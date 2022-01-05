@@ -1,0 +1,58 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+
+    ext {
+        // Sdk and tools
+        compileSdkVersion = 31
+        minSdkVersion = 21
+        targetSdkVersion = 31
+
+        // App dependencies
+        appCompatVersion = '1.4.0'
+        constraintLayoutVersion = '2.1.2'
+        coreTestingVersion = '2.0.0'
+        coroutinesVersion = "1.4.2"
+        espressoVersion = '3.1.1'
+        fragmentVersion = '1.4.0'
+        glideVersion = '4.10.0'
+        gradleVersion = '7.0.3'
+        gsonVersion = '2.8.6'
+        hiltVersion = '2.38.1'
+        junitVersion = '4.12'
+        kotlinVersion = '1.5.31'
+        ktlintVersion = '0.38.1'
+        ktxVersion = '1.7.0'
+        lifecycleVersion = '2.4.0'
+        lifecycle_extensions = '2.2.0'
+        materialVersion = '1.4.0'
+        navigationVersion = '2.3.5'
+        okhttpLoggingVersion = '4.7.2'
+        pagingVersion = '3.1.0'
+        retrofitVersion = '2.9.0'
+        roomVersion = '2.3.0'
+        runnerVersion = '1.0.1'
+        truthVersion = '0.42'
+        testExtJunit = '1.1.0'
+        uiAutomatorVersion = '2.2.0'
+        viewPagerVersion = '1.0.0'
+        workVersion = '2.7.1'
+    }
+
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:7.0.4"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
