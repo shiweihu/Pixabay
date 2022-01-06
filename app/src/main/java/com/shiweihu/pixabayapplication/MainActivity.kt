@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
-    private val icons=  listOf{R.drawable.image_search_selector}
+    private val icons=  listOf(R.drawable.image_search_selector,R.drawable.vedio_icon_selector)
     private val names by lazy {
         this.resources.getStringArray(R.array.bottom_text)
     }
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.viewPage.adapter = FragmentsAdapter(this)
         TabLayoutMediator(binding.bottomNavigate,binding.viewPage){tab,position ->
-           tab.setIcon(icons[position].invoke())
+            tab.setIcon(icons[position])
             tab.text = names[position]
         }.attach()
 

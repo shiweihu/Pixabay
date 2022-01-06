@@ -6,4 +6,27 @@
         <item>@string/images</item>
         <item>@string/video</item>
     </array>
+
+    <array name="category_text">
+        <item>@string/backgrounds</item>
+        <item>@string/fashion</item>
+        <item>@string/nature</item>
+        <item>@string/science</item>
+        <item>@string/education</item>
+        <item>@string/feelings</item>
+        <item>@string/health</item>
+        <item>@string/people</item>
+        <item>@string/religion</item>
+        <item>@string/places</item>
+        <item>@string/animals</item>
+        <item>@string/industry</item>
+        <item>@string/computer</item>
+        <item>@string/food</item>
+        <item>@string/sports</item>
+        <item>@string/transportation</item>
+        <item>@string/travel</item>
+        <item>@string/buildings</item>
+        <item>@string/business</item>
+        <item>@string/music</item>
+    </array>
 </resources>

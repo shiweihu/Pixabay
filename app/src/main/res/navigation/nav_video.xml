@@ -9,7 +9,7 @@
     <fragment
         android:id="@+id/video_fragment"
         android:name="com.shiweihu.pixabayapplication.video.VideoFragment"
-        tools:layout="@layout/fragment_video"
+        tools:layout="@layout/fragment_main_video"
         >
 
 

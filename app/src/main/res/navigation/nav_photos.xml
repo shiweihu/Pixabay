@@ -7,8 +7,8 @@
     >
    <fragment
        android:id="@+id/photos_fragment"
-       android:name="com.shiweihu.pixabayapplication.photos.PhotosFragment"
-       tools:layout="@layout/fragment_photos"
+       android:name="com.shiweihu.pixabayapplication.photos.PhotosMainFragment"
+       tools:layout="@layout/fragment_main_photos"
        >
 
 
