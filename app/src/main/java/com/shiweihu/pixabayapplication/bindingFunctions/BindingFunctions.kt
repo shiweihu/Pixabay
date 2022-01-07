@@ -14,6 +14,7 @@ fun bindImageFromUrl(view: ImageView, imageUrl: String?) {
     if (!imageUrl.isNullOrEmpty()) {
         Glide.with(view.context)
             .load(imageUrl)
+            .placeholder(R.drawable.placeholder)
             .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(view)

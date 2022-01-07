@@ -25,7 +25,7 @@ class SearchPhotoSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ImageInfo> {
         val page = params.key ?: 1
         return try {
-            val response = photoProxy.queryImages(q = query ?: "")
+            val response = photoProxy.queryImages(q = query ?: "", page = page)
             LoadResult.Page(
                 data = response.hits,
                 prevKey = if (page == 1) null else page - 1,

@@ -24,7 +24,7 @@ class PhotosAdapter: PagingDataAdapter<ImageInfo, PhotosAdapter.ImageViewHolder>
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         getItem(position)?.also {
-            holder.binding.authorName = it.user
+            holder.binding.authorName = it.user.trim()
             holder.binding.imageUrl = it.previewURL
         }
     }

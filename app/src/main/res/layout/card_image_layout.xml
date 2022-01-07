@@ -17,10 +17,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     app:cardElevation="2dp"
     android:layout_margin="5dp"
+    android:backgroundTint="@color/white"
     >
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,9 +29,9 @@
             tools:src="@drawable/ic_launcher_background"
             android:scaleType="fitCenter"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             />
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -49,7 +50,7 @@
                 tools:text = "aaaaaaaaa"
                 android:textStyle="bold|italic"
                 android:textColor="@color/blue"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 />
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/px_log"

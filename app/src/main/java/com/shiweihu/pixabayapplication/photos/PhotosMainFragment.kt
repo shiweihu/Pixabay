@@ -1,11 +1,13 @@
 package com.shiweihu.pixabayapplication.photos
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import com.google.android.material.appbar.AppBarLayout
 import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.databinding.FragmentMainPhotosBinding
 import com.shiweihu.pixabayapplication.viewModle.PhotoFragmentMainViewModel
@@ -48,6 +50,14 @@ class PhotosMainFragment : Fragment() {
         val binding = FragmentMainPhotosBinding.inflate(inflater,container,false).also {
             it.categoryGrid.adapter = categoryAdapter
             it.recycleView.adapter = photosAdapter
+
+
+            it.appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+                Log.println(Log.DEBUG,"appbar",verticalOffset.toString())
+
+
+
+            })
         }
         return binding.root
     }
