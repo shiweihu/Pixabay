@@ -10,4 +10,5 @@
     <color name="text_color">#FF000000</color>
     <color name="blue">#0000cc</color>
     <color name="transparent_background">#33000000</color>
+    <color name="yellow">#FFEB3B</color>
 </resources>

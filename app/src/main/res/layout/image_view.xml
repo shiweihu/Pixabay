@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <import type="kotlin.jvm.functions.Function0" />
+        <import type="kotlin." />
+        <variable
+            name="image_url"
+            type="String" />
+        <variable
+            name="priority"
+            type="Boolean" />
+
+
+
+    </data>
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/image_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="center"
+            android:layout_gravity="center"
+            app:imageUrl="@{image_url}"
+            app:priority="@{priority}"
+
+            />
+
+    </FrameLayout>
+
+</layout>
