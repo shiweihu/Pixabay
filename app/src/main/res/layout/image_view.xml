@@ -2,13 +2,15 @@
 <layout>
     <data>
         <import type="kotlin.jvm.functions.Function0" />
-        <import type="kotlin." />
         <variable
             name="image_url"
             type="String" />
         <variable
             name="priority"
             type="Boolean" />
+        <variable
+            name="do_end"
+            type="Function0&lt;kotlin.Unit&gt;" />
 
 
 
@@ -25,6 +27,7 @@
             android:layout_gravity="center"
             app:imageUrl="@{image_url}"
             app:priority="@{priority}"
+            app:doEnd="@{do_end}"
 
             />
 

@@ -11,11 +11,9 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.shiweihu.pixabayapplication.R
-import kotlin.jvm.functions.Function0
-
 
 @BindingAdapter(value = ["imageUrl","priority","doEnd"],requireAll = false)
-fun bindImageFromUrl(view: ImageView, imageUrl: String?,priority:Boolean = false,doEnd:(Function0<Unit>)? = null) {
+fun bindImageFromUrl(view: ImageView, imageUrl: String?,priority:Boolean = false,doEnd:Function0<Unit>?  = null) {
     if (imageUrl != null && imageUrl.isNotEmpty()) {
         var request = Glide.with(view.context)
             .load(imageUrl)

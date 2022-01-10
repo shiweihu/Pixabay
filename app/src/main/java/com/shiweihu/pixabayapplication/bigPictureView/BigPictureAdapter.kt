@@ -1,5 +1,6 @@
 package com.shiweihu.pixabayapplication.bigPictureView
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -18,11 +19,14 @@ class BigPictureAdapter(val argu: BigPictureArgu): RecyclerView.Adapter<BigPictu
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         holder.binding.imageUrl = argu.images?.get(position) ?:""
         holder.binding.priority = position == argu.currentIndex
-        holder.binding.executePendingBindings()
         holder.binding.root.tag = position
         if(position == argu.currentIndex){
             holder.binding.imageView.transitionName = "${BigPictureFragment.SHARE_ELEMENT_NAME}-${position}"
+            holder.binding.doEnd = {
+                argu.images?.get(position)?.let { Log.println(Log.DEBUG,"do_end", it) }
+            }
         }
+        holder.binding.executePendingBindings()
     }
 
     override fun getItemCount(): Int {
