@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
     <data>
-
+        <import type="kotlin.jvm.functions.Function0" />
         <variable
             name="image_url"
             type="String" />
         <variable
+            name="priority"
+            type="Boolean" />
+        <variable
             name="author_name"
             type="String" />
+
+        <variable
+            name="do_end"
+            type="Function0&lt;kotlin.Unit&gt;" />
 
 
     </data>
@@ -27,6 +34,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:imageUrl="@{image_url}"
+            app:priority="@{priority}"
+            app:doEnd="@{do_end}"
             tools:src="@drawable/ic_launcher_background"
             android:scaleType="center"
             app:layout_constraintTop_toTopOf="parent"

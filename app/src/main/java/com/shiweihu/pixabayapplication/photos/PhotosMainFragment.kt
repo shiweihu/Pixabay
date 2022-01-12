@@ -39,31 +39,23 @@ class PhotosMainFragment : Fragment() {
     }
 
     private val photosAdapter by lazy {
-        PhotosAdapter(model){
+        PhotosAdapter(model,this){
             model.sharedElementIndex = it
-
         }
     }
 
 
     private fun initShareElement(binding:FragmentMainPhotosBinding){
-
-
-
-
-
         this.setExitSharedElementCallback(object: SharedElementCallback(){
             override fun onMapSharedElements(
                 names: MutableList<String>?,
                 sharedElements: MutableMap<String, View>?
             ) {
                 super.onMapSharedElements(names, sharedElements)
-
                 val viewHolder = binding.recycleView.findViewHolderForAdapterPosition(model.sharedElementIndex)
                 if(sharedElements != null && names != null && viewHolder !=null){
                     sharedElements[names[0]] = (viewHolder as PhotosAdapter.ImageViewHolder).binding.imageView
-                    binding.recycleView.layoutManager?.scrollToPosition(model.sharedElementIndex)
-                    binding.executePendingBindings()
+
                 }
             }
         })
@@ -72,9 +64,6 @@ class PhotosMainFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
-
         model.searchPhotos("",photosAdapter)
     }
 
@@ -85,17 +74,14 @@ class PhotosMainFragment : Fragment() {
         binding = FragmentMainPhotosBinding.inflate( LayoutInflater.from(this.context) ,null,false).also {
             it.categoryGrid.adapter = categoryAdapter
             it.recycleView.adapter = photosAdapter
-            it.recycleView.isSaveEnabled = false;
-            it.categoryGrid.isSaveEnabled = false
-
             initShareElement(it)
-
+            it.recycleView.layoutManager?.scrollToPosition(model.sharedElementIndex)
+            it.recycleView.setItemViewCacheSize(20)
             it.appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
                 Log.println(Log.DEBUG,"appbar",verticalOffset.toString())
 
             })
         }
-
         return binding.root
     }
 
@@ -108,6 +94,8 @@ class PhotosMainFragment : Fragment() {
 
         reenterTransition = TransitionInflater.from(context)
             .inflateTransition(R.transition.grid_exit_transition)
+
+        postponeEnterTransition()
 
     }
 

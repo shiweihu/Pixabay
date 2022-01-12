@@ -56,7 +56,7 @@ class BigPictureFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         val binding =  FragmentBigPictureBinding.inflate(inflater,container,false).also {
-            it.viewPage.adapter = BigPictureAdapter(args.pictureResult)
+            it.viewPage.adapter = BigPictureAdapter(args.pictureResult,this)
             it.viewPage.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
@@ -65,17 +65,19 @@ class BigPictureFragment : Fragment() {
                 }
             })
             it.viewPage.setCurrentItem(args.pictureResult.currentIndex,false)
+            it.viewPage.offscreenPageLimit = 4
             it.toolBar.setNavigationOnClickListener { _ ->
-                args.pictureResult.callBack?.callBack(it.viewPage.currentItem)
-                it.root.post {
-                    findNavController().navigateUp()
+                it.toolBar.post {
+                    args.pictureResult.callBack?.callBack(it.viewPage.currentItem)
                 }
+                findNavController().navigateUp()
             }
             initTransition(it)
 
 
         }
         binding.executePendingBindings()
+        postponeEnterTransition()
         return binding.root
     }
 
@@ -87,7 +89,6 @@ class BigPictureFragment : Fragment() {
             ) {
                 super.onMapSharedElements(names, sharedElements)
 
-                binding.viewPage.adapter
                 val view:ImageView? = binding.viewPage.findViewWithTag<View>(binding.viewPage.currentItem)?.findViewById(R.id.image_view)
                 if(names != null && sharedElements!=null && view!=null){
                     sharedElements[names[0]] = view
@@ -116,7 +117,7 @@ class BigPictureFragment : Fragment() {
                 }
             })
             if(navController.currentDestination?.id == R.id.photos_fragment){
-                navController.navigate(R.id.photos_home_to_big_picture,
+                navController.navigate(R.id.to_big_picture,
                     BigPictureFragmentArgs(argu).toBundle(),
                     null,
                     FragmentNavigatorExtras(

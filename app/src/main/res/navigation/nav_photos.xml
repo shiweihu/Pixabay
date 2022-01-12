@@ -12,7 +12,7 @@
        tools:layout="@layout/fragment_main_photos"
        >
       <action
-          android:id="@+id/photos_home_to_big_picture"
+          android:id="@+id/to_big_picture"
           app:destination="@+id/big_picture_fragment"
           />
    </fragment>

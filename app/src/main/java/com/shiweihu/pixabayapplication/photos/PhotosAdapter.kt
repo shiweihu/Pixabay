@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.motion.widget.ViewTransition
+import androidx.fragment.app.Fragment
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -14,7 +15,7 @@ import com.shiweihu.pixabayapplication.databinding.CardImageLayoutBinding
 import com.shiweihu.pixabayapplication.viewArgu.BigPictureArgu
 import com.shiweihu.pixabayapplication.viewModle.PhotoFragmentMainViewModel
 
-class PhotosAdapter(val viewModle: PhotoFragmentMainViewModel,val func:(position:Int)->Unit): PagingDataAdapter<ImageInfo, PhotosAdapter.ImageViewHolder>(ImageDiff()) {
+class PhotosAdapter(val viewModle: PhotoFragmentMainViewModel, val fragment: Fragment, val func:(position:Int)->Unit): PagingDataAdapter<ImageInfo, PhotosAdapter.ImageViewHolder>(ImageDiff()) {
     class ImageViewHolder(val binding:CardImageLayoutBinding):RecyclerView.ViewHolder(binding.root)
 
     class ImageDiff: DiffUtil.ItemCallback<ImageInfo>(){
@@ -32,13 +33,17 @@ class PhotosAdapter(val viewModle: PhotoFragmentMainViewModel,val func:(position
         getItem(position)?.also {
             holder.binding.authorName = it.user.trim()
             holder.binding.imageUrl = it.previewURL
-            holder.binding.executePendingBindings()
-
+            holder.binding.imageView.transitionName = "${BigPictureFragment.SHARE_ELEMENT_NAME}-${position}"
             holder.binding.imageView.setOnClickListener { view ->
-                holder.binding.imageView.transitionName = "${BigPictureFragment.SHARE_ELEMENT_NAME}-${position}"
                 navigateToBigPicture(view,position)
             }
-
+            if(position == viewModle.sharedElementIndex){
+                holder.binding.priority = true
+                holder.binding.doEnd = {
+                    fragment.startPostponedEnterTransition()
+                }
+            }
+            holder.binding.executePendingBindings()
         }
 
         holder.binding.root.tag = position
