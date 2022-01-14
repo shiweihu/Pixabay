@@ -2,16 +2,20 @@ package com.shiweihu.pixabayapplication.photos
 
 import android.os.Bundle
 import android.transition.TransitionInflater
-import android.util.Log
+
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
+
 import androidx.core.app.SharedElementCallback
+
 import androidx.fragment.app.viewModels
-import com.google.android.material.appbar.AppBarLayout
+
 import com.shiweihu.pixabayapplication.R
-import com.shiweihu.pixabayapplication.bigPictureView.BigPictureFragment
+
 import com.shiweihu.pixabayapplication.databinding.FragmentMainPhotosBinding
 import com.shiweihu.pixabayapplication.viewModle.PhotoFragmentMainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -55,7 +59,6 @@ class PhotosMainFragment : Fragment() {
                 val viewHolder = binding.recycleView.findViewHolderForAdapterPosition(model.sharedElementIndex)
                 if(sharedElements != null && names != null && viewHolder !=null){
                     sharedElements[names[0]] = (viewHolder as PhotosAdapter.ImageViewHolder).binding.imageView
-
                 }
             }
         })
@@ -76,11 +79,24 @@ class PhotosMainFragment : Fragment() {
             it.recycleView.adapter = photosAdapter
             initShareElement(it)
             it.recycleView.layoutManager?.scrollToPosition(model.sharedElementIndex)
-            it.recycleView.setItemViewCacheSize(20)
-            it.appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
-                Log.println(Log.DEBUG,"appbar",verticalOffset.toString())
+            it.toolBar.setOnMenuItemClickListener{menuItem ->
+                if(menuItem.itemId == R.id.action_search){
+                   val searchView = menuItem.actionView as SearchView
+                    searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+                        override fun onQueryTextSubmit(query: String?): Boolean {
+                            model.searchPhotos(query,photosAdapter)
+                            photosAdapter.refresh()
+                            return true
+                        }
 
-            })
+                        override fun onQueryTextChange(newText: String?): Boolean {
+                            return true
+                        }
+                    })
+                }
+                true
+            }
+
         }
         return binding.root
     }

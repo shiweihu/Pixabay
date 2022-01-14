@@ -18,7 +18,7 @@ fun bindImageFromUrl(view: ImageView, imageUrl: String?,priority:Boolean = false
         var request = Glide.with(view.context)
             .load(imageUrl)
             .placeholder(R.drawable.placeholder)
-            .diskCacheStrategy(DiskCacheStrategy.RESOURCE).doOnEnd {
+            .diskCacheStrategy(DiskCacheStrategy.DATA).doOnEnd {
                 doEnd?.invoke()
             }
         if(priority){
