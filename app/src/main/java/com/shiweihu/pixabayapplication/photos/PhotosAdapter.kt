@@ -28,30 +28,32 @@ class PhotosAdapter(val viewModle: PhotoFragmentMainViewModel, val fragment: Fra
         }
     }
 
-    private var initItemNum = 0
-    private var isWait = false;
+//    private var initItemNum = 0
+//    private var isWait = false;
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
-        initItemNum = 0
-        isWait = true
+
+//        initItemNum = 0
+//        isWait = true
     }
 
     override fun onViewAttachedToWindow(holder: ImageViewHolder) {
         super.onViewAttachedToWindow(holder)
-        if(isWait){
-            initItemNum++
-        }
+
+//        if(isWait){
+//            initItemNum++
+//        }
     }
 
     private fun ifStartEnterTransition(){
-        if(isWait){
-            initItemNum --
-            if(initItemNum == 0){
-                fragment.startPostponedEnterTransition()
-                isWait = false;
-            }
-        }
+//        if(isWait){
+//            initItemNum --
+//            if(initItemNum == 0){
+//                fragment.startPostponedEnterTransition()
+//                isWait = false;
+//            }
+//        }
     }
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
@@ -62,9 +64,11 @@ class PhotosAdapter(val viewModle: PhotoFragmentMainViewModel, val fragment: Fra
             holder.binding.imageView.setOnClickListener { view ->
                 navigateToBigPicture(view,position)
             }
-            holder.binding.priority = true
-            holder.binding.doEnd = {
-                ifStartEnterTransition()
+            holder.binding.priority = position == viewModle.sharedElementIndex
+            if(position == viewModle.sharedElementIndex){
+                holder.binding.doEnd = {
+                    fragment.startPostponedEnterTransition()
+                }
             }
             holder.binding.executePendingBindings()
         }

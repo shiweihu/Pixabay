@@ -1,8 +1,10 @@
 package com.shiweihu.pixabayapplication.photos
 
+import android.content.Context
 import android.os.Bundle
 import android.transition.TransitionInflater
 import android.view.*
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 
 import androidx.fragment.app.Fragment
@@ -19,6 +21,7 @@ import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.databinding.FragmentMainPhotosBinding
 import com.shiweihu.pixabayapplication.viewModle.PhotoFragmentMainViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.concurrent.TimeUnit
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,10 +39,19 @@ class PhotosMainFragment : Fragment() {
 
     private val model:PhotoFragmentMainViewModel by viewModels()
 
-    private lateinit var binding:FragmentMainPhotosBinding
+    private var binding:FragmentMainPhotosBinding? = null
+
+    private lateinit var searchView:SearchView
+
+    private var isInput = false
 
     private val categoryAdapter by lazy{
-        CategoryAdapter(this.requireContext())
+        CategoryAdapter(this.requireContext()){
+            val imm = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            if(!isInput){
+                query(searchView.query.toString())
+            }
+        }
     }
 
     private val photosAdapter by lazy {
@@ -74,35 +86,50 @@ class PhotosMainFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentMainPhotosBinding.inflate( LayoutInflater.from(this.context) ,null,false).also { it ->
-            it.categoryGrid.adapter = categoryAdapter
-            it.recycleView.adapter = photosAdapter
-            initShareElement(it)
-            it.recycleView.layoutManager?.scrollToPosition(model.sharedElementIndex)
-            initMenu(it.toolBar.menu)
+    ): View? {
+        if(binding == null){
+            binding = FragmentMainPhotosBinding.inflate( LayoutInflater.from(this.context) ,null,false).also { it ->
+                it.categoryGrid.adapter = categoryAdapter
+                it.recycleView.adapter = photosAdapter
+                it.recycleView.isSaveEnabled = false
+                initShareElement(it)
+                initMenu(it.toolBar.menu)
+            }
+        }else{
+            val view = binding?.recycleView?.layoutManager?.findViewByPosition(model.sharedElementIndex)
+            if(view == null){
+                postponeEnterTransition(1,TimeUnit.SECONDS)
+                binding?.recycleView?.layoutManager?.scrollToPosition(model.sharedElementIndex)
+            }
         }
-        return binding.root
+        return binding?.root
+    }
+
+    private fun query(q:String){
+        var category: String = ""
+        categoryAdapter.checkedList.forEachIndexed { index, selectedCategory ->
+            category += if (index == categoryAdapter.checkedList.size - 1) {
+                selectedCategory
+            } else {
+                ("$selectedCategory,")
+            }
+        }
+        model.searchPhotos(q, photosAdapter, category)
+        photosAdapter.refresh()
+        model.sharedElementIndex = 0
     }
 
     private fun initMenu(menu: Menu){
         menu.forEachIndexed { index, item ->
             when (item.itemId) {
                 R.id.action_search -> {
-                    val searchView = item.actionView as SearchView
+                    searchView = item.actionView as SearchView
+                    searchView.setOnQueryTextFocusChangeListener { view, b ->
+                        isInput = b
+                    }
                     searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                        override fun onQueryTextSubmit(query: String?): Boolean {
-                            var category: String = ""
-                            categoryAdapter.checkedList.forEachIndexed { index, selectedCategory ->
-                                category += if (index == categoryAdapter.checkedList.size - 1) {
-                                    selectedCategory
-                                } else {
-                                    ("$selectedCategory,")
-                                }
-                            }
-                            model.searchPhotos(query, photosAdapter, category)
-                            photosAdapter.refresh()
-                            model.sharedElementIndex = 0
+                        override fun onQueryTextSubmit(query: String): Boolean {
+                            query(query)
                             searchView.clearFocus()
                             return true
                         }
@@ -130,7 +157,7 @@ class PhotosMainFragment : Fragment() {
         reenterTransition = TransitionInflater.from(context)
             .inflateTransition(R.transition.grid_exit_transition)
 
-        postponeEnterTransition()
+
 
     }
 
