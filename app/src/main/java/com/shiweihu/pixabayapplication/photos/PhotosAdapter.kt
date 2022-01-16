@@ -26,7 +26,32 @@ class PhotosAdapter(val viewModle: PhotoFragmentMainViewModel, val fragment: Fra
         override fun areContentsTheSame(oldItem: ImageInfo, newItem: ImageInfo): Boolean {
             return oldItem.id == newItem.id
         }
+    }
 
+    private var initItemNum = 0
+    private var isWait = false;
+
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        super.onAttachedToRecyclerView(recyclerView)
+        initItemNum = 0
+        isWait = true
+    }
+
+    override fun onViewAttachedToWindow(holder: ImageViewHolder) {
+        super.onViewAttachedToWindow(holder)
+        if(isWait){
+            initItemNum++
+        }
+    }
+
+    private fun ifStartEnterTransition(){
+        if(isWait){
+            initItemNum --
+            if(initItemNum == 0){
+                fragment.startPostponedEnterTransition()
+                isWait = false;
+            }
+        }
     }
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
@@ -37,15 +62,12 @@ class PhotosAdapter(val viewModle: PhotoFragmentMainViewModel, val fragment: Fra
             holder.binding.imageView.setOnClickListener { view ->
                 navigateToBigPicture(view,position)
             }
-            if(position == viewModle.sharedElementIndex){
-                holder.binding.priority = true
-                holder.binding.doEnd = {
-                    fragment.startPostponedEnterTransition()
-                }
+            holder.binding.priority = true
+            holder.binding.doEnd = {
+                ifStartEnterTransition()
             }
             holder.binding.executePendingBindings()
         }
-
         holder.binding.root.tag = position
     }
 

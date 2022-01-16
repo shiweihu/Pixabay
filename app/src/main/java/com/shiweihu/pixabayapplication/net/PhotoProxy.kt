@@ -14,7 +14,8 @@ interface PhotoProxy {
         @Query("q") q:String = "",
         @Query("id") id:String = "",
         @Query("page") page:Int = 1,
-        @Query("per_page") per_page:Int = 20
+        @Query("per_page") per_page:Int = 20,
+        @Query("category") category:String = ""
     ): Photos
 
     @GET("api/")

@@ -24,9 +24,9 @@ class PhotoFragmentMainViewModel @Inject constructor(
 
     var sharedElementIndex = 0
 
-   fun searchPhotos(q:String?,adapter:PhotosAdapter){
+   fun searchPhotos(q:String?,adapter:PhotosAdapter,category:String? = null){
        viewModelScope.launch {
-           photosRepository.searchPhotos(q).cachedIn(viewModelScope).collectLatest {
+           photosRepository.searchPhotos(q,category).cachedIn(viewModelScope).collectLatest {
                adapter.submitData(it)
            }
        }

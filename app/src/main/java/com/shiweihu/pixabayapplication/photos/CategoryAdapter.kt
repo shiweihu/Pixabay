@@ -16,9 +16,7 @@ class CategoryAdapter(val context: Context) : RecyclerView.Adapter<CategoryAdapt
 
     val checkedList = ArrayList<String>()
 
-    public fun getCheckedText():List<String>{
-        return checkedList
-    }
+
 
 
     class CategoryViewHolder(val binding:CategoryItemLayoutBinding):RecyclerView.ViewHolder(binding.root)
@@ -31,6 +29,7 @@ class CategoryAdapter(val context: Context) : RecyclerView.Adapter<CategoryAdapt
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val category = categorys[position]
         holder.binding.categoryText = category
+        holder.binding.checkbox.isChecked = checkedList.contains(category)
         holder.binding.checkbox.setOnCheckedChangeListener { buttonView, isChecked ->
             if(isChecked){
                 checkedList.add(category)

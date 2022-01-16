@@ -9,7 +9,8 @@ import java.lang.Exception
 
 class SearchPhotoSource(
     private val photoProxy: PhotoProxy,
-    private val query:String?
+    private val query:String?,
+    private val category:String?
 ): PagingSource<Int, ImageInfo>() {
     override fun getRefreshKey(state: PagingState<Int, ImageInfo>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
@@ -25,11 +26,11 @@ class SearchPhotoSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ImageInfo> {
         val page = params.key ?: 1
         return try {
-            val response = photoProxy.queryImages(q = query ?: "", page = page)
+            val response = photoProxy.queryImages(q = query ?: "", category = category ?: "",page = page)
             LoadResult.Page(
                 data = response.hits,
                 prevKey = if (page == 1) null else page - 1,
-                nextKey = page + 1
+                nextKey = if(response.hits.isNotEmpty()) page + 1 else null
             )
         }catch (e:Exception){
             Log.println(Log.DEBUG,"searchPhotos",e.toString())

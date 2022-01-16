@@ -13,12 +13,12 @@ import javax.inject.Inject
 
 
 class PhotoRepository @Inject constructor(
-     val photoProxy: PhotoProxy
+    private val photoProxy: PhotoProxy
 ) {
-    fun searchPhotos(q:String?): Flow<PagingData<ImageInfo>> {
+    fun searchPhotos(q:String?,category:String?): Flow<PagingData<ImageInfo>> {
         return Pager(
-            config = PagingConfig(enablePlaceholders = false, pageSize = 1000,prefetchDistance = 1, initialLoadSize = 1000),
-            pagingSourceFactory = { SearchPhotoSource(photoProxy,q) }
+            config = PagingConfig(enablePlaceholders = false, pageSize = 3, initialLoadSize = 20),
+            pagingSourceFactory = { SearchPhotoSource(photoProxy,q,category) }
         ).flow
     }
 }

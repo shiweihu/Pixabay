@@ -2,15 +2,15 @@ package com.shiweihu.pixabayapplication.photos
 
 import android.os.Bundle
 import android.transition.TransitionInflater
+import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 
 import androidx.core.app.SharedElementCallback
+import androidx.core.view.forEachIndexed
 
 import androidx.fragment.app.viewModels
 
@@ -68,24 +68,42 @@ class PhotosMainFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         model.searchPhotos("",photosAdapter)
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentMainPhotosBinding.inflate( LayoutInflater.from(this.context) ,null,false).also {
+        binding = FragmentMainPhotosBinding.inflate( LayoutInflater.from(this.context) ,null,false).also { it ->
             it.categoryGrid.adapter = categoryAdapter
             it.recycleView.adapter = photosAdapter
             initShareElement(it)
             it.recycleView.layoutManager?.scrollToPosition(model.sharedElementIndex)
-            it.toolBar.setOnMenuItemClickListener{menuItem ->
-                if(menuItem.itemId == R.id.action_search){
-                   val searchView = menuItem.actionView as SearchView
-                    searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+            initMenu(it.toolBar.menu)
+        }
+        return binding.root
+    }
+
+    private fun initMenu(menu: Menu){
+        menu.forEachIndexed { index, item ->
+            when (item.itemId) {
+                R.id.action_search -> {
+                    val searchView = item.actionView as SearchView
+                    searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                         override fun onQueryTextSubmit(query: String?): Boolean {
-                            model.searchPhotos(query,photosAdapter)
+                            var category: String = ""
+                            categoryAdapter.checkedList.forEachIndexed { index, selectedCategory ->
+                                category += if (index == categoryAdapter.checkedList.size - 1) {
+                                    selectedCategory
+                                } else {
+                                    ("$selectedCategory,")
+                                }
+                            }
+                            model.searchPhotos(query, photosAdapter, category)
                             photosAdapter.refresh()
+                            model.sharedElementIndex = 0
+                            searchView.clearFocus()
                             return true
                         }
 
@@ -94,11 +112,12 @@ class PhotosMainFragment : Fragment() {
                         }
                     })
                 }
-                true
             }
-
         }
-        return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
 
