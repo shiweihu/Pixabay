@@ -10,6 +10,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.addCallback
 import com.google.android.material.tabs.TabLayoutMediator
 import com.shiweihu.pixabayapplication.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,8 +38,6 @@ class MainActivity : AppCompatActivity() {
             tab.setIcon(icons[position])
             tab.text = names[position]
         }.attach()
-
-
     }
 
 

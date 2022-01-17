@@ -16,6 +16,7 @@ import androidx.core.app.SharedElementCallback
 import androidx.core.view.forEachIndexed
 
 import androidx.fragment.app.viewModels
+import com.shiweihu.pixabayapplication.BaseFragment
 
 import com.shiweihu.pixabayapplication.R
 
@@ -35,7 +36,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 @AndroidEntryPoint
-class PhotosMainFragment : Fragment() {
+class PhotosMainFragment : BaseFragment() {
 
 
     private val model:PhotoFragmentMainViewModel by viewModels()
@@ -48,7 +49,6 @@ class PhotosMainFragment : Fragment() {
 
     private val categoryAdapter by lazy{
         CategoryAdapter(this.requireContext()){
-            val imm = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             if(!isInput){
                 query(searchView.query.toString())
             }
@@ -81,7 +81,9 @@ class PhotosMainFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         model.searchPhotos("",photosAdapter)
-        setHasOptionsMenu(true)
+
+
+
     }
 
     override fun onCreateView(
@@ -101,6 +103,7 @@ class PhotosMainFragment : Fragment() {
                 postponeEnterTransition(resources.getInteger(R.integer.post_pone_time).toLong(), TimeUnit.MILLISECONDS)
                 binding?.recycleView?.layoutManager?.scrollToPosition(model.sharedElementIndex)
             }
+
         }
         return binding?.root
     }
@@ -159,12 +162,6 @@ class PhotosMainFragment : Fragment() {
 
         reenterTransition = TransitionInflater.from(context)
             .inflateTransition(R.transition.grid_exit_transition)
-
-
-        requireActivity().onBackPressedDispatcher.addCallback(this){
-
-        }
-
     }
 
 

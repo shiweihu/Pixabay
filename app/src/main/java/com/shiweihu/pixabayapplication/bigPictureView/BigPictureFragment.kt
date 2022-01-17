@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
 import androidx.core.app.SharedElementCallback
 import androidx.fragment.app.viewModels
@@ -18,6 +19,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.shiweihu.pixabayapplication.BaseFragment
 import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.databinding.FragmentBigPictureBinding
 import com.shiweihu.pixabayapplication.viewArgu.BigPictureArgu
@@ -37,7 +39,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 @AndroidEntryPoint
-class BigPictureFragment : Fragment() {
+class BigPictureFragment : BaseFragment() {
 
      open class BigPictureCallBack() :Parcelable{
         constructor(parcel: Parcel) : this() {
@@ -68,22 +70,31 @@ class BigPictureFragment : Fragment() {
 
     }
 
-    val modle:BigPictureViewModle by viewModels()
+    private val modle:BigPictureViewModle by viewModels()
 
-    val args:BigPictureFragmentArgs by navArgs()
+    private val args:BigPictureFragmentArgs by navArgs()
+
+    private lateinit var binding:FragmentBigPictureBinding
+
+
+    override fun onBackKeyPressed() {
+        super.onBackKeyPressed()
+        navigateUp(binding)
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
     }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        val binding =  FragmentBigPictureBinding.inflate(inflater,container,false).also {
+        binding =  FragmentBigPictureBinding.inflate(inflater,container,false).also {
             it.viewPage.adapter = BigPictureAdapter(args.pictureResult,this)
             it.viewPage.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
                 override fun onPageSelected(position: Int) {
@@ -111,15 +122,13 @@ class BigPictureFragment : Fragment() {
                 navigateUp(it)
             }
             initTransition(it)
-            requireActivity().onBackPressedDispatcher.addCallback(this){
-                navigateUp(it)
-            }
-
         }
         binding.executePendingBindings()
         postponeEnterTransition(resources.getInteger(R.integer.post_pone_time).toLong(), TimeUnit.MILLISECONDS)
         return binding.root
     }
+
+
 
     private fun navigateUp(binding:FragmentBigPictureBinding){
         binding.root.post {
