@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.transition.TransitionInflater
 import android.view.*
 import android.view.inputmethod.InputMethodManager
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 
 import androidx.fragment.app.Fragment
@@ -91,14 +92,13 @@ class PhotosMainFragment : Fragment() {
             binding = FragmentMainPhotosBinding.inflate( LayoutInflater.from(this.context) ,null,false).also { it ->
                 it.categoryGrid.adapter = categoryAdapter
                 it.recycleView.adapter = photosAdapter
-                it.recycleView.isSaveEnabled = false
                 initShareElement(it)
                 initMenu(it.toolBar.menu)
             }
         }else{
             val view = binding?.recycleView?.layoutManager?.findViewByPosition(model.sharedElementIndex)
             if(view == null){
-                postponeEnterTransition(1,TimeUnit.SECONDS)
+                postponeEnterTransition(resources.getInteger(R.integer.post_pone_time).toLong(), TimeUnit.MILLISECONDS)
                 binding?.recycleView?.layoutManager?.scrollToPosition(model.sharedElementIndex)
             }
         }
@@ -106,6 +106,9 @@ class PhotosMainFragment : Fragment() {
     }
 
     private fun query(q:String){
+        if(q.isEmpty()){
+            return
+        }
         var category: String = ""
         categoryAdapter.checkedList.forEachIndexed { index, selectedCategory ->
             category += if (index == categoryAdapter.checkedList.size - 1) {
@@ -114,7 +117,7 @@ class PhotosMainFragment : Fragment() {
                 ("$selectedCategory,")
             }
         }
-        model.searchPhotos(q, photosAdapter, category)
+        model.searchPhotos(q.trim(), photosAdapter, category)
         photosAdapter.refresh()
         model.sharedElementIndex = 0
     }
@@ -158,8 +161,12 @@ class PhotosMainFragment : Fragment() {
             .inflateTransition(R.transition.grid_exit_transition)
 
 
+        requireActivity().onBackPressedDispatcher.addCallback(this){
+
+        }
 
     }
+
 
     companion object {
 

@@ -1,6 +1,7 @@
 package com.shiweihu.pixabayapplication.bigPictureView
 
 import android.os.Bundle
+import android.os.Parcel
 import android.os.Parcelable
 import android.transition.TransitionInflater
 import androidx.fragment.app.Fragment
@@ -8,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.activity.addCallback
 import androidx.core.app.SharedElementCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
@@ -22,6 +24,7 @@ import com.shiweihu.pixabayapplication.viewArgu.BigPictureArgu
 import com.shiweihu.pixabayapplication.viewModle.BigPictureViewModle
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.Serializable
+import java.util.concurrent.TimeUnit
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,8 +39,33 @@ private const val ARG_PARAM2 = "param2"
 @AndroidEntryPoint
 class BigPictureFragment : Fragment() {
 
-    interface BigPictureCallBack:Serializable{
-        fun callBack(position:Int)
+     open class BigPictureCallBack() :Parcelable{
+        constructor(parcel: Parcel) : this() {
+        }
+
+        open fun callBack(position:Int){
+
+        }
+
+        override fun writeToParcel(parcel: Parcel, flags: Int) {
+
+        }
+
+        override fun describeContents(): Int {
+            return 0
+        }
+
+        companion object CREATOR : Parcelable.Creator<BigPictureCallBack> {
+            override fun createFromParcel(parcel: Parcel): BigPictureCallBack {
+                return BigPictureCallBack(parcel)
+            }
+
+            override fun newArray(size: Int): Array<BigPictureCallBack?> {
+                return arrayOfNulls(size)
+            }
+        }
+
+
     }
 
     val modle:BigPictureViewModle by viewModels()
@@ -64,21 +92,40 @@ class BigPictureFragment : Fragment() {
                     it.priority = true
                 }
             })
+            it.userProfile.setOnClickListener { view ->
+                val username = args.pictureResult.userNameArray?.get(it.viewPage.currentItem)
+                val userid = args.pictureResult.useridArray?.get(it.viewPage.currentItem)
+                if(username != null && userid!=null){
+                    modle.navigateToUserProfilePage(view.context,username,userid)
+                }
+            }
+            it.pageProfile.setOnClickListener { view ->
+                args.pictureResult.pageUrls?.get(it.viewPage.currentItem)?.also { pageUrl ->
+                    modle.navigateToWeb(view.context,pageUrl)
+                }
+            }
+
             it.viewPage.setCurrentItem(args.pictureResult.currentIndex,false)
             it.viewPage.offscreenPageLimit = 4
             it.toolBar.setNavigationOnClickListener { _ ->
-                it.toolBar.post {
-                    args.pictureResult.callBack?.callBack(it.viewPage.currentItem)
-                }
-                findNavController().navigateUp()
+                navigateUp(it)
             }
             initTransition(it)
-
+            requireActivity().onBackPressedDispatcher.addCallback(this){
+                navigateUp(it)
+            }
 
         }
         binding.executePendingBindings()
-        postponeEnterTransition()
+        postponeEnterTransition(resources.getInteger(R.integer.post_pone_time).toLong(), TimeUnit.MILLISECONDS)
         return binding.root
+    }
+
+    private fun navigateUp(binding:FragmentBigPictureBinding){
+        binding.root.post {
+            args.pictureResult.callBack?.callBack(binding.viewPage.currentItem)
+        }
+        findNavController().navigateUp()
     }
 
     private fun initTransition(binding:FragmentBigPictureBinding){
@@ -109,9 +156,11 @@ class BigPictureFragment : Fragment() {
                                  tags:List<String>,
                                  usersID:List<String>,
                                  usersName:List<String>,
-                                 position:Int,callBackFuc:(position:Int)->Unit){
+                                 pageUrls:List<String>,
+                                 position:Int,
+                                 callBackFuc:(position:Int)->Unit){
             val navController = view.findNavController()
-            val argu = BigPictureArgu(images,profiles,tags,usersID,usersName,position,object:BigPictureCallBack {
+            val argu = BigPictureArgu(images,profiles,tags,usersID,usersName,pageUrls,position,object:BigPictureCallBack() {
                 override fun callBack(position: Int) {
                     callBackFuc(position)
                 }

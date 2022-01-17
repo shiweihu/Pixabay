@@ -59,7 +59,7 @@ class PhotosAdapter(val viewModle: PhotoFragmentMainViewModel, val fragment: Fra
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         getItem(position)?.also {
             holder.binding.authorName = it.user.trim()
-            holder.binding.imageUrl = it.previewURL
+            holder.binding.imageUrl = it.webformatURL
             holder.binding.imageView.transitionName = "${BigPictureFragment.SHARE_ELEMENT_NAME}-${position}"
             holder.binding.imageView.setOnClickListener { view ->
                 navigateToBigPicture(view,position)
@@ -85,6 +85,7 @@ class PhotosAdapter(val viewModle: PhotoFragmentMainViewModel, val fragment: Fra
         val tags = ArrayList<String>()
         val usersID = ArrayList<String>()
         val usersName = ArrayList<String>()
+        val pageUrl = ArrayList<String>()
         this.snapshot().forEach { imageInfo ->
             imageInfo?.let { info->
                 images.add(info.largeImageURL)
@@ -92,10 +93,11 @@ class PhotosAdapter(val viewModle: PhotoFragmentMainViewModel, val fragment: Fra
                 tags.add(info.tags)
                 usersID.add(info.userId.toString())
                 usersName.add(info.user)
+                pageUrl.add(info.pageURL)
             }
         }
         viewModle.sharedElementIndex = position
-        viewModle.navigateToBigPicture(view,images,profiles,tags,usersID,usersName,position,func)
+        viewModle.navigateToBigPicture(view,images,profiles,tags,usersID,usersName,pageUrl,position,func)
     }
 
 }

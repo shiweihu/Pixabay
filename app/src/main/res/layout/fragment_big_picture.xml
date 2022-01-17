@@ -31,6 +31,7 @@
                 app:navigationIcon="@mipmap/return_button_drawable"
                 >
                 <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/user_profile"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="end"
@@ -38,7 +39,18 @@
                     android:layout_marginEnd="20dp"
                     app:imageUrl="@{user_profile_url}"
                     app:priority="@{priority}"
+                    android:theme="@style/ShapeAppearance.circle"
                     />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/page_profile"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/pixabay_logo"
+                    />
+
             </com.google.android.material.appbar.MaterialToolbar>
         </com.google.android.material.appbar.AppBarLayout>
         <androidx.viewpager2.widget.ViewPager2

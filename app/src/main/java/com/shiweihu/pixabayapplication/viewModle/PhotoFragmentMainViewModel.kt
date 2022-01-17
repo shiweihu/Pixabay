@@ -38,11 +38,12 @@ class PhotoFragmentMainViewModel @Inject constructor(
                              tags:List<String>,
                              usersID:List<String>,
                              usersName:List<String>,
+                             pageUrls:List<String>,
                              position:Int,
                              fuc:(position:Int)->Unit
                              )
     {
-       BigPictureFragment.navigateToBigPicture(view,images,profiles,tags,usersID,usersName,position,fuc)
+       BigPictureFragment.navigateToBigPicture(view,images,profiles,tags,usersID,usersName,pageUrls,position,fuc)
     }
 
 }

@@ -1,6 +1,8 @@
 package com.shiweihu.pixabayapplication.net
 
 
+import android.util.Log
+import com.shiweihu.pixabayapplication.MyApplication
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -39,7 +41,13 @@ class NetworkModule {
                     val newRequest = origin.newBuilder()
                         .method(origin.method,origin.body)
                         .build()
-                    chain.proceed(newRequest)
+                    val response = chain.proceed(newRequest)
+                    for(header in response.headers){
+                        MyApplication.mHandler.post {
+                            Log.println(Log.DEBUG,"response header","${header.first}:${header.second}")
+                        }
+                    }
+                    return@addInterceptor response
                 }
                 it.connectTimeout(10L, TimeUnit.MINUTES)
             }.build())
