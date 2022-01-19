@@ -45,9 +45,9 @@ class BigPictureFragment : BaseFragment() {
         constructor(parcel: Parcel) : this() {
         }
 
-        open fun callBack(position:Int){
+         open fun callBack(position:Int){
 
-        }
+         }
 
         override fun writeToParcel(parcel: Parcel, flags: Int) {
 

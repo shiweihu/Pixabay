@@ -94,6 +94,7 @@ class PhotosMainFragment : BaseFragment() {
             binding = FragmentMainPhotosBinding.inflate( LayoutInflater.from(this.context) ,null,false).also { it ->
                 it.categoryGrid.adapter = categoryAdapter
                 it.recycleView.adapter = photosAdapter
+                it.recycleView.setItemViewCacheSize(20)
                 initShareElement(it)
                 initMenu(it.toolBar.menu)
             }
