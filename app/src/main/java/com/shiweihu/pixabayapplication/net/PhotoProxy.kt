@@ -18,6 +18,7 @@ interface PhotoProxy {
         @Query("per_page") per_page:Int = 20,
         @Query("category") category:String = "",
         @Query("lang") lang:String = MyApplication.lang,
-        @Query("safesearch") safesearch:Boolean = true
+        @Query("safesearch") safesearch:Boolean = true,
+        @Query("order") order:String = "latest"
     ): Photos
 }
