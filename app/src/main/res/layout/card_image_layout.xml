@@ -26,7 +26,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     app:cardElevation="2dp"
     android:layout_margin="5dp"
-    android:backgroundTint="@color/white"
     app:cardCornerRadius="0dp"
     >
         <com.google.android.material.imageview.ShapeableImageView
@@ -38,6 +37,7 @@
             app:doEnd="@{do_end}"
             tools:src="@drawable/ic_launcher_background"
             android:scaleType="centerCrop"
+            android:backgroundTint="?attr/colorAccent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

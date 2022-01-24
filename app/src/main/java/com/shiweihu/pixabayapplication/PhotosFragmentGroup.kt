@@ -17,4 +17,8 @@ class PhotosFragmentGroup: Fragment() {
 
         return inflater.inflate(R.layout.fragment_photos_group_layout,container,false)
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+    }
 }

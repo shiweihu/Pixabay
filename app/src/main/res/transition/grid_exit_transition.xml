@@ -31,6 +31,12 @@
     </targets>
   </explode>
 
+  <changeClipBounds/>
+  <changeTransform/>
+  <changeBounds/>
+  <changeImageTransform/>
+
+
 
 
 

@@ -3,7 +3,11 @@ package com.shiweihu.pixabayapplication
 import android.app.Application
 import android.os.Handler
 import android.os.Looper
+import com.bumptech.glide.Glide
 import dagger.hilt.android.HiltAndroidApp
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.*
 
 @HiltAndroidApp
@@ -17,9 +21,18 @@ class MyApplication: Application() {
     override fun onCreate() {
         super.onCreate()
         lang = Locale.getDefault().language;
+        Glide.get(this@MyApplication).clearMemory()
+        CoroutineScope(Dispatchers.IO).launch {
+            Glide.get(this@MyApplication).clearDiskCache()
+        }
 //        val mSystemLanguageList= Locale.getAvailableLocales()
 //        for (local in mSystemLanguageList){
 //            lang += local.country
 //        }
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        Glide.get(this).clearMemory()
     }
 }
