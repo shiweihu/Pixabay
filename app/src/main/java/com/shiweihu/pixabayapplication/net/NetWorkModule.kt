@@ -25,6 +25,11 @@ class NetworkModule {
     fun providePhotoProxy(): PhotoProxy {
         return myHttpProxy.create(PhotoProxy::class.java)
     }
+    @Singleton
+    @Provides
+    fun provideVideoProxy():VideoProxy{
+        return myHttpProxy.create(VideoProxy::class.java)
+    }
 
 
 

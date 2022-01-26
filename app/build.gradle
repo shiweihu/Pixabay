@@ -42,6 +42,7 @@ android {
 
 dependencies {
 
+    implementation "com.google.android.exoplayer:exoplayer:$exoplayer_version"
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt "androidx.room:room-compiler:$rootProject.roomVersion"
