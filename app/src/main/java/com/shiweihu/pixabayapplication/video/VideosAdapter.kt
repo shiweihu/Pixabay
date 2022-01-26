@@ -34,6 +34,7 @@ class VideosAdapter(val viewModle: VideoFragmentMainViewModel, val fragment: Fra
             holder.binding.priority = false
             holder.binding.authorName = it.user
             holder.binding.imageView.scaleType = ImageView.ScaleType.CENTER
+
         }
     }
 
