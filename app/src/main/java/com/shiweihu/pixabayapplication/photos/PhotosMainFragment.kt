@@ -98,13 +98,16 @@ class PhotosMainFragment : BaseFragment() {
                 initShareElement(it)
                 initMenu(it.toolBar.menu)
             }
-        }else{
-            val view = binding?.recycleView?.layoutManager?.findViewByPosition(model.sharedElementIndex)
-            if(view == null){
-                postponeEnterTransition(resources.getInteger(R.integer.post_pone_time).toLong(), TimeUnit.MILLISECONDS)
+        }else {
+            val view =
+                binding?.recycleView?.layoutManager?.findViewByPosition(model.sharedElementIndex)
+            if (view == null) {
+                postponeEnterTransition(
+                    resources.getInteger(R.integer.post_pone_time).toLong(),
+                    TimeUnit.MILLISECONDS
+                )
                 binding?.recycleView?.layoutManager?.scrollToPosition(model.sharedElementIndex)
             }
-
         }
         return binding?.root
     }

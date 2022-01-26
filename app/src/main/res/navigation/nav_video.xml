@@ -12,6 +12,10 @@
         tools:layout="@layout/fragment_main_video"
         >
 
+        <action
+            android:id="@+id/to_video_play_view"
+            app:destination="@+id/video_play_activity"
+            />
 
     </fragment>
 
