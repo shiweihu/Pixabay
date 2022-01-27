@@ -70,13 +70,15 @@ class VideoPlayActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         if(player.isPlaying){
-            player.stop()
+            player.pause()
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-
+        if(player.isPlaying){
+            player.stop()
+        }
 
     }
 
