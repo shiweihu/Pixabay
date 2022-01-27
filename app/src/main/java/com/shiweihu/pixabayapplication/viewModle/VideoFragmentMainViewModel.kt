@@ -16,13 +16,12 @@ class VideoFragmentMainViewModel @Inject constructor (
     private val videoRepository: VideoRepository
 ): ViewModel()  {
 
-    fun feedData(q:String? = null, adapter: VideosAdapter, category:String? = null){
+    fun searchVideo(q:String? = null, adapter: VideosAdapter, category:String? = null){
         viewModelScope.launch {
             videoRepository.searchVideo(q,category).cachedIn(viewModelScope).collectLatest {
                 adapter.submitData(it)
             }
         }
-
     }
 
 }

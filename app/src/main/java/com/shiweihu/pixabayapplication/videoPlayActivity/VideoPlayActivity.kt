@@ -2,6 +2,7 @@ package com.shiweihu.pixabayapplication.videoPlayActivity
 
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -38,21 +39,12 @@ class VideoPlayActivity : AppCompatActivity() {
         binding.playerView.player = player
 
         data.videos?.forEach {
-             val uri = Uri.parse(it)
-             val item = MediaItem.fromUri(uri)
+             val item = MediaItem.fromUri(it)
              player.addMediaItem(item)
         }
-
-//        val item = MediaItem.Builder().also {
-//            it.setUri(data.videos?.get(0))
-//            it.setMimeType(MimeTypes.APPLICATION_MP4)
-//        }
-//        player.addMediaItem(item.build())
-
+        Log.println(Log.DEBUG,"video url", data.videos!![data.currentIndex])
         player.seekTo(data.currentIndex,0L)
-
         player.prepare()
-
     }
 
     override fun onResume() {
@@ -76,10 +68,8 @@ class VideoPlayActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        if(player.isPlaying){
-            player.stop()
-        }
-
+        player.stop()
+        player.release()
     }
 
 }

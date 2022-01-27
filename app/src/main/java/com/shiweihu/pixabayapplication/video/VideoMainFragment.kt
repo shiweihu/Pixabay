@@ -3,8 +3,11 @@ package com.shiweihu.pixabayapplication.video
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
+import androidx.core.view.forEachIndexed
 import androidx.fragment.app.viewModels
 import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.databinding.FragmentMainVideoBinding
@@ -45,7 +48,7 @@ class VideoFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        model.feedData(adapter = videosAdapter)
+        model.searchVideo(adapter = videosAdapter)
     }
 
 
@@ -57,9 +60,51 @@ class VideoFragment : Fragment() {
         binding = FragmentMainVideoBinding.inflate(inflater,container,false).also{
             it.categoryGrid.adapter = categoryAdapter
             it.recycleView.adapter = videosAdapter
-
+            initMenu(it.toolBar.menu)
         }
         return binding?.root
+    }
+
+    private fun query(q:String? = null){
+
+        if(q?.isEmpty() == true){
+            return
+        }
+
+        var category: String = ""
+        categoryAdapter.checkedList.forEachIndexed { index, selectedCategory ->
+            category += if (index == categoryAdapter.checkedList.size - 1) {
+                selectedCategory
+            } else {
+                ("$selectedCategory,")
+            }
+        }
+        model.searchVideo(q?.trim() ?: "", videosAdapter, category)
+        videosAdapter.refresh()
+    }
+
+    private fun initMenu(menu: Menu){
+        menu.forEachIndexed { index, item ->
+            when (item.itemId) {
+                R.id.action_search -> {
+                    val searchView = item.actionView as SearchView
+//                    searchView.setOnQueryTextFocusChangeListener { view, b ->
+//                        isInput = b
+//                    }
+                    searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                        override fun onQueryTextSubmit(query: String): Boolean {
+                            query(query)
+                            searchView.clearFocus()
+                            return true
+                        }
+
+                        override fun onQueryTextChange(newText: String?): Boolean {
+                            return true
+                        }
+                    })
+                }
+            }
+        }
     }
 
     companion object {

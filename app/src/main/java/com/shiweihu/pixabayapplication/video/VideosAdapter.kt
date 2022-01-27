@@ -39,11 +39,11 @@ class VideosAdapter(val viewModle: VideoFragmentMainViewModel, val fragment: Fra
             holder.binding.authorName = it.user
             holder.binding.imageView.scaleType = ImageView.ScaleType.CENTER
             holder.binding.root.setOnClickListener {view->
-                val videos = ArrayList<String>();
+                val videos = ArrayList<String>()
 
                 this.snapshot().forEach { items ->
                     items?.let {video ->
-                        videos.add(video.videos.medium.url)
+                        videos.add(video.videos.large.url)
                     }
                 }
                 val argu = VideoPlayArgu(videos,null,null,null,null,null,position)
