@@ -46,7 +46,7 @@ class VideosAdapter(val viewModle: VideoFragmentMainViewModel, val fragment: Fra
                         videos.add(video.videos.medium.url)
                     }
                 }
-                val argu = VideoPlayArgu(videos,null,null,null,null,null,0)
+                val argu = VideoPlayArgu(videos,null,null,null,null,null,position)
 
                 val navController = view.findNavController()
                 if(navController.currentDestination?.id == R.id.video_fragment){

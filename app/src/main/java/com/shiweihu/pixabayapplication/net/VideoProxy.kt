@@ -13,10 +13,10 @@ interface VideoProxy {
        @Query("q") q:String = "",
        @Query("id") id:String = "",
        @Query("page") page:Int = 1,
-       @Query("per_page") per_page:Int = 200,
+       @Query("per_page") per_page:Int = 20,
        @Query("category") category:String = "",
        @Query("lang") lang:String = MyApplication.lang,
        @Query("safesearch") safesearch:Boolean = true,
-       @Query("order") order:String = "latest"
+       @Query("order") order:String = "popular"
    ):Videos
 }

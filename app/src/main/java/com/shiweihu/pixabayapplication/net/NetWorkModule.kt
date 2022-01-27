@@ -54,7 +54,7 @@ class NetworkModule {
                     }
                     return@addInterceptor response
                 }
-                it.connectTimeout(10L, TimeUnit.MINUTES)
+                it.connectTimeout(30L, TimeUnit.SECONDS)
             }.build())
             .addConverterFactory(GsonConverterFactory.create())
             .build()

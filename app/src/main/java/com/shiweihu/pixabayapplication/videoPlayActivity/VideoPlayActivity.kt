@@ -4,9 +4,12 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
 import androidx.navigation.navArgs
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.util.MimeTypes
+import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.databinding.ActivityVideoPlayBinding
 
 
@@ -28,6 +31,10 @@ class VideoPlayActivity : AppCompatActivity() {
         val binding = ActivityVideoPlayBinding.inflate(LayoutInflater.from(this))
         setContentView(binding.root)
 
+        binding.toolBar.setNavigationOnClickListener {
+            this.finish()
+        }
+
         binding.playerView.player = player
 
         data.videos?.forEach {
@@ -35,10 +42,40 @@ class VideoPlayActivity : AppCompatActivity() {
              val item = MediaItem.fromUri(uri)
              player.addMediaItem(item)
         }
+
+//        val item = MediaItem.Builder().also {
+//            it.setUri(data.videos?.get(0))
+//            it.setMimeType(MimeTypes.APPLICATION_MP4)
+//        }
+//        player.addMediaItem(item.build())
+
+        player.seekTo(data.currentIndex,0L)
+
         player.prepare()
+
+    }
+
+    override fun onResume() {
+        super.onResume()
         player.play()
+    }
 
+    override fun onPause() {
+        super.onPause()
+        if(player.isPlaying){
+            player.pause()
+        }
+    }
 
+    override fun onStop() {
+        super.onStop()
+        if(player.isPlaying){
+            player.stop()
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
 
 
     }
