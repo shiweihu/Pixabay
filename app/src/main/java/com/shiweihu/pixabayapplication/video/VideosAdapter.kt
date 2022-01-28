@@ -15,7 +15,7 @@ import com.shiweihu.pixabayapplication.videoPlayActivity.VideoPlayActivityArgs
 import com.shiweihu.pixabayapplication.viewArgu.VideoPlayArgu
 import com.shiweihu.pixabayapplication.viewModle.VideoFragmentMainViewModel
 
-class VideosAdapter(val viewModle: VideoFragmentMainViewModel, val fragment: Fragment, val func:(position:Int)->Unit): PagingDataAdapter<Video, VideosAdapter.CoverViewHolder>(
+class VideosAdapter(val viewModle: VideoFragmentMainViewModel, val fragment: Fragment, val func:((position:Int)->Unit)? = null): PagingDataAdapter<Video, VideosAdapter.CoverViewHolder>(
     VideosAdapter.VideoDiff()
 ) {
 

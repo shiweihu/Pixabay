@@ -33,17 +33,17 @@ class VideoFragment : Fragment() {
 
     val model:VideoFragmentMainViewModel by viewModels()
 
+    private lateinit var searchView:SearchView;
+
 
     private val categoryAdapter by lazy{
         CategoryAdapter(this.requireContext()){
-
+            query(searchView.query.toString())
         }
     }
 
     private val videosAdapter by lazy {
-        VideosAdapter(model,this){
-
-        }
+        VideosAdapter(model,this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -87,7 +87,7 @@ class VideoFragment : Fragment() {
         menu.forEachIndexed { index, item ->
             when (item.itemId) {
                 R.id.action_search -> {
-                    val searchView = item.actionView as SearchView
+                    searchView = item.actionView as SearchView
 //                    searchView.setOnQueryTextFocusChangeListener { view, b ->
 //                        isInput = b
 //                    }

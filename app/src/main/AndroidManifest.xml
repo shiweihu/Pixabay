@@ -18,14 +18,16 @@
             android:exported="false"
             android:label="@string/title_activity_video_play"
             android:theme="@style/Theme.PixabayApplication.NoActionBar"
-            android:screenOrientation="fullSensor"
+            android:screenOrientation="sensor"
+            android:configChanges="orientation|screenSize"
             />
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:screenOrientation="fullSensor"
-            android:theme="@style/Theme.PixabayApplication.NoActionBar">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.PixabayApplication.NoActionBar"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

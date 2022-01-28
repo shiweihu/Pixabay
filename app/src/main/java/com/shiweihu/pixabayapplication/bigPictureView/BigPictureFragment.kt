@@ -156,6 +156,10 @@ class BigPictureFragment : BaseFragment() {
 
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+    }
+
 
 
     companion object {

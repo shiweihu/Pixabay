@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.viewPage.isUserInputEnabled = false
+        binding.viewPage.offscreenPageLimit = 4
         binding.viewPage.adapter = FragmentsAdapter(this)
         TabLayoutMediator(binding.bottomNavigate,binding.viewPage){tab,position ->
             tab.setIcon(icons[position])
