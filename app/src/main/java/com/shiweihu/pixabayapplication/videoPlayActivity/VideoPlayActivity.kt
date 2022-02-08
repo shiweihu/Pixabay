@@ -79,7 +79,8 @@ class VideoPlayActivity(
         player.prepare()
         player.addListener(object: Player.Listener {
             override fun onPlayerError(error: PlaybackException) {
-                Toast.makeText(this@VideoPlayActivity,error.message,Toast.LENGTH_LONG).show()
+                val url =  player.currentMediaItem?.localConfiguration?.uri.toString()
+                Toast.makeText(this@VideoPlayActivity,url,Toast.LENGTH_LONG).show()
                 if(player.hasNextMediaItem()){
                     player.seekToNextMediaItem()
                     mHandler.postDelayed({

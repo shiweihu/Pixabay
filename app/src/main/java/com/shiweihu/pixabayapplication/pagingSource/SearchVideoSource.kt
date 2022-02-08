@@ -30,7 +30,7 @@ class SearchVideoSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Video> {
         val page = params.key ?: 1
         return try {
-            val response = videoProxy.searchVideos(q = query ?: "", category = category ?: "",page = page)
+            val response = videoProxy.searchVideos(q = query ?: "", category = category ?: "",page = page,order = if(query == null) "latest" else "popular")
             LoadResult.Page(
                 data = response.hits,
                 prevKey = if (page == 1) null else page - 1,

@@ -17,7 +17,7 @@
             android:name=".videoPlayActivity.VideoPlayActivity"
             android:exported="false"
             android:label="@string/title_activity_video_play"
-            android:theme="@style/Theme.PixabayApplication.NoActionBar"
+            android:theme="@style/Theme.PixabayApplication.FullScreen"
             android:screenOrientation="sensor"
             android:configChanges="orientation|screenSize"
             />

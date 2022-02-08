@@ -17,6 +17,6 @@ interface VideoProxy {
        @Query("category") category:String = "",
        @Query("lang") lang:String = MyApplication.lang,
        @Query("safesearch") safesearch:Boolean = true,
-       @Query("order") order:String = "popular"
+       @Query("order") order:String = "latest"
    ):Videos
 }
