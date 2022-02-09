@@ -9,7 +9,7 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface PhotoProxy {
-    @POST("api/")
+    @GET("api/")
     suspend fun queryImages(
         @Query("key") key:String = MyApplication.API_KEY,
         @Query("q") q:String = "",

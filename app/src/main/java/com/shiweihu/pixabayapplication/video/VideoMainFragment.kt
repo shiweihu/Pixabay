@@ -66,19 +66,7 @@ class VideoFragment : Fragment() {
     }
 
     private fun query(q:String? = null){
-
-        if(q?.isEmpty() == true){
-            return
-        }
-
-        var category: String = ""
-        categoryAdapter.checkedList.forEachIndexed { index, selectedCategory ->
-            category += if (index == categoryAdapter.checkedList.size - 1) {
-                selectedCategory
-            } else {
-                ("$selectedCategory,")
-            }
-        }
+        var category: String = categoryAdapter.checkedItem
         model.searchVideo(q?.trim() ?: "", videosAdapter, category)
         videosAdapter.refresh()
     }

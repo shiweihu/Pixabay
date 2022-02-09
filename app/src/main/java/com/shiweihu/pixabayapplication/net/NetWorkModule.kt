@@ -7,6 +7,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Cache
 import okhttp3.Dispatcher
 import okhttp3.OkHttp
 import okhttp3.OkHttpClient
@@ -43,10 +44,10 @@ class NetworkModule {
                 })
                 it.addInterceptor { chain ->
                     val origin  = chain.request()
-                    val newRequest = origin.newBuilder()
-                        .method(origin.method,origin.body)
-                        .build()
-                    val response = chain.proceed(newRequest)
+//                    val newRequest = origin.newBuilder()
+//                        .method(origin.method,origin.body)
+//                        .build()
+                    val response = chain.proceed(origin)
                     for(header in response.headers){
                         MyApplication.mHandler.post {
                             Log.println(Log.DEBUG,"response header","${header.first}:${header.second}")
@@ -54,7 +55,9 @@ class NetworkModule {
                     }
                     return@addInterceptor response
                 }
+                it.cache(MyApplication.cachePath?.let { cache -> Cache(cache, 86400L) })
                 it.connectTimeout(30L, TimeUnit.SECONDS)
+                it.readTimeout(20L,TimeUnit.SECONDS)
             }.build())
             .addConverterFactory(GsonConverterFactory.create())
             .build()

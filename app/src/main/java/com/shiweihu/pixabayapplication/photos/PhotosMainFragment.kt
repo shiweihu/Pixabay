@@ -113,18 +113,8 @@ class PhotosMainFragment : BaseFragment() {
     }
 
     private fun query(q:String){
-        if(q.isEmpty()){
-            return
-        }
-        var category: String = ""
-        categoryAdapter.checkedList.forEachIndexed { index, selectedCategory ->
-            category += if (index == categoryAdapter.checkedList.size - 1) {
-                selectedCategory
-            } else {
-                ("$selectedCategory,")
-            }
-        }
-        model.searchPhotos(q.trim(), photosAdapter, category)
+        var category: String = categoryAdapter.checkedItem
+        model.searchPhotos(q, photosAdapter, category)
         photosAdapter.refresh()
         model.sharedElementIndex = 0
     }
