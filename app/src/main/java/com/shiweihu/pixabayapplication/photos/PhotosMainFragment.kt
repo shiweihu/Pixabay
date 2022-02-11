@@ -41,16 +41,13 @@ class PhotosMainFragment : BaseFragment() {
 
     private val model:PhotoFragmentMainViewModel by viewModels()
 
-    private var binding:FragmentMainPhotosBinding? = null
-
-    private lateinit var searchView:SearchView
-
+    private var queryStr:String = ""
     private var isInput = false
 
     private val categoryAdapter by lazy{
         CategoryAdapter(this.requireContext()){
             if(!isInput){
-                query(searchView.query.toString())
+                query(queryStr)
             }
         }
     }
@@ -89,27 +86,29 @@ class PhotosMainFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        if(binding == null){
-            binding = FragmentMainPhotosBinding.inflate( LayoutInflater.from(this.context) ,null,false).also { it ->
-                it.categoryGrid.adapter = categoryAdapter
-                it.recycleView.adapter = photosAdapter
-                it.recycleView.setItemViewCacheSize(20)
-                initShareElement(it)
-                initMenu(it.toolBar.menu)
-            }
-        }else {
+    ): View {
+
+        val binding = FragmentMainPhotosBinding.inflate( LayoutInflater.from(this.context) ,container,false).also { it ->
+            it.appBar.setExpanded(false)
+            it.categoryGrid.adapter = categoryAdapter
+            it.recycleView.adapter = photosAdapter
+            it.recycleView.setItemViewCacheSize(20)
+            initShareElement(it)
+            initMenu(it.toolBar.menu)
             val view =
-                binding?.recycleView?.layoutManager?.findViewByPosition(model.sharedElementIndex)
+                it.recycleView.layoutManager?.findViewByPosition(model.sharedElementIndex)
             if (view == null) {
                 postponeEnterTransition(
                     resources.getInteger(R.integer.post_pone_time).toLong(),
                     TimeUnit.MILLISECONDS
                 )
-                binding?.recycleView?.layoutManager?.scrollToPosition(model.sharedElementIndex)
+                it.recycleView.layoutManager?.scrollToPosition(model.sharedElementIndex)
             }
+
         }
-        return binding?.root
+        return binding.root.also {
+            it.isSaveEnabled = true
+        }
     }
 
     private fun query(q:String){
@@ -123,13 +122,14 @@ class PhotosMainFragment : BaseFragment() {
         menu.forEachIndexed { index, item ->
             when (item.itemId) {
                 R.id.action_search -> {
-                    searchView = item.actionView as SearchView
+                    val searchView = item.actionView as SearchView
                     searchView.setOnQueryTextFocusChangeListener { view, b ->
                         isInput = b
                     }
                     searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                         override fun onQueryTextSubmit(query: String): Boolean {
                             query(query)
+                            queryStr = query
                             searchView.clearFocus()
                             return true
                         }
@@ -141,6 +141,11 @@ class PhotosMainFragment : BaseFragment() {
                 }
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

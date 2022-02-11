@@ -19,6 +19,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.Glide
 import com.shiweihu.pixabayapplication.BaseFragment
 import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.databinding.FragmentBigPictureBinding
@@ -74,12 +75,13 @@ class BigPictureFragment : BaseFragment() {
 
     private val args:BigPictureFragmentArgs by navArgs()
 
-    private lateinit var binding:FragmentBigPictureBinding
+    private lateinit  var binding:FragmentBigPictureBinding
 
 
     override fun onBackKeyPressed() {
         super.onBackKeyPressed()
         navigateUp(binding)
+
     }
 
 
@@ -131,9 +133,7 @@ class BigPictureFragment : BaseFragment() {
 
 
     private fun navigateUp(binding:FragmentBigPictureBinding){
-        binding.root.post {
-            args.pictureResult.callBack?.callBack(binding.viewPage.currentItem)
-        }
+        args.pictureResult.callBack?.callBack(binding.viewPage.currentItem)
         findNavController().navigateUp()
     }
 
@@ -156,8 +156,13 @@ class BigPictureFragment : BaseFragment() {
 
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
+
     }
 
 

@@ -18,7 +18,7 @@
                 android:id="@+id/collasing_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
+                app:layout_scrollFlags="scroll|enterAlways"
                 android:minHeight="?attr/actionBarSize"
                 app:collapsedTitleGravity="top"
                 >

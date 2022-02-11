@@ -122,10 +122,10 @@ class VideoPlayActivity(
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         mHandler.removeCallbacksAndMessages(null)
         player.stop()
         player.release()
+        super.onDestroy()
     }
 
 }

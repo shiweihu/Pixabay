@@ -33,12 +33,12 @@ class VideoFragment : Fragment() {
 
     val model:VideoFragmentMainViewModel by viewModels()
 
-    private lateinit var searchView:SearchView;
+    private var queryStr:String = ""
 
 
     private val categoryAdapter by lazy{
         CategoryAdapter(this.requireContext()){
-            query(searchView.query.toString())
+            query(queryStr)
         }
     }
 
@@ -58,6 +58,7 @@ class VideoFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentMainVideoBinding.inflate(inflater,container,false).also{
+            it.appBar.setExpanded(false)
             it.categoryGrid.adapter = categoryAdapter
             it.recycleView.adapter = videosAdapter
             initMenu(it.toolBar.menu)
@@ -75,13 +76,14 @@ class VideoFragment : Fragment() {
         menu.forEachIndexed { index, item ->
             when (item.itemId) {
                 R.id.action_search -> {
-                    searchView = item.actionView as SearchView
+                    val searchView = item.actionView as SearchView
 //                    searchView.setOnQueryTextFocusChangeListener { view, b ->
 //                        isInput = b
 //                    }
                     searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                         override fun onQueryTextSubmit(query: String): Boolean {
                             query(query)
+                            queryStr = query
                             searchView.clearFocus()
                             return true
                         }
