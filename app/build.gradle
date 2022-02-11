@@ -44,6 +44,8 @@ dependencies {
 
     implementation "com.google.android.exoplayer:exoplayer:$exoplayer_version"
 
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.8.1'
+
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt "androidx.room:room-compiler:$rootProject.roomVersion"
     kapt "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
