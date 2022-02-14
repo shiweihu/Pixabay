@@ -80,15 +80,15 @@ class PhotosAdapter(val viewModle: PhotoFragmentMainViewModel, val fragment: Fra
                 0,
                 View.MeasureSpec.UNSPECIFIED
             )
-//调用measure方法之后就可以获取宽高
-//调用measure方法之后就可以获取宽高
-            holder.binding.root.measure(width, height)
-            val widthValue = holder.binding.root.measuredWidth // 获取宽度
-            val heightValue = holder.binding.root.measuredHeight // 获取高度
-
-            val widthPx = DisplayUtils.dp2px(holder.binding.root.context,widthValue.toFloat())
-            val radio = widthPx.toFloat()/it.webformatWidth.toFloat()
-            holder.binding.root.layoutParams.height = (it.webformatHeight*radio).toInt().coerceAtLeast(300)
+            //调用measure方法之后就可以获取宽高
+            //调用measure方法之后就可以获取宽高
+//            holder.binding.root.measure(width, height)
+//            val widthValue = holder.binding.root.measuredWidth // 获取宽度
+//            val heightValue = holder.binding.root.measuredHeight // 获取高度
+//
+//            val widthPx = DisplayUtils.dp2px(holder.binding.root.context,widthValue.toFloat())
+//            val radio = widthPx.toFloat()/it.webformatWidth.toFloat()
+//            holder.binding.root.layoutParams.height = (it.webformatHeight*radio).toInt().coerceAtLeast(300)
             //
 
 

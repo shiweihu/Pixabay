@@ -36,7 +36,7 @@
             app:priority="@{priority}"
             app:doEnd="@{do_end}"
             tools:src="@drawable/ic_launcher_background"
-            android:scaleType="centerCrop"
+            android:scaleType="center"
             android:backgroundTint="?attr/colorAccent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
