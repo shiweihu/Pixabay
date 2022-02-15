@@ -40,14 +40,25 @@ class VideosAdapter(val viewModle: VideoFragmentMainViewModel, val fragment: Fra
             holder.binding.imageView.scaleType = ImageView.ScaleType.CENTER
             holder.binding.root.setOnClickListener {view->
                 val videos = ArrayList<String>()
+                val profiles = ArrayList<String>()
+                val tags = ArrayList<String>()
+                val userid = ArrayList<String>()
+                val userNames = ArrayList<String>()
+                val pageUrls = ArrayList<String>()
+
 
                 this.snapshot().forEach { items ->
                     items?.let {video ->
-                        videos.add(video.videos.large.url)
+                        videos.add(video.videos.small.url)
+                        profiles.add(video.userImageURL)
+                        tags.add(video.tags)
+                        userid.add(video.userId.toString())
+                        userNames.add(video.user)
+                        pageUrls.add(video.pageURL)
+
                     }
                 }
-                val argu = VideoPlayArgu(videos,null,null,null,null,null,position)
-
+                val argu = VideoPlayArgu(videos,profiles,tags,userid,userNames,pageUrls,position)
                 val navController = view.findNavController()
                 if(navController.currentDestination?.id == R.id.video_fragment){
                     navController.navigate(R.id.to_video_play_view,VideoPlayActivityArgs(argu).toBundle())

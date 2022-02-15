@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.navArgs
@@ -19,6 +20,7 @@ import com.google.android.exoplayer2.Player.STATE_READY
 import com.google.android.exoplayer2.util.MimeTypes
 import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.databinding.ActivityVideoPlayBinding
+import com.shiweihu.pixabayapplication.viewModle.VideoPlayViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,6 +33,7 @@ class VideoPlayActivity(
     }
 
 
+    private val model: VideoPlayViewModel by viewModels()
 
     private val args:VideoPlayActivityArgs by navArgs()
 
@@ -63,11 +66,16 @@ class VideoPlayActivity(
         binding.toolBar.setNavigationOnClickListener {
             this.finish()
         }
-        binding.playerView.player = player
-        binding.playerView.setControllerVisibilityListener {
-            binding.toolBar.visibility = it
 
+        binding.playerView.player = player
+        binding.playerView.controllerAutoShow = false
+
+        binding.playerView.setControllerVisibilityListener {
+            binding.appBar.visibility = it
         }
+
+
+
 
         data.videos?.forEach {
              val item = MediaItem.fromUri(it)
@@ -76,11 +84,16 @@ class VideoPlayActivity(
         Log.println(Log.DEBUG,"video url", data.videos!![data.currentIndex])
         player.seekTo(data.currentIndex,0L)
         player.repeatMode = REPEAT_MODE_ONE
-        player.prepare()
         player.addListener(object: Player.Listener {
+
+
+            override fun onMediaItemTransition(mediaItem: MediaItem?, reason: Int) {
+                super.onMediaItemTransition(mediaItem, reason)
+                initMenuAction(player.currentMediaItemIndex)
+            }
+
             override fun onPlayerError(error: PlaybackException) {
-                val url =  player.currentMediaItem?.localConfiguration?.uri.toString()
-                Toast.makeText(this@VideoPlayActivity,url,Toast.LENGTH_LONG).show()
+                Toast.makeText(this@VideoPlayActivity,error.message,Toast.LENGTH_LONG).show()
                 if(player.hasNextMediaItem()){
                     player.seekToNextMediaItem()
                     mHandler.postDelayed({
@@ -92,6 +105,23 @@ class VideoPlayActivity(
             }
 
         })
+        player.prepare()
+        initMenuAction(data.currentIndex)
+    }
+
+
+    private fun initMenuAction(position:Int){
+        binding.userProfileUrl = data.profiles?.get(position)
+        binding.pageProfile.setOnClickListener {
+            model.navigateToWeb(this@VideoPlayActivity,data.pageUrls!![position])
+        }
+        binding.userProfile.setOnClickListener {
+            val username = data.userNameArray?.get(position)
+            val userid = data.useridArray?.get(position)
+            if(username != null && userid!=null){
+                model.navigateToUserProfilePage(this@VideoPlayActivity,username,userid)
+            }
+        }
     }
 
     override fun onStart() {
@@ -116,13 +146,13 @@ class VideoPlayActivity(
 
     override fun onStop() {
         super.onStop()
+        mHandler.removeCallbacksAndMessages(null)
         if(player.isPlaying){
             player.pause()
         }
     }
 
     override fun onDestroy() {
-        mHandler.removeCallbacksAndMessages(null)
         player.stop()
         player.release()
         super.onDestroy()
