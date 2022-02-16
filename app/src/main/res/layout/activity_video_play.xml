@@ -21,6 +21,15 @@
         android:fitsSystemWindows="true"
         android:background="@color/black"
         >
+        <com.google.android.exoplayer2.ui.StyledPlayerView
+            android:id="@+id/player_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:show_buffering="when_playing"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            />
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar"
@@ -41,7 +50,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="end"
-                    tools:src="@drawable/user_profile"
+                    android:src="@drawable/user_profile"
                     android:layout_marginEnd="20dp"
                     app:imageUrl="@{user_profile_url}"
                     app:priority="@{priority}"
@@ -55,6 +64,8 @@
                     android:layout_gravity="end"
                     android:layout_marginEnd="20dp"
                     android:src="@drawable/pixabay_logo"
+                    android:theme="@style/ShapeAppearance.circle"
+
                     />
 
 
@@ -62,18 +73,6 @@
             </com.google.android.material.appbar.MaterialToolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
-
-        <com.google.android.exoplayer2.ui.StyledPlayerView
-            android:id="@+id/player_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:show_buffering="when_playing"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-
-            />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

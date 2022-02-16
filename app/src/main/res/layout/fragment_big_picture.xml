@@ -35,7 +35,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="end"
-                    tools:src="@drawable/user_profile"
+                    android:src="@drawable/user_profile"
                     android:layout_marginEnd="20dp"
                     app:imageUrl="@{user_profile_url}"
                     app:priority="@{priority}"
@@ -49,6 +49,7 @@
                     android:layout_gravity="end"
                     android:layout_marginEnd="20dp"
                     android:src="@drawable/pixabay_logo"
+                    android:theme="@style/ShapeAppearance.circle"
                     />
 
             </com.google.android.material.appbar.MaterialToolbar>
