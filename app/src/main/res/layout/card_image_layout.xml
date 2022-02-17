@@ -32,6 +32,7 @@
             android:id="@+id/image_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:minHeight="100dp"
             app:imageUrl="@{image_url}"
             app:priority="@{priority}"
             app:doEnd="@{do_end}"

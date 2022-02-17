@@ -8,9 +8,12 @@ import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.shiweihu.pixabayapplication.R
+import com.shiweihu.pixabayapplication.bigPictureView.BigPictureFragment
 import com.shiweihu.pixabayapplication.data.Video
 import com.shiweihu.pixabayapplication.databinding.CardImageLayoutBinding
+import com.shiweihu.pixabayapplication.photos.PhotosAdapter
 import com.shiweihu.pixabayapplication.videoPlayActivity.VideoPlayActivityArgs
 import com.shiweihu.pixabayapplication.viewArgu.VideoPlayArgu
 import com.shiweihu.pixabayapplication.viewModle.VideoFragmentMainViewModel
@@ -31,13 +34,24 @@ class VideosAdapter(val viewModle: VideoFragmentMainViewModel, val fragment: Fra
         }
     }
 
-    override fun onBindViewHolder(holder: CoverViewHolder, position: Int) {
-        getItem(position)?.let { it ->
+    override fun onViewDetachedFromWindow(holder: VideosAdapter.CoverViewHolder) {
+        super.onViewDetachedFromWindow(holder)
+        Glide.with(holder.binding.imageView).clear(holder.binding.imageView)
+    }
+
+    override fun onViewAttachedToWindow(holder: VideosAdapter.CoverViewHolder) {
+        super.onViewAttachedToWindow(holder)
+        getItem(holder.layoutPosition)?.also {
             val url = "https://i.vimeocdn.com/video/${it.pictureId}_960x540.jpg"
             holder.binding.imageUrl = url
             holder.binding.priority = false
+        }
+
+    }
+
+    override fun onBindViewHolder(holder: CoverViewHolder, position: Int) {
+        getItem(position)?.let { it ->
             holder.binding.authorName = it.user
-            holder.binding.imageView.scaleType = ImageView.ScaleType.CENTER
             holder.binding.root.setOnClickListener {view->
                 val videos = ArrayList<String>()
                 val profiles = ArrayList<String>()

@@ -16,6 +16,8 @@ import androidx.core.app.SharedElementCallback
 import androidx.core.view.forEachIndexed
 
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.bumptech.glide.Glide
 import com.shiweihu.pixabayapplication.BaseFragment
 
 import com.shiweihu.pixabayapplication.R
@@ -44,19 +46,8 @@ class PhotosMainFragment : BaseFragment() {
     private var queryStr:String = ""
     private var isInput = false
 
-    private val categoryAdapter by lazy{
-        CategoryAdapter(this.requireContext()){
-            if(!isInput){
-                query(queryStr)
-            }
-        }
-    }
-
-    private val photosAdapter by lazy {
-        PhotosAdapter(model,this){
-            model.sharedElementIndex = it
-        }
-    }
+    private var binding:FragmentMainPhotosBinding? = null
+    private var category:String = ""
 
 
     private fun initShareElement(binding:FragmentMainPhotosBinding){
@@ -77,43 +68,39 @@ class PhotosMainFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        model.searchPhotos("",photosAdapter)
-
-
 
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
 
-        val binding = FragmentMainPhotosBinding.inflate( LayoutInflater.from(this.context) ,container,false).also { it ->
+        binding = FragmentMainPhotosBinding.inflate(inflater,container,false).also { it ->
             it.appBar.setExpanded(false)
-            it.categoryGrid.adapter = categoryAdapter
-            it.recycleView.adapter = photosAdapter
-            it.recycleView.setItemViewCacheSize(20)
+            it.categoryGrid.adapter = CategoryAdapter(this.requireContext()){category ->
+                this.category = category
+                if(!isInput){
+                    query(queryStr,this.category)
+                }
+            }
+            it.recycleView.adapter = PhotosAdapter(model,this){
+                model.sharedElementIndex = it
+            }.also {
+                model.searchPhotos("",it)
+            }
+            //it.recycleView.setItemViewCacheSize(20)
             initShareElement(it)
             initMenu(it.toolBar.menu)
-            val view =
-                it.recycleView.layoutManager?.findViewByPosition(model.sharedElementIndex)
-            if (view == null) {
-                postponeEnterTransition(
-                    resources.getInteger(R.integer.post_pone_time).toLong(),
-                    TimeUnit.MILLISECONDS
-                )
-                it.recycleView.layoutManager?.scrollToPosition(model.sharedElementIndex)
-            }
-
+            it.lifecycleOwner = viewLifecycleOwner
         }
-        return binding.root.also {
-            it.isSaveEnabled = true
-        }
+        return binding?.root
     }
 
-    private fun query(q:String){
-        var category: String = categoryAdapter.checkedItem
-        model.searchPhotos(q, photosAdapter, category)
+    private fun query(q:String,category:String){
+        val photosAdapter = (binding?.recycleView?.adapter as PhotosAdapter)
+
+        model.searchPhotos(q, photosAdapter,category)
         photosAdapter.refresh()
         model.sharedElementIndex = 0
     }
@@ -128,7 +115,7 @@ class PhotosMainFragment : BaseFragment() {
                     }
                     searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                         override fun onQueryTextSubmit(query: String): Boolean {
-                            query(query)
+                            query(query,this@PhotosMainFragment.category)
                             queryStr = query
                             searchView.clearFocus()
                             return true
@@ -144,14 +131,27 @@ class PhotosMainFragment : BaseFragment() {
     }
 
     override fun onDestroyView() {
+        binding = null
         super.onDestroyView()
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
+    override fun onStart() {
+        super.onStart()
+        val currentView = binding?.recycleView?.layoutManager?.findViewByPosition(model.sharedElementIndex)
+        if(currentView == null){
+            postponeEnterTransition(resources.getInteger(R.integer.post_pone_time).toLong(),TimeUnit.MILLISECONDS)
+            binding?.recycleView?.layoutManager?.scrollToPosition(model.sharedElementIndex)
+        }
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

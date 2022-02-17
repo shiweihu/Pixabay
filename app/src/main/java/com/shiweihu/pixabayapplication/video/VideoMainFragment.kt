@@ -29,26 +29,19 @@ private const val ARG_PARAM2 = "param2"
 @AndroidEntryPoint
 class VideoFragment : Fragment() {
 
-    var binding:FragmentMainVideoBinding? = null
+    private var binding:FragmentMainVideoBinding? = null
 
-    val model:VideoFragmentMainViewModel by viewModels()
+    private val model:VideoFragmentMainViewModel by viewModels()
 
     private var queryStr:String = ""
 
+    private var category:String = ""
 
-    private val categoryAdapter by lazy{
-        CategoryAdapter(this.requireContext()){
-            query(queryStr)
-        }
-    }
 
-    private val videosAdapter by lazy {
-        VideosAdapter(model,this)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        model.searchVideo(adapter = videosAdapter)
+
     }
 
 
@@ -57,17 +50,28 @@ class VideoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentMainVideoBinding.inflate(inflater,container,false).also{
-            it.appBar.setExpanded(false)
-            it.categoryGrid.adapter = categoryAdapter
-            it.recycleView.adapter = videosAdapter
-            initMenu(it.toolBar.menu)
+        binding = FragmentMainVideoBinding.inflate(inflater,container,false).also{ binding ->
+            binding.appBar.setExpanded(false)
+            binding.categoryGrid.adapter = CategoryAdapter(this.requireContext()){
+                category = it
+                query(queryStr,category = category)
+            }
+            binding.recycleView.adapter = VideosAdapter(model,this).also {
+                model.searchVideo(adapter = it)
+            }
+            initMenu(binding.toolBar.menu)
+            binding.lifecycleOwner = viewLifecycleOwner
         }
         return binding?.root
     }
 
-    private fun query(q:String? = null){
-        var category: String = categoryAdapter.checkedItem
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
+
+    private fun query(q:String? = null , category: String = ""){
+        val videosAdapter = ( binding?.recycleView?.adapter as VideosAdapter)
         model.searchVideo(q?.trim() ?: "", videosAdapter, category)
         videosAdapter.refresh()
     }

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.databinding.CategoryItemLayoutBinding
 
-class CategoryAdapter(val context: Context,val callBack:()->Unit) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
+class CategoryAdapter(val context: Context,val callBack:(category:String)->Unit) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
     private val categorys by lazy {
         context.resources.getStringArray(R.array.category_text)
@@ -35,14 +35,12 @@ class CategoryAdapter(val context: Context,val callBack:()->Unit) : RecyclerView
         holder.binding.checkbox.setOnCheckedChangeListener { buttonView, isChecked ->
             if(isChecked){
                 checkedItem = category
-                callBack()
                 this.notifyItemChanged(checkedPosition)
                 checkedPosition = position
             }else{
                 checkedItem = ""
-                callBack()
             }
-
+            callBack(checkedItem)
         }
 
 

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.shiweihu.pixabayapplication.bigPictureView.BigPictureFragment
 import com.shiweihu.pixabayapplication.data.ImageInfo
 import com.shiweihu.pixabayapplication.databinding.CardImageLayoutBinding
@@ -17,7 +18,9 @@ import com.shiweihu.pixabayapplication.viewArgu.BigPictureArgu
 import com.shiweihu.pixabayapplication.viewModle.PhotoFragmentMainViewModel
 
 class PhotosAdapter(val viewModle: PhotoFragmentMainViewModel, val fragment: Fragment, val func:(position:Int)->Unit): PagingDataAdapter<ImageInfo, PhotosAdapter.ImageViewHolder>(ImageDiff()) {
-    class ImageViewHolder(val binding:CardImageLayoutBinding):RecyclerView.ViewHolder(binding.root)
+    class ImageViewHolder(
+        val binding:CardImageLayoutBinding
+    ):RecyclerView.ViewHolder(binding.root)
 
     class ImageDiff: DiffUtil.ItemCallback<ImageInfo>(){
         override fun areItemsTheSame(oldItem: ImageInfo, newItem: ImageInfo): Boolean {
@@ -29,73 +32,46 @@ class PhotosAdapter(val viewModle: PhotoFragmentMainViewModel, val fragment: Fra
         }
     }
 
-//    private var initItemNum = 0
-//    private var isWait = false;
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
 
-//        initItemNum = 0
-//        isWait = true
+    }
+
+    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView)
+
+    }
+
+    override fun onViewDetachedFromWindow(holder: ImageViewHolder) {
+        super.onViewDetachedFromWindow(holder)
+        Glide.with(holder.binding.imageView).clear(holder.binding.imageView)
     }
 
     override fun onViewAttachedToWindow(holder: ImageViewHolder) {
         super.onViewAttachedToWindow(holder)
+        getItem(holder.layoutPosition)?.also {
+            holder.binding.imageUrl = it.webformatURL
 
-//        if(isWait){
-//            initItemNum++
-//        }
-    }
+            holder.binding.imageView.setOnClickListener { view ->
+                navigateToBigPicture(view,holder.layoutPosition)
+            }
+            holder.binding.imageView.transitionName = "${BigPictureFragment.SHARE_ELEMENT_NAME}-${holder.layoutPosition}"
+            holder.binding.priority = holder.layoutPosition == viewModle.sharedElementIndex
+            if(holder.layoutPosition == viewModle.sharedElementIndex){
+                holder.binding.doEnd = {
+                    fragment.startPostponedEnterTransition()
+                }
+            }
+        }
 
-    private fun ifStartEnterTransition(){
-//        if(isWait){
-//            initItemNum --
-//            if(initItemNum == 0){
-//                fragment.startPostponedEnterTransition()
-//                isWait = false;
-//            }
-//        }
     }
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         getItem(position)?.also {
             holder.binding.authorName = it.user.trim()
-            holder.binding.imageUrl = it.webformatURL
-            holder.binding.imageView.transitionName = "${BigPictureFragment.SHARE_ELEMENT_NAME}-${position}"
-            holder.binding.imageView.setOnClickListener { view ->
-                navigateToBigPicture(view,position)
-            }
-            holder.binding.priority = position == viewModle.sharedElementIndex
-            if(position == viewModle.sharedElementIndex){
-                holder.binding.doEnd = {
-                    fragment.startPostponedEnterTransition()
-                }
-            }
-            holder.binding.executePendingBindings()
-            val width = View.MeasureSpec.makeMeasureSpec(
-                0,
-                View.MeasureSpec.UNSPECIFIED
-            )
-            val height = View.MeasureSpec.makeMeasureSpec(
-                0,
-                View.MeasureSpec.UNSPECIFIED
-            )
-            //调用measure方法之后就可以获取宽高
-            //调用measure方法之后就可以获取宽高
-//            holder.binding.root.measure(width, height)
-//            val widthValue = holder.binding.root.measuredWidth // 获取宽度
-//            val heightValue = holder.binding.root.measuredHeight // 获取高度
-//
-//            val widthPx = DisplayUtils.dp2px(holder.binding.root.context,widthValue.toFloat())
-//            val radio = widthPx.toFloat()/it.webformatWidth.toFloat()
-//            holder.binding.root.layoutParams.height = (it.webformatHeight*radio).toInt().coerceAtLeast(300)
-            //
-
-
-
-
         }
-        holder.binding.root.tag = position
+        holder.binding.root
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
