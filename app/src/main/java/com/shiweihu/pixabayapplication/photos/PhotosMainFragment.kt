@@ -97,7 +97,6 @@ class PhotosMainFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        query(queryStr,category)
     }
 
     override fun onCreateView(
@@ -130,7 +129,7 @@ class PhotosMainFragment : BaseFragment() {
 
     private fun query(q:String,category:String){
         adapterJob?.cancel()
-        adapterJob = lifecycleScope.launch {
+        adapterJob = viewLifecycleOwner.lifecycleScope.launch {
             model.searchPhotos(q,category).collectLatest {
                 photoAdapter.submitData(it)
             }
@@ -166,7 +165,7 @@ class PhotosMainFragment : BaseFragment() {
         super.onStop()
         val firstPositions = (binding?.recycleView?.layoutManager as StaggeredGridLayoutManager).findFirstCompletelyVisibleItemPositions(null)
         val lastPositions = (binding?.recycleView?.layoutManager as StaggeredGridLayoutManager).findLastCompletelyVisibleItemPositions(null)
-
+        adapterJob?.cancel()
         firstPosition = firstPositions.minOrNull() ?: 0
 
         lastPosition = lastPositions.maxOrNull() ?: 0
@@ -198,7 +197,7 @@ class PhotosMainFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        query(queryStr,category)
 
         exitTransition = TransitionInflater.from(context)
             .inflateTransition(R.transition.grid_exit_transition)
