@@ -10,6 +10,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.view.forEachIndexed
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.databinding.FragmentMainVideoBinding
 import com.shiweihu.pixabayapplication.photos.CategoryAdapter
@@ -17,6 +18,8 @@ import com.shiweihu.pixabayapplication.viewModle.VideoFragmentMainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChangedBy
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 
 // TODO: Rename parameter arguments, choose names that match
@@ -43,7 +46,13 @@ class VideoFragment : Fragment() {
 
 
     private val videosAdapter by lazy {
-        VideosAdapter(model,this)
+        VideosAdapter(model,this).also {adapter ->
+            adapter.loadStateFlow.distinctUntilChangedBy {
+                it.refresh
+            }.filter {
+                it.refresh is LoadState.NotLoading
+            }
+        }
     }
 
 
