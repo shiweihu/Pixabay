@@ -1,6 +1,8 @@
 package com.shiweihu.pixabayapplication.repository
 
 import android.graphics.ImageDecoder
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData

@@ -27,25 +27,21 @@ class PhotoFragmentMainViewModel @Inject constructor(
 
     var sharedElementIndex = 0
 
-    private  var lastDataFlow:Flow<PagingData<ImageInfo>>? = null
-    private  var lastSearchConditions:String? = null
+    private var currentQueryValue:String? = null
+    private var currentQueryFlow:Flow<PagingData<ImageInfo>>? = null
 
 
-   fun searchPhotos(q:String?,adapter:PhotosAdapter,category:String? = null){
-       viewModelScope.launch {
-           if(lastDataFlow == null || lastSearchConditions != q+category){
-               lastDataFlow = photosRepository.searchPhotos(q,category).cachedIn(viewModelScope)
-               lastSearchConditions = q+category
-           }
-           lastDataFlow?.collectLatest {
-               adapter.submitData(it)
-           }
+   fun searchPhotos(q:String?,category:String? = null):Flow<PagingData<ImageInfo>>{
+       if(currentQueryValue != q+category || currentQueryFlow == null){
+           currentQueryValue = q+category
+           currentQueryFlow = photosRepository.searchPhotos(q,category).cachedIn(viewModelScope)
+           sharedElementIndex = 0
        }
+       return currentQueryFlow!!
    }
 
     override fun onCleared() {
         super.onCleared()
-        lastDataFlow = null
     }
 
     fun navigateToBigPicture(view: View,

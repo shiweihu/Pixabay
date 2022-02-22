@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.shiweihu.pixabayapplication.data.ImageInfo
 import com.shiweihu.pixabayapplication.data.Video
 import com.shiweihu.pixabayapplication.photos.PhotosAdapter
 import com.shiweihu.pixabayapplication.repository.VideoRepository
@@ -20,19 +21,16 @@ class VideoFragmentMainViewModel @Inject constructor (
 ): ViewModel()  {
 
 
-    private var lastFlow: Flow<PagingData<Video>>? = null
-    private var lastSearchConditions:String? = null
+    private var currentQueryValue:String? = null
+    private var currentQueryFlow:Flow<PagingData<Video>>? = null
 
-    fun searchVideo(q:String? = null, adapter: VideosAdapter, category:String? = null){
-        viewModelScope.launch {
-            if(lastFlow == null || lastSearchConditions != q+category ){
-                lastFlow = videoRepository.searchVideo(q,category).cachedIn(viewModelScope)
-                lastSearchConditions = q+category
-            }
-            lastFlow?.collectLatest {
-                adapter.submitData(it)
-            }
+
+    fun searchVideo(q:String? = null, category:String? = null):Flow<PagingData<Video>>{
+        if(currentQueryValue != q+category || currentQueryFlow == null){
+            currentQueryValue = q+category
+            currentQueryFlow = videoRepository.searchVideo(q,category).cachedIn(viewModelScope)
         }
+        return currentQueryFlow!!
     }
 
 }

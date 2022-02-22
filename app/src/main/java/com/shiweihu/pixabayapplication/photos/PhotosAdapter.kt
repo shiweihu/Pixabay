@@ -52,7 +52,6 @@ class PhotosAdapter(val viewModle: PhotoFragmentMainViewModel, val fragment: Fra
         super.onViewAttachedToWindow(holder)
         getItem(holder.layoutPosition)?.also {
             holder.binding.imageUrl = it.webformatURL
-
             holder.binding.imageView.setOnClickListener { view ->
                 navigateToBigPicture(view,holder.layoutPosition)
             }

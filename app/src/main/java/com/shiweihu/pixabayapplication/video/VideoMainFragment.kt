@@ -9,11 +9,15 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.forEachIndexed
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.databinding.FragmentMainVideoBinding
 import com.shiweihu.pixabayapplication.photos.CategoryAdapter
 import com.shiweihu.pixabayapplication.viewModle.VideoFragmentMainViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -38,6 +42,10 @@ class VideoFragment : Fragment() {
     private var category:String = ""
 
 
+    private val videosAdapter by lazy {
+        VideosAdapter(model,this)
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,24 +64,32 @@ class VideoFragment : Fragment() {
                 category = it
                 query(queryStr,category = category)
             }
-            binding.recycleView.adapter = VideosAdapter(model,this).also {
-                model.searchVideo(adapter = it)
-            }
+            binding.recycleView.adapter = videosAdapter
             initMenu(binding.toolBar.menu)
             binding.lifecycleOwner = viewLifecycleOwner
         }
         return binding?.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        query(queryStr,category = category)
+    }
     override fun onDestroyView() {
         super.onDestroyView()
+        binding?.recycleView?.adapter = null
         binding = null
     }
 
+
+
     private fun query(q:String? = null , category: String = ""){
-        val videosAdapter = ( binding?.recycleView?.adapter as VideosAdapter)
-        model.searchVideo(q?.trim() ?: "", videosAdapter, category)
-        videosAdapter.refresh()
+        viewLifecycleOwner.lifecycleScope.launch {
+            model.searchVideo(q?.trim() ?: "", category).collectLatest {
+                videosAdapter.submitData(it)
+            }
+        }
     }
 
     private fun initMenu(menu: Menu){

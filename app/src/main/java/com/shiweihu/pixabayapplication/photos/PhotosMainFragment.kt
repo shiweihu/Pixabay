@@ -2,6 +2,8 @@ package com.shiweihu.pixabayapplication.photos
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.transition.TransitionInflater
 import android.view.*
 import android.view.inputmethod.InputMethodManager
@@ -16,6 +18,8 @@ import androidx.core.app.SharedElementCallback
 import androidx.core.view.forEachIndexed
 
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.bumptech.glide.Glide
 import com.shiweihu.pixabayapplication.BaseFragment
@@ -25,6 +29,14 @@ import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.databinding.FragmentMainPhotosBinding
 import com.shiweihu.pixabayapplication.viewModle.PhotoFragmentMainViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChangedBy
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.lang.Integer.min
 import java.util.concurrent.TimeUnit
 
 // TODO: Rename parameter arguments, choose names that match
@@ -49,6 +61,22 @@ class PhotosMainFragment : BaseFragment() {
     private var binding:FragmentMainPhotosBinding? = null
     private var category:String = ""
 
+    private val handler = Handler(Looper.getMainLooper())
+
+    private var firstPosition = 0
+    private var lastPosition = 0
+
+    private val photoAdapter by lazy {
+        PhotosAdapter(model,this){
+            model.sharedElementIndex = it
+        }.also {adapter ->
+            adapter.loadStateFlow.distinctUntilChangedBy {
+                it.refresh
+            }.filter {
+                it.refresh is LoadState.NotLoading
+            }
+        }
+    }
 
     private fun initShareElement(binding:FragmentMainPhotosBinding){
         this.setExitSharedElementCallback(object: SharedElementCallback(){
@@ -57,6 +85,7 @@ class PhotosMainFragment : BaseFragment() {
                 sharedElements: MutableMap<String, View>?
             ) {
                 super.onMapSharedElements(names, sharedElements)
+
                 val viewHolder = binding.recycleView.findViewHolderForAdapterPosition(model.sharedElementIndex)
                 if(sharedElements != null && names != null && viewHolder !=null){
                     sharedElements[names[0]] = (viewHolder as PhotosAdapter.ImageViewHolder).binding.imageView
@@ -68,7 +97,7 @@ class PhotosMainFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        query(queryStr,category)
     }
 
     override fun onCreateView(
@@ -84,25 +113,28 @@ class PhotosMainFragment : BaseFragment() {
                     query(queryStr,this.category)
                 }
             }
-            it.recycleView.adapter = PhotosAdapter(model,this){
-                model.sharedElementIndex = it
-            }.also {
-                model.searchPhotos("",it)
+            it.recycleView.adapter = photoAdapter
+
+            if(model.sharedElementIndex < firstPosition || model.sharedElementIndex > lastPosition){
+                it.recycleView.scrollToPosition(model.sharedElementIndex)
             }
+            //it.recycleView.setItemViewCacheSize(if(model.sharedElementIndex>2) model.sharedElementIndex else 2)
             //it.recycleView.setItemViewCacheSize(20)
             initShareElement(it)
             initMenu(it.toolBar.menu)
-            it.lifecycleOwner = viewLifecycleOwner
         }
         return binding?.root
     }
 
-    private fun query(q:String,category:String){
-        val photosAdapter = (binding?.recycleView?.adapter as PhotosAdapter)
+    var adapterJob: Job? = null
 
-        model.searchPhotos(q, photosAdapter,category)
-        photosAdapter.refresh()
-        model.sharedElementIndex = 0
+    private fun query(q:String,category:String){
+        adapterJob?.cancel()
+        adapterJob = lifecycleScope.launch {
+            model.searchPhotos(q,category).collectLatest {
+                photoAdapter.submitData(it)
+            }
+        }
     }
 
     private fun initMenu(menu: Menu){
@@ -130,9 +162,21 @@ class PhotosMainFragment : BaseFragment() {
         }
     }
 
+    override fun onStop() {
+        super.onStop()
+        val firstPositions = (binding?.recycleView?.layoutManager as StaggeredGridLayoutManager).findFirstCompletelyVisibleItemPositions(null)
+        val lastPositions = (binding?.recycleView?.layoutManager as StaggeredGridLayoutManager).findLastCompletelyVisibleItemPositions(null)
+
+        firstPosition = firstPositions.minOrNull() ?: 0
+
+        lastPosition = lastPositions.maxOrNull() ?: 0
+    }
+
     override fun onDestroyView() {
-        binding = null
         super.onDestroyView()
+
+        binding?.recycleView?.adapter = null
+        binding = null
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -141,20 +185,20 @@ class PhotosMainFragment : BaseFragment() {
 
     override fun onStart() {
         super.onStart()
-        val currentView = binding?.recycleView?.layoutManager?.findViewByPosition(model.sharedElementIndex)
-        if(currentView == null){
-            postponeEnterTransition(resources.getInteger(R.integer.post_pone_time).toLong(),TimeUnit.MILLISECONDS)
-            binding?.recycleView?.layoutManager?.scrollToPosition(model.sharedElementIndex)
-        }
+        //postponeEnterTransition(resources.getInteger(R.integer.post_pone_time).toLong(),TimeUnit.MILLISECONDS)
+        postponeEnterTransition()
     }
 
 
     override fun onResume() {
         super.onResume()
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
 
         exitTransition = TransitionInflater.from(context)
             .inflateTransition(R.transition.grid_exit_transition)
