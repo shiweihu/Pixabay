@@ -165,7 +165,6 @@ class PhotosMainFragment : BaseFragment() {
         super.onStop()
         val firstPositions = (binding?.recycleView?.layoutManager as StaggeredGridLayoutManager).findFirstCompletelyVisibleItemPositions(null)
         val lastPositions = (binding?.recycleView?.layoutManager as StaggeredGridLayoutManager).findLastCompletelyVisibleItemPositions(null)
-        adapterJob?.cancel()
         firstPosition = firstPositions.minOrNull() ?: 0
 
         lastPosition = lastPositions.maxOrNull() ?: 0
@@ -173,7 +172,7 @@ class PhotosMainFragment : BaseFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-
+        adapterJob?.cancel()
         binding?.recycleView?.adapter = null
         binding = null
     }
