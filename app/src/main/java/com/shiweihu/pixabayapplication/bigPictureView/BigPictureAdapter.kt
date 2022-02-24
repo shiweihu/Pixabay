@@ -1,11 +1,19 @@
 package com.shiweihu.pixabayapplication.bigPictureView
 
+import android.annotation.SuppressLint
+import android.graphics.Matrix
+import android.graphics.Point
+import android.graphics.RectF
 import android.view.LayoutInflater
+import android.view.MotionEvent
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.shiweihu.pixabayapplication.databinding.ImageViewBinding
 import com.shiweihu.pixabayapplication.viewArgu.BigPictureArgu
+import kotlin.math.sqrt
 
 class BigPictureAdapter(val argu: BigPictureArgu,val fragment: Fragment): RecyclerView.Adapter<BigPictureAdapter.ImageViewHolder>() {
     class ImageViewHolder(val binding:ImageViewBinding):RecyclerView.ViewHolder(binding.root)
@@ -16,6 +24,7 @@ class BigPictureAdapter(val argu: BigPictureArgu,val fragment: Fragment): Recycl
         )
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         holder.binding.imageUrl = argu.images?.get(position) ?:""
         holder.binding.priority = position == argu.currentIndex
@@ -26,8 +35,76 @@ class BigPictureAdapter(val argu: BigPictureArgu,val fragment: Fragment): Recycl
                 fragment.startPostponedEnterTransition()
             }
         }
+
+        val origFirstPoint = Point()
+        val origSecondPoint = Point()
+
+        holder.binding.imageView.setOnTouchListener { v, event ->
+
+
+            var x = event.x
+            var y = event.y
+
+            when(event.actionMasked){
+                MotionEvent.ACTION_DOWN->{
+                    holder.binding.imageView.scaleType = ImageView.ScaleType.MATRIX
+                }
+                MotionEvent.ACTION_POINTER_DOWN->{
+                    origFirstPoint.set(x.toInt(),y.toInt())
+                    x = event.getX(1)
+                    y = event.getY(1)
+                    origSecondPoint.set(x.toInt(),y.toInt())
+                }
+                MotionEvent.ACTION_MOVE->{
+                    if(event.pointerCount >= 2){
+                        val x1 = event.getX(1)
+                        val y1 = event.getY(1)
+                        val dis = getDistance(x.toInt(),y.toInt(),x1.toInt(),y1.toInt())
+                        val lastdis = getDistance(origFirstPoint.x,origFirstPoint.y,origSecondPoint.x,origSecondPoint.y)
+                        val scale = dis.toFloat() / lastdis.toFloat()
+                        val matrix = Matrix()
+                        matrix.set(holder.binding.imageView.imageMatrix)
+                        matrix.postScale(scale,scale,(x+x1)/2,(y+y1)/2)
+                        holder.binding.imageView.imageMatrix = matrix
+                        origFirstPoint.set(x.toInt(),y.toInt())
+                        origSecondPoint.set(x.toInt(),y.toInt())
+                    }
+                }
+                MotionEvent.ACTION_CANCEL->{
+                    restoreCenter(holder.binding)
+                }
+                MotionEvent.ACTION_UP->{
+                    restoreCenter(holder.binding)
+                }
+            }
+
+
+            return@setOnTouchListener true
+        }
+
+
         holder.binding.executePendingBindings()
     }
+
+    private fun getDistance(x1:Int,y1:Int,x2:Int,y2:Int):Int{
+        return sqrt( (x1-x2)*(x1-x2).toDouble() + (y1-y2)*(y1-y2) ).toInt()
+    }
+
+
+    private fun restoreCenter(binding:ImageViewBinding){
+        val m = binding.imageView.imageMatrix
+        val rectf = RectF(0f,0f,binding.imageView.drawable.intrinsicWidth.toFloat(),binding.imageView.drawable.intrinsicHeight.toFloat())
+        m.mapRect(rectf)
+        val postX = binding.imageView.width/2 - (rectf.right + rectf.left)/2
+        val postY = binding.imageView.height/2 - (rectf.bottom + rectf.top)/2
+        val matrix = Matrix()
+        matrix.set(m)
+        matrix.postTranslate(postX,postY)
+        binding.imageView.imageMatrix = matrix
+
+
+    }
+
 
     override fun getItemCount(): Int {
         return argu.images!!.size
