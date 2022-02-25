@@ -6,6 +6,7 @@ import android.os.Parcelable
 import android.transition.TransitionInflater
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -97,7 +98,16 @@ class BigPictureFragment : BaseFragment() {
     ): View {
         // Inflate the layout for this fragment
         binding =  FragmentBigPictureBinding.inflate(inflater,container,false).also {
-            it.viewPage.adapter = BigPictureAdapter(args.pictureResult,this)
+            it.viewPage.adapter = BigPictureAdapter(args.pictureResult,this){action ->
+                when(action){
+                    MotionEvent.ACTION_MOVE->{
+                       it.viewPage.isUserInputEnabled = false
+                    }
+                    MotionEvent.ACTION_UP->{
+                        it.viewPage.isUserInputEnabled = true
+                    }
+                }
+            }
             it.viewPage.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)

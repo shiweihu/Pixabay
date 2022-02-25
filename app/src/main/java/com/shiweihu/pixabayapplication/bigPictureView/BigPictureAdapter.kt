@@ -15,8 +15,10 @@ import com.shiweihu.pixabayapplication.databinding.ImageViewBinding
 import com.shiweihu.pixabayapplication.viewArgu.BigPictureArgu
 import kotlin.math.sqrt
 
-class BigPictureAdapter(val argu: BigPictureArgu,val fragment: Fragment): RecyclerView.Adapter<BigPictureAdapter.ImageViewHolder>() {
+class BigPictureAdapter(val argu: BigPictureArgu,val fragment: Fragment,val touchCallBack:(touchState:Int)->Unit): RecyclerView.Adapter<BigPictureAdapter.ImageViewHolder>() {
     class ImageViewHolder(val binding:ImageViewBinding):RecyclerView.ViewHolder(binding.root)
+
+    private var origMatrix:Matrix? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
         return ImageViewHolder(
@@ -39,9 +41,9 @@ class BigPictureAdapter(val argu: BigPictureArgu,val fragment: Fragment): Recycl
         val origFirstPoint = Point()
         val origSecondPoint = Point()
 
+        var isMoving = false
+
         holder.binding.imageView.setOnTouchListener { v, event ->
-
-
             var x = event.x
             var y = event.y
 
@@ -50,6 +52,7 @@ class BigPictureAdapter(val argu: BigPictureArgu,val fragment: Fragment): Recycl
                     holder.binding.imageView.scaleType = ImageView.ScaleType.MATRIX
                 }
                 MotionEvent.ACTION_POINTER_DOWN->{
+                    origMatrix = holder.binding.imageView.imageMatrix
                     origFirstPoint.set(x.toInt(),y.toInt())
                     x = event.getX(1)
                     y = event.getY(1)
@@ -57,6 +60,8 @@ class BigPictureAdapter(val argu: BigPictureArgu,val fragment: Fragment): Recycl
                 }
                 MotionEvent.ACTION_MOVE->{
                     if(event.pointerCount >= 2){
+                        isMoving = true
+                        touchCallBack(MotionEvent.ACTION_MOVE)
                         val x1 = event.getX(1)
                         val y1 = event.getY(1)
                         val dis = getDistance(x.toInt(),y.toInt(),x1.toInt(),y1.toInt())
@@ -67,14 +72,22 @@ class BigPictureAdapter(val argu: BigPictureArgu,val fragment: Fragment): Recycl
                         matrix.postScale(scale,scale,(x+x1)/2,(y+y1)/2)
                         holder.binding.imageView.imageMatrix = matrix
                         origFirstPoint.set(x.toInt(),y.toInt())
-                        origSecondPoint.set(x.toInt(),y.toInt())
+                        origSecondPoint.set(x1.toInt(),y1.toInt())
                     }
                 }
                 MotionEvent.ACTION_CANCEL->{
-                    restoreCenter(holder.binding)
+                    if(isMoving) {
+                        restoreCenter(holder.binding)
+                        isMoving = false
+                    }
                 }
                 MotionEvent.ACTION_UP->{
-                    restoreCenter(holder.binding)
+                    if(isMoving){
+                        touchCallBack(MotionEvent.ACTION_UP)
+                        restoreCenter(holder.binding)
+                        isMoving = false
+                    }
+
                 }
             }
 
@@ -101,6 +114,7 @@ class BigPictureAdapter(val argu: BigPictureArgu,val fragment: Fragment): Recycl
         matrix.set(m)
         matrix.postTranslate(postX,postY)
         binding.imageView.imageMatrix = matrix
+
 
 
     }
