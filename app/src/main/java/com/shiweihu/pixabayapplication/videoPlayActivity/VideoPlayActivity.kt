@@ -17,6 +17,7 @@ import com.google.android.exoplayer2.PlaybackException
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.Player.REPEAT_MODE_ONE
 import com.google.android.exoplayer2.Player.STATE_READY
+import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.util.MimeTypes
 import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.databinding.ActivityVideoPlayBinding
@@ -76,11 +77,12 @@ class VideoPlayActivity(
 
 
 
-
         data.videos?.forEach {
              val item = MediaItem.fromUri(it)
              player.addMediaItem(item)
         }
+
+
         Log.println(Log.DEBUG,"video url", data.videos!![data.currentIndex])
         player.seekTo(data.currentIndex,0L)
         player.repeatMode = REPEAT_MODE_ONE

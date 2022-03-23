@@ -46,7 +46,8 @@ class VideoFragment : Fragment() {
 
 
     private val videosAdapter by lazy {
-        VideosAdapter(model,this).also {adapter ->
+        VideosAdapter(model,this)
+            .also {adapter ->
             adapter.loadStateFlow.distinctUntilChangedBy {
                 it.refresh
             }.filter {

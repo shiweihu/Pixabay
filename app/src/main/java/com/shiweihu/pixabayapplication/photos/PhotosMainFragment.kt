@@ -70,12 +70,12 @@ class PhotosMainFragment : BaseFragment() {
         PhotosAdapter(model,this){
             model.sharedElementIndex = it
         }.also {adapter ->
-            adapter.loadStateFlow.distinctUntilChangedBy {
-                it.refresh
-            }.filter {
-                it.refresh is LoadState.NotLoading
+                adapter.loadStateFlow.distinctUntilChangedBy {
+                    it.refresh
+                }.filter {
+                    it.refresh is LoadState.NotLoading
+                }
             }
-        }
     }
 
     private fun initShareElement(binding:FragmentMainPhotosBinding){
