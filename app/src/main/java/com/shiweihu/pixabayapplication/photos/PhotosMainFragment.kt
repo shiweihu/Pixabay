@@ -113,6 +113,7 @@ class PhotosMainFragment : BaseFragment() {
                 }
             }
             it.recycleView.adapter = photoAdapter
+   //         (it.recycleView.layoutManager as StaggeredGridLayoutManager).gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS
 
             if(model.sharedElementIndex < firstPosition || model.sharedElementIndex > lastPosition){
                 it.recycleView.scrollToPosition(model.sharedElementIndex)
@@ -146,6 +147,7 @@ class PhotosMainFragment : BaseFragment() {
                     }
                     searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                         override fun onQueryTextSubmit(query: String): Boolean {
+                            binding?.recycleView?.scrollToPosition(0)
                             query(query,this@PhotosMainFragment.category)
                             queryStr = query
                             searchView.clearFocus()
@@ -183,8 +185,7 @@ class PhotosMainFragment : BaseFragment() {
 
     override fun onStart() {
         super.onStart()
-        //postponeEnterTransition(resources.getInteger(R.integer.post_pone_time).toLong(),TimeUnit.MILLISECONDS)
-        postponeEnterTransition()
+        postponeEnterTransition(resources.getInteger(R.integer.post_pone_time).toLong(),TimeUnit.MILLISECONDS)
     }
 
 

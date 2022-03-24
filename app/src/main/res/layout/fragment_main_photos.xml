@@ -19,7 +19,7 @@
                 android:id="@+id/collasing_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_scrollFlags="scroll|enterAlways"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 android:minHeight="?attr/actionBarSize"
                 app:collapsedTitleGravity="top"
                 >
@@ -65,11 +65,12 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycle_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:spanCount="2"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             tools:listitem="@layout/card_image_layout"
+
             />
 
 

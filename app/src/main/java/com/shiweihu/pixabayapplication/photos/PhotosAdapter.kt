@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.motion.widget.ViewTransition
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -57,11 +58,12 @@ class PhotosAdapter(val viewModle: PhotoFragmentMainViewModel, val fragment: Fra
             }
             holder.binding.imageView.transitionName = "${BigPictureFragment.SHARE_ELEMENT_NAME}-${holder.layoutPosition}"
             holder.binding.priority = holder.layoutPosition == viewModle.sharedElementIndex
-            if(holder.layoutPosition == viewModle.sharedElementIndex){
-                holder.binding.doEnd = {
+            holder.binding.doEnd = {loadState ->
+                if(holder.layoutPosition == viewModle.sharedElementIndex) {
                     fragment.startPostponedEnterTransition()
                 }
             }
+
         }
 
     }

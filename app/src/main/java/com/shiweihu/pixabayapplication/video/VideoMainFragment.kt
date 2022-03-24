@@ -112,6 +112,7 @@ class VideoFragment : Fragment() {
 //                    }
                     searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                         override fun onQueryTextSubmit(query: String): Boolean {
+                            binding?.recycleView?.scrollToPosition(0)
                             query(query)
                             queryStr = query
                             searchView.clearFocus()
