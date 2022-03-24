@@ -36,7 +36,16 @@ class PhotosAdapter(val viewModle: PhotoFragmentMainViewModel, val fragment: Fra
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
-
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if(newState == RecyclerView.SCROLL_STATE_IDLE){
+                    Glide.with(recyclerView.context).resumeRequests()
+                }else if(!Glide.with(recyclerView.context).isPaused){
+                    Glide.with(recyclerView.context).pauseRequests()
+                }
+            }
+        })
     }
 
     override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
@@ -47,6 +56,7 @@ class PhotosAdapter(val viewModle: PhotoFragmentMainViewModel, val fragment: Fra
     override fun onViewDetachedFromWindow(holder: ImageViewHolder) {
         super.onViewDetachedFromWindow(holder)
         Glide.with(holder.binding.imageView).clear(holder.binding.imageView)
+
     }
 
     override fun onViewAttachedToWindow(holder: ImageViewHolder) {

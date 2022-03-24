@@ -32,11 +32,12 @@ class BigPictureAdapter(val argu: BigPictureArgu,val fragment: Fragment,val touc
         holder.binding.priority = position == argu.currentIndex
         holder.binding.root.tag = position
         holder.binding.imageView.transitionName = "${BigPictureFragment.SHARE_ELEMENT_NAME}-${position}"
-        if(position == argu.currentIndex){
-            holder.binding.doEnd = {
+        holder.binding.doEnd = {
+            if(position == argu.currentIndex) {
                 fragment.startPostponedEnterTransition()
             }
         }
+
 
         val origFirstPoint = Point()
         val origSecondPoint = Point()
