@@ -36,6 +36,7 @@ class PhotosAdapter(val viewModle: PhotoFragmentMainViewModel, val fragment: Fra
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
+        Glide.with(recyclerView.context).resumeRequests()
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
@@ -50,19 +51,24 @@ class PhotosAdapter(val viewModle: PhotoFragmentMainViewModel, val fragment: Fra
 
     override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
         super.onDetachedFromRecyclerView(recyclerView)
-
+        Glide.with(recyclerView.context).pauseRequests()
     }
 
     override fun onViewDetachedFromWindow(holder: ImageViewHolder) {
         super.onViewDetachedFromWindow(holder)
-        Glide.with(holder.binding.imageView).clear(holder.binding.imageView)
-
+        //Glide.with(holder.binding.imageView).clear(holder.binding.imageView)
+        //Glide.with(holder.binding.imageView).pauseRequests();
     }
 
     override fun onViewAttachedToWindow(holder: ImageViewHolder) {
         super.onViewAttachedToWindow(holder)
-        getItem(holder.layoutPosition)?.also {
-            holder.binding.imageUrl = it.webformatURL
+        //Glide.with(holder.binding.imageView).resumeRequests()
+    }
+
+    override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
+        getItem(position)?.also {
+            holder.binding.authorName = it.user.trim()
+            holder.binding.imageUrl = it.previewURL
             holder.binding.imageView.setOnClickListener { view ->
                 navigateToBigPicture(view,holder.layoutPosition)
             }
@@ -73,15 +79,8 @@ class PhotosAdapter(val viewModle: PhotoFragmentMainViewModel, val fragment: Fra
                     fragment.startPostponedEnterTransition()
                 }
             }
-
         }
-
-    }
-
-    override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-        getItem(position)?.also {
-            holder.binding.authorName = it.user.trim()
-        }
+        holder.binding.executePendingBindings()
         holder.binding.root
     }
 

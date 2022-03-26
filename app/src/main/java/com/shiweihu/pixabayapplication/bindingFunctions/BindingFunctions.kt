@@ -1,7 +1,10 @@
 package com.shiweihu.pixabayapplication.bindingFunctions
 
+import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
+import androidx.lifecycle.findViewTreeLifecycleOwner
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.bumptech.glide.Glide
@@ -13,6 +16,8 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.shiweihu.pixabayapplication.R
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @BindingAdapter(value = ["imageUrl","priority","doEnd"],requireAll = false)
 fun bindImageFromUrl(view: ImageView, imageUrl: String?,priority:Boolean = false,doEnd:((result:Boolean)->Unit)?) {
