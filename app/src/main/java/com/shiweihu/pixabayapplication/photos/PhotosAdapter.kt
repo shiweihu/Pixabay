@@ -11,6 +11,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.bigPictureView.BigPictureFragment
 import com.shiweihu.pixabayapplication.data.ImageInfo
 import com.shiweihu.pixabayapplication.databinding.CardImageLayoutBinding
@@ -22,6 +23,9 @@ class PhotosAdapter(val viewModle: PhotoFragmentMainViewModel, val fragment: Fra
     class ImageViewHolder(
         val binding:CardImageLayoutBinding
     ):RecyclerView.ViewHolder(binding.root)
+
+    private val recyclerview_span = fragment.context?.resources?.getInteger(R.integer.photo_recyclerview_span) ?: 1
+    private val photos_item_margin = fragment.context?.resources?.getDimension(R.dimen.photo_recyclerview_margin) ?: 0F
 
     class ImageDiff: DiffUtil.ItemCallback<ImageInfo>(){
         override fun areItemsTheSame(oldItem: ImageInfo, newItem: ImageInfo): Boolean {
@@ -36,29 +40,31 @@ class PhotosAdapter(val viewModle: PhotoFragmentMainViewModel, val fragment: Fra
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
-        Glide.with(recyclerView.context).resumeRequests()
-        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                if(newState == RecyclerView.SCROLL_STATE_IDLE){
-                    Glide.with(recyclerView.context).resumeRequests()
-                }else if(!Glide.with(recyclerView.context).isPaused){
-                    Glide.with(recyclerView.context).pauseRequests()
-                }
-            }
-        })
+//        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+//            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+//                super.onScrollStateChanged(recyclerView, newState)
+//                if(newState == RecyclerView.SCROLL_STATE_IDLE){
+//                    Glide.with(recyclerView.context).resumeRequests()
+//                }else if(!Glide.with(recyclerView.context).isPaused){
+//                    Glide.with(recyclerView.context).pauseRequests()
+//                }
+//            }
+//        })
     }
+
+
 
     override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
         super.onDetachedFromRecyclerView(recyclerView)
-        Glide.with(recyclerView.context).pauseRequests()
     }
 
     override fun onViewDetachedFromWindow(holder: ImageViewHolder) {
         super.onViewDetachedFromWindow(holder)
         //Glide.with(holder.binding.imageView).clear(holder.binding.imageView)
         //Glide.with(holder.binding.imageView).pauseRequests();
+
     }
+
 
     override fun onViewAttachedToWindow(holder: ImageViewHolder) {
         super.onViewAttachedToWindow(holder)
@@ -79,6 +85,22 @@ class PhotosAdapter(val viewModle: PhotoFragmentMainViewModel, val fragment: Fra
                     fragment.startPostponedEnterTransition()
                 }
             }
+
+            val item_margin =
+                fragment.context?.let { it1 -> DisplayUtils.dp2px(it1,photos_item_margin)*2 } ?:0
+
+
+
+            val scaleRadio = (DisplayUtils.ScreenWidth.toFloat()-item_margin) / it.imageWidth.toFloat()
+            var heightPX = (it.imageHeight.toFloat()-item_margin)*(scaleRadio)
+
+            heightPX /= recyclerview_span
+
+
+
+            //val highDP = DisplayUtils.px2dp(holder.binding.imageView.context,heightPX)
+
+            holder.binding.imageView.layoutParams.height = heightPX.toInt()
         }
         holder.binding.executePendingBindings()
         holder.binding.root
@@ -97,7 +119,7 @@ class PhotosAdapter(val viewModle: PhotoFragmentMainViewModel, val fragment: Fra
         val pageUrl = ArrayList<String>()
         this.snapshot().forEach { imageInfo ->
             imageInfo?.let { info->
-                images.add(info.webformatURL)
+                images.add(info.largeImageURL)
                 profiles.add(info.userImageURL)
                 tags.add(info.tags)
                 usersID.add(info.userId.toString())

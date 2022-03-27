@@ -27,13 +27,10 @@ class SearchPhotoSource(
         val page = params.key ?: 1
         return try {
             val response = photoProxy.queryImages(q = query ?: "", category = category ?: "",page = page, order = if(query == null || query.isEmpty()) "latest" else "popular",editors_choice = (query == null || query.isEmpty()))
-            val dataList = response.hits.sortedBy {
-                it.imageHeight.toFloat() / it.imageWidth.toFloat()
-            }
             LoadResult.Page(
-                data = dataList,
+                data = response.hits,
                 prevKey = if (page == 1) null else page - 1,
-                nextKey = if(dataList.isNotEmpty()) page + 1 else null
+                nextKey = if(response.hits.isNotEmpty()) page + 1 else null
             )
         }catch (e:Exception){
             Log.println(Log.DEBUG,"searchPhotos",e.toString())

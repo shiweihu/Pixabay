@@ -6,6 +6,10 @@ class DisplayUtils {
 
 
     companion object{
+
+        var ScreenWidth = 0
+        var ScreenHeight = 0
+
         /**
          * convert px to its equivalent dp
          * 将px转换为与之相等的dp

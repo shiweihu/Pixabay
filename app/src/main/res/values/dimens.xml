@@ -2,4 +2,6 @@
     <dimen name="fab_margin">16dp</dimen>
     <integer name="transition">200</integer>
     <integer name="post_pone_time">1000</integer>
+    <integer name="photo_recyclerview_span">2</integer>
+    <dimen name="photo_recyclerview_margin">2dp</dimen>
 </resources>

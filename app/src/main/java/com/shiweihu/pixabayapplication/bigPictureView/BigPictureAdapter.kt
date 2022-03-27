@@ -95,8 +95,6 @@ class BigPictureAdapter(val argu: BigPictureArgu,val fragment: Fragment,val touc
 
             return@setOnTouchListener true
         }
-
-
         holder.binding.executePendingBindings()
     }
 

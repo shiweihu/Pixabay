@@ -25,6 +25,7 @@
             android:layout_height="match_parent"
             android:scaleType="fitCenter"
             android:layout_gravity="center"
+            android:adjustViewBounds="true"
             app:imageUrl="@{image_url}"
             app:priority="@{priority}"
             app:doEnd="@{do_end}"

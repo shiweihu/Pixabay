@@ -31,7 +31,7 @@ fun bindImageFromUrl(view: ImageView, imageUrl: String?,priority:Boolean = false
         if(priority){
             request = request.priority(Priority.IMMEDIATE)
         }
-        request.into(view)
+        request.into(view).clearOnDetach()
     }
 }
 

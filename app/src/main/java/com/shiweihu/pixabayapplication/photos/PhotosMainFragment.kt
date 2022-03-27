@@ -114,7 +114,8 @@ class PhotosMainFragment : BaseFragment() {
                 }
             }
             it.recycleView.adapter = photoAdapter
-   //         (it.recycleView.layoutManager as StaggeredGridLayoutManager).gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS
+
+            it.recycleView.setItemViewCacheSize(50)
 
             if(model.sharedElementIndex < firstPosition || model.sharedElementIndex > lastPosition){
                 it.recycleView.scrollToPosition(model.sharedElementIndex)

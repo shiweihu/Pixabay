@@ -28,7 +28,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     app:cardElevation="2dp"
-    android:layout_margin="5dp"
+    android:layout_margin="@dimen/photo_recyclerview_margin"
     app:cardCornerRadius="0dp"
     >
         <com.google.android.material.imageview.ShapeableImageView
@@ -64,7 +64,7 @@
                 android:text="@{author_name}"
                 tools:text = "aaaaaaaaa"
                 android:textStyle="bold|italic"
-                android:textColor="@color/blue"
+                android:textColor="@color/white"
                 android:textSize="12sp"
                 />
             <com.google.android.material.imageview.ShapeableImageView
