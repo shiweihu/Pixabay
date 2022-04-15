@@ -179,6 +179,7 @@ class PhotosMainFragment : BaseFragment() {
         adapterJob?.cancel()
         binding?.recycleView?.adapter = null
         binding = null
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
