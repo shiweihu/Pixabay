@@ -11,6 +11,7 @@ import android.view.WindowManager
 import android.view.WindowMetrics
 import androidx.annotation.RequiresApi
 import com.bumptech.glide.Glide
+import com.shiweihu.pixabayapplication.net.NetworkModule
 import com.shiweihu.pixabayapplication.utils.DisplayUtils
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.CoroutineScope
@@ -26,12 +27,14 @@ class MyApplication: Application() {
         const val API_KEY= "25109780-7bd3253b1b879d034650fb7f1"
         val mHandler = Handler(Looper.getMainLooper())
         var lang = "en"
-        var cachePath: File? = null
     }
+
     override fun onCreate() {
+
+        NetworkModule.file_cache = this.cacheDir
+
         super.onCreate()
         lang = Locale.getDefault().language
-        cachePath = this.cacheDir
 //        Glide.get(this@MyApplication).clearMemory()
 //        CoroutineScope(Dispatchers.IO).launch {
 //            Glide.get(this@MyApplication).clearDiskCache()

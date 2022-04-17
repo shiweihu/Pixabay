@@ -4,11 +4,10 @@ package com.shiweihu.pixabayapplication.net
 import com.shiweihu.pixabayapplication.MyApplication
 
 import com.shiweihu.pixabayapplication.data.Photos
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface PhotoProxy {
+    @Headers("cache-control:private,max-age=86400")
     @GET("api/")
     suspend fun queryImages(
         @Query("key") key:String = MyApplication.API_KEY,

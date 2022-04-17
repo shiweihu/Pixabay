@@ -3,10 +3,11 @@ package com.shiweihu.pixabayapplication.net
 import Videos
 import com.shiweihu.pixabayapplication.MyApplication
 import retrofit2.http.GET
+import retrofit2.http.Headers
 import retrofit2.http.Query
 
 interface VideoProxy {
-
+   @Headers("cache-control:private,max-age=86400")
    @GET("api/videos/")
    suspend fun searchVideos(
        @Query("key") key:String = MyApplication.API_KEY,
