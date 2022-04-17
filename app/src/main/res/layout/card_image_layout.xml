@@ -38,6 +38,7 @@
             app:imageUrl="@{image_url}"
             app:priority="@{priority}"
             app:doEnd="@{do_end}"
+            android:minHeight="100dp"
             tools:src="@drawable/ic_launcher_background"
             android:scaleType="fitXY"
             android:adjustViewBounds="true"

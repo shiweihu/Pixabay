@@ -18,6 +18,8 @@ import com.shiweihu.pixabayapplication.databinding.CardImageLayoutBinding
 import com.shiweihu.pixabayapplication.utils.DisplayUtils
 import com.shiweihu.pixabayapplication.viewArgu.BigPictureArgu
 import com.shiweihu.pixabayapplication.viewModle.PhotoFragmentMainViewModel
+import kotlin.math.max
+import kotlin.math.min
 
 class PhotosAdapter(val viewModle: PhotoFragmentMainViewModel, val fragment: Fragment, val func:(position:Int)->Unit): PagingDataAdapter<ImageInfo, PhotosAdapter.ImageViewHolder>(ImageDiff()) {
     class ImageViewHolder(
@@ -74,7 +76,7 @@ class PhotosAdapter(val viewModle: PhotoFragmentMainViewModel, val fragment: Fra
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         getItem(position)?.also {
             holder.binding.authorName = it.user.trim()
-            holder.binding.imageUrl = it.previewURL
+            holder.binding.imageUrl = it.webformatURL.replace("_640","_340")
             holder.binding.imageView.setOnClickListener { view ->
                 navigateToBigPicture(view,holder.layoutPosition)
             }
@@ -100,7 +102,7 @@ class PhotosAdapter(val viewModle: PhotoFragmentMainViewModel, val fragment: Fra
 
             //val highDP = DisplayUtils.px2dp(holder.binding.imageView.context,heightPX)
 
-            holder.binding.imageView.layoutParams.height = heightPX.toInt()
+            holder.binding.imageView.layoutParams.height = max(heightPX.toInt(),200)
         }
         holder.binding.executePendingBindings()
         holder.binding.root
