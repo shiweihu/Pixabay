@@ -7,7 +7,7 @@ import com.shiweihu.pixabayapplication.data.Photos
 import retrofit2.http.*
 
 interface PhotoProxy {
-    @Headers("cache-control:private,max-age=86400")
+    @Headers("cache-control:max-age=86400")
     @GET("api/")
     suspend fun queryImages(
         @Query("key") key:String = MyApplication.API_KEY,

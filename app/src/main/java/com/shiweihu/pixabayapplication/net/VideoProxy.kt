@@ -7,7 +7,7 @@ import retrofit2.http.Headers
 import retrofit2.http.Query
 
 interface VideoProxy {
-   @Headers("cache-control:private,max-age=86400")
+   @Headers("cache-control:max-age=86400")
    @GET("api/videos/")
    suspend fun searchVideos(
        @Query("key") key:String = MyApplication.API_KEY,
