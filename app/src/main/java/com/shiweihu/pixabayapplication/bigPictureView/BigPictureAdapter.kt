@@ -50,7 +50,7 @@ class BigPictureAdapter(val argu: BigPictureArgu,val fragment: Fragment,val touc
 
             when(event.actionMasked){
                 MotionEvent.ACTION_DOWN->{
-                    holder.binding.imageView.scaleType = ImageView.ScaleType.MATRIX
+
                 }
                 MotionEvent.ACTION_POINTER_DOWN->{
                     origMatrix = holder.binding.imageView.imageMatrix
@@ -61,6 +61,9 @@ class BigPictureAdapter(val argu: BigPictureArgu,val fragment: Fragment,val touc
                 }
                 MotionEvent.ACTION_MOVE->{
                     if(event.pointerCount >= 2){
+                        if(holder.binding.imageView.scaleType != ImageView.ScaleType.MATRIX){
+                            holder.binding.imageView.scaleType = ImageView.ScaleType.MATRIX
+                        }
                         isMoving = true
                         touchCallBack(MotionEvent.ACTION_MOVE)
                         val x1 = event.getX(1)

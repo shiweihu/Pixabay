@@ -43,10 +43,10 @@ class VideosAdapter(val viewModle: VideoFragmentMainViewModel, val fragment: Fra
     override fun onViewAttachedToWindow(holder: VideosAdapter.CoverViewHolder) {
         super.onViewAttachedToWindow(holder)
         getItem(holder.layoutPosition)?.also {
-            val url = "https://i.vimeocdn.com/video/${it.pictureId}_960x540.jpg"
+            val url = "https://i.vimeocdn.com/video/${it.pictureId}_640x360.jpg"
             holder.binding.imageUrl = url
             holder.binding.priority = false
-            holder.binding.imageView.layoutParams.height = 540
+            holder.binding.imageView.layoutParams.height = 360
         }
 
     }
