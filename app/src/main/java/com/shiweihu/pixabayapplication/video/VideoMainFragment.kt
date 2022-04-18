@@ -73,6 +73,8 @@ class VideoFragment : Fragment() {
             binding.categoryGrid.adapter = CategoryAdapter(this.requireContext()){
                 category = it
                 query(queryStr,category = category)
+            }.also {
+                it.checkedItem = category
             }
             binding.recycleView.adapter = videosAdapter
             initMenu(binding.toolBar.menu)

@@ -112,6 +112,8 @@ class PhotosMainFragment : BaseFragment() {
                 if(!isInput){
                     query(queryStr,this.category)
                 }
+            }.also {
+                it.checkedItem = this.category
             }
             it.recycleView.adapter = photoAdapter
 
