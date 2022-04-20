@@ -37,6 +37,7 @@ import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.Integer.min
+import java.lang.ref.WeakReference
 import java.util.concurrent.TimeUnit
 
 // TODO: Rename parameter arguments, choose names that match
@@ -66,6 +67,8 @@ class PhotosMainFragment : BaseFragment() {
     private var firstPosition = 0
     private var lastPosition = 0
 
+    private var testbinding:WeakReference<View>? = null
+
     private val photoAdapter by lazy {
         PhotosAdapter(model,this){
             model.sharedElementIndex = it
@@ -78,7 +81,7 @@ class PhotosMainFragment : BaseFragment() {
             }
     }
 
-    private fun initShareElement(binding:FragmentMainPhotosBinding){
+    private fun initShareElement(){
         this.setExitSharedElementCallback(object: SharedElementCallback(){
             override fun onMapSharedElements(
                 names: MutableList<String>?,
@@ -86,7 +89,7 @@ class PhotosMainFragment : BaseFragment() {
             ) {
                 super.onMapSharedElements(names, sharedElements)
 
-                val viewHolder = binding.recycleView.findViewHolderForAdapterPosition(model.sharedElementIndex)
+                val viewHolder = binding?.recycleView?.findViewHolderForAdapterPosition(model.sharedElementIndex)
                 if(sharedElements != null && names != null && viewHolder !=null){
                     sharedElements[names[0]] = (viewHolder as PhotosAdapter.ImageViewHolder).binding.imageView
                 }
@@ -104,7 +107,7 @@ class PhotosMainFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        val test = testbinding?.get()
         binding = FragmentMainPhotosBinding.inflate(inflater,container,false).also { it ->
             it.appBar.setExpanded(false)
             it.categoryGrid.adapter = CategoryAdapter(this.requireContext()){category ->
@@ -124,9 +127,10 @@ class PhotosMainFragment : BaseFragment() {
             }
             //it.recycleView.setItemViewCacheSize(if(model.sharedElementIndex>2) model.sharedElementIndex else 2)
             //it.recycleView.setItemViewCacheSize(20)
-            initShareElement(it)
+            initShareElement()
             initMenu(it.toolBar.menu)
         }
+        testbinding = WeakReference(binding?.root)
         return binding?.root
     }
 

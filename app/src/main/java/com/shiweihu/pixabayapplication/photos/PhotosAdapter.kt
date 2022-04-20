@@ -60,6 +60,8 @@ class PhotosAdapter(val viewModle: PhotoFragmentMainViewModel, val fragment: Fra
         super.onDetachedFromRecyclerView(recyclerView)
     }
 
+
+
     override fun onViewDetachedFromWindow(holder: ImageViewHolder) {
         super.onViewDetachedFromWindow(holder)
         //Glide.with(holder.binding.imageView).clear(holder.binding.imageView)
