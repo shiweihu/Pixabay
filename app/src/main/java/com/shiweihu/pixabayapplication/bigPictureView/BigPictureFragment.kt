@@ -76,12 +76,12 @@ class BigPictureFragment : BaseFragment() {
 
     private val args:BigPictureFragmentArgs by navArgs()
 
-    private lateinit  var binding:FragmentBigPictureBinding
+    private  var binding:FragmentBigPictureBinding? = null
 
 
     override fun onBackKeyPressed() {
         super.onBackKeyPressed()
-        navigateUp(binding)
+        navigateUp(binding!!)
 
     }
 
@@ -95,7 +95,7 @@ class BigPictureFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         // Inflate the layout for this fragment
         binding =  FragmentBigPictureBinding.inflate(inflater,container,false).also {
             it.viewPage.adapter = BigPictureAdapter(args.pictureResult,this){action ->
@@ -133,11 +133,10 @@ class BigPictureFragment : BaseFragment() {
             it.toolBar.setNavigationOnClickListener { _ ->
                 navigateUp(it)
             }
-            initTransition(it)
+            initTransition()
         }
-        binding.executePendingBindings()
         postponeEnterTransition(resources.getInteger(R.integer.post_pone_time).toLong(), TimeUnit.MILLISECONDS)
-        return binding.root
+        return binding?.root
     }
 
 
@@ -147,15 +146,14 @@ class BigPictureFragment : BaseFragment() {
         findNavController().navigateUp()
     }
 
-    private fun initTransition(binding:FragmentBigPictureBinding){
+    private fun initTransition(){
         setEnterSharedElementCallback(object:SharedElementCallback(){
             override fun onMapSharedElements(
                 names: MutableList<String>?,
                 sharedElements: MutableMap<String, View>?
             ) {
                 super.onMapSharedElements(names, sharedElements)
-
-                val view:ImageView? = binding.viewPage.findViewWithTag<View>(binding.viewPage.currentItem)?.findViewById(R.id.image_view)
+                val view:ImageView? = binding?.viewPage?.findViewWithTag<View>(binding?.viewPage?.currentItem)?.findViewById(R.id.image_view)
                 if(names != null && sharedElements!=null && view!=null){
                     sharedElements[names[0]] = view
                 }
@@ -164,10 +162,13 @@ class BigPictureFragment : BaseFragment() {
         sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(R.transition.image_shared_element_transition)
         sharedElementReturnTransition = TransitionInflater.from(context).inflateTransition(R.transition.image_shared_element_transition)
 
+
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        binding?.viewPage?.adapter = null
+        binding = null
     }
 
     override fun onDestroy() {

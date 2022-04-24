@@ -2,6 +2,8 @@ package com.shiweihu.pixabayapplication
 
 import android.annotation.TargetApi
 import android.app.Application
+import android.content.ComponentCallbacks
+import android.content.res.Configuration
 import android.opengl.Matrix
 import android.os.Build
 import android.os.Handler
@@ -34,6 +36,9 @@ class MyApplication: Application() {
         NetworkModule.file_cache = this.cacheDir
 
         super.onCreate()
+
+
+
         lang = Locale.getDefault().language
 //        Glide.get(this@MyApplication).clearMemory()
 //        CoroutineScope(Dispatchers.IO).launch {
@@ -73,7 +78,17 @@ class MyApplication: Application() {
     }
 
 
+    override fun onTrimMemory(level: Int) {
+        super.onTrimMemory(level)
+        when(level){
+            TRIM_MEMORY_UI_HIDDEN->{
+//                CoroutineScope(Dispatchers.IO).launch {
+//                    Glide.get(this@MyApplication).clearDiskCache()
+//                }
+            }
+        }
 
+    }
 
 
 

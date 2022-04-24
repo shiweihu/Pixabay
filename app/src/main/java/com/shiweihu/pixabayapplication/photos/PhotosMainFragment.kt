@@ -67,8 +67,6 @@ class PhotosMainFragment : BaseFragment() {
     private var firstPosition = 0
     private var lastPosition = 0
 
-    private var testbinding:WeakReference<View>? = null
-
     private val photoAdapter by lazy {
         PhotosAdapter(model,this){
             model.sharedElementIndex = it
@@ -107,7 +105,6 @@ class PhotosMainFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val test = testbinding?.get()
         binding = FragmentMainPhotosBinding.inflate(inflater,container,false).also { it ->
             it.appBar.setExpanded(false)
             it.categoryGrid.adapter = CategoryAdapter(this.requireContext()){category ->
@@ -119,8 +116,7 @@ class PhotosMainFragment : BaseFragment() {
                 it.checkedItem = this.category
             }
             it.recycleView.adapter = photoAdapter
-
-            it.recycleView.setItemViewCacheSize(50)
+            it.recycleView.setItemViewCacheSize(30)
 
             if(model.sharedElementIndex < firstPosition || model.sharedElementIndex > lastPosition){
                 it.recycleView.scrollToPosition(model.sharedElementIndex)
@@ -130,7 +126,6 @@ class PhotosMainFragment : BaseFragment() {
             initShareElement()
             initMenu(it.toolBar.menu)
         }
-        testbinding = WeakReference(binding?.root)
         return binding?.root
     }
 
