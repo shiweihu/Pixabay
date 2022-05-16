@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "963848198200",
+    "project_id": "imagesapp-96d27",
+    "storage_bucket": "imagesapp-96d27.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:963848198200:android:f8f5b5718c912122352ecd",
+        "android_client_info": {
+          "package_name": "com.shiweihu.pixabayapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "963848198200-gf7g2e7knn7do6rqhqmmtso04thok2l9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAb-c5aiACTdszva5h8wwYlfgkGX9-wWkw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "963848198200-gf7g2e7knn7do6rqhqmmtso04thok2l9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

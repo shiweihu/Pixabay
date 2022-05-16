@@ -37,4 +37,5 @@
     <string name="business">business</string>
     <string name="music">music</string>
     <string name="title_activity_video_play">VideoPlayActivity</string>
+    <string name="instagram_btn_description">share to instagram feed</string>
 </resources>

@@ -1,45 +1,50 @@
 package com.shiweihu.pixabayapplication.bigPictureView
 
+import android.content.ContentValues
+import android.content.Context
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
 import android.os.Parcel
 import android.os.Parcelable
+import android.provider.MediaStore
 import android.transition.TransitionInflater
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.activity.OnBackPressedCallback
-import androidx.activity.addCallback
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.contract.ActivityResultContract
 import androidx.core.app.SharedElementCallback
+import androidx.core.view.get
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.shiweihu.pixabayapplication.BaseFragment
 import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.databinding.FragmentBigPictureBinding
 import com.shiweihu.pixabayapplication.viewArgu.BigPictureArgu
 import com.shiweihu.pixabayapplication.viewModle.BigPictureViewModle
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.Serializable
+import java.io.File
+import java.util.*
 import java.util.concurrent.TimeUnit
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [BigPictureFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
+
+
 @AndroidEntryPoint
 class BigPictureFragment : BaseFragment() {
 
@@ -79,6 +84,46 @@ class BigPictureFragment : BaseFragment() {
     private  var binding:FragmentBigPictureBinding? = null
 
 
+    private val shareToInstagram = registerForActivityResult(object :ActivityResultContract<Bitmap,Unit>(){
+        var temp_input:Uri? = null
+
+        fun getOutPutUri(bitmap:Bitmap):Uri{
+            val content = ContentValues()
+            content.put(MediaStore.Images.Media.DISPLAY_NAME,UUID.randomUUID().toString());
+            content.put(MediaStore.Images.Media.MIME_TYPE,"image/png")
+            val outputUri = requireContext().contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,content)
+
+            if (outputUri != null) {
+                requireContext().contentResolver.openOutputStream(outputUri).also { output ->
+                    bitmap.compress(Bitmap.CompressFormat.PNG,100,output)
+                }
+            }
+            return outputUri!!
+        }
+
+
+        override fun createIntent(context: Context, input: Bitmap?): Intent {
+             return Intent(Intent.ACTION_SEND).also {
+                 it.type = "image/*"
+                 // Add the URI to the Intent.
+                 val outputUri = getOutPutUri(input!!)
+                 it.putExtra(Intent.EXTRA_STREAM, outputUri)
+                 temp_input = outputUri
+             }
+        }
+
+        override fun parseResult(resultCode: Int, intent: Intent?) {
+            if(temp_input != null){
+                this@BigPictureFragment.requireContext().contentResolver.delete(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,temp_input?.query,null)
+            }
+
+        }
+
+    }) {
+
+    }
+
+
     override fun onBackKeyPressed() {
         super.onBackKeyPressed()
         navigateUp(binding!!)
@@ -98,16 +143,17 @@ class BigPictureFragment : BaseFragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding =  FragmentBigPictureBinding.inflate(inflater,container,false).also {
-            it.viewPage.adapter = BigPictureAdapter(args.pictureResult,this){action ->
+            val pageAdapter = BigPictureAdapter(args.pictureResult,this){ action ->
                 when(action){
                     MotionEvent.ACTION_MOVE->{
-                       it.viewPage.isUserInputEnabled = false
+                        it.viewPage.isUserInputEnabled = false
                     }
                     MotionEvent.ACTION_UP->{
                         it.viewPage.isUserInputEnabled = true
                     }
                 }
             }
+            it.viewPage.adapter = pageAdapter
             it.viewPage.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
@@ -133,10 +179,31 @@ class BigPictureFragment : BaseFragment() {
             it.toolBar.setNavigationOnClickListener { _ ->
                 navigateUp(it)
             }
+
+            it.shareToInstagramFeed.setOnClickListener {_ ->
+                val url = args.pictureResult.images?.get(it.viewPage.currentItem)
+                if (url != null) {
+                    shareImageToInstagram(url)
+                }
+            }
+
             initTransition()
         }
         postponeEnterTransition(resources.getInteger(R.integer.post_pone_time).toLong(), TimeUnit.MILLISECONDS)
         return binding?.root
+    }
+
+    private fun shareImageToInstagram(url:String){
+        Uri.parse(url).also {
+            Glide.with(this.requireContext()).asBitmap().load(it).into(object:CustomTarget<Bitmap>(){
+                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                    shareToInstagram.launch(resource)
+                }
+                override fun onLoadCleared(placeholder: Drawable?) {
+
+                }
+            })
+        }
     }
 
 

@@ -28,6 +28,8 @@ class BigPictureAdapter(val argu: BigPictureArgu,val fragment: Fragment,val touc
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
+
+
         holder.binding.imageUrl = argu.images?.get(position) ?:""
         holder.binding.priority = position == argu.currentIndex
         holder.binding.root.tag = position
@@ -116,9 +118,6 @@ class BigPictureAdapter(val argu: BigPictureArgu,val fragment: Fragment,val touc
         matrix.set(m)
         matrix.postTranslate(postX,postY)
         binding.imageView.imageMatrix = matrix
-
-
-
     }
 
 
