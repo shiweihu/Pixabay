@@ -1,10 +1,6 @@
 package com.shiweihu.pixabayapplication
 
-import android.annotation.TargetApi
 import android.app.Application
-import android.content.ComponentCallbacks
-import android.content.res.Configuration
-import android.opengl.Matrix
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
@@ -13,14 +9,12 @@ import android.view.WindowManager
 import android.view.WindowMetrics
 import androidx.annotation.RequiresApi
 import com.bumptech.glide.Glide
+import com.google.android.gms.ads.MobileAds
 import com.shiweihu.pixabayapplication.net.NetworkModule
 import com.shiweihu.pixabayapplication.utils.DisplayUtils
 import dagger.hilt.android.HiltAndroidApp
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import java.io.File
 import java.util.*
+
 
 @HiltAndroidApp
 class MyApplication: Application() {
@@ -31,7 +25,11 @@ class MyApplication: Application() {
         var lang = "en"
     }
 
+    private val appOpenManager = AppOpenManager(this)
+
+
     override fun onCreate() {
+
 
         NetworkModule.file_cache = this.cacheDir
 
@@ -54,6 +52,10 @@ class MyApplication: Application() {
             DisplayUtils.ScreenWidth  = displayMatrics.widthPixels
             DisplayUtils.ScreenHeight = displayMatrics.heightPixels
         }
+
+        MobileAds.initialize(
+            this
+        ) { }
 
 
 //        val mSystemLanguageList= Locale.getAvailableLocales()

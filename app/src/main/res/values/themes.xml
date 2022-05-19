@@ -30,6 +30,17 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="Theme.PixabayApplication.LoadDialog" >
+<!--        <item name="android:windowFrame">@null</item>-->
+<!--        <item name="android:windowBackground">@android:color/transparent</item>-->
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowNoTitle">true</item>
+
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:backgroundDimAmount">0.6</item>
+    </style>
+
     <style name="Theme.PixabayApplication.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.PixabayApplication.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

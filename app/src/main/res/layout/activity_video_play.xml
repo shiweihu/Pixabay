@@ -2,6 +2,7 @@
 <layout>
 
     <data>
+        <import type="com.google.android.gms.ads.AdSize" />
         <variable
             name="user_profile_url"
             type="String" />
@@ -9,7 +10,6 @@
         <variable
             name="priority"
             type="Boolean" />
-
 
 
     </data>
@@ -24,11 +24,20 @@
         <com.google.android.exoplayer2.ui.StyledPlayerView
             android:id="@+id/player_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             app:show_buffering="when_playing"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/adView"
             app:layout_constraintBottom_toBottomOf="parent"
+            />
 
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            app:adSize="SMART_BANNER"
+            app:adUnitId="@string/banner_id_for_video_play"
+            app:layout_constraintTop_toBottomOf="@+id/app_bar"
             />
 
         <com.google.android.material.appbar.AppBarLayout
@@ -73,6 +82,18 @@
             </com.google.android.material.appbar.MaterialToolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/share_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="30dp"
+            android:src="@drawable/ic_instagram_icon"
+            />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

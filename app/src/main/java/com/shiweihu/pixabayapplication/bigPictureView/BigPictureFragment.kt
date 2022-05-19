@@ -4,7 +4,6 @@ import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
@@ -12,16 +11,14 @@ import android.os.Parcel
 import android.os.Parcelable
 import android.provider.MediaStore
 import android.transition.TransitionInflater
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.core.app.SharedElementCallback
-import androidx.core.view.get
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -31,18 +28,23 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.shiweihu.pixabayapplication.BaseFragment
 import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.databinding.FragmentBigPictureBinding
 import com.shiweihu.pixabayapplication.viewArgu.BigPictureArgu
 import com.shiweihu.pixabayapplication.viewModle.BigPictureViewModle
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.File
 import java.util.*
 import java.util.concurrent.TimeUnit
-
-
-
+import kotlin.collections.List
+import kotlin.collections.MutableList
+import kotlin.collections.MutableMap
+import kotlin.collections.set
 
 
 @AndroidEntryPoint
@@ -82,6 +84,8 @@ class BigPictureFragment : BaseFragment() {
     private val args:BigPictureFragmentArgs by navArgs()
 
     private  var binding:FragmentBigPictureBinding? = null
+
+    private var scrollPageCount:Int = 0
 
 
     private val shareToInstagram = registerForActivityResult(object :ActivityResultContract<Bitmap,Unit>(){
@@ -135,6 +139,32 @@ class BigPictureFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
     }
 
+    private fun checkIfShowAd(){
+
+        if(scrollPageCount > 5){
+            binding?.viewPage?.isUserInputEnabled = false
+            val adRequest = AdRequest.Builder().build()
+            val adUnitid =  this.requireContext().getString(R.string.Interstitial_ads_big_picture)
+            InterstitialAd.load(this.requireContext(), adUnitid, adRequest,
+                object : InterstitialAdLoadCallback() {
+                    override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                        // The mInterstitialAd reference will be null until
+                        // an ad is loaded.
+                        interstitialAd.show(this@BigPictureFragment.requireActivity())
+                        scrollPageCount = 0
+                        Log.i("Interstitial ads", "onAdLoaded")
+                        binding?.viewPage?.isUserInputEnabled = true
+                    }
+                    override fun onAdFailedToLoad(loadAdError: LoadAdError) {
+                        // Handle the error
+                        Log.i("Interstitial ads", loadAdError.message)
+                        binding?.viewPage?.isUserInputEnabled = true
+
+                    }
+                })
+        }
+
+    }
 
 
     override fun onCreateView(
@@ -159,6 +189,8 @@ class BigPictureFragment : BaseFragment() {
                     super.onPageSelected(position)
                     it.userProfileUrl = args.pictureResult.profiles?.get(position) ?: ""
                     it.priority = true
+                    scrollPageCount++
+                    checkIfShowAd()
                 }
             })
             it.userProfile.setOnClickListener { view ->
@@ -185,6 +217,11 @@ class BigPictureFragment : BaseFragment() {
                 if (url != null) {
                     shareImageToInstagram(url)
                 }
+            }
+            val adRequest = AdRequest.Builder().build()
+            it.adView.loadAd(adRequest)
+            it.adView.adListener = object :AdListener(){
+
             }
 
             initTransition()

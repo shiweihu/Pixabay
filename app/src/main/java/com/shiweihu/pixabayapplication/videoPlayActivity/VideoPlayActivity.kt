@@ -1,28 +1,35 @@
 package com.shiweihu.pixabayapplication.videoPlayActivity
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.content.res.Configuration
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.navigation.navArgs
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.PlaybackException
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.Player.REPEAT_MODE_ONE
-import com.google.android.exoplayer2.Player.STATE_READY
-import com.google.android.exoplayer2.source.MediaSource
-import com.google.android.exoplayer2.util.MimeTypes
+import com.google.android.exoplayer2.metadata.Metadata
+import com.google.android.exoplayer2.transformer.Transformer
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
+import com.shiweihu.pixabayapplication.MyApplication
 import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.databinding.ActivityVideoPlayBinding
+import com.shiweihu.pixabayapplication.databinding.LoadingDialogLayoutBinding
 import com.shiweihu.pixabayapplication.viewModle.VideoPlayViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.security.Permission
 
 @AndroidEntryPoint
 class VideoPlayActivity(
@@ -71,8 +78,24 @@ class VideoPlayActivity(
         binding.playerView.player = player
         binding.playerView.controllerAutoShow = false
 
+        binding.shareBtn.setOnClickListener {
+            player.pause()
+            val builder = AlertDialog.Builder(this,R.style.Theme_PixabayApplication_LoadDialog)
+            val loadingBinding = LoadingDialogLayoutBinding.inflate(LayoutInflater.from(this))
+            builder.setView(loadingBinding.root)
+            builder.setCancelable(false)
+            val dialog =builder.create()
+            dialog.show()
+            model.downloadVideo(this,player.currentMediaItem!!){
+                dialog.dismiss()
+            }
+
+
+        }
+
         binding.playerView.setControllerVisibilityListener {
             binding.appBar.visibility = it
+            binding.shareBtn.visibility = if(it == View.GONE) View.VISIBLE else View.GONE
         }
 
 
@@ -87,12 +110,16 @@ class VideoPlayActivity(
         player.seekTo(data.currentIndex,0L)
         player.repeatMode = REPEAT_MODE_ONE
         player.addListener(object: Player.Listener {
-
-
             override fun onMediaItemTransition(mediaItem: MediaItem?, reason: Int) {
                 super.onMediaItemTransition(mediaItem, reason)
                 initMenuAction(player.currentMediaItemIndex)
             }
+
+            override fun onMetadata(metadata: Metadata) {
+                super.onMetadata(metadata)
+            }
+
+
 
             override fun onPlayerError(error: PlaybackException) {
                 Toast.makeText(this@VideoPlayActivity,error.message,Toast.LENGTH_LONG).show()
@@ -109,6 +136,15 @@ class VideoPlayActivity(
         })
         player.prepare()
         initMenuAction(data.currentIndex)
+        MobileAds.initialize(this) {
+            MyApplication.mHandler.postDelayed({
+                AdRequest.Builder().build().also {
+                    binding.adView.loadAd(it)
+                }
+            },100)
+        }
+
+
     }
 
 
@@ -128,6 +164,7 @@ class VideoPlayActivity(
 
     override fun onStart() {
         super.onStart()
+
     }
 
     override fun onRestart() {
@@ -137,6 +174,7 @@ class VideoPlayActivity(
     override fun onResume() {
         super.onResume()
         player.play()
+
     }
 
     override fun onPause() {
