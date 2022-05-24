@@ -196,6 +196,7 @@ class VideoPlayActivity(
         player.stop()
         player.release()
         super.onDestroy()
+        binding.adView.destroy()
     }
 
 }

@@ -224,6 +224,7 @@ class BigPictureFragment : BaseFragment() {
 
             }
 
+
             initTransition()
         }
         postponeEnterTransition(resources.getInteger(R.integer.post_pone_time).toLong(), TimeUnit.MILLISECONDS)
@@ -272,6 +273,7 @@ class BigPictureFragment : BaseFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         binding?.viewPage?.adapter = null
+        binding?.adView?.destroy()
         binding = null
     }
 
