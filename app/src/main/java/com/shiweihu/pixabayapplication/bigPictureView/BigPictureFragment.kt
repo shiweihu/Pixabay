@@ -11,7 +11,6 @@ import android.os.Parcel
 import android.os.Parcelable
 import android.provider.MediaStore
 import android.transition.TransitionInflater
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -30,14 +29,11 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.interstitial.InterstitialAd
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.shiweihu.pixabayapplication.BaseFragment
 import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.databinding.FragmentBigPictureBinding
 import com.shiweihu.pixabayapplication.viewArgu.BigPictureArgu
-import com.shiweihu.pixabayapplication.viewModle.BigPictureViewModle
+import com.shiweihu.pixabayapplication.viewModle.BigPictureViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -79,7 +75,7 @@ class BigPictureFragment : BaseFragment() {
 
     }
 
-    private val modle:BigPictureViewModle by viewModels()
+    private val modle:BigPictureViewModel by viewModels()
 
     private val args:BigPictureFragmentArgs by navArgs()
 
@@ -93,7 +89,7 @@ class BigPictureFragment : BaseFragment() {
 
         fun getOutPutUri(bitmap:Bitmap):Uri{
             val content = ContentValues()
-            content.put(MediaStore.Images.Media.DISPLAY_NAME,UUID.randomUUID().toString());
+            content.put(MediaStore.Images.Media.DISPLAY_NAME,UUID.randomUUID().toString())
             content.put(MediaStore.Images.Media.MIME_TYPE,"image/png")
             val outputUri = requireContext().contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,content)
 
@@ -143,26 +139,8 @@ class BigPictureFragment : BaseFragment() {
     private fun checkIfShowAd(){
 
         if(scrollPageCount > 5){
-            binding?.viewPage?.isUserInputEnabled = false
-            val adRequest = AdRequest.Builder().build()
-            val adUnitid =  this.requireContext().getString(R.string.Interstitial_ads_big_picture)
-            InterstitialAd.load(this.requireContext(), adUnitid, adRequest,
-                object : InterstitialAdLoadCallback() {
-                    override fun onAdLoaded(interstitialAd: InterstitialAd) {
-                        // The mInterstitialAd reference will be null until
-                        // an ad is loaded.
-                        interstitialAd.show(this@BigPictureFragment.requireActivity())
-                        scrollPageCount = 0
-                        Log.i("Interstitial ads", "onAdLoaded")
-                        binding?.viewPage?.isUserInputEnabled = true
-                    }
-                    override fun onAdFailedToLoad(loadAdError: LoadAdError) {
-                        // Handle the error
-                        Log.i("Interstitial ads", loadAdError.message)
-                        binding?.viewPage?.isUserInputEnabled = true
-
-                    }
-                })
+            scrollPageCount = 0
+            modle.showInterstitialAd(this.requireActivity())
         }
 
     }
@@ -221,10 +199,6 @@ class BigPictureFragment : BaseFragment() {
             }
             val adRequest = AdRequest.Builder().build()
             it.adView.loadAd(adRequest)
-            it.adView.adListener = object :AdListener(){
-
-            }
-
 
             initTransition()
         }

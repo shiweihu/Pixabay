@@ -137,11 +137,11 @@ class VideoPlayActivity(
         player.prepare()
         initMenuAction(data.currentIndex)
         MobileAds.initialize(this) {
-            MyApplication.mHandler.postDelayed({
-                AdRequest.Builder().build().also {
+            AdRequest.Builder().build().also {
+                if(binding.root.isActivated){
                     binding.adView.loadAd(it)
                 }
-            },100)
+            }
         }
 
 
@@ -186,7 +186,7 @@ class VideoPlayActivity(
 
     override fun onStop() {
         super.onStop()
-        mHandler.removeCallbacksAndMessages(null)
+
         if(player.isPlaying){
             player.pause()
         }
@@ -196,6 +196,7 @@ class VideoPlayActivity(
         player.stop()
         player.release()
         super.onDestroy()
+        mHandler.removeCallbacksAndMessages(null)
         binding.adView.destroy()
     }
 

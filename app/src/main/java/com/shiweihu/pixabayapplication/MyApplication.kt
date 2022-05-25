@@ -26,6 +26,7 @@ class MyApplication: Application() {
     }
 
     private val appOpenManager = AppOpenManager(this)
+    fun getCurrentActivity() = appOpenManager.currentActivity
 
 
     override fun onCreate() {

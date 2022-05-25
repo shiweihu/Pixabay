@@ -52,7 +52,7 @@ class BigPictureAdapter(val argu: BigPictureArgu,val fragment: Fragment,val touc
 
             when(event.actionMasked){
                 MotionEvent.ACTION_DOWN->{
-
+                    restoreCenter(holder.binding)
                 }
                 MotionEvent.ACTION_POINTER_DOWN->{
                     origMatrix = holder.binding.imageView.imageMatrix
@@ -83,14 +83,14 @@ class BigPictureAdapter(val argu: BigPictureArgu,val fragment: Fragment,val touc
                 }
                 MotionEvent.ACTION_CANCEL->{
                     if(isMoving) {
-                        restoreCenter(holder.binding)
+                        //restoreCenter(holder.binding)
                         isMoving = false
                     }
                 }
                 MotionEvent.ACTION_UP->{
                     if(isMoving){
                         touchCallBack(MotionEvent.ACTION_UP)
-                        restoreCenter(holder.binding)
+                        //restoreCenter(holder.binding)
                         isMoving = false
                     }
 

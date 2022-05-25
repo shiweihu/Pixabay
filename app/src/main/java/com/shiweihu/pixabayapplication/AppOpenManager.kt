@@ -25,7 +25,7 @@ class AppOpenManager(private val myApplication: MyApplication): LifecycleEventOb
     private var appOpenAd: AppOpenAd? = null
     private val loadCallback: AppOpenAdLoadCallback? = null
 
-    private var currentActivity: Activity? = null
+    var currentActivity: Activity? = null
 
     private val AD_UNIT_ID by lazy {
         myApplication.getString(R.string.app_open_ad)
