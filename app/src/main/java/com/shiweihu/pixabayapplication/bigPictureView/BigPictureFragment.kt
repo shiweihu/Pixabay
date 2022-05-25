@@ -107,13 +107,14 @@ class BigPictureFragment : BaseFragment() {
 
 
         override fun createIntent(context: Context, input: Bitmap?): Intent {
-             return Intent(Intent.ACTION_SEND).also {
+             val intent = Intent(Intent.ACTION_SEND).also {
                  it.type = "image/*"
                  // Add the URI to the Intent.
                  val outputUri = getOutPutUri(input!!)
                  it.putExtra(Intent.EXTRA_STREAM, outputUri)
                  temp_input = outputUri
              }
+            return Intent.createChooser(intent,this@BigPictureFragment.resources.getString(R.string.app_choser_title))
         }
 
         override fun parseResult(resultCode: Int, intent: Intent?) {

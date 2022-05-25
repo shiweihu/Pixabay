@@ -10,6 +10,7 @@ import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.transformer.TransformationException
 import com.google.android.exoplayer2.transformer.Transformer
 import com.shiweihu.pixabayapplication.MyApplication
+import com.shiweihu.pixabayapplication.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
 import javax.inject.Inject
@@ -47,7 +48,8 @@ class VideoPlayViewModel @Inject constructor(
                         it.type = "video/*"
                         it.putExtra(Intent.EXTRA_STREAM, outputUri)
                     }
-                    context.startActivity(intent)
+                    val chose_intent = Intent.createChooser(intent,context.resources.getString(R.string.app_choser_title))
+                    context.startActivity(chose_intent)
                     callBack()
                 }
 
