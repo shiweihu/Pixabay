@@ -137,12 +137,9 @@ class VideoPlayActivity(
         player.prepare()
         initMenuAction(data.currentIndex)
         MobileAds.initialize(this) {
-            AdRequest.Builder().build().also {
-                if(binding.root.isActivated){
-                    binding.adView.loadAd(it)
-                }
-            }
+
         }
+
 
 
     }
@@ -174,6 +171,9 @@ class VideoPlayActivity(
     override fun onResume() {
         super.onResume()
         player.play()
+        AdRequest.Builder().build().also {
+            binding.adView.loadAd(it)
+        }
 
     }
 
