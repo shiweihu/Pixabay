@@ -2,20 +2,17 @@ package com.shiweihu.pixabayapplication.video
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.Target
 import com.shiweihu.pixabayapplication.R
-import com.shiweihu.pixabayapplication.bigPictureView.BigPictureFragment
 import com.shiweihu.pixabayapplication.data.Video
 import com.shiweihu.pixabayapplication.databinding.CardImageLayoutBinding
-import com.shiweihu.pixabayapplication.photos.PhotosAdapter
-import com.shiweihu.pixabayapplication.videoPlayActivity.VideoPlayActivityArgs
+import com.shiweihu.pixabayapplication.videoPlayView.VideoPlayFragment
+import com.shiweihu.pixabayapplication.videoPlayView.VideoPlayFragmentArgs
 import com.shiweihu.pixabayapplication.viewArgu.VideoPlayArgu
 import com.shiweihu.pixabayapplication.viewModle.VideoFragmentMainViewModel
 
@@ -37,23 +34,28 @@ class VideosAdapter(val viewModle: VideoFragmentMainViewModel, val fragment: Fra
 
     override fun onViewDetachedFromWindow(holder: VideosAdapter.CoverViewHolder) {
         super.onViewDetachedFromWindow(holder)
-        Glide.with(holder.binding.imageView).clear(holder.binding.imageView)
+
     }
 
     override fun onViewAttachedToWindow(holder: VideosAdapter.CoverViewHolder) {
         super.onViewAttachedToWindow(holder)
-        getItem(holder.layoutPosition)?.also {
-            val url = "https://i.vimeocdn.com/video/${it.pictureId}_640x360.jpg"
-            holder.binding.imageUrl = url
-            holder.binding.priority = false
-            holder.binding.imageView.layoutParams.height = 360
-        }
+
 
     }
 
     override fun onBindViewHolder(holder: CoverViewHolder, position: Int) {
         getItem(position)?.let { it ->
             holder.binding.authorName = it.user
+            val url = "https://i.vimeocdn.com/video/${it.pictureId}_640x360.jpg"
+            holder.binding.imageUrl = url
+            holder.binding.priority = false
+            holder.binding.imageView.layoutParams.height = 360
+            holder.binding.doEnd = {
+                if(viewModle.videoPosition == position){
+                    fragment.startPostponedEnterTransition()
+                }
+            }
+            holder.binding.imageView.transitionName = VideoPlayFragment.PLAYER_BACKGROUND +"-${position}"
             holder.binding.root.setOnClickListener {view->
                 val videos = ArrayList<String>()
                 val profiles = ArrayList<String>()
@@ -74,13 +76,21 @@ class VideosAdapter(val viewModle: VideoFragmentMainViewModel, val fragment: Fra
 
                     }
                 }
+
+                viewModle.videoPosition = position
                 val argu = VideoPlayArgu(videos,profiles,tags,userid,userNames,pageUrls,position)
                 val navController = view.findNavController()
                 if(navController.currentDestination?.id == R.id.video_fragment){
-                    navController.navigate(R.id.to_video_play_view,VideoPlayActivityArgs(argu).toBundle())
+                    navController.navigate(R.id.video_play_fragment,VideoPlayFragmentArgs(argu).toBundle(),null,
+                        FragmentNavigatorExtras(
+                            holder.binding.imageView to VideoPlayFragment.PLAYER_BACKGROUND
+                        ))
+                   // navController.navigate(R.id.to_video_play_view,VideoPlayFragmentArgs(argu).toBundle())
                 }
             }
         }
+        holder.binding.executePendingBindings()
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoverViewHolder {

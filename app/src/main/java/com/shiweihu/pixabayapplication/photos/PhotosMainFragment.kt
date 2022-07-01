@@ -1,14 +1,10 @@
 package com.shiweihu.pixabayapplication.photos
 
-import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.transition.TransitionInflater
 import android.view.*
-import android.view.inputmethod.InputMethodManager
-import androidx.activity.addCallback
-import androidx.appcompat.app.AppCompatActivity
 
 import androidx.fragment.app.Fragment
 
@@ -16,28 +12,25 @@ import androidx.appcompat.widget.SearchView
 
 import androidx.core.app.SharedElementCallback
 import androidx.core.view.forEachIndexed
+import androidx.fragment.app.activityViewModels
 
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.bumptech.glide.Glide
 import com.shiweihu.pixabayapplication.BaseFragment
 
 import com.shiweihu.pixabayapplication.R
 
 import com.shiweihu.pixabayapplication.databinding.FragmentMainPhotosBinding
 import com.shiweihu.pixabayapplication.viewModle.PhotoFragmentMainViewModel
+import com.shiweihu.pixabayapplication.viewModle.FragmentComunicationViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.lang.Integer.min
-import java.lang.ref.WeakReference
 import java.util.concurrent.TimeUnit
 
 // TODO: Rename parameter arguments, choose names that match
@@ -55,6 +48,7 @@ class PhotosMainFragment : BaseFragment() {
 
 
     private val model:PhotoFragmentMainViewModel by viewModels()
+    private val activeModel:FragmentComunicationViewModel by activityViewModels()
 
     private var queryStr:String = ""
     private var isInput = false
@@ -68,9 +62,7 @@ class PhotosMainFragment : BaseFragment() {
     private var lastPosition = 0
 
     private val photoAdapter by lazy {
-        PhotosAdapter(model,this){
-            model.sharedElementIndex = it
-        }.also {adapter ->
+        PhotosAdapter(model,this).also {adapter ->
                 adapter.loadStateFlow.distinctUntilChangedBy {
                     it.refresh
                 }.filter {
@@ -99,6 +91,13 @@ class PhotosMainFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        activeModel.pictureItemPosition.observe(this){
+            model.sharedElementIndex = it
+            if(model.sharedElementIndex < firstPosition || model.sharedElementIndex > lastPosition){
+                binding?.recycleView?.scrollToPosition(model.sharedElementIndex)
+            }
+        }
+
     }
 
     override fun onCreateView(
@@ -118,9 +117,7 @@ class PhotosMainFragment : BaseFragment() {
             it.recycleView.adapter = photoAdapter
             it.recycleView.setItemViewCacheSize(30)
 
-            if(model.sharedElementIndex < firstPosition || model.sharedElementIndex > lastPosition){
-                it.recycleView.scrollToPosition(model.sharedElementIndex)
-            }
+
             //it.recycleView.setItemViewCacheSize(if(model.sharedElementIndex>2) model.sharedElementIndex else 2)
             //it.recycleView.setItemViewCacheSize(20)
             initShareElement()
@@ -183,9 +180,6 @@ class PhotosMainFragment : BaseFragment() {
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-    }
 
     override fun onStart() {
         super.onStart()

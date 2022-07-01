@@ -23,6 +23,8 @@ class VideoFragmentMainViewModel @Inject constructor (
 
     private var currentQueryValue:String? = null
     private var currentQueryFlow:Flow<PagingData<Video>>? = null
+    var videoPosition = 0
+
 
 
     fun searchVideo(q:String? = null, category:String? = null):Flow<PagingData<Video>>{

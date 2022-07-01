@@ -4,19 +4,31 @@ import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Bundle
 import android.provider.MediaStore
+import android.view.View
 import androidx.lifecycle.ViewModel
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.transformer.TransformationException
+import com.google.android.exoplayer2.transformer.TransformationResult
 import com.google.android.exoplayer2.transformer.Transformer
 import com.shiweihu.pixabayapplication.MyApplication
 import com.shiweihu.pixabayapplication.R
+import com.shiweihu.pixabayapplication.net.ApplicationModule
+import com.shiweihu.pixabayapplication.videoPlayView.VideoPlayActivity
+import com.shiweihu.pixabayapplication.videoPlayView.VideoPlayActivityArgs
+
+import com.shiweihu.pixabayapplication.videoPlayView.VideoPlayFragment
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
 class VideoPlayViewModel @Inject constructor(
+    val videoPlayerPosition: ApplicationModule.Companion.VideoPlayerPosition
 ):ViewModel() {
 
 
@@ -30,6 +42,16 @@ class VideoPlayViewModel @Inject constructor(
         context.startActivity(Intent(Intent.ACTION_VIEW,uri))
     }
 
+    fun navigateToFullScreen(player: View, uri: Uri,position:Long){
+        player.findNavController().navigate(R.id.full_screen,VideoPlayActivityArgs(uri,position).toBundle(),
+            null,
+            FragmentNavigatorExtras(
+                player to VideoPlayActivity.TRANSITION_NAME
+             )
+        )
+
+    }
+
 
     fun downloadVideo(context:Context,mediaItem:MediaItem,callBack:()->Unit){
         val content = ContentValues()
@@ -39,8 +61,14 @@ class VideoPlayViewModel @Inject constructor(
         // Configure and create a Transformer instance.
         val transformer: Transformer = Transformer.Builder(context)
             .addListener(object: Transformer.Listener{
-                override fun onTransformationCompleted(inputMediaItem: MediaItem) {
-                    super.onTransformationCompleted(inputMediaItem)
+                override fun onTransformationCompleted(inputMediaItem: MediaItem,transformationResult: TransformationResult) {
+                    super.onTransformationCompleted(inputMediaItem,transformationResult)
+
+                    if(transformationResult.fileSizeBytes == C.LENGTH_UNSET.toLong()){
+                        callBack()
+                        return
+                    }
+
 //                    val fileDescriptor = context.contentResolver.openFileDescriptor(outputUri!!,"w")
 //                    val file = File(Environment.getDownloadCacheDirectory().path+"/temp.mp4")
 //                    val uri = Uri.fromFile(file)
@@ -69,7 +97,6 @@ class VideoPlayViewModel @Inject constructor(
 
         val fileDescriptor = context.contentResolver.openFileDescriptor(outputUri!!,"w")
         transformer.startTransformation(mediaItem, fileDescriptor!! )
-
 
     }
 

@@ -53,7 +53,13 @@
 
             </com.google.android.material.appbar.MaterialToolbar>
         </com.google.android.material.appbar.AppBarLayout>
-
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_page"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/app_bar"
+            />
         <com.google.android.gms.ads.AdView
             android:id="@+id/adView"
             android:layout_width="match_parent"
@@ -62,14 +68,6 @@
             android:layout_alignParentBottom="true"
             app:adSize="BANNER"
             app:adUnitId="@string/banner_id_for_big_picture"
-            app:layout_constraintTop_toBottomOf="@+id/app_bar"
-            />
-
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/view_page"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/app_bar"
             />
         <com.google.android.material.floatingactionbutton.FloatingActionButton

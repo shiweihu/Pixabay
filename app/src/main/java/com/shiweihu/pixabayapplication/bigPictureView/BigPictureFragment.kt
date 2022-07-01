@@ -7,8 +7,6 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
-import android.os.Parcel
-import android.os.Parcelable
 import android.provider.MediaStore
 import android.transition.TransitionInflater
 import android.view.LayoutInflater
@@ -18,6 +16,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.core.app.SharedElementCallback
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -27,13 +26,13 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
-import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.shiweihu.pixabayapplication.BaseFragment
 import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.databinding.FragmentBigPictureBinding
 import com.shiweihu.pixabayapplication.viewArgu.BigPictureArgu
 import com.shiweihu.pixabayapplication.viewModle.BigPictureViewModel
+import com.shiweihu.pixabayapplication.viewModle.FragmentComunicationViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -46,36 +45,9 @@ import kotlin.collections.set
 @AndroidEntryPoint
 class BigPictureFragment : BaseFragment() {
 
-     open class BigPictureCallBack() :Parcelable{
-        constructor(parcel: Parcel) : this() {
-        }
-
-         open fun callBack(position:Int){
-
-         }
-
-        override fun writeToParcel(parcel: Parcel, flags: Int) {
-
-        }
-
-        override fun describeContents(): Int {
-            return 0
-        }
-
-        companion object CREATOR : Parcelable.Creator<BigPictureCallBack> {
-            override fun createFromParcel(parcel: Parcel): BigPictureCallBack {
-                return BigPictureCallBack(parcel)
-            }
-
-            override fun newArray(size: Int): Array<BigPictureCallBack?> {
-                return arrayOfNulls(size)
-            }
-        }
-
-
-    }
 
     private val modle:BigPictureViewModel by viewModels()
+    private val activeModel: FragmentComunicationViewModel by activityViewModels()
 
     private val args:BigPictureFragmentArgs by navArgs()
 
@@ -102,11 +74,11 @@ class BigPictureFragment : BaseFragment() {
         }
 
 
-        override fun createIntent(context: Context, input: Bitmap?): Intent {
+        override fun createIntent(context: Context, input: Bitmap): Intent {
              val intent = Intent(Intent.ACTION_SEND).also {
                  it.type = "image/*"
                  // Add the URI to the Intent.
-                 val outputUri = getOutPutUri(input!!)
+                 val outputUri = getOutPutUri(input)
                  it.putExtra(Intent.EXTRA_STREAM, outputUri)
                  temp_input = outputUri
              }
@@ -137,8 +109,8 @@ class BigPictureFragment : BaseFragment() {
     }
 
     private fun checkIfShowAd(){
-
-        if(scrollPageCount > 5){
+        scrollPageCount++
+        if(scrollPageCount > 20){
             scrollPageCount = 0
             modle.showInterstitialAd(this.requireActivity())
         }
@@ -168,7 +140,6 @@ class BigPictureFragment : BaseFragment() {
                     super.onPageSelected(position)
                     it.userProfileUrl = args.pictureResult.profiles?.get(position) ?: ""
                     it.priority = true
-                    scrollPageCount++
                     checkIfShowAd()
                 }
             })
@@ -222,7 +193,7 @@ class BigPictureFragment : BaseFragment() {
 
 
     private fun navigateUp(binding:FragmentBigPictureBinding){
-        args.pictureResult.callBack?.callBack(binding.viewPage.currentItem)
+        activeModel.pictureItemPosition.postValue(binding.viewPage.currentItem)
         findNavController().navigateUp()
     }
 
@@ -267,14 +238,9 @@ class BigPictureFragment : BaseFragment() {
                                  usersID:List<String>,
                                  usersName:List<String>,
                                  pageUrls:List<String>,
-                                 position:Int,
-                                 callBackFuc:(position:Int)->Unit){
+                                 position:Int){
             val navController = view.findNavController()
-            val argu = BigPictureArgu(images,profiles,tags,usersID,usersName,pageUrls,position,object:BigPictureCallBack() {
-                override fun callBack(position: Int) {
-                    callBackFuc(position)
-                }
-            })
+            val argu = BigPictureArgu(images,profiles,tags,usersID,usersName,pageUrls,position)
             if(navController.currentDestination?.id == R.id.photos_fragment){
                 navController.navigate(R.id.to_big_picture,
                     BigPictureFragmentArgs(argu).toBundle(),

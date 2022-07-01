@@ -20,25 +20,57 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:fitsSystemWindows="true"
         android:background="@color/black"
+        android:id="@+id/background"
         >
-        <com.google.android.exoplayer2.ui.StyledPlayerView
-            android:id="@+id/player_view"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:show_buffering="when_playing"
-            app:layout_constraintTop_toBottomOf="@+id/adView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
-
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/adView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            app:adSize="SMART_BANNER"
-            app:adUnitId="@string/banner_id_for_video_play"
             app:layout_constraintTop_toBottomOf="@+id/app_bar"
-            />
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
+            <com.google.android.exoplayer2.ui.StyledPlayerView
+                android:id="@+id/player_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:show_buffering="when_playing"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+
+            <com.google.android.gms.ads.AdView
+                android:id="@+id/adView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                app:adSize="SMART_BANNER"
+                app:adUnitId="@string/banner_id_for_video_play"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/share_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/adView"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_instagram_icon"
+                />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/full_screen_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_margin="10dp"
+                android:src="@drawable/full_screen_icon"
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar"
@@ -84,15 +116,7 @@
         </com.google.android.material.appbar.AppBarLayout>
 
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/share_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_margin="30dp"
-            android:src="@drawable/ic_instagram_icon"
-            />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

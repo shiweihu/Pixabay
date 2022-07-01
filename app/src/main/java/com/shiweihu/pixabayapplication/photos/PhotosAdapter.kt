@@ -21,7 +21,7 @@ import com.shiweihu.pixabayapplication.viewModle.PhotoFragmentMainViewModel
 import kotlin.math.max
 import kotlin.math.min
 
-class PhotosAdapter(val viewModle: PhotoFragmentMainViewModel, val fragment: Fragment, val func:(position:Int)->Unit): PagingDataAdapter<ImageInfo, PhotosAdapter.ImageViewHolder>(ImageDiff()) {
+class PhotosAdapter(val viewModle: PhotoFragmentMainViewModel, val fragment: Fragment): PagingDataAdapter<ImageInfo, PhotosAdapter.ImageViewHolder>(ImageDiff()) {
     class ImageViewHolder(
         val binding:CardImageLayoutBinding
     ):RecyclerView.ViewHolder(binding.root)
@@ -132,7 +132,7 @@ class PhotosAdapter(val viewModle: PhotoFragmentMainViewModel, val fragment: Fra
             }
         }
         viewModle.sharedElementIndex = position
-        viewModle.navigateToBigPicture(view,images,profiles,tags,usersID,usersName,pageUrl,position,func)
+        viewModle.navigateToBigPicture(view,images,profiles,tags,usersID,usersName,pageUrl,position)
     }
 
 }

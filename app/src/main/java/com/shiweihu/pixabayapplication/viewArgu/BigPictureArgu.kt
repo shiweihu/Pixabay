@@ -11,8 +11,7 @@ class BigPictureArgu(
     val useridArray:List<String>?,
     val userNameArray:List<String>?,
     val pageUrls:List<String>?,
-    var currentIndex:Int,
-    val callBack: BigPictureFragment.BigPictureCallBack? = null
+    var currentIndex:Int
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.createStringArrayList(),
@@ -21,8 +20,7 @@ class BigPictureArgu(
         parcel.createStringArrayList(),
         parcel.createStringArrayList(),
         parcel.createStringArrayList(),
-        parcel.readInt(),
-        parcel.readParcelable<BigPictureFragment.BigPictureCallBack>(BigPictureFragment.BigPictureCallBack.javaClass.classLoader)
+        parcel.readInt()
     ) {
     }
 
@@ -34,7 +32,6 @@ class BigPictureArgu(
         parcel.writeStringList(userNameArray)
         parcel.writeStringList(pageUrls)
         parcel.writeInt(currentIndex)
-        parcel.writeParcelable(callBack,flags)
     }
 
     override fun describeContents(): Int {

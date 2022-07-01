@@ -13,20 +13,42 @@
         >
 
         <action
-            android:id="@+id/to_video_play_view"
-            app:destination="@+id/video_play_activity"
+            android:id="@+id/video_play_fragment"
+            app:destination="@+id/video_play_fragment"
             />
 
     </fragment>
 
-    <activity
-        android:id="@+id/video_play_activity"
-        android:name="com.shiweihu.pixabayapplication.videoPlayActivity.VideoPlayActivity"
+    <fragment
+        android:id="@+id/video_play_fragment"
+        android:name="com.shiweihu.pixabayapplication.videoPlayView.VideoPlayFragment"
         tools:layout="@layout/activity_video_play"
         >
         <argument
             android:name="data"
             app:argType="com.shiweihu.pixabayapplication.viewArgu.VideoPlayArgu"
+            />
+
+        <action
+            android:id="@+id/full_screen"
+            app:destination="@+id/video_play_activity"
+            />
+
+
+    </fragment>
+
+    <activity
+        android:id="@+id/video_play_activity"
+        android:name="com.shiweihu.pixabayapplication.videoPlayView.VideoPlayActivity"
+        tools:layout="@layout/video_play_activity_layout"
+        >
+        <argument
+            android:name="uri"
+            app:argType = "android.net.Uri"
+            />
+        <argument
+            android:name="position"
+            app:argType = "long"
             />
 
 

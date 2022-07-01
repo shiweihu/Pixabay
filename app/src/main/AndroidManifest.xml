@@ -11,24 +11,19 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/app_icon_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.PixabayApplication">
+        android:theme="@style/Theme.PixabayApplication"
+        android:hardwareAccelerated="true"
+        >
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-8265796598311311~8823962298"/>
-        <activity
-            android:name=".videoPlayActivity.VideoPlayActivity"
-            android:exported="false"
-            android:label="@string/title_activity_video_play"
-            android:theme="@style/Theme.PixabayApplication.FullScreen"
-            android:screenOrientation="sensor"
-            android:configChanges="orientation|screenSize"
-            />
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.PixabayApplication.NoActionBar"
+            android:configChanges="orientation|screenSize"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,6 +31,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".videoPlayView.VideoPlayActivity"
+            android:exported="false"
+            android:screenOrientation= "landscape"
+            android:theme="@style/Theme.PixabayApplication.FullScreen"
+            android:configChanges="orientation|screenSize"
+            />
+
 
     </application>
 
