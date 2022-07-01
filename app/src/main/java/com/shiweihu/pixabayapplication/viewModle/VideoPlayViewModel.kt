@@ -64,11 +64,6 @@ class VideoPlayViewModel @Inject constructor(
                 override fun onTransformationCompleted(inputMediaItem: MediaItem,transformationResult: TransformationResult) {
                     super.onTransformationCompleted(inputMediaItem,transformationResult)
 
-                    if(transformationResult.fileSizeBytes == C.LENGTH_UNSET.toLong()){
-                        callBack()
-                        return
-                    }
-
 //                    val fileDescriptor = context.contentResolver.openFileDescriptor(outputUri!!,"w")
 //                    val file = File(Environment.getDownloadCacheDirectory().path+"/temp.mp4")
 //                    val uri = Uri.fromFile(file)
