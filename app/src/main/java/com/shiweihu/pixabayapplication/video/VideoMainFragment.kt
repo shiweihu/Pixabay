@@ -2,6 +2,7 @@ package com.shiweihu.pixabayapplication.video
 
 import android.os.Bundle
 import android.transition.TransitionInflater
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
@@ -158,7 +159,7 @@ class VideoFragment : Fragment() {
     }
 
     private fun initMenu(menu: Menu){
-        menu.forEachIndexed { index, item ->
+        menu.forEachIndexed { _, item ->
             when (item.itemId) {
                 R.id.action_search -> {
                     val searchView = item.actionView as SearchView

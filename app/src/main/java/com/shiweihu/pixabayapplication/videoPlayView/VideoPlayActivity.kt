@@ -14,6 +14,7 @@ import androidx.navigation.navArgs
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
+import com.google.android.exoplayer2.Player.REPEAT_MODE_ONE
 import com.google.android.exoplayer2.Player.STATE_READY
 import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.shiweihu.pixabayapplication.R
@@ -64,6 +65,7 @@ class VideoPlayActivity :AppCompatActivity(){
 //            window.sharedElementExitTransition = it
 //
 //        }
+        player.repeatMode = REPEAT_MODE_ONE
         player.prepare()
 
     }
