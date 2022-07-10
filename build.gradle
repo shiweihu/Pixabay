@@ -17,7 +17,7 @@ buildscript {
         glideVersion = '4.13.1'
         gradleVersion = '7.0.3'
         gsonVersion = '2.9.0'
-        hiltVersion = '2.41'
+        hiltVersion = '2.42'
         junitVersion = '4.12'
         kotlinVersion = '1.5.31'
         ktlintVersion = '0.38.1'
@@ -39,7 +39,7 @@ buildscript {
         exoplayer_version = "2.18.0"
         anko_version = "0.10.4"
         lifecycle_version = "2.5.0"
-        kotlin_plugin = "1.6.21"
+        kotlin_plugin = "1.7.0"
         gradle_version = "7.2.1"
     }
 

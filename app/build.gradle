@@ -43,7 +43,7 @@ android {
 
 dependencies {
 
-    implementation 'com.google.android.gms:play-services-ads:20.6.0'
+    implementation 'com.google.android.gms:play-services-ads:21.0.0'
 
     implementation "com.google.android.exoplayer:exoplayer:$exoplayer_version"
     implementation "com.google.android.exoplayer:exoplayer-transformer:$exoplayer_version"

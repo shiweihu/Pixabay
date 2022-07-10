@@ -15,6 +15,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContract
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.SharedElementCallback
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -124,16 +125,7 @@ class BigPictureFragment : BaseFragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding =  FragmentBigPictureBinding.inflate(inflater,container,false).also {
-            val pageAdapter = BigPictureAdapter(args.pictureResult,this){ action ->
-                when(action){
-                    MotionEvent.ACTION_MOVE->{
-                        it.viewPage.isUserInputEnabled = false
-                    }
-                    MotionEvent.ACTION_UP->{
-                        it.viewPage.isUserInputEnabled = true
-                    }
-                }
-            }
+            val pageAdapter = BigPictureAdapter(args.pictureResult,this)
             it.viewPage.adapter = pageAdapter
             it.viewPage.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
                 override fun onPageSelected(position: Int) {
@@ -157,7 +149,7 @@ class BigPictureFragment : BaseFragment() {
             }
 
             it.viewPage.setCurrentItem(args.pictureResult.currentIndex,false)
-            it.viewPage.offscreenPageLimit = 4
+            it.viewPage.offscreenPageLimit = 1
             it.toolBar.setNavigationOnClickListener { _ ->
                 navigateUp(it)
             }
@@ -188,6 +180,9 @@ class BigPictureFragment : BaseFragment() {
                 }
             })
         }
+
+
+
     }
 
 
