@@ -33,7 +33,9 @@ class BigPictureAdapter(val argu: BigPictureArgu,val fragment: Fragment): Recycl
         val imageUrl = argu.images?.get(position) ?:""
         holder.binding.imageUrl = imageUrl
         holder.binding.priority = position == argu.currentIndex
-        holder.binding.imageView.transitionName = "${BigPictureFragment.SHARE_ELEMENT_NAME}-${position}"
+        val transitionName = "${BigPictureFragment.SHARE_ELEMENT_NAME}-${position}"
+        holder.binding.imageView.transitionName = transitionName
+        holder.binding.imageView.tag = transitionName
         holder.binding.doEnd = {
             if(position == argu.currentIndex) {
                 fragment.startPostponedEnterTransition()

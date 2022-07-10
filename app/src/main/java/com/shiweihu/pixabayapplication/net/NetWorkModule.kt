@@ -2,8 +2,10 @@ package com.shiweihu.pixabayapplication.net
 
 
 import android.content.Context
+import android.os.Build
 import android.util.Log
 import com.shiweihu.pixabayapplication.MyApplication
+import com.shiweihu.pixabayapplication.bigPictureView.ViewPictureDialog
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -41,9 +43,11 @@ class NetworkModule {
 //                        .method(origin.method,origin.body)
 //                        .build()
                 val response = chain.proceed(origin)
-                for(header in response.headers){
-                    MyApplication.mHandler.post {
-                        Log.println(Log.DEBUG,"response header","${header.first}:${header.second}")
+                if(MyApplication.APP_DEBUG){
+                    for(header in response.headers){
+                        MyApplication.mHandler.post {
+                            Log.println(Log.DEBUG,"response header","${header.first}:${header.second}")
+                        }
                     }
                 }
                 return@addInterceptor response

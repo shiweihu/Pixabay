@@ -149,7 +149,7 @@ class BigPictureFragment : BaseFragment() {
             }
 
             it.viewPage.setCurrentItem(args.pictureResult.currentIndex,false)
-            it.viewPage.offscreenPageLimit = 1
+            it.viewPage.offscreenPageLimit = 4
             it.toolBar.setNavigationOnClickListener { _ ->
                 navigateUp(it)
             }
@@ -199,7 +199,7 @@ class BigPictureFragment : BaseFragment() {
                 sharedElements: MutableMap<String, View>?
             ) {
                 super.onMapSharedElements(names, sharedElements)
-                val view:ImageView? = binding?.viewPage?.findViewWithTag<View>(binding?.viewPage?.currentItem)?.findViewById(R.id.image_view)
+                val view:ImageView? = binding?.viewPage?.findViewWithTag<ImageView>( "${BigPictureFragment.SHARE_ELEMENT_NAME}-${binding?.viewPage?.currentItem}")
                 if(names != null && sharedElements!=null && view!=null){
                     sharedElements[names[0]] = view
                 }

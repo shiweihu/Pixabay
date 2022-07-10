@@ -2,10 +2,7 @@
 buildscript {
 
     ext {
-        // Sdk and tools
-        compileSdkVersion = 33
-        minSdkVersion = 26
-        targetSdkVersion = 33
+
 
         // App dependencies
         appCompatVersion = '1.4.2'
@@ -39,7 +36,7 @@ buildscript {
         exoplayer_version = "2.18.0"
         anko_version = "0.10.4"
         lifecycle_version = "2.5.0"
-        kotlin_plugin = "1.7.0"
+        kotlin_plugin = "1.7.10"
         gradle_version = "7.2.1"
     }
 

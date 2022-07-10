@@ -12,10 +12,14 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.addCallback
+import com.bumptech.glide.Glide
 import com.google.android.gms.ads.MobileAds
 import com.google.android.material.tabs.TabLayoutMediator
 import com.shiweihu.pixabayapplication.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -44,6 +48,13 @@ class MainActivity : AppCompatActivity() {
 //        MobileAds.initialize(this) {
 //            Log.println(Log.DEBUG,"Admob","complex")
 //        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        CoroutineScope(Dispatchers.IO).launch {
+            Glide.get(this@MainActivity).clearDiskCache()
+        }
     }
 
 

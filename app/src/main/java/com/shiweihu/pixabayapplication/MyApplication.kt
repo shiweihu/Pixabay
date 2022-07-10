@@ -1,6 +1,8 @@
 package com.shiweihu.pixabayapplication
 
 import android.app.Application
+import android.content.Context
+import android.content.pm.ApplicationInfo
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
@@ -13,6 +15,9 @@ import com.google.android.gms.ads.MobileAds
 import com.shiweihu.pixabayapplication.net.NetworkModule
 import com.shiweihu.pixabayapplication.utils.DisplayUtils
 import dagger.hilt.android.HiltAndroidApp
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.*
 
 
@@ -20,10 +25,18 @@ import java.util.*
 class MyApplication: Application() {
 
     companion object{
+        //pixabay request key
         const val API_KEY= "25109780-7bd3253b1b879d034650fb7f1"
         val mHandler = Handler(Looper.getMainLooper())
         var lang = "en"
+        var APP_DEBUG = false
+
     }
+
+    private fun isApkDebugable(): Boolean {
+        return this.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE != 0
+    }
+
 
     private val appOpenManager = AppOpenManager(this)
     fun getCurrentActivity() = appOpenManager.currentActivity
@@ -36,13 +49,15 @@ class MyApplication: Application() {
 
         super.onCreate()
 
+        APP_DEBUG = isApkDebugable()
+
 
 
         lang = Locale.getDefault().language
-//        Glide.get(this@MyApplication).clearMemory()
-//        CoroutineScope(Dispatchers.IO).launch {
-//            Glide.get(this@MyApplication).clearDiskCache()
-//        }
+        //Glide.get(this@MyApplication).clearMemory()
+        CoroutineScope(Dispatchers.IO).launch {
+            Glide.get(this@MyApplication).clearDiskCache()
+        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){
             val displayMatrics = getScreenMatricsNew()
@@ -99,4 +114,7 @@ class MyApplication: Application() {
         super.onLowMemory()
         Glide.get(this).clearMemory()
     }
+
+
+
 }

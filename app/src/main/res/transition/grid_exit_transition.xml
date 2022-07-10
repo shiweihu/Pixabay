@@ -20,21 +20,22 @@
     android:interpolator="@android:interpolator/fast_out_slow_in"
     android:transitionOrdering="together"
     >
-  <slide android:slideEdge="top">
+   <slide android:slideEdge="top">
     <targets>
       <target android:targetId="@id/app_bar" />
     </targets>
   </slide>
+
   <explode>
     <targets>
       <target android:excludeId="@id/app_bar" />
     </targets>
   </explode>
 
-  <changeClipBounds/>
-  <changeTransform/>
-  <changeBounds/>
-<!--  <changeImageTransform/>-->
+    <!--  <changeClipBounds/>
+      <changeTransform/>
+      <changeBounds/>
+       <changeImageTransform/> -->
 
 
 

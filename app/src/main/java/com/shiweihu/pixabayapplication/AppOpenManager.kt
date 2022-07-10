@@ -2,6 +2,8 @@ package com.shiweihu.pixabayapplication
 
 import android.app.Activity
 import android.app.Application
+import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.os.Bundle
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
@@ -13,6 +15,7 @@ import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.appopen.AppOpenAd
 import com.google.android.gms.ads.appopen.AppOpenAd.AppOpenAdLoadCallback
+import kotlin.system.exitProcess
 
 
 class AppOpenManager(private val myApplication: MyApplication): LifecycleEventObserver,Application.ActivityLifecycleCallbacks {
@@ -34,7 +37,8 @@ class AppOpenManager(private val myApplication: MyApplication): LifecycleEventOb
     private var isShowingAd = false
 
     private var loadTime: Long = 0
-
+    private val activityList:MutableList<Activity> = mutableListOf()
+    private var lastCreateTime:Long = System.currentTimeMillis()
 
 
     /** Shows the ad if one isn't already showing.  */
@@ -106,6 +110,7 @@ class AppOpenManager(private val myApplication: MyApplication): LifecycleEventOb
     }
 
     override fun onActivityCreated(p0: Activity, p1: Bundle?) {
+        activityList.add(p0)
     }
 
     override fun onActivityStarted(p0: Activity) {
@@ -129,13 +134,38 @@ class AppOpenManager(private val myApplication: MyApplication): LifecycleEventOb
     }
 
     override fun onActivityDestroyed(p0: Activity) {
-        currentActivity = null
+        if(p0 == currentActivity){
+            currentActivity = null
+        }
+        activityList.remove(p0)
     }
 
     override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
-       if(event.targetState == Lifecycle.State.STARTED){
+        if(event.targetState == Lifecycle.State.STARTED){
          //  showAdIfAvailable()
-       }
+        }
+        if(event == Lifecycle.Event.ON_START){
+            checkIfdataExpired()
+        }
+
     }
+
+    private fun checkIfdataExpired(){
+        val timeDiff = System.currentTimeMillis() - lastCreateTime
+        //If the startup time is 20 hours longer than the last startup time，
+        //it should restart the MainActivity,because the pixabay reset image url after 24 hours.
+        if( timeDiff/1000/60/60 >= 20){
+           lastCreateTime = System.currentTimeMillis()
+           Intent(myApplication.applicationContext,MainActivity::class.java).also{
+               it.flags = FLAG_ACTIVITY_NEW_TASK
+               myApplication.applicationContext.startActivity(it)
+           }
+           for(activity in activityList){
+                activity.finish()
+           }
+           activityList.clear()
+        }
+    }
+
 
 }
