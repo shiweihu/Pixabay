@@ -1,5 +1,7 @@
 # Pixabay APP
 ### The project was developed using the Jetpack framework and the Kotlin language.
+### code in this project is high-quality,good layered structure.high-performance.
+### However,there are no memory leak in this program.
 
 ## Jetpack component using in project:
 1. Data Binding
