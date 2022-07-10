@@ -2,6 +2,8 @@
 ### The project was developed using the Jetpack framework and the Kotlin language.
 ### code in this project is high-quality,good layered structure.high-performance.
 ### However,there are no memory leak in this program.
+this android project search images and video from Pixabay open API,and display to users.
+users may share images or video to other APP in their phone,such as Facebook,Instagram,or Gmail.
 
 ## Jetpack component using in project:
 1. Data Binding
