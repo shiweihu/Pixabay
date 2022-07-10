@@ -1,7 +1,7 @@
 # Pixabay APP
 ### The project was developed using the Jetpack framework and the Kotlin language.
 
-## Jetpack component using in:
+## Jetpack component using in project:
 1. Data Binding
 2. Lifecycles
 3. LiveData
@@ -9,7 +9,7 @@
 5. Paging
 6. ViewModel
 
-## other library:
+## Other library:
 1. Retrofit+OKHTTP
 2. Dagger
 3. ExoPlayer
