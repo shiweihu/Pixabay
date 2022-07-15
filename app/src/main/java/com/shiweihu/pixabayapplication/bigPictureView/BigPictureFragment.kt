@@ -233,9 +233,9 @@ class BigPictureFragment : BaseFragment() {
                                  usersID:List<String>,
                                  usersName:List<String>,
                                  pageUrls:List<String>,
-                                 position:Int){
+                                 position:Int,from:Int){
             val navController = view.findNavController()
-            val argu = BigPictureArgu(images,profiles,tags,usersID,usersName,pageUrls,position)
+            val argu = BigPictureArgu(images,profiles,tags,usersID,usersName,pageUrls,position,from)
             if(navController.currentDestination?.id == R.id.photos_fragment){
                 navController.navigate(R.id.to_big_picture,
                     BigPictureFragmentArgs(argu).toBundle(),

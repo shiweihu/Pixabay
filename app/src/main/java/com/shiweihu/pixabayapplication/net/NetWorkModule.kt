@@ -58,6 +58,41 @@ class NetworkModule {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
+    private val myPexelsHttpProxy: Retrofit = Retrofit.Builder()
+        .baseUrl(PEXELS_BASE_URL)
+        .client(OkHttpClient.Builder().also {
+
+            it.cache(file_cache?.let { it1 -> Cache(it1, 86400L) })
+
+
+            it.addInterceptor(HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BASIC
+            })
+            it.addInterceptor { chain ->
+                val origin  = chain.request()
+//                    val newRequest = origin.newBuilder()
+//                        .method(origin.method,origin.body)
+//                        .build()
+
+                val newRequest = origin.newBuilder()
+                    .header("Authorization"," ${MyApplication.PEXELS_API_KEY}")
+                    .build()
+                val response = chain.proceed(newRequest)
+                if(MyApplication.APP_DEBUG){
+                    for(header in response.headers){
+                        MyApplication.mHandler.post {
+                            Log.println(Log.DEBUG,"response header","${header.first}:${header.second}")
+                        }
+                    }
+                }
+                return@addInterceptor response
+            }
+            it.connectTimeout(30L, TimeUnit.SECONDS)
+            it.readTimeout(20L,TimeUnit.SECONDS)
+        }.build())
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+
 
     @Singleton
     @Provides
@@ -70,10 +105,17 @@ class NetworkModule {
         return myHttpProxy.create(VideoProxy::class.java)
     }
 
+    @Singleton
+    @Provides
+    fun providePexelsPhotoProxy():PexelsPhotoProxy{
+        return myPexelsHttpProxy.create(PexelsPhotoProxy::class.java)
+    }
+
 
 
     companion object{
         private const val BASE_URL = "https://pixabay.com/"
+        private const val PEXELS_BASE_URL = "https://api.pexels.com/"
         var file_cache: File? = null
     }
 

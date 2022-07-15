@@ -1,33 +1,29 @@
 package com.shiweihu.pixabayapplication.photos
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.motion.widget.ViewTransition
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.paging.LoadState
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.shiweihu.pixabayapplication.R
-import com.shiweihu.pixabayapplication.bigPictureView.BigPictureFragment
 import com.shiweihu.pixabayapplication.data.ImageInfo
 import com.shiweihu.pixabayapplication.databinding.CardImageLayoutBinding
 import com.shiweihu.pixabayapplication.utils.DisplayUtils
-import com.shiweihu.pixabayapplication.viewArgu.BigPictureArgu
-import com.shiweihu.pixabayapplication.viewModle.PhotoFragmentMainViewModel
 import kotlin.math.max
-import kotlin.math.min
 
-class PhotosAdapter(val viewModle: PhotoFragmentMainViewModel, val fragment: Fragment): PagingDataAdapter<ImageInfo, PhotosAdapter.ImageViewHolder>(ImageDiff()) {
+class PixabayPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,position:Int,args:List<List<String>>)->Unit): PagingDataAdapter<ImageInfo, PixabayPhotosAdapter.ImageViewHolder>(ImageDiff()) {
     class ImageViewHolder(
         val binding:CardImageLayoutBinding
     ):RecyclerView.ViewHolder(binding.root)
 
+    var pageIdex = -1
     private val recyclerview_span = fragment.context?.resources?.getInteger(R.integer.photo_recyclerview_span) ?: 1
     private val photos_item_margin = fragment.context?.resources?.getDimension(R.dimen.photo_recyclerview_margin) ?: 0F
+    var sharedElementIndex:Int = 0
 
     class ImageDiff: DiffUtil.ItemCallback<ImageInfo>(){
         override fun areItemsTheSame(oldItem: ImageInfo, newItem: ImageInfo): Boolean {
@@ -39,26 +35,36 @@ class PhotosAdapter(val viewModle: PhotoFragmentMainViewModel, val fragment: Fra
         }
     }
 
+    var reStoreFirstPosition = 0
+    var reStoreLastPostion = 0
+
+
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
-//        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
-//            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-//                super.onScrollStateChanged(recyclerView, newState)
-//                if(newState == RecyclerView.SCROLL_STATE_IDLE){
-//                    Glide.with(recyclerView.context).resumeRequests()
-//                }else if(!Glide.with(recyclerView.context).isPaused){
-//                    Glide.with(recyclerView.context).pauseRequests()
-//                }
-//            }
-//        })
+
+        if(pageIdex != 0){
+            recyclerView.scrollToPosition(reStoreFirstPosition)
+        }else{
+            if(sharedElementIndex < reStoreFirstPosition || sharedElementIndex>reStoreLastPostion){
+                recyclerView.scrollToPosition(sharedElementIndex)
+            }else if( sharedElementIndex >= reStoreFirstPosition && sharedElementIndex<= reStoreLastPostion){
+                recyclerView.scrollToPosition(reStoreFirstPosition)
+            }
+        }
+        this.addLoadStateListener {
+            if(it.refresh == LoadState.Loading){
+                //init position
+                recyclerView.scrollToPosition(0)
+            }
+        }
+
+
+
     }
 
 
 
-    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
-        super.onDetachedFromRecyclerView(recyclerView)
-    }
 
 
 
@@ -79,13 +85,14 @@ class PhotosAdapter(val viewModle: PhotoFragmentMainViewModel, val fragment: Fra
         getItem(position)?.also {
             holder.binding.authorName = it.user.trim()
             holder.binding.imageUrl = it.webformatURL.replace("_640","_340")
+            holder.binding.imageView.tag = "PixabayPhotos-${position}"
             holder.binding.imageView.setOnClickListener { view ->
                 navigateToBigPicture(view,holder.layoutPosition)
             }
-            holder.binding.imageView.transitionName = "${BigPictureFragment.SHARE_ELEMENT_NAME}-${holder.layoutPosition}"
-            holder.binding.priority = holder.layoutPosition == viewModle.sharedElementIndex
-            holder.binding.doEnd = {loadState ->
-                if(holder.layoutPosition == viewModle.sharedElementIndex) {
+            holder.binding.imageView.transitionName = "PixabayPhotos-${holder.layoutPosition}"
+            holder.binding.priority = (holder.layoutPosition == sharedElementIndex && pageIdex == 0)
+            holder.binding.doEnd = {_ ->
+                if(holder.layoutPosition == sharedElementIndex && pageIdex == 0) {
                     fragment.startPostponedEnterTransition()
                 }
             }
@@ -107,7 +114,6 @@ class PhotosAdapter(val viewModle: PhotoFragmentMainViewModel, val fragment: Fra
             holder.binding.imageView.layoutParams.height = max(heightPX.toInt(),200)
         }
         holder.binding.executePendingBindings()
-        holder.binding.root
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
@@ -131,8 +137,10 @@ class PhotosAdapter(val viewModle: PhotoFragmentMainViewModel, val fragment: Fra
                 pageUrl.add(info.pageURL)
             }
         }
-        viewModle.sharedElementIndex = position
-        viewModle.navigateToBigPicture(view,images,profiles,tags,usersID,usersName,pageUrl,position)
+        sharedElementIndex = position
+        val args:List<List<String>> = listOf(images,profiles,tags,usersID,usersName,pageUrl)
+        clickCallBack(view,position,args)
+        //viewModel.navigateToBigPicture(view,images,profiles,tags,usersID,usersName,pageUrl,position)
     }
 
 }

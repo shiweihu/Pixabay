@@ -1,63 +1,48 @@
 package com.shiweihu.pixabayapplication.photos
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.transition.TransitionInflater
 import android.view.*
-
-import androidx.fragment.app.Fragment
-
 import androidx.appcompat.widget.SearchView
-
 import androidx.core.app.SharedElementCallback
-import androidx.core.view.forEachIndexed
-import androidx.fragment.app.activityViewModels
+import androidx.core.view.forEach
 
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
-import androidx.paging.LoadState
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.google.android.material.tabs.TabLayout
+
+import com.google.android.material.tabs.TabLayoutMediator
 import com.shiweihu.pixabayapplication.BaseFragment
 
 import com.shiweihu.pixabayapplication.R
 
 import com.shiweihu.pixabayapplication.databinding.FragmentMainPhotosBinding
-import com.shiweihu.pixabayapplication.viewModle.PhotoFragmentMainViewModel
 import com.shiweihu.pixabayapplication.viewModle.FragmentComunicationViewModel
+import com.shiweihu.pixabayapplication.viewModle.PhotosMainFragmentModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.distinctUntilChangedBy
-import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class PhotosMainFragment : BaseFragment() {
 
 
-    private val model:PhotoFragmentMainViewModel by viewModels()
     private val activeModel:FragmentComunicationViewModel by activityViewModels()
+    private val model: PhotosMainFragmentModel by viewModels()
 
-    private var queryStr:String = ""
-    private var isInput = false
 
     private var binding:FragmentMainPhotosBinding? = null
-    private var category:String = ""
 
-    private var firstPosition = 0
-    private var lastPosition = 0
+    private var sourceIndex = 0
 
-    private val photoAdapter by lazy {
-        PhotosAdapter(model,this).also {adapter ->
-                adapter.loadStateFlow.distinctUntilChangedBy {
-                    it.refresh
-                }.filter {
-                    it.refresh is LoadState.NotLoading
-                }
-            }
+    private val fragmentAdapter:SouceAdapter by lazy {
+        SouceAdapter(this,model)
     }
+
+    private var tabLayoutMediator:TabLayoutMediator? = null
+
+
 
     private fun initShareElement(){
         this.setExitSharedElementCallback(object: SharedElementCallback(){
@@ -67,9 +52,19 @@ class PhotosMainFragment : BaseFragment() {
             ) {
                 super.onMapSharedElements(names, sharedElements)
 
-                val viewHolder = binding?.recycleView?.findViewHolderForAdapterPosition(model.sharedElementIndex)
-                if(sharedElements != null && names != null && viewHolder !=null){
-                    sharedElements[names[0]] = (viewHolder as PhotosAdapter.ImageViewHolder).binding.imageView
+                val recyclerView =  binding?.viewPager?.findViewWithTag<RecyclerView>(sourceIndex)
+                var tag = ""
+                when(sourceIndex){
+                    0 ->{
+                        tag = "PixabayPhotos-${fragmentAdapter.shareElementIndex}"
+                    }
+                    1 ->{
+                        tag = "PexelsPhotos-${fragmentAdapter.shareElementIndex}"
+                    }
+                }
+                val view = recyclerView?.findViewWithTag<View>(tag)
+                if(names != null && sharedElements != null && view != null){
+                    sharedElements[names[0]] = view
                 }
             }
         })
@@ -79,11 +74,14 @@ class PhotosMainFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        activeModel.pictureQueryText.observe(this){
+            fragmentAdapter.query = it
+            fragmentAdapter.reloadData()
+        }
+
+
         activeModel.pictureItemPosition.observe(this){
-            model.sharedElementIndex = it
-            if(model.sharedElementIndex < firstPosition || model.sharedElementIndex > lastPosition){
-                binding?.recycleView?.scrollToPosition(model.sharedElementIndex)
-            }
+            fragmentAdapter.shareElementIndex = it
         }
 
     }
@@ -93,51 +91,75 @@ class PhotosMainFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentMainPhotosBinding.inflate(inflater,container,false).also { it ->
-            it.appBar.setExpanded(false)
-            it.categoryGrid.adapter = CategoryAdapter(this.requireContext()){category ->
-                this.category = category
-                if(!isInput){
-                    query(queryStr,this.category)
-                }
+//            it.recycleView.adapter = photoAdapter
+//            it.recycleView.setItemViewCacheSize(30)
+           // initShareElement()
+           // it.appBar.setExpanded(false)
+            it.viewPager.adapter = fragmentAdapter
+            it.viewPager.offscreenPageLimit = 1
+            it.viewPager.isSaveEnabled = false
+            it.viewPager.isUserInputEnabled = false
+            it.viewPager.setCurrentItem(sourceIndex,false)
+            fragmentAdapter.setPageIndex(sourceIndex)
+            tabLayoutMediator = TabLayoutMediator(it.tabs, it.viewPager) { tab, position ->
+                tab.text = getTabTitle(position)
             }.also {
-                it.checkedItem = this.category
+                it.attach()
             }
-            it.recycleView.adapter = photoAdapter
-            it.recycleView.setItemViewCacheSize(30)
+            it.tabs.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
+                override fun onTabSelected(tab: TabLayout.Tab) {
+                    sourceIndex = tab.position
+                    fragmentAdapter.setPageIndex(tab.position)
+                }
 
+                override fun onTabUnselected(tab: TabLayout.Tab) {
 
-            //it.recycleView.setItemViewCacheSize(if(model.sharedElementIndex>2) model.sharedElementIndex else 2)
-            //it.recycleView.setItemViewCacheSize(20)
-            initShareElement()
+                }
+
+                override fun onTabReselected(tab: TabLayout.Tab) {
+
+                }
+
+            })
+
             initMenu(it.toolBar.menu)
+            initShareElement()
+
         }
+        //postponeEnterTransition(resources.getInteger(R.integer.post_pone_time).toLong(), TimeUnit.MILLISECONDS)
+        postponeEnterTransition()
         return binding?.root
     }
 
-    var adapterJob: Job? = null
 
-    private fun query(q:String,category:String){
-        adapterJob?.cancel()
-        adapterJob = viewLifecycleOwner.lifecycleScope.launch {
-            model.searchPhotos(q,category).collectLatest {
-                photoAdapter.submitData(it)
-            }
+
+    private fun getTabTitle(position: Int): String? {
+        return when (position) {
+            PIXABAY_INDEX -> getString(R.string.pixabay_title)
+            PEXELS_INDEX -> getString(R.string.pexels_title)
+            else -> null
         }
     }
 
+//    var adapterJob: Job? = null
+//
+//    private fun query(q:String,category:String){
+//        adapterJob?.cancel()
+//        adapterJob = viewLifecycleOwner.lifecycleScope.launch {
+//            model.searchPhotos(q,category).collectLatest {
+//                photoAdapter.submitData(it)
+//            }
+//        }
+//    }
+
     private fun initMenu(menu: Menu){
-        menu.forEachIndexed { index, item ->
-            when (item.itemId) {
+        menu.forEach {
+            when (it.itemId) {
                 R.id.action_search -> {
-                    val searchView = item.actionView as SearchView
-                    searchView.setOnQueryTextFocusChangeListener { view, b ->
-                        isInput = b
-                    }
+                    val searchView = it.actionView as SearchView
                     searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                         override fun onQueryTextSubmit(query: String): Boolean {
-                            binding?.recycleView?.scrollToPosition(0)
-                            query(query,this@PhotosMainFragment.category)
-                            queryStr = query
+                            activeModel.pictureQueryText.postValue(query)
                             searchView.clearFocus()
                             return true
                         }
@@ -149,29 +171,38 @@ class PhotosMainFragment : BaseFragment() {
                 }
             }
         }
+
+
     }
 
     override fun onStop() {
         super.onStop()
-        val firstPositions = (binding?.recycleView?.layoutManager as StaggeredGridLayoutManager).findFirstCompletelyVisibleItemPositions(null)
-        val lastPositions = (binding?.recycleView?.layoutManager as StaggeredGridLayoutManager).findLastCompletelyVisibleItemPositions(null)
-        firstPosition = firstPositions.minOrNull() ?: 0
+//        val recyclerView =  binding?.viewPager?.findViewWithTag<RecyclerView>(sourceIndex)
+//        val firstPositions = (recyclerView?.layoutManager as StaggeredGridLayoutManager).findFirstCompletelyVisibleItemPositions(null)
+//        val lastPositions = (recyclerView?.layoutManager as StaggeredGridLayoutManager).findLastCompletelyVisibleItemPositions(null)
+//        firstPosition = firstPositions.minOrNull() ?: 0
+//
+//        lastPosition = lastPositions.maxOrNull() ?: 0
+         fragmentAdapter.onStop()
 
-        lastPosition = lastPositions.maxOrNull() ?: 0
+
+
+
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        adapterJob?.cancel()
-        binding?.recycleView?.adapter = null
+        tabLayoutMediator?.detach()
+        binding?.viewPager?.adapter = null
         binding = null
+
 
     }
 
 
     override fun onStart() {
         super.onStart()
-        postponeEnterTransition(resources.getInteger(R.integer.post_pone_time).toLong(),TimeUnit.MILLISECONDS)
+
     }
 
 
@@ -183,7 +214,7 @@ class PhotosMainFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        query(queryStr,category)
+        //query(queryStr,category)
 
         exitTransition = TransitionInflater.from(context)
             .inflateTransition(R.transition.grid_exit_transition)
@@ -194,6 +225,7 @@ class PhotosMainFragment : BaseFragment() {
 
 
     companion object {
-
+        const val PIXABAY_INDEX = 0
+        const val PEXELS_INDEX = 1
     }
 }

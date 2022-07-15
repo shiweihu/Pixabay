@@ -29,6 +29,10 @@ class BigPictureViewModel @Inject constructor(
         navigateToWeb(context,"https://pixabay.com/users/${username}-${userid}/")
     }
 
+    fun navigateToUserProfilePagePexils(context: Context,userUrl:String){
+        navigateToWeb(context,userUrl)
+    }
+
     fun navigateToWeb(context:Context,url:String){
         val uri = Uri.parse(url)
         context.startActivity(Intent(Intent.ACTION_VIEW,uri))

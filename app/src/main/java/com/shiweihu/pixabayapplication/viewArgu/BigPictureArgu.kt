@@ -11,7 +11,8 @@ class BigPictureArgu(
     val useridArray:List<String>?,
     val userNameArray:List<String>?,
     val pageUrls:List<String>?,
-    var currentIndex:Int
+    var currentIndex:Int,
+    val from:Int
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.createStringArrayList(),
@@ -20,6 +21,7 @@ class BigPictureArgu(
         parcel.createStringArrayList(),
         parcel.createStringArrayList(),
         parcel.createStringArrayList(),
+        parcel.readInt(),
         parcel.readInt()
     ) {
     }
@@ -32,11 +34,14 @@ class BigPictureArgu(
         parcel.writeStringList(userNameArray)
         parcel.writeStringList(pageUrls)
         parcel.writeInt(currentIndex)
+        parcel.writeInt(from)
     }
 
     override fun describeContents(): Int {
         return 0
     }
+
+
 
     companion object CREATOR : Parcelable.Creator<BigPictureArgu> {
         override fun createFromParcel(parcel: Parcel): BigPictureArgu {
@@ -47,4 +52,7 @@ class BigPictureArgu(
             return arrayOfNulls(size)
         }
     }
+
+
+
 }

@@ -39,4 +39,6 @@
     <string name="title_activity_video_play">VideoPlayActivity</string>
     <string name="instagram_btn_description">share to instagram feed</string>
     <string name="app_choser_title">chose a application:</string>
+    <string name="pixabay_title">Pixabay</string>
+    <string name="pexels_title">Pexels</string>
 </resources>

@@ -25,12 +25,13 @@ fun bindImageFromUrl(view: ImageView, imageUrl: String?,priority:Boolean = false
         var request = Glide.with(view.context)
             .load(imageUrl)
             .placeholder(R.drawable.placeholder).dontTransform()
-            .diskCacheStrategy(DiskCacheStrategy.DATA).doOnEnd {result ->
-                doEnd?.invoke(result)
-            }
+            .diskCacheStrategy(DiskCacheStrategy.DATA)
         if(priority){
             request = request.priority(Priority.IMMEDIATE)
         }
+        request.doOnEnd {result ->
+                doEnd?.invoke(result)
+            }
         request.into(view).clearOnDetach()
     }
 }
@@ -47,7 +48,7 @@ fun <T> RequestBuilder<T>.doOnEnd(body: (result:Boolean) -> Unit): RequestBuilde
             isFirstResource: Boolean
         ): Boolean {
             body(false)
-            return false
+            return true
         }
 
         override fun onResourceReady(

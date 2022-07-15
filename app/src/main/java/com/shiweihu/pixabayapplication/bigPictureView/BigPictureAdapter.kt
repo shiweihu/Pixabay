@@ -36,15 +36,18 @@ class BigPictureAdapter(val argu: BigPictureArgu,val fragment: Fragment): Recycl
         val transitionName = "${BigPictureFragment.SHARE_ELEMENT_NAME}-${position}"
         holder.binding.imageView.transitionName = transitionName
         holder.binding.imageView.tag = transitionName
-        holder.binding.doEnd = {
+        holder.binding.doEnd = { state ->
             if(position == argu.currentIndex) {
                 fragment.startPostponedEnterTransition()
             }
+            if(state){
+                holder.binding.root.setOnClickListener {
+                    val dialogBuilder = ViewPictureDialog.Companion.Builder()
+                    dialogBuilder.show(holder.binding.root.context,imageUrl)
+                }
+            }
         }
-        holder.binding.root.setOnClickListener {
-            val dialogBuilder = ViewPictureDialog.Companion.Builder()
-            dialogBuilder.show(holder.binding.root.context,imageUrl)
-        }
+
 
         holder.binding.executePendingBindings()
     }

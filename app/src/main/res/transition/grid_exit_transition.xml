@@ -20,11 +20,11 @@
     android:interpolator="@android:interpolator/fast_out_slow_in"
     android:transitionOrdering="together"
     >
-   <slide android:slideEdge="top">
-    <targets>
-      <target android:targetId="@id/app_bar" />
-    </targets>
-  </slide>
+<!--   <slide android:slideEdge="top">-->
+<!--    <targets>-->
+<!--      <target android:targetId="@id/app_bar" />-->
+<!--    </targets>-->
+<!--  </slide>-->
 
   <explode>
     <targets>

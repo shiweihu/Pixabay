@@ -26,7 +26,8 @@ class MyApplication: Application() {
 
     companion object{
         //pixabay request key
-        const val API_KEY= "25109780-7bd3253b1b879d034650fb7f1"
+        const val API_KEY = "25109780-7bd3253b1b879d034650fb7f1"
+        const val PEXELS_API_KEY = "563492ad6f917000010000014f8e0e71323c406392738971f27849a7"
         val mHandler = Handler(Looper.getMainLooper())
         var lang = "en"
         var APP_DEBUG = false
@@ -55,9 +56,9 @@ class MyApplication: Application() {
 
         lang = Locale.getDefault().language
         //Glide.get(this@MyApplication).clearMemory()
-        CoroutineScope(Dispatchers.IO).launch {
-            Glide.get(this@MyApplication).clearDiskCache()
-        }
+//        CoroutineScope(Dispatchers.IO).launch {
+//            Glide.get(this@MyApplication).clearDiskCache()
+//        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){
             val displayMatrics = getScreenMatricsNew()

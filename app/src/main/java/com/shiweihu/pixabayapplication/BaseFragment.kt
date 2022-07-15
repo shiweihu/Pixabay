@@ -3,6 +3,8 @@ package com.shiweihu.pixabayapplication
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
+import dagger.hilt.android.AndroidEntryPoint
+
 
 abstract class BaseFragment:Fragment() {
     open lateinit var backKeyCallBack:OnBackPressedCallback
