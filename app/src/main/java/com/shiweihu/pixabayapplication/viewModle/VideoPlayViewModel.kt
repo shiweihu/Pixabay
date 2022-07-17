@@ -43,6 +43,9 @@ class VideoPlayViewModel @Inject constructor(
     fun navigateToUserProfilePage(context: Context, username:String, userid:String){
         navigateToWeb(context,"https://pixabay.com/users/${username}-${userid}/")
     }
+    fun navigateToUserProfilePageOnPexels(context: Context,url:String){
+        navigateToWeb(context,url)
+    }
 
     fun navigateToWeb(context: Context, url:String){
         val uri = Uri.parse(url)

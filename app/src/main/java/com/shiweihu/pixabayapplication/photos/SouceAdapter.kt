@@ -96,13 +96,6 @@ class SouceAdapter(val fragment:Fragment,
     fun initPixabayRecyclerView(holder: RecyclerViewHolder){
         pixabayPhotosAdapter.sharedElementIndex = shareElementIndex
         holder.binding.recycleView.adapter = pixabayPhotosAdapter
-//        //holder.binding.recycleView.isSaveEnabled = true
-//        val job = fragment.lifecycleScope.launch {
-//            model.searchPhotosFromPixabay(query).collectLatest {
-//                pixabayPhotosAdapter.submitData(it)
-//            }
-//        }
-//        jobs.add(job)
         holder.binding.recycleView.tag = 0
 
     }
@@ -110,13 +103,6 @@ class SouceAdapter(val fragment:Fragment,
     fun initPexelsRecyclerView(holder: RecyclerViewHolder){
         pexelsPhotosAdapter.sharedElementIndex = shareElementIndex
         holder.binding.recycleView.adapter = pexelsPhotosAdapter
-//        //holder.binding.recycleView.isSaveEnabled = true
-//        val job = fragment.lifecycleScope.launch {
-//            model.searchPhotosFromPexels(query).collectLatest {
-//                pexelsPhotosAdapter.submitData(it)
-//            }
-//        }
-//        jobs.add(job)
         holder.binding.recycleView.tag = 1
     }
 

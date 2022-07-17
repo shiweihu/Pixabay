@@ -15,9 +15,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayoutMediator
 import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.databinding.FragmentMainVideoBinding
-import com.shiweihu.pixabayapplication.photos.CategoryAdapter
+import com.shiweihu.pixabayapplication.photos.PhotosMainFragment
 import com.shiweihu.pixabayapplication.viewModle.FragmentComunicationViewModel
 import com.shiweihu.pixabayapplication.viewModle.VideoFragmentMainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,24 +49,12 @@ class VideoFragment : Fragment() {
     private val model:VideoFragmentMainViewModel by viewModels()
     private val sharedModel: FragmentComunicationViewModel by activityViewModels()
 
-    private var queryStr:String = ""
+    private var tabLayoutMediator:TabLayoutMediator? = null
 
-    private var category:String = ""
-    private var job:Job? = null
+    private var sourceIndex = 0
 
-    private var firstVisiblePosition = 0
-    private var lastVisiblePosition = 0
-
-
-    private val videosAdapter by lazy {
-        VideosAdapter(model,this)
-            .also {adapter ->
-            adapter.loadStateFlow.distinctUntilChangedBy {
-                it.refresh
-            }.filter {
-                it.refresh is LoadState.NotLoading
-            }
-        }
+    private val adapter:VideoSourceAdapter by lazy {
+        VideoSourceAdapter(this,model)
     }
 
 
@@ -74,12 +65,11 @@ class VideoFragment : Fragment() {
         reenterTransition = TransitionInflater.from(this.requireContext()).inflateTransition(R.transition.video_shared_element_transition)
 
         sharedModel.videoItemPosition.observe(this){
-            model.videoPosition = it
-
-
-            if(model.videoPosition < firstVisiblePosition || model.videoPosition>lastVisiblePosition){
-                binding?.recycleView?.scrollToPosition(model.videoPosition)
-            }
+            adapter.shareElementIndex = it
+        }
+        sharedModel.videoQueryText.observe(this){
+            adapter.query = it
+            adapter.reloadData()
         }
 
         this.setExitSharedElementCallback(object: SharedElementCallback(){
@@ -88,9 +78,20 @@ class VideoFragment : Fragment() {
                 sharedElements: MutableMap<String, View>?
             ) {
                 super.onMapSharedElements(names, sharedElements)
-                val viewHolder = binding?.recycleView?.findViewHolderForAdapterPosition(model.videoPosition)
-                if(sharedElements != null && names != null && viewHolder !=null){
-                    sharedElements[names[0]] = (viewHolder as VideosAdapter.CoverViewHolder).binding.imageView
+
+                val recyclerView =  binding?.viewPager?.findViewWithTag<RecyclerView>(sourceIndex)
+                var tag = ""
+                when(sourceIndex){
+                    0 ->{
+                        tag = "PixabayVideo-${adapter.shareElementIndex}"
+                    }
+                    1 ->{
+                        tag = "PexelsVideo-${adapter.shareElementIndex}"
+                    }
+                }
+                val view = recyclerView?.findViewWithTag<View>(tag)
+                if(names != null && sharedElements != null && view != null){
+                    sharedElements[names[0]] = view
                 }
 
             }
@@ -108,15 +109,26 @@ class VideoFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentMainVideoBinding.inflate(inflater,container,false).also{ binding ->
-            binding.appBar.setExpanded(false)
-            binding.categoryGrid.adapter = CategoryAdapter(this.requireContext()){
-                category = it
-                query(queryStr,category = category)
-            }.also {
-                it.checkedItem = category
-            }
-            binding.recycleView.adapter = videosAdapter
             initMenu(binding.toolBar.menu)
+            binding.viewPager.adapter = adapter
+            binding.viewPager.offscreenPageLimit = 1
+            binding.viewPager.isSaveEnabled = false
+            binding.viewPager.isUserInputEnabled = false
+            binding.viewPager.registerOnPageChangeCallback(object:
+                ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    sourceIndex = position
+                    adapter.setPageIndex(position)
+                }
+            })
+            binding.viewPager.setCurrentItem(sourceIndex,false)
+
+            tabLayoutMediator = TabLayoutMediator(binding.tabs, binding.viewPager) { tab, position ->
+                tab.text = getTabTitle(position)
+            }.also {
+                it.attach()
+            }
         }
         postponeEnterTransition()
         return binding?.root
@@ -125,34 +137,26 @@ class VideoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        query(queryStr,category = category)
+
     }
 
     override fun onStop() {
         super.onStop()
-        val layoutManager = (binding?.recycleView?.layoutManager as GridLayoutManager)
-        firstVisiblePosition = layoutManager.findFirstCompletelyVisibleItemPosition()
-        lastVisiblePosition = layoutManager.findLastCompletelyVisibleItemPosition()
+
+        adapter.onStop()
+
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        job?.cancel()
-        job = null
-        binding?.recycleView?.adapter = null
+        tabLayoutMediator?.detach()
+        binding?.viewPager?.adapter = null
         binding = null
     }
 
 
 
-    private fun query(q:String? = null , category: String = ""){
-        job?.cancel()
-        job =  viewLifecycleOwner.lifecycleScope.launch {
-            model.searchVideo(q?.trim() ?: "", category).collectLatest {
-                videosAdapter.submitData(it)
-            }
-        }
-    }
+
 
     private fun initMenu(menu: Menu){
         menu.forEachIndexed { _, item ->
@@ -164,9 +168,7 @@ class VideoFragment : Fragment() {
 //                    }
                     searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                         override fun onQueryTextSubmit(query: String): Boolean {
-                            binding?.recycleView?.scrollToPosition(0)
-                            query(query,category)
-                            queryStr = query
+                            sharedModel.videoQueryText.postValue(query)
                             searchView.clearFocus()
                             return true
                         }
@@ -180,7 +182,16 @@ class VideoFragment : Fragment() {
         }
     }
 
-    companion object {
+    private fun getTabTitle(position: Int): String? {
+        return when (position) {
+            PIXABAY_INDEX -> getString(R.string.pixabay_title)
+            PEXELS_INDEX -> getString(R.string.pexels_title)
+            else -> null
+        }
+    }
 
+    companion object {
+        const val PIXABAY_INDEX = 0
+        const val PEXELS_INDEX = 1
     }
 }

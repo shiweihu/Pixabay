@@ -10,7 +10,7 @@ class FragmentComunicationViewModel @Inject constructor(
 
 ):ViewModel() {
     val pictureItemPosition:MutableLiveData<Int> = MutableLiveData(0)
-    val pictureSourcePosition:MutableLiveData<Int> = MutableLiveData(0)
     val pictureQueryText:MutableLiveData<String> = MutableLiveData("")
     val videoItemPosition:MutableLiveData<Int> = MutableLiveData(0)
+    val videoQueryText:MutableLiveData<String> = MutableLiveData("")
 }

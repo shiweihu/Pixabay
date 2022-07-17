@@ -27,11 +27,17 @@ class PexelsSearchPhotoSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PexelsPhoto> {
         val page = params.key ?: 1
         return try {
-            val response = photoProxy.queryImages(query = query.ifEmpty { "Ocean" },page = page)
+
+           val photos =  if(query.isEmpty()){
+                photoProxy.curatedImages(page = page).photos
+            }else{
+                photoProxy.queryImages(query = query,page = page).photos
+            }
+
             LoadResult.Page(
-                data = response.photos,
+                data = photos,
                 prevKey = if (page == 1) null else page - 1,
-                nextKey = if(response.photos.isNotEmpty()) page + 1 else null
+                nextKey = if(photos.isNotEmpty()) page + 1 else null
             )
         }catch (e:Exception){
             Log.println(Log.DEBUG,"PexelsSearchPhotos",e.toString())

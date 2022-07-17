@@ -134,9 +134,9 @@ class PexelsPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,po
                 images.add(info.src?.large!!)
                 profiles.add("")
                 tags.add("")
-                usersID.add(info.photographer_id.toString())
+                usersID.add(info.photographer_url!!)
                 usersName.add(info.photographer!!)
-                pageUrl.add(info.photographer_url!!)
+                pageUrl.add(info.url!!)
             }
         }
         sharedElementIndex = position

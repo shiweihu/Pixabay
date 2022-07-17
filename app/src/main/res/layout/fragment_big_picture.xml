@@ -7,6 +7,9 @@
         <variable
             name="priority"
             type="Boolean" />
+        <variable
+            name="from"
+            type="Integer" />
 
 
     </data>
@@ -47,7 +50,7 @@
                     android:layout_height="50dp"
                     android:layout_gravity="end"
                     android:layout_marginEnd="20dp"
-                    android:src="@drawable/pixabay_logo"
+                    android:src="@{from == 0? @drawable/pixabay_logo : @drawable/ic_pexels}"
                     android:theme="@style/ShapeAppearance.circle"
                     />
 

@@ -111,6 +111,12 @@ class NetworkModule {
         return myPexelsHttpProxy.create(PexelsPhotoProxy::class.java)
     }
 
+    @Singleton
+    @Provides
+    fun providePexelsVideoProxy():PexelsVideoProxy{
+        return myPexelsHttpProxy.create(PexelsVideoProxy::class.java)
+    }
+
 
 
     companion object{

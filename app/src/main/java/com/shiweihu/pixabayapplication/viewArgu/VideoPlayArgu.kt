@@ -11,7 +11,8 @@ class VideoPlayArgu(
     val useridArray:List<String>?,
     val userNameArray:List<String>?,
     val pageUrls:List<String>?,
-    var currentIndex:Int
+    var currentIndex:Int,
+    val from:Int
 ):Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.createStringArrayList(),
@@ -20,6 +21,7 @@ class VideoPlayArgu(
         parcel.createStringArrayList(),
         parcel.createStringArrayList(),
         parcel.createStringArrayList(),
+        parcel.readInt(),
         parcel.readInt()
     ) {
     }
@@ -32,6 +34,7 @@ class VideoPlayArgu(
         parcel.writeStringList(userNameArray)
         parcel.writeStringList(pageUrls)
         parcel.writeInt(currentIndex)
+        parcel.writeInt(from)
     }
 
     override fun describeContents(): Int {

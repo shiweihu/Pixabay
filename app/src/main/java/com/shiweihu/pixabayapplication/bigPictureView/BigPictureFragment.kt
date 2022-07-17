@@ -125,6 +125,8 @@ class BigPictureFragment : BaseFragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding =  FragmentBigPictureBinding.inflate(inflater,container,false).also {
+
+            it.from = args.pictureResult.from
             val pageAdapter = BigPictureAdapter(args.pictureResult,this)
             it.viewPage.adapter = pageAdapter
             it.viewPage.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
@@ -138,9 +140,20 @@ class BigPictureFragment : BaseFragment() {
             it.userProfile.setOnClickListener { view ->
                 val username = args.pictureResult.userNameArray?.get(it.viewPage.currentItem)
                 val userid = args.pictureResult.useridArray?.get(it.viewPage.currentItem)
-                if(username != null && userid!=null){
-                    modle.navigateToUserProfilePage(view.context,username,userid)
+
+                when(args.pictureResult.from){
+                    0 ->{
+                        if(username != null && userid!=null){
+                            modle.navigateToUserProfilePage(view.context,username,userid)
+                        }
+                    }
+                    1 ->{
+                        modle.navigateToUserProfilePagePexils(view.context,userid!!)
+                    }
+
                 }
+
+
             }
             it.pageProfile.setOnClickListener { view ->
                 args.pictureResult.pageUrls?.get(it.viewPage.currentItem)?.also { pageUrl ->
