@@ -20,7 +20,7 @@ users may share images or video to other APP in their phone,such as Facebook,Ins
 4. Gson
 5. Glide
 
-### this project has two main functions.the first functions is images search.it load data from Pixabay open API,user could click a image to see a big picture and there is a view transition animation in view navigated
+### this project has two main functions.the first functions is images search.it load data from Pixabay and Pexels open API.Users easyly change the view between them.
 https://user-images.githubusercontent.com/13948493/178139132-e93beeba-e228-4df8-8ec5-ada679495190.mp4
 
 ### the second functions is video,customer can play this video immediately,do not need to wait the video download progress.
