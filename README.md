@@ -25,5 +25,5 @@ https://user-images.githubusercontent.com/13948493/179451376-cfb3d42f-374e-4136-
 ### If user type work to search,this APP will search new images from Pixabay and Pexels.
 https://user-images.githubusercontent.com/13948493/179453056-ce21c76a-fdf8-43f5-b681-0bcd21e9a217.mp4
 
-### User click any image,that will nagetive to a new view which shows clear pictures,user may left and right scroll the view to see different pictures.
-
+### User click any image,that will nagetive to a new view which shows clear pictures,user may left and right scroll the view to see different pictures.Furthermore,user may click a picture to scale picture and watch its detial.However,if user click return button,there is a return transision animation between views. this kind of transition animation help users to know where he is now.
+https://user-images.githubusercontent.com/13948493/179456324-ee46469b-2810-40a3-b434-d068fc603c53.mp4
