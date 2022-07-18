@@ -31,3 +31,6 @@ https://user-images.githubusercontent.com/13948493/179456324-ee46469b-2810-40a3-
 ### this APP also may search videos from Pixabay and Pexels.user click any video to watch,and may click the full screen button that play the video with full screen.
 https://user-images.githubusercontent.com/13948493/179457940-0d9a3971-20ee-427e-b723-3c8b8cd09adf.mp4
 
+### use can download resource and share it to other APP in his phone,such as Gmail,Youtube,Facebook,Instagram.
+https://user-images.githubusercontent.com/13948493/179466786-70ff7c27-71d5-4d39-ade8-5a45bdd422a7.mp4
+
