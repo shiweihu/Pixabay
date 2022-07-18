@@ -27,3 +27,7 @@ https://user-images.githubusercontent.com/13948493/179453056-ce21c76a-fdf8-43f5-
 
 ### User click any image,that will nagetive to a new view which shows clear pictures,user may left and right scroll the view to see different pictures.Furthermore,user may click a picture to scale picture and watch its detial.However,if user click return button,there is a return transision animation between views. this kind of transition animation help users to know where he is now.
 https://user-images.githubusercontent.com/13948493/179456324-ee46469b-2810-40a3-b434-d068fc603c53.mp4
+
+### this APP also may search videos from Pixabay and Pexels.user lick any video to watch,and may click the full screen button that play the video with full screen.
+https://user-images.githubusercontent.com/13948493/179457940-0d9a3971-20ee-427e-b723-3c8b8cd09adf.mp4
+
