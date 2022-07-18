@@ -22,6 +22,8 @@ users may share images or video to other APP in their phone,such as Facebook,Ins
 
 ### this project has two main functions.the first functions is images search.it load data from Pixabay and Pexels open API.Users easyly change the view between them.
 https://user-images.githubusercontent.com/13948493/179451376-cfb3d42f-374e-4136-ae89-1cf945ba7e51.mp4
+### if user type work to search,this APP will search new images from Pixabay and Pexels.
+https://user-images.githubusercontent.com/13948493/179453056-ce21c76a-fdf8-43f5-b681-0bcd21e9a217.mp4
 
 ### the second functions is video,customer can play this video immediately,do not need to wait the video download progress.
 https://user-images.githubusercontent.com/13948493/178140481-2b354d74-60a7-46c6-839c-9779165f5c02.mp4
