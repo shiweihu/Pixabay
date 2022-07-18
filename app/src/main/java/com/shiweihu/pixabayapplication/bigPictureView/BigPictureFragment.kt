@@ -88,7 +88,8 @@ class BigPictureFragment : BaseFragment() {
 
         override fun parseResult(resultCode: Int, intent: Intent?) {
             if(temp_input != null){
-                this@BigPictureFragment.requireContext().contentResolver.delete(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,temp_input?.query,null)
+               // this@BigPictureFragment.requireContext().contentResolver.delete(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,temp_input?.query,null)
+                temp_input = null
             }
 
         }
