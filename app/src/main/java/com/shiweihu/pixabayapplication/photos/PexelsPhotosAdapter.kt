@@ -24,6 +24,15 @@ class PexelsPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,po
     var pageIdex = -1
     private val recyclerview_span = fragment.context?.resources?.getInteger(R.integer.photo_recyclerview_span) ?: 1
     private val photos_item_margin = fragment.context?.resources?.getDimension(R.dimen.photo_recyclerview_margin) ?: 0F
+    private var recyclerView:RecyclerView? = null
+    init {
+        this.addLoadStateListener {
+            if(it.refresh == LoadState.Loading){
+                //init position
+                recyclerView?.scrollToPosition(0)
+            }
+        }
+    }
 
 
 
@@ -58,15 +67,12 @@ class PexelsPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,po
                 recyclerView.scrollToPosition(reStoreFirstPosition)
             }
         }
+        this.recyclerView = recyclerView
+    }
 
-        this.addLoadStateListener {
-            if(it.refresh == LoadState.Loading){
-                //init position
-                recyclerView.scrollToPosition(0)
-            }
-        }
-
-
+    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView)
+        this.recyclerView = null
     }
 
 

@@ -34,6 +34,16 @@ PexelsVideoAdapter.VideoDiff()
     var reStoreFirstPosition = 0
     var reStoreLastPostion = 0
 
+    private var recyclerView:RecyclerView? = null
+    init {
+        this.addLoadStateListener {
+            if(it.refresh == LoadState.Loading){
+                //init position
+                recyclerView?.scrollToPosition(0)
+            }
+        }
+    }
+
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
@@ -47,15 +57,12 @@ PexelsVideoAdapter.VideoDiff()
                 recyclerView.scrollToPosition(reStoreFirstPosition)
             }
         }
+        this.recyclerView = recyclerView
+    }
 
-        this.addLoadStateListener {
-            if(it.refresh == LoadState.Loading){
-                //init position
-                recyclerView.scrollToPosition(0)
-            }
-        }
-
-
+    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView)
+        this.recyclerView = null
     }
 
     override fun onBindViewHolder(holder:CoverViewHolder, position: Int) {

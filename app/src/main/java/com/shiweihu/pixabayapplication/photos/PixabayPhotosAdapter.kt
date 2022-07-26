@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -38,6 +39,18 @@ class PixabayPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,p
     var reStoreFirstPosition = 0
     var reStoreLastPostion = 0
 
+    private var recyclerView:RecyclerView? = null
+
+
+    init {
+        this.addLoadStateListener{
+            if(it.refresh == LoadState.Loading){
+                //init position
+                recyclerView?.scrollToPosition(0)
+            }
+        }
+    }
+
 
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
@@ -52,33 +65,12 @@ class PixabayPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,p
                 recyclerView.scrollToPosition(reStoreFirstPosition)
             }
         }
-        this.addLoadStateListener {
-            if(it.refresh == LoadState.Loading){
-                //init position
-                recyclerView.scrollToPosition(0)
-            }
-        }
-
-
-
+        this.recyclerView = recyclerView
     }
 
-
-
-
-
-
-    override fun onViewDetachedFromWindow(holder: ImageViewHolder) {
-        super.onViewDetachedFromWindow(holder)
-        //Glide.with(holder.binding.imageView).clear(holder.binding.imageView)
-        //Glide.with(holder.binding.imageView).pauseRequests();
-
-    }
-
-
-    override fun onViewAttachedToWindow(holder: ImageViewHolder) {
-        super.onViewAttachedToWindow(holder)
-        //Glide.with(holder.binding.imageView).resumeRequests()
+    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView)
+        this.recyclerView = null
     }
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
