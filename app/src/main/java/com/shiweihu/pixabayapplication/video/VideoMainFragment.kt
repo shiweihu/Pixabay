@@ -150,6 +150,7 @@ class VideoFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         tabLayoutMediator?.detach()
+        tabLayoutMediator = null
         binding?.viewPager?.adapter = null
         binding = null
     }
