@@ -174,8 +174,10 @@ class BigPictureFragment : BaseFragment() {
                     shareImageToInstagram(url)
                 }
             }
-            val adRequest = AdRequest.Builder().build()
-            it.adView.loadAd(adRequest)
+            AdRequest.Builder().build().also { adRequest ->
+                it.adView.loadAd(adRequest)
+            }
+
 
             initTransition()
         }
@@ -213,7 +215,7 @@ class BigPictureFragment : BaseFragment() {
                 sharedElements: MutableMap<String, View>?
             ) {
                 super.onMapSharedElements(names, sharedElements)
-                val view:ImageView? = binding?.viewPage?.findViewWithTag<ImageView>( "${BigPictureFragment.SHARE_ELEMENT_NAME}-${binding?.viewPage?.currentItem}")
+                val view = binding?.viewPage?.findViewWithTag<ImageView>( "${BigPictureFragment.SHARE_ELEMENT_NAME}-${binding?.viewPage?.currentItem}")
                 if(names != null && sharedElements!=null && view!=null){
                     sharedElements[names[0]] = view
                 }

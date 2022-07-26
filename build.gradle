@@ -33,11 +33,12 @@ buildscript {
         uiAutomatorVersion = '2.2.0'
         viewPagerVersion = '1.0.0'
         workVersion = '2.7.1'
-        exoplayer_version = "2.18.0"
+        exoplayer_version = "2.18.1"
         anko_version = "0.10.4"
         lifecycle_version = "2.5.0"
         kotlin_plugin = "1.7.10"
         gradle_version = "7.2.1"
+        ads_version = "21.1.0"
     }
 
     repositories {

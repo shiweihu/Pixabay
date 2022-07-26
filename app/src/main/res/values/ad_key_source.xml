@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="banner_id_for_big_picture">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="banner_id_for_video_play">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="Interstitial_ads_big_picture">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="banner_id_for_big_picture">ca-app-pub-8265796598311311/2258553948</string>
+    <string name="banner_id_for_video_play">ca-app-pub-8265796598311311/7199889435</string>
+    <string name="Interstitial_ads_big_picture">ca-app-pub-8265796598311311/8256437343</string>
     <string name="app_open_ad">ca-app-pub-8265796598311311/9052027150</string>
 </resources>
