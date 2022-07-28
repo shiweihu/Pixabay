@@ -126,8 +126,7 @@ class PhotosMainFragment : BaseFragment() {
             initShareElement()
 
         }
-        //postponeEnterTransition(resources.getInteger(R.integer.post_pone_time).toLong(), TimeUnit.MILLISECONDS)
-        postponeEnterTransition()
+        postponeEnterTransition(resources.getInteger(R.integer.post_pone_time).toLong(), TimeUnit.MILLISECONDS)
         return binding?.root
     }
 
