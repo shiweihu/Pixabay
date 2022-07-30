@@ -12,4 +12,6 @@
     <color name="transparent_background">#99000000</color>
     <color name="yellow">#FFEB3B</color>
     <color name="title_color">#FFFFFFFF</color>
+    <color name="splash_background">#FFFFFFFF</color>
+    <color name="splash_icon_color">#000000</color>
 </resources>

@@ -39,6 +39,7 @@ buildscript {
         kotlin_plugin = "1.7.10"
         gradle_version = "7.2.1"
         ads_version = "21.1.0"
+        splashscreen = "1.0.0-rc01"
     }
 
     repositories {

@@ -26,11 +26,11 @@
 <!--    </targets>-->
 <!--  </slide>-->
 
-  <explode>
-    <targets>
-      <target android:excludeId="@id/app_bar" />
-    </targets>
-  </explode>
+<!--  <explode>-->
+<!--    <targets>-->
+<!--      <target android:excludeId="@id/app_bar" />-->
+<!--    </targets>-->
+<!--  </explode>-->
 
     <!--  <changeClipBounds/>
       <changeTransform/>

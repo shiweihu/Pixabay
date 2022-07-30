@@ -88,7 +88,7 @@ class PixabayVideoAdapter(val viewModle: VideoFragmentMainViewModel, val fragmen
                 navigateToPlayBack(view,position)
             }
         }
-        holder.binding.executePendingBindings()
+        //holder.binding.executePendingBindings()
 
     }
 

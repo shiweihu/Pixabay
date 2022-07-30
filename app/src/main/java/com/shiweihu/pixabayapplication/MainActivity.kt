@@ -1,5 +1,6 @@
 package com.shiweihu.pixabayapplication
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
@@ -12,6 +13,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.addCallback
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.bumptech.glide.Glide
 import com.google.android.gms.ads.MobileAds
 import com.google.android.material.tabs.TabLayoutMediator
@@ -35,7 +37,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.viewPage.isUserInputEnabled = false
@@ -45,9 +46,6 @@ class MainActivity : AppCompatActivity() {
             tab.setIcon(icons[position])
             tab.text = names[position]
         }.attach()
-//        MobileAds.initialize(this) {
-//            Log.println(Log.DEBUG,"Admob","complex")
-//        }
     }
 
     override fun onDestroy() {

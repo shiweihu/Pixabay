@@ -83,7 +83,6 @@ PexelsVideoAdapter.VideoDiff()
             holder.binding.imageView.setOnClickListener {view ->
                 navigateToPlayBack(view,position)
             }
-
         }
 
     }

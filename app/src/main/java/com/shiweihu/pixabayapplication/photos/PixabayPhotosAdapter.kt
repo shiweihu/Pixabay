@@ -105,7 +105,7 @@ class PixabayPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,p
 
             holder.binding.imageView.layoutParams.height = max(heightPX.toInt(),200)
         }
-        holder.binding.executePendingBindings()
+        //holder.binding.executePendingBindings()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {

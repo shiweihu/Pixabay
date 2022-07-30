@@ -113,7 +113,7 @@ class PexelsPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,po
 
 
         }
-        holder.binding.executePendingBindings()
+        //holder.binding.executePendingBindings()
     }
 
 

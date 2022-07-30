@@ -20,17 +20,13 @@
             android:value="ca-app-pub-8265796598311311~8823962298"/>
         <activity
             android:name=".MainActivity"
-            android:exported="true"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
+            android:exported="false"
             android:theme="@style/Theme.PixabayApplication.NoActionBar"
             android:configChanges="orientation|screenSize"
             >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".videoPlayView.VideoPlayActivity"
@@ -39,6 +35,20 @@
             android:theme="@style/Theme.PixabayApplication.FullScreen"
             android:configChanges="orientation|screenSize"
             />
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true"
+            android:screenOrientation= "portrait"
+            android:theme="@style/Theme.App.SplashActivityTheme"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+
+
 
 
     </application>
