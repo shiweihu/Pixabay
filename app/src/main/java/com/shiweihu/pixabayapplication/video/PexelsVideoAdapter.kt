@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.shiweihu.pixabayapplication.data.PexelsVideos
 import com.shiweihu.pixabayapplication.data.Video
 import com.shiweihu.pixabayapplication.databinding.CardImageLayoutBinding
-import com.shiweihu.pixabayapplication.videoPlayView.VideoPlayFragment
 import com.shiweihu.pixabayapplication.viewModle.VideoFragmentMainViewModel
 
 class PexelsVideoAdapter(val viewModle: VideoFragmentMainViewModel, val fragment: Fragment): PagingDataAdapter<PexelsVideos, PexelsVideoAdapter.CoverViewHolder>(

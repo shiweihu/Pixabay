@@ -12,6 +12,7 @@ import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.data.PexelsPhoto
 import com.shiweihu.pixabayapplication.databinding.CardImageLayoutBinding
 import com.shiweihu.pixabayapplication.utils.DisplayUtils
+import java.lang.RuntimeException
 import kotlin.math.max
 
 class PexelsPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,position:Int,args:List<List<String>>)->Unit):
@@ -137,7 +138,7 @@ class PexelsPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,po
         val pageUrl = ArrayList<String>()
         this.snapshot().forEach { imageInfo ->
             imageInfo?.let { info->
-                images.add(info.src?.large!!)
+                images.add(info.src!!.large!!)
                 profiles.add("")
                 tags.add("")
                 usersID.add(info.photographer_url!!)

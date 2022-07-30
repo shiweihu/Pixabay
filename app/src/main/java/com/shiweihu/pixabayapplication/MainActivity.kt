@@ -22,6 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.lang.RuntimeException
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -46,6 +47,7 @@ class MainActivity : AppCompatActivity() {
             tab.setIcon(icons[position])
             tab.text = names[position]
         }.attach()
+
     }
 
     override fun onDestroy() {

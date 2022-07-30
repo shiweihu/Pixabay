@@ -39,7 +39,11 @@ buildscript {
         kotlin_plugin = "1.7.10"
         gradle_version = "7.2.1"
         ads_version = "21.1.0"
-        splashscreen = "1.0.0-rc01"
+        splashscreen = "1.0.0"
+        firebase_bom = "30.3.1"
+        firebase_crashlytics_gradle = "2.9.1"
+        google_services = "4.3.13"
+        perf_plugin = "1.4.1"
     }
 
     repositories {
@@ -51,8 +55,12 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_plugin"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath "com.google.gms:google-services:$google_services"
+        // Add the Crashlytics Gradle plugin
+        classpath "com.google.firebase:firebase-crashlytics-gradle:$firebase_crashlytics_gradle"
+
+        // Add the dependency for the Performance Monitoring plugin
+        classpath "com.google.firebase:perf-plugin:$perf_plugin"
     }
 }
 

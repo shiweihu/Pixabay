@@ -6,17 +6,14 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
-import android.os.Bundle
 import android.os.Environment
 import android.os.Environment.DIRECTORY_MOVIES
 import android.provider.MediaStore
 import android.view.View
 import androidx.annotation.RequiresApi
-import androidx.core.net.toFile
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
-import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.transformer.TransformationException
 import com.google.android.exoplayer2.transformer.TransformationResult
@@ -27,7 +24,6 @@ import com.shiweihu.pixabayapplication.net.ApplicationModule
 import com.shiweihu.pixabayapplication.videoPlayView.VideoPlayActivity
 import com.shiweihu.pixabayapplication.videoPlayView.VideoPlayActivityArgs
 
-import com.shiweihu.pixabayapplication.videoPlayView.VideoPlayFragment
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.io.File
 import java.util.*

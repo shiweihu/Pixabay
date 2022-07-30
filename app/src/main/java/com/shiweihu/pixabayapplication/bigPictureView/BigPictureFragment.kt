@@ -31,6 +31,8 @@ import com.bumptech.glide.request.transition.Transition
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.LoadAdError
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.perf.ktx.performance
 import com.shiweihu.pixabayapplication.BaseFragment
 import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.databinding.FragmentBigPictureBinding
@@ -58,6 +60,8 @@ class BigPictureFragment : BaseFragment() {
     private  var binding:FragmentBigPictureBinding? = null
 
     private var scrollPageCount:Int = 0
+
+    private val myTrace = Firebase.performance.newTrace("BigPicture view trace")
 
 
     private val shareToInstagram = registerForActivityResult(object :ActivityResultContract<Bitmap,Unit>(){
@@ -127,6 +131,7 @@ class BigPictureFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        myTrace.start()
         // Inflate the layout for this fragment
         binding =  FragmentBigPictureBinding.inflate(inflater,container,false).also {
 
@@ -240,6 +245,11 @@ class BigPictureFragment : BaseFragment() {
         binding?.viewPage?.adapter = null
         binding?.adView?.destroy()
         binding = null
+    }
+
+    override fun onResume() {
+        super.onResume()
+        myTrace.stop()
     }
 
     override fun onDestroy() {

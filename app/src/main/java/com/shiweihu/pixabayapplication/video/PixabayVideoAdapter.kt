@@ -4,17 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.paging.LoadState
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.data.Video
 import com.shiweihu.pixabayapplication.databinding.CardImageLayoutBinding
-import com.shiweihu.pixabayapplication.videoPlayView.VideoPlayFragment
-import com.shiweihu.pixabayapplication.videoPlayView.VideoPlayFragmentArgs
 import com.shiweihu.pixabayapplication.viewArgu.VideoPlayArgu
 import com.shiweihu.pixabayapplication.viewModle.VideoFragmentMainViewModel
 

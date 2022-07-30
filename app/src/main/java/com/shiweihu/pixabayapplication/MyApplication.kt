@@ -97,6 +97,7 @@ class MyApplication: Application() {
     }
 
 
+
     override fun onTrimMemory(level: Int) {
         super.onTrimMemory(level)
         when(level){
@@ -104,6 +105,7 @@ class MyApplication: Application() {
 //                CoroutineScope(Dispatchers.IO).launch {
 //                    Glide.get(this@MyApplication).clearDiskCache()
 //                }
+                Glide.get(this).clearMemory()
             }
         }
 

@@ -3,6 +3,8 @@ package com.shiweihu.pixabayapplication.pagingSource
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.perf.ktx.performance
 import com.shiweihu.pixabayapplication.data.ImageInfo
 import com.shiweihu.pixabayapplication.data.PexelsPhoto
 import com.shiweihu.pixabayapplication.data.PexelsVideos
@@ -28,20 +30,22 @@ class PexelsSearchVideoSource(
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PexelsVideos> {
         val page = params.key ?: 1
+        val myTrace = Firebase.performance.newTrace("Pexels Video Search Request")
         return try {
-
-           val photos =  if(query.isEmpty()){
+            myTrace.start()
+            val photos =  if(query.isEmpty()){
                videoProxy.popularVideos(page = page).videos
             }else{
                videoProxy.queryVideos(query = query,page = page).videos
             }
-
+            myTrace.stop()
             LoadResult.Page(
                 data = photos,
                 prevKey = if (page == 1) null else page - 1,
                 nextKey = if(photos.isNotEmpty()) page + 1 else null
             )
         }catch (e:Exception){
+            myTrace.stop()
             Log.println(Log.DEBUG,"PexelsSearchPhotos",e.toString())
             LoadResult.Error(e)
         }
