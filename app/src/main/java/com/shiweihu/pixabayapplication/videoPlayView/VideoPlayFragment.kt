@@ -150,6 +150,7 @@ class VideoPlayFragment:BaseFragment(
                 override fun onMediaItemTransition(mediaItem: MediaItem?, reason: Int) {
                     super.onMediaItemTransition(mediaItem, reason)
                     initMenuAction(player.currentMediaItemIndex)
+                    getAdRequest(player.currentMediaItemIndex)
                 }
 
                 override fun onMetadata(metadata: Metadata) {
@@ -179,10 +180,6 @@ class VideoPlayFragment:BaseFragment(
                 }
 
             })
-
-            AdRequest.Builder().build().also {
-                binding.adView.loadAd(it)
-            }
         }
         return binding?.root
     }
@@ -222,9 +219,17 @@ class VideoPlayFragment:BaseFragment(
             initMenuAction(args.currentIndex)
             player.prepare()
         }
+    }
 
-
-
+    fun getAdRequest(index:Int):AdRequest{
+        var builder =  AdRequest.Builder()
+        builder = data?.tags?.get(index)?.let {
+            it.split(",").forEach { keyWord ->
+                builder = if(keyWord.isEmpty()) builder else builder.addKeyword(keyWord)
+            }
+            builder
+        } ?: builder
+        return builder.build()
     }
 
 

@@ -89,6 +89,17 @@ class BigPictureViewModel @Inject constructor(
         return bigPictureArgu?.images?.get(index)
     }
 
+    fun getAdRequest(index:Int):AdRequest{
+        var builder =  AdRequest.Builder()
+        builder = bigPictureArgu?.tags?.get(index)?.let {
+            it.split(",").forEach { keyWord ->
+                builder = if(keyWord.isEmpty()) builder else builder.addKeyword(keyWord)
+            }
+            builder
+        } ?: builder
+        return builder.build()
+    }
+
 
     companion object{
 

@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.google.android.gms.ads.AdRequest
 import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.data.PexelsVideos
 import com.shiweihu.pixabayapplication.data.Video
@@ -60,5 +61,8 @@ class VideoFragmentMainViewModel @Inject constructor (
             // navController.navigate(R.id.to_video_play_view,VideoPlayFragmentArgs(argu).toBundle())
         }
     }
+
+
+
 
 }

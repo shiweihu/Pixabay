@@ -119,6 +119,12 @@ class BigPictureFragment : BaseFragment() {
 
     }
 
+    private fun loadBanerAd(index:Int){
+        modle.getAdRequest(index).also { adRequest ->
+            binding?.adView?.loadAd(adRequest)
+        }
+    }
+
 
 
     override fun onCreateView(
@@ -134,6 +140,7 @@ class BigPictureFragment : BaseFragment() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
                     modle.onPageChange(it,position,this@BigPictureFragment.requireActivity())
+                    loadBanerAd(position)
                 }
             })
             it.userProfile.setOnClickListener { view ->
@@ -155,11 +162,6 @@ class BigPictureFragment : BaseFragment() {
                 }
 
             }
-            AdRequest.Builder().build().also { adRequest ->
-                it.adView.loadAd(adRequest)
-            }
-
-
             initTransition()
         }
         postponeEnterTransition(resources.getInteger(R.integer.post_pone_time).toLong(), TimeUnit.MILLISECONDS)
