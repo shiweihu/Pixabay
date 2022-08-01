@@ -5,6 +5,11 @@
 this android project search images and video from Pixabay and Pexels open API,and display to users.
 users may share images or video to other APP in their phone,such as Facebook,Instagram,or Gmail.
 
+Furthermore,APP integrates firebase tools to help project monitor the performance in different device.
+## Firebase tools:
+1. Crashlytics
+2. Profermance
+
 ## Jetpack component using in project:
 1. Data Binding
 2. Lifecycles
@@ -19,6 +24,7 @@ users may share images or video to other APP in their phone,such as Facebook,Ins
 3. ExoPlayer
 4. Gson
 5. Glide
+6. leakcanary
 
 ### This project has two main functions.the first functions is images search.it load data from Pixabay and Pexels open API.Users easyly change the view between them.
 https://user-images.githubusercontent.com/13948493/179451376-cfb3d42f-374e-4136-ae89-1cf945ba7e51.mp4
