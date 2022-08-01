@@ -150,7 +150,9 @@ class VideoPlayFragment:BaseFragment(
                 override fun onMediaItemTransition(mediaItem: MediaItem?, reason: Int) {
                     super.onMediaItemTransition(mediaItem, reason)
                     initMenuAction(player.currentMediaItemIndex)
-                    getAdRequest(player.currentMediaItemIndex)
+                    getAdRequest(player.currentMediaItemIndex).also {
+                        binding.adView.loadAd(it)
+                    }
                 }
 
                 override fun onMetadata(metadata: Metadata) {
