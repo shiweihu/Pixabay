@@ -55,7 +55,7 @@ class VideoFragment : Fragment() {
     private var sourceIndex = 0
 
     private val adapter:VideoSourceAdapter by lazy {
-        VideoSourceAdapter(this,model)
+        VideoSourceAdapter(this,model,sharedModel)
     }
 
 

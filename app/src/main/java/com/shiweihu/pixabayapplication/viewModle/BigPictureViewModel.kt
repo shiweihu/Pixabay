@@ -14,6 +14,8 @@ import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.shiweihu.pixabayapplication.MyApplication
 import com.shiweihu.pixabayapplication.R
+import com.shiweihu.pixabayapplication.databinding.FragmentBigPictureBinding
+import com.shiweihu.pixabayapplication.viewArgu.BigPictureArgu
 import dagger.hilt.android.HiltAndroidApp
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -24,6 +26,9 @@ import javax.inject.Inject
 class BigPictureViewModel @Inject constructor(
   private val myApplication: MyApplication
 ) :AndroidViewModel(myApplication) {
+
+
+    var bigPictureArgu: BigPictureArgu? = null
 
     fun navigateToUserProfilePage(context: Context, username:String, userid:String){
         navigateToWeb(context,"https://pixabay.com/users/${username}-${userid}/")
@@ -42,6 +47,48 @@ class BigPictureViewModel @Inject constructor(
         val adUnitid =  activity.getString(R.string.Interstitial_ads_big_picture)
         InterstitialAd.load(activity, adUnitid, adRequest,AdCallBack(activity))
     }
+
+    fun onPageChange(binding:FragmentBigPictureBinding,position:Int,activity: Activity){
+        binding.userProfileUrl = bigPictureArgu?.profiles?.get(position) ?: ""
+        binding.priority = true
+        checkIfShowAd(activity)
+    }
+    private var scrollPageCount = 0
+    private fun checkIfShowAd(activity:Activity){
+        scrollPageCount++
+        if(scrollPageCount > 20){
+            scrollPageCount = 0
+            showInterstitialAd(activity)
+        }
+
+    }
+
+    fun userProfileOnClick(context: Context,index:Int){
+        val username = bigPictureArgu?.userNameArray?.get(index)
+        val userid = bigPictureArgu?.useridArray?.get(index)
+
+        when(bigPictureArgu?.from){
+            0 ->{
+                if(username != null && userid!=null){
+                    navigateToUserProfilePage(context,username,userid)
+                }
+            }
+            1 ->{
+                navigateToUserProfilePagePexils(context,userid!!)
+            }
+
+        }
+    }
+    fun pageProfileOnClick(context: Context,index:Int){
+        bigPictureArgu?.pageUrls?.get(index)?.also { pageUrl ->
+            navigateToWeb(context,pageUrl)
+        }
+    }
+
+    fun getShareUrl(index:Int):String?{
+        return bigPictureArgu?.images?.get(index)
+    }
+
 
     companion object{
 

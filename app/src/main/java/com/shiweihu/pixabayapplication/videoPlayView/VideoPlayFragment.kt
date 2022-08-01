@@ -38,6 +38,7 @@ import com.shiweihu.pixabayapplication.BaseFragment
 import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.databinding.ActivityVideoPlayBinding
 import com.shiweihu.pixabayapplication.databinding.LoadingDialogLayoutBinding
+import com.shiweihu.pixabayapplication.viewArgu.VideoPlayArgu
 import com.shiweihu.pixabayapplication.viewModle.FragmentComunicationViewModel
 import com.shiweihu.pixabayapplication.viewModle.VideoPlayViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,19 +51,14 @@ class VideoPlayFragment:BaseFragment(
     private val model: VideoPlayViewModel by viewModels()
     private val sharedModel: FragmentComunicationViewModel by activityViewModels()
 
-    private val args:VideoPlayFragmentArgs by navArgs()
+    //private val args:VideoPlayFragmentArgs by navArgs()
 
     private var binding:ActivityVideoPlayBinding? = null
 
     private fun mHandler() = binding!!.root.handler
 
+    private var data: VideoPlayArgu? = null
 
-
-
-
-    private val data by lazy {
-        args.data
-    }
 
     private val player by lazy {
          ExoPlayer.Builder(this.requireContext()).build()
@@ -99,6 +95,8 @@ class VideoPlayFragment:BaseFragment(
 
 
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -108,9 +106,7 @@ class VideoPlayFragment:BaseFragment(
 
 
             ViewCompat.setTransitionName(binding.playerView, VideoPlayFragment.PLAYER_BACKGROUND)
-            if(args.data.from == 1){
-                 binding.pageProfile.setImageResource(R.drawable.ic_pexels)
-            }
+
             binding.toolBar.setNavigationOnClickListener {
                 sharedModel.videoItemPosition.postValue(player.currentMediaItemIndex)
                 this.findNavController().navigateUp()
@@ -147,17 +143,8 @@ class VideoPlayFragment:BaseFragment(
 
             binding.playerView.player = player
             binding.playerView.controllerAutoShow = false
-//            binding.playerView.setControllerVisibilityListener(StyledPlayerView.ControllerVisibilityListener {
-//                binding.appBar.visibility = it
-//                binding.shareBtn.visibility = it
-//                binding.adView.visibility = it
-//            })
-            data.videos?.forEach {
-                val item = MediaItem.fromUri(it)
-                player.addMediaItem(item)
-            }
 
-            player.seekTo(data.currentIndex,0L)
+
             player.repeatMode = REPEAT_MODE_ONE
             player.addListener(object: Player.Listener {
                 override fun onMediaItemTransition(mediaItem: MediaItem?, reason: Int) {
@@ -197,9 +184,6 @@ class VideoPlayFragment:BaseFragment(
                 binding.adView.loadAd(it)
             }
         }
-        initMenuAction(data.currentIndex)
-        player.prepare()
-        //postponeEnterTransition()
         return binding?.root
     }
 
@@ -218,31 +202,6 @@ class VideoPlayFragment:BaseFragment(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        sharedElementEnterTransition = TransitionInflater.from(this.requireContext()).inflateTransition(R.transition.video_shared_element_transition).also {
-//            it.addListener(object: android.transition.Transition.TransitionListener {
-//                override fun onTransitionStart(p0: android.transition.Transition?) {
-//
-//                }
-//
-//                override fun onTransitionEnd(p0: android.transition.Transition?) {
-//                    player.play()
-//                }
-//
-//                override fun onTransitionCancel(p0: android.transition.Transition?) {
-//
-//                }
-//
-//                override fun onTransitionPause(p0: android.transition.Transition?) {
-//
-//                }
-//
-//                override fun onTransitionResume(p0: android.transition.Transition?) {
-//
-//                }
-//
-//            })
-//        }
-
         TransitionInflater.from(this.requireContext()).inflateTransition(R.transition.video_shared_element_transition).also {
             sharedElementReturnTransition = it
         }
@@ -250,27 +209,41 @@ class VideoPlayFragment:BaseFragment(
         model.videoPlayerPosition.position.observe(this){
             player.seekTo(it)
         }
+        sharedModel.videoPlayArguLiveData.observe(this){args ->
+            this.data = args
+            if(args.from == 1){
+                binding?.pageProfile?.setImageResource(R.drawable.ic_pexels)
+            }
+            args.videos?.forEach {
+                val item = MediaItem.fromUri(it)
+                player.addMediaItem(item)
+            }
+            player.seekTo(args.currentIndex,0L)
+            initMenuAction(args.currentIndex)
+            player.prepare()
+        }
+
 
 
     }
 
 
     private fun initMenuAction(position:Int){
-        binding?.userProfileUrl = data.profiles?.get(position)
+        binding?.userProfileUrl = data?.profiles?.get(position)
         binding?.pageProfile?.setOnClickListener {
-            model.navigateToWeb(this@VideoPlayFragment.requireContext(),data.pageUrls!![position])
+            model.navigateToWeb(this@VideoPlayFragment.requireContext(),data?.pageUrls!![position])
         }
         binding?.userProfile?.setOnClickListener {
-            when(args.data.from){
+            when(data?.from){
                 0 ->{
-                    val username = data.userNameArray?.get(position)
-                    val userid = data.useridArray?.get(position)
+                    val username = data?.userNameArray?.get(position)
+                    val userid = data?.useridArray?.get(position)
                     if(username != null && userid!=null){
                         model.navigateToUserProfilePage(this@VideoPlayFragment.requireContext(),username,userid)
                     }
                 }
                 1 ->{
-                    val url = data.useridArray?.get(position)
+                    val url = data?.useridArray?.get(position)
                     if(url != null){
                         model.navigateToUserProfilePageOnPexels(this.requireContext(),url)
                     }

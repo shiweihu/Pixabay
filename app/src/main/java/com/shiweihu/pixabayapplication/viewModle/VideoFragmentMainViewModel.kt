@@ -46,12 +46,13 @@ class VideoFragmentMainViewModel @Inject constructor (
         return currentQueryFlowPexels!!
     }
 
-    fun navigateToVideoPlayback(view: View,position:Int,from:Int,vararg lists:List<String>){
-        val argu = VideoPlayArgu(lists[0],lists[1],lists[2],lists[3],lists[4],lists[5],position,from)
+    fun navigateToVideoPlayback(view: View,argu:VideoPlayArgu){
         val navController = view.findNavController()
         if(navController.currentDestination?.id == R.id.video_fragment){
+            //because the limitation that only 1M data could be transition as Args,
+            //so this program did not use Args to transition data,it use LiveData to communicate between fragment.
             navController.navigate(
-                R.id.video_play_fragment, VideoPlayFragmentArgs(argu).toBundle(),null,
+                R.id.video_play_fragment,null,null,
                 FragmentNavigatorExtras(
                     view to VideoPlayFragment.PLAYER_BACKGROUND
                 )

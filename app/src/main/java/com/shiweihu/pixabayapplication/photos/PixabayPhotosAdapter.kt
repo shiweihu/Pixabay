@@ -14,9 +14,10 @@ import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.data.ImageInfo
 import com.shiweihu.pixabayapplication.databinding.CardImageLayoutBinding
 import com.shiweihu.pixabayapplication.utils.DisplayUtils
+import com.shiweihu.pixabayapplication.viewArgu.BigPictureArgu
 import kotlin.math.max
 
-class PixabayPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,position:Int,args:List<List<String>>)->Unit): PagingDataAdapter<ImageInfo, PixabayPhotosAdapter.ImageViewHolder>(ImageDiff()) {
+class PixabayPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,args:BigPictureArgu)->Unit): PagingDataAdapter<ImageInfo, PixabayPhotosAdapter.ImageViewHolder>(ImageDiff()) {
     class ImageViewHolder(
         val binding:CardImageLayoutBinding
     ):RecyclerView.ViewHolder(binding.root)
@@ -130,8 +131,8 @@ class PixabayPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,p
             }
         }
         sharedElementIndex = position
-        val args:List<List<String>> = listOf(images,profiles,tags,usersID,usersName,pageUrl)
-        clickCallBack(view,position,args)
+        val args = BigPictureArgu(images,profiles,tags,usersID,usersName,pageUrl,position,0)
+        clickCallBack(view,args)
         //viewModel.navigateToBigPicture(view,images,profiles,tags,usersID,usersName,pageUrl,position)
     }
 

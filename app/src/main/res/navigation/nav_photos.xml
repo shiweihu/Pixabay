@@ -22,11 +22,6 @@
        android:name="com.shiweihu.pixabayapplication.bigPictureView.BigPictureFragment"
        tools:layout="@layout/fragment_big_picture"
        >
-      <argument
-          android:name="picture_result"
-          app:argType="com.shiweihu.pixabayapplication.viewArgu.BigPictureArgu"
-          />
-
 
    </fragment>
 

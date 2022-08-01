@@ -11,9 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.shiweihu.pixabayapplication.data.PexelsVideos
 import com.shiweihu.pixabayapplication.data.Video
 import com.shiweihu.pixabayapplication.databinding.CardImageLayoutBinding
+import com.shiweihu.pixabayapplication.viewArgu.VideoPlayArgu
 import com.shiweihu.pixabayapplication.viewModle.VideoFragmentMainViewModel
 
-class PexelsVideoAdapter(val viewModle: VideoFragmentMainViewModel, val fragment: Fragment): PagingDataAdapter<PexelsVideos, PexelsVideoAdapter.CoverViewHolder>(
+class PexelsVideoAdapter(val fragment: Fragment,val clickCallBack:(view:View,args: VideoPlayArgu)->Unit): PagingDataAdapter<PexelsVideos, PexelsVideoAdapter.CoverViewHolder>(
 PexelsVideoAdapter.VideoDiff()
 )  {
     class CoverViewHolder(val binding: CardImageLayoutBinding): RecyclerView.ViewHolder(binding.root)
@@ -105,7 +106,8 @@ PexelsVideoAdapter.VideoDiff()
                 pageUrls.add(video.url)
             }
         }
-        viewModle.navigateToVideoPlayback(view,position,1,videos,profiles,tags,userid,userNames,pageUrls)
+        val args = VideoPlayArgu(videos,profiles,tags,userid,userNames,pageUrls,position,1)
+        clickCallBack(view,args)
     }
 
     override fun onCreateViewHolder(

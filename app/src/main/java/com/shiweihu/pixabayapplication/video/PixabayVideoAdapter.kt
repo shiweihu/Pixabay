@@ -1,5 +1,6 @@
 package com.shiweihu.pixabayapplication.video
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +11,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.shiweihu.pixabayapplication.data.Video
 import com.shiweihu.pixabayapplication.databinding.CardImageLayoutBinding
+import com.shiweihu.pixabayapplication.viewArgu.BigPictureArgu
 import com.shiweihu.pixabayapplication.viewArgu.VideoPlayArgu
 import com.shiweihu.pixabayapplication.viewModle.VideoFragmentMainViewModel
 
-class PixabayVideoAdapter(val viewModle: VideoFragmentMainViewModel, val fragment: Fragment): PagingDataAdapter<Video, PixabayVideoAdapter.CoverViewHolder>(
+class PixabayVideoAdapter(val fragment: Fragment,val clickCallBack:(view:View,args: VideoPlayArgu)->Unit): PagingDataAdapter<Video, PixabayVideoAdapter.CoverViewHolder>(
     VideoDiff()
 ) {
 
@@ -87,7 +89,7 @@ class PixabayVideoAdapter(val viewModle: VideoFragmentMainViewModel, val fragmen
 
     }
 
-    fun navigateToPlayBack(view: View, position:Int){
+    private fun navigateToPlayBack(view: View, position:Int){
         val videos = ArrayList<String>()
         val profiles = ArrayList<String>()
         val tags = ArrayList<String>()
@@ -107,7 +109,8 @@ class PixabayVideoAdapter(val viewModle: VideoFragmentMainViewModel, val fragmen
 
             }
         }
-        viewModle.navigateToVideoPlayback(view,position,0,videos,profiles,tags,userid,userNames,pageUrls)
+        val args = VideoPlayArgu(videos,profiles,tags,userid,userNames,pageUrls,position,0)
+        clickCallBack(view,args)
     }
 
 

@@ -9,40 +9,30 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.transition.TransitionInflater
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContract
-import androidx.appcompat.app.AlertDialog
 import androidx.core.app.SharedElementCallback
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
-import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.LoadAdError
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.perf.ktx.performance
 import com.shiweihu.pixabayapplication.BaseFragment
 import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.databinding.FragmentBigPictureBinding
-import com.shiweihu.pixabayapplication.viewArgu.BigPictureArgu
 import com.shiweihu.pixabayapplication.viewModle.BigPictureViewModel
 import com.shiweihu.pixabayapplication.viewModle.FragmentComunicationViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import java.util.concurrent.TimeUnit
-import kotlin.collections.List
 import kotlin.collections.MutableList
 import kotlin.collections.MutableMap
 import kotlin.collections.set
@@ -55,13 +45,16 @@ class BigPictureFragment : BaseFragment() {
     private val modle:BigPictureViewModel by viewModels()
     private val activeModel: FragmentComunicationViewModel by activityViewModels()
 
-    private val args:BigPictureFragmentArgs by navArgs()
+    //private val args:BigPictureFragmentArgs by navArgs()
 
     private  var binding:FragmentBigPictureBinding? = null
 
     private var scrollPageCount:Int = 0
 
     private val myTrace = Firebase.performance.newTrace("BigPicture view trace")
+
+
+
 
 
     private val shareToInstagram = registerForActivityResult(object :ActivityResultContract<Bitmap,Unit>(){
@@ -108,23 +101,24 @@ class BigPictureFragment : BaseFragment() {
 
     override fun onBackKeyPressed() {
         super.onBackKeyPressed()
-        navigateUp(binding!!)
+        navigateUp()
 
     }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-    }
 
-    private fun checkIfShowAd(){
-        scrollPageCount++
-        if(scrollPageCount > 20){
-            scrollPageCount = 0
-            modle.showInterstitialAd(this.requireActivity())
+        activeModel.bigPictureArguLiveData.observe(this){
+            modle.bigPictureArgu = it
+            binding?.from = it.from
+            val pageAdapter = BigPictureAdapter(it,this)
+            binding?.viewPage?.adapter = pageAdapter
+            binding?.viewPage?.setCurrentItem(it.currentIndex,false)
         }
 
     }
+
 
 
     override fun onCreateView(
@@ -135,60 +129,34 @@ class BigPictureFragment : BaseFragment() {
         // Inflate the layout for this fragment
         binding =  FragmentBigPictureBinding.inflate(inflater,container,false).also {
 
-            it.from = args.pictureResult.from
-            val pageAdapter = BigPictureAdapter(args.pictureResult,this)
-            it.viewPage.adapter = pageAdapter
+
             it.viewPage.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
-                    it.userProfileUrl = args.pictureResult.profiles?.get(position) ?: ""
-                    it.priority = true
-                    checkIfShowAd()
+                    modle.onPageChange(it,position,this@BigPictureFragment.requireActivity())
                 }
             })
             it.userProfile.setOnClickListener { view ->
-                val username = args.pictureResult.userNameArray?.get(it.viewPage.currentItem)
-                val userid = args.pictureResult.useridArray?.get(it.viewPage.currentItem)
-
-                when(args.pictureResult.from){
-                    0 ->{
-                        if(username != null && userid!=null){
-                            modle.navigateToUserProfilePage(view.context,username,userid)
-                        }
-                    }
-                    1 ->{
-                        modle.navigateToUserProfilePagePexils(view.context,userid!!)
-                    }
-
-                }
-
-
+                modle.userProfileOnClick(view.context,it.viewPage.currentItem)
             }
             it.pageProfile.setOnClickListener { view ->
-                args.pictureResult.pageUrls?.get(it.viewPage.currentItem)?.also { pageUrl ->
-                    modle.navigateToWeb(view.context,pageUrl)
-                }
+                modle.pageProfileOnClick(view.context,it.viewPage.currentItem)
             }
 
-            it.viewPage.setCurrentItem(args.pictureResult.currentIndex,false)
+
             it.viewPage.offscreenPageLimit = 4
             it.toolBar.setNavigationOnClickListener { _ ->
-                navigateUp(it)
+                navigateUp()
             }
 
             it.shareToInstagramFeed.setOnClickListener {_ ->
-                val url = args.pictureResult.images?.get(it.viewPage.currentItem)
-                if (url != null) {
+                modle.getShareUrl(it.viewPage.currentItem)?.also { url ->
                     shareImageToInstagram(url)
                 }
+
             }
             AdRequest.Builder().build().also { adRequest ->
                 it.adView.loadAd(adRequest)
-                it.adView.adListener = object :AdListener(){
-                    override fun onAdFailedToLoad(error: LoadAdError) {
-                        super.onAdFailedToLoad(error)
-                    }
-                }
             }
 
 
@@ -197,6 +165,8 @@ class BigPictureFragment : BaseFragment() {
         postponeEnterTransition(resources.getInteger(R.integer.post_pone_time).toLong(), TimeUnit.MILLISECONDS)
         return binding?.root
     }
+
+
 
     private fun shareImageToInstagram(url:String){
         Uri.parse(url).also {
@@ -216,8 +186,8 @@ class BigPictureFragment : BaseFragment() {
 
 
 
-    private fun navigateUp(binding:FragmentBigPictureBinding){
-        activeModel.pictureItemPosition.postValue(binding.viewPage.currentItem)
+    private fun navigateUp(){
+        activeModel.pictureItemPosition.postValue(binding?.viewPage?.currentItem)
         findNavController().navigateUp()
     }
 
@@ -261,24 +231,5 @@ class BigPictureFragment : BaseFragment() {
 
     companion object {
         const val SHARE_ELEMENT_NAME = "image_view_transition_name"
-        fun navigateToBigPicture(view: View,images:List<String>,
-                                 profiles:List<String>,
-                                 tags:List<String>,
-                                 usersID:List<String>,
-                                 usersName:List<String>,
-                                 pageUrls:List<String>,
-                                 position:Int,from:Int){
-            val navController = view.findNavController()
-            val argu = BigPictureArgu(images,profiles,tags,usersID,usersName,pageUrls,position,from)
-            if(navController.currentDestination?.id == R.id.photos_fragment){
-                navController.navigate(R.id.to_big_picture,
-                    BigPictureFragmentArgs(argu).toBundle(),
-                    null,
-                    FragmentNavigatorExtras(
-                        view to SHARE_ELEMENT_NAME+"-${position}"
-                    )
-                )
-            }
-        }
     }
 }

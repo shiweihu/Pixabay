@@ -1,5 +1,6 @@
 package com.shiweihu.pixabayapplication.video
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.children
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.shiweihu.pixabayapplication.databinding.RecyclerViewLayoutBinding
 import com.shiweihu.pixabayapplication.photos.SouceAdapter
+import com.shiweihu.pixabayapplication.viewModle.FragmentComunicationViewModel
 import com.shiweihu.pixabayapplication.viewModle.PhotosMainFragmentModel
 import com.shiweihu.pixabayapplication.viewModle.VideoFragmentMainViewModel
 import kotlinx.coroutines.Job
@@ -17,7 +19,8 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class VideoSourceAdapter(val fragment: Fragment,
-                         val model: VideoFragmentMainViewModel
+                         val model: VideoFragmentMainViewModel,
+                         val activityModel: FragmentComunicationViewModel
 ) : RecyclerView.Adapter<VideoSourceAdapter.RecyclerViewHolder>()  {
 
     class RecyclerViewHolder(
@@ -33,11 +36,18 @@ class VideoSourceAdapter(val fragment: Fragment,
     private var recyclerview:RecyclerView? = null
 
     private val pixabayVideoAdapyer by lazy {
-        PixabayVideoAdapter(model,fragment)
+        PixabayVideoAdapter(fragment){view , args ->
+            activityModel.videoPlayArguLiveData.value = args
+            model.navigateToVideoPlayback(view,args)
+        }
     }
 
     private val pexelsVideoAdapter by lazy {
-        PexelsVideoAdapter(model,fragment)
+        PexelsVideoAdapter(fragment){view , args ->
+            activityModel.videoPlayArguLiveData.value = args
+            model.navigateToVideoPlayback(view,args)
+
+        }
     }
 
     fun setPageIndex(pageIndex:Int){
@@ -65,6 +75,7 @@ class VideoSourceAdapter(val fragment: Fragment,
                 pixabayVideoAdapyer.submitData(it)
             }
         }
+
         jobs.add(job1)
         pixabayVideoAdapyer.sharedElementIndex = 0
         val job2 = fragment.lifecycleScope.launch {

@@ -12,10 +12,11 @@ import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.data.PexelsPhoto
 import com.shiweihu.pixabayapplication.databinding.CardImageLayoutBinding
 import com.shiweihu.pixabayapplication.utils.DisplayUtils
+import com.shiweihu.pixabayapplication.viewArgu.BigPictureArgu
 import java.lang.RuntimeException
 import kotlin.math.max
 
-class PexelsPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,position:Int,args:List<List<String>>)->Unit):
+class PexelsPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,args:BigPictureArgu)->Unit):
     PagingDataAdapter<PexelsPhoto, PexelsPhotosAdapter.ImageViewHolder>(ImageDiff())
 {
 
@@ -147,8 +148,8 @@ class PexelsPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,po
             }
         }
         sharedElementIndex = position
-        val args:List<List<String>> = listOf(images,profiles,tags,usersID,usersName,pageUrl)
-        clickCallBack(view,position,args)
+        val args = BigPictureArgu(images,profiles,tags,usersID,usersName,pageUrl,position,1)
+        clickCallBack(view,args)
     }
 
 

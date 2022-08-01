@@ -37,7 +37,7 @@ class PhotosMainFragment : BaseFragment() {
     private var sourceIndex = 0
 
     private val fragmentAdapter:SouceAdapter by lazy {
-        SouceAdapter(this,model)
+        SouceAdapter(this,model,activeModel)
     }
 
     private var tabLayoutMediator:TabLayoutMediator? = null

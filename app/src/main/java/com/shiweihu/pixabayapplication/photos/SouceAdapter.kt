@@ -7,22 +7,18 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import androidx.viewpager2.adapter.FragmentStateAdapter
-import androidx.viewpager2.widget.ViewPager2
-import com.shiweihu.pixabayapplication.FragmentsAdapter
-import com.shiweihu.pixabayapplication.databinding.CardImageLayoutBinding
 import com.shiweihu.pixabayapplication.databinding.RecyclerViewLayoutBinding
+import com.shiweihu.pixabayapplication.viewModle.FragmentComunicationViewModel
 import com.shiweihu.pixabayapplication.viewModle.PhotosMainFragmentModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
-import java.lang.ref.WeakReference
-import java.util.zip.Inflater
 
 
 class SouceAdapter(val fragment:Fragment,
-                   val model: PhotosMainFragmentModel) : RecyclerView.Adapter<SouceAdapter.RecyclerViewHolder>() {
+                   val model: PhotosMainFragmentModel,
+                   val activityModel: FragmentComunicationViewModel
+) : RecyclerView.Adapter<SouceAdapter.RecyclerViewHolder>() {
 
     class RecyclerViewHolder(
         val binding: RecyclerViewLayoutBinding
@@ -37,14 +33,16 @@ class SouceAdapter(val fragment:Fragment,
     private var recyclerview:RecyclerView? = null
 
     private val pixabayPhotosAdapter by lazy {
-        PixabayPhotosAdapter(fragment){view,position,args->
-           model.navigateToBigPicture(view,args,position,0)
+        PixabayPhotosAdapter(fragment){view,args->
+            activityModel.bigPictureArguLiveData.value = args
+            model.navigateToBigPicture(view,args.currentIndex)
         }
     }
 
     private val pexelsPhotosAdapter by lazy {
-        PexelsPhotosAdapter(fragment){view,position,args->
-            model.navigateToBigPicture(view,args,position,1)
+        PexelsPhotosAdapter(fragment){view,args->
+            activityModel.bigPictureArguLiveData.value = args
+            model.navigateToBigPicture(view,args.currentIndex)
         }
     }
 

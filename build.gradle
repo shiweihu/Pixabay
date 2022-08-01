@@ -10,7 +10,7 @@ buildscript {
         coreTestingVersion = '2.0.0'
         coroutinesVersion = "1.6.3"
         espressoVersion = '3.1.1'
-        fragmentVersion = '1.5.0'
+        fragmentVersion = '1.5.1'
         glideVersion = '4.13.1'
         gradleVersion = '7.0.3'
         gsonVersion = '2.9.0'
@@ -22,11 +22,11 @@ buildscript {
         lifecycleVersion = '2.4.1'
         lifecycle_extensions = '2.2.0'
         materialVersion = '1.6.1'
-        navigationVersion = '2.5.0'
+        navigationVersion = '2.5.1'
         okhttpLoggingVersion = '4.9.3'
         pagingVersion = '3.1.1'
         retrofitVersion = '2.9.0'
-        roomVersion = '2.4.2'
+        roomVersion = '2.4.3'
         runnerVersion = '1.0.1'
         truthVersion = '0.42'
         testExtJunit = '1.1.0'
@@ -35,7 +35,7 @@ buildscript {
         workVersion = '2.7.1'
         exoplayer_version = "2.18.1"
         anko_version = "0.10.4"
-        lifecycle_version = "2.5.0"
+        lifecycle_version = "2.5.1"
         kotlin_plugin = "1.7.10"
         gradle_version = "7.2.1"
         ads_version = "21.1.0"
