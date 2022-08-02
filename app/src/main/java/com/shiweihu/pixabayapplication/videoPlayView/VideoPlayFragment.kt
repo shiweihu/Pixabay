@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.transition.TransitionInflater
 import android.util.Log
@@ -129,7 +130,7 @@ class VideoPlayFragment:BaseFragment(
             binding.shareBtn.setOnClickListener {
                 player.pause()
                 val permissionState = ActivityCompat.checkSelfPermission(this.requireContext(),Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                if(permissionState == PackageManager.PERMISSION_GRANTED){
+                if(permissionState == PackageManager.PERMISSION_GRANTED || Build.VERSION.SDK_INT > Build.VERSION_CODES.P){
                     showLoadingDialog()
                 }else{
                     requestPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)

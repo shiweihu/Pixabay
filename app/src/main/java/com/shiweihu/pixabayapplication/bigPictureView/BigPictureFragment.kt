@@ -1,11 +1,14 @@
 package com.shiweihu.pixabayapplication.bigPictureView
 
+import android.Manifest
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.transition.TransitionInflater
@@ -14,6 +17,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContract
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
 import androidx.core.app.SharedElementCallback
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -23,6 +28,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.google.android.gms.ads.AdRequest
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.perf.ktx.performance
 import com.shiweihu.pixabayapplication.BaseFragment
@@ -31,6 +37,7 @@ import com.shiweihu.pixabayapplication.databinding.FragmentBigPictureBinding
 import com.shiweihu.pixabayapplication.viewModle.BigPictureViewModel
 import com.shiweihu.pixabayapplication.viewModle.FragmentComunicationViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.Exception
 import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.collections.MutableList
@@ -55,20 +62,47 @@ class BigPictureFragment : BaseFragment() {
 
 
 
+    private val requestPermissionLauncher =registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            shareOnClick()
+        } else {
+            // Explain to the user that the feature is unavailable because the
+            // features requires a permission that the user has denied. At the
+            // same time, respect the user's decision. Don't link to system
+            // settings in an effort to convince the user to change their
+            // decision.
+            Snackbar.make(binding!!.root,R.string.permission_deny_notice, Snackbar.LENGTH_LONG).setAction(R.string.go){
+                getAppDetailSettingIntent()
+            }.show()
+        }
+    }
+
+    /**
+     * navigate to application setting view.
+     */
+    private fun getAppDetailSettingIntent() {
+        val intent = Intent()
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        intent.action = android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+        intent.data = Uri.parse("package:${requireActivity().packageName}")
+        startActivity(intent)
+    }
+
 
 
     private val shareToInstagram = registerForActivityResult(object :ActivityResultContract<Bitmap,Unit>(){
         var temp_input:Uri? = null
 
-        fun getOutPutUri(bitmap:Bitmap):Uri{
+        fun getOutPutUri(bitmap:Bitmap):Uri?{
             val content = ContentValues()
             content.put(MediaStore.Images.Media.DISPLAY_NAME,UUID.randomUUID().toString())
             content.put(MediaStore.Images.Media.MIME_TYPE,"image/png")
             val outputUri = requireContext().contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,content)
-
             if (outputUri != null) {
                 requireContext().contentResolver.openOutputStream(outputUri).also { output ->
-                    bitmap.compress(Bitmap.CompressFormat.PNG,100,output)
+                        bitmap.compress(Bitmap.CompressFormat.PNG,100,output)
                 }
             }
             return outputUri!!
@@ -76,13 +110,13 @@ class BigPictureFragment : BaseFragment() {
 
 
         override fun createIntent(context: Context, input: Bitmap): Intent {
-             val intent = Intent(Intent.ACTION_SEND).also {
-                 it.type = "image/*"
-                 // Add the URI to the Intent.
-                 val outputUri = getOutPutUri(input)
-                 it.putExtra(Intent.EXTRA_STREAM, outputUri)
-                 temp_input = outputUri
-             }
+            val outputUri = getOutPutUri(input)
+            val intent = Intent(Intent.ACTION_SEND).also {
+                    it.type = "image/*"
+                    // Add the URI to the Intent.
+                    it.putExtra(Intent.EXTRA_STREAM, outputUri)
+            }
+            temp_input = outputUri
             return Intent.createChooser(intent,this@BigPictureFragment.resources.getString(R.string.app_choser_title))
         }
 
@@ -157,15 +191,24 @@ class BigPictureFragment : BaseFragment() {
             }
 
             it.shareToInstagramFeed.setOnClickListener {_ ->
-                modle.getShareUrl(it.viewPage.currentItem)?.also { url ->
-                    shareImageToInstagram(url)
-                }
-
+                shareOnClick()
             }
             initTransition()
         }
         postponeEnterTransition(resources.getInteger(R.integer.post_pone_time).toLong(), TimeUnit.MILLISECONDS)
         return binding?.root
+    }
+
+    private fun shareOnClick(){
+        val permissionState = ActivityCompat.checkSelfPermission(this.requireContext(),
+            Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        if(permissionState == PackageManager.PERMISSION_GRANTED || Build.VERSION.SDK_INT > Build.VERSION_CODES.P){
+            modle.getShareUrl(binding!!.viewPage.currentItem)?.also { url ->
+                shareImageToInstagram(url)
+            }
+        }else{
+            requestPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        }
     }
 
 
