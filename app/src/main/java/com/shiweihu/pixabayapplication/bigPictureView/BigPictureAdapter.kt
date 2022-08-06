@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.graphics.Matrix
 import android.graphics.Point
 import android.graphics.RectF
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -37,12 +38,12 @@ class BigPictureAdapter(val argu:BigPictureArgu,val fragment: Fragment): Recycle
         val transitionName = "${BigPictureFragment.SHARE_ELEMENT_NAME}-${position}"
         holder.binding.imageView.transitionName = transitionName
         holder.binding.imageView.tag = transitionName
-        holder.binding.doEnd = { state ->
+        holder.binding.doEnd = { state,view ->
             if(position == argu.currentIndex) {
                 fragment.startPostponedEnterTransition()
             }
             if(state){
-                holder.binding.root.setOnClickListener {
+                view.setOnClickListener {
                     val dialogBuilder = ViewPictureDialog.Companion.Builder()
                     dialogBuilder.show(holder.binding.root.context,imageUrl)
                 }

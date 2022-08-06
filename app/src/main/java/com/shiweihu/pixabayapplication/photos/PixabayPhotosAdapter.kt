@@ -84,7 +84,7 @@ class PixabayPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,a
             }
             holder.binding.imageView.transitionName = "PixabayPhotos-${holder.layoutPosition}"
             holder.binding.priority = (holder.layoutPosition == sharedElementIndex && pageIdex == 0)
-            holder.binding.doEnd = {_ ->
+            holder.binding.doEnd = {_,_ ->
                 if(holder.layoutPosition == sharedElementIndex && pageIdex == 0) {
                     fragment.startPostponedEnterTransition()
                 }

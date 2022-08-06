@@ -8,6 +8,7 @@ import androidx.paging.LoadState
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.data.PexelsVideos
 import com.shiweihu.pixabayapplication.data.Video
 import com.shiweihu.pixabayapplication.databinding.CardImageLayoutBinding
@@ -68,11 +69,12 @@ PexelsVideoAdapter.VideoDiff()
     override fun onBindViewHolder(holder:CoverViewHolder, position: Int) {
         getItem(position)?.also{
             holder.binding.imageUrl = it.image
+            holder.binding.pxLog.setImageResource(R.drawable.ic_pexels)
             holder.binding.authorName = it.user.name
             holder.binding.imageView.layoutParams.height = 360
             val priority = pageIdex == 0 && sharedElementIndex == position
             holder.binding.priority = priority
-            holder.binding.doEnd = {
+            holder.binding.doEnd = {_,_ ->
                 if(pageIdex == 1 && sharedElementIndex == position){
                     fragment.startPostponedEnterTransition()
                 }

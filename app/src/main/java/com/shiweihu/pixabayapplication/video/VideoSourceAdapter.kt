@@ -58,6 +58,7 @@ class VideoSourceAdapter(val fragment: Fragment,
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
         this.recyclerview = recyclerView
+        bindingData()
     }
 
     override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
@@ -68,8 +69,15 @@ class VideoSourceAdapter(val fragment: Fragment,
     }
 
     fun reloadData(){
-        cancelAllJob()
+
         shareElementIndex = 0
+        pexelsVideoAdapter.sharedElementIndex=0
+        pixabayVideoAdapyer.sharedElementIndex = 0
+        bindingData()
+    }
+
+    private fun bindingData(){
+        cancelAllJob()
         val job1 = fragment.lifecycleScope.launch {
             model.searchVideo(query).collectLatest {
                 pixabayVideoAdapyer.submitData(it)
@@ -77,15 +85,12 @@ class VideoSourceAdapter(val fragment: Fragment,
         }
 
         jobs.add(job1)
-        pixabayVideoAdapyer.sharedElementIndex = 0
         val job2 = fragment.lifecycleScope.launch {
             model.searchVideoFromPexels(query).collectLatest {
                 pexelsVideoAdapter.submitData(it)
             }
         }
         jobs.add(job2)
-        pexelsVideoAdapter.sharedElementIndex=0
-
     }
 
     private fun cancelAllJob(){
@@ -145,7 +150,6 @@ class VideoSourceAdapter(val fragment: Fragment,
         pixabayVideoAdapyer.sharedElementIndex = shareElementIndex
         holder.binding.recycleView.adapter = pixabayVideoAdapyer
         holder.binding.recycleView.tag = 0
-
     }
 
     fun initPexelsRecyclerView(holder: RecyclerViewHolder){

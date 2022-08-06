@@ -79,7 +79,6 @@ class PhotosMainFragment : BaseFragment() {
             fragmentAdapter.reloadData()
         }
 
-
         activeModel.pictureItemPosition.observe(this){
             fragmentAdapter.shareElementIndex = it
         }

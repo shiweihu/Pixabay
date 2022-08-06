@@ -92,7 +92,7 @@ class PexelsPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,ar
             holder.binding.imageView.setOnClickListener { view ->
                 navigateToBigPicture(view,holder.layoutPosition)
             }
-            holder.binding.doEnd = {
+            holder.binding.doEnd = {_,_ ->
                 if(holder.layoutPosition == sharedElementIndex && pageIdex == 1){
                     fragment.startPostponedEnterTransition()
                 }
@@ -139,7 +139,7 @@ class PexelsPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,ar
         val pageUrl = ArrayList<String>()
         this.snapshot().forEach { imageInfo ->
             imageInfo?.let { info->
-                images.add(info.src!!.large!!)
+                images.add(info.src!!.large2x!!)
                 profiles.add("")
                 tags.add("")
                 usersID.add(info.photographer_url!!)

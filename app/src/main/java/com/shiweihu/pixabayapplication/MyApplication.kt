@@ -1,11 +1,13 @@
 package com.shiweihu.pixabayapplication
 
 import android.app.Application
-import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
+import android.os.StrictMode
+import android.os.StrictMode.ThreadPolicy
+import android.os.StrictMode.VmPolicy
 import android.util.DisplayMetrics
 import android.view.WindowManager
 import android.view.WindowMetrics
@@ -15,9 +17,6 @@ import com.google.android.gms.ads.MobileAds
 import com.shiweihu.pixabayapplication.net.NetworkModule
 import com.shiweihu.pixabayapplication.utils.DisplayUtils
 import dagger.hilt.android.HiltAndroidApp
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import java.util.*
 
 
@@ -74,6 +73,20 @@ class MyApplication: Application() {
             this
         ) { }
 
+        if(APP_DEBUG){
+//            StrictMode.setThreadPolicy(
+//                ThreadPolicy.Builder()
+//                    .detectAll()
+//                    .penaltyLog()//.penaltyDeath()
+//                    .build()
+//            )
+//            StrictMode.setVmPolicy(
+//                VmPolicy.Builder()
+//                    .detectAll()
+//                    .penaltyLog()//.penaltyDeath()
+//                    .build()
+//            )
+        }
 
 //        val mSystemLanguageList= Locale.getAvailableLocales()
 //        for (local in mSystemLanguageList){

@@ -71,24 +71,27 @@ class SouceAdapter(val fragment:Fragment,
     }
 
     fun reloadData(){
-        cancelAllJob()
         shareElementIndex = 0
+        pixabayPhotosAdapter.sharedElementIndex = 0
+        pexelsPhotosAdapter.sharedElementIndex=0
+        bindingData()
+    }
+    private fun bindingData(){
+        cancelAllJob()
         val job1 = fragment.lifecycleScope.launch {
             model.searchPhotosFromPixabay(query).collectLatest {
                 pixabayPhotosAdapter.submitData(it)
             }
         }
         jobs.add(job1)
-        pixabayPhotosAdapter.sharedElementIndex = 0
         val job2 = fragment.lifecycleScope.launch {
             model.searchPhotosFromPexels(query).collectLatest {
                 pexelsPhotosAdapter.submitData(it)
             }
         }
         jobs.add(job2)
-        pexelsPhotosAdapter.sharedElementIndex=0
-
     }
+
 
 
     fun initPixabayRecyclerView(holder: RecyclerViewHolder){
@@ -118,12 +121,12 @@ class SouceAdapter(val fragment:Fragment,
                 val lastPosition = layoutManager.findLastCompletelyVisibleItemPositions(null)
                 when(index){
                     0 ->{
-                        pixabayPhotosAdapter.reStoreFirstPosition = firstPosition.min()
-                        pixabayPhotosAdapter.reStoreLastPostion = lastPosition.max()
+                        pixabayPhotosAdapter.reStoreFirstPosition = firstPosition.firstOrNull() ?: firstPosition.last()
+                        pixabayPhotosAdapter.reStoreLastPostion = lastPosition.lastOrNull() ?: lastPosition.first()
                     }
                     1 ->{
-                        pexelsPhotosAdapter.reStoreFirstPosition = firstPosition.min()
-                        pexelsPhotosAdapter.reStoreLastPostion = lastPosition.max()
+                        pexelsPhotosAdapter.reStoreFirstPosition = firstPosition.firstOrNull() ?: firstPosition.last()
+                        pexelsPhotosAdapter.reStoreLastPostion = lastPosition.lastOrNull() ?: lastPosition.first()
                     }
                 }
             }
@@ -142,6 +145,7 @@ class SouceAdapter(val fragment:Fragment,
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
         recyclerview = recyclerView
+        bindingData()
     }
 
     private fun cancelAllJob(){

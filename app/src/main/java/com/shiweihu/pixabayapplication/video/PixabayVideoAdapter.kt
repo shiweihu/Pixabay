@@ -73,7 +73,7 @@ class PixabayVideoAdapter(val fragment: Fragment,val clickCallBack:(view:View,ar
             val priority = pageIdex == 0 && sharedElementIndex == position
             holder.binding.priority = priority
             holder.binding.imageView.layoutParams.height = 360
-            holder.binding.doEnd = {
+            holder.binding.doEnd = {_,_ ->
                 if(pageIdex == 0 && sharedElementIndex == position){
                     fragment.startPostponedEnterTransition()
                 }

@@ -1,26 +1,23 @@
 package com.shiweihu.pixabayapplication.bindingFunctions
 
-import android.graphics.drawable.Drawable
+import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import androidx.lifecycle.findViewTreeLifecycleOwner
-import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
 import com.shiweihu.pixabayapplication.R
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+
 
 @BindingAdapter(value = ["imageUrl","priority","doEnd"],requireAll = false)
-fun bindImageFromUrl(view: ImageView, imageUrl: String?,priority:Boolean = false,doEnd:((result:Boolean)->Unit)?) {
+fun bindImageFromUrl(view: ImageView, imageUrl: String?,priority:Boolean = false,doEnd:((result:Boolean,view: View)->Unit)?) {
     if (imageUrl != null && imageUrl.isNotEmpty()) {
         var request = Glide.with(view.context)
             .load(imageUrl)
@@ -30,7 +27,7 @@ fun bindImageFromUrl(view: ImageView, imageUrl: String?,priority:Boolean = false
             request = request.priority(Priority.IMMEDIATE)
         }
         request.doOnEnd {result ->
-                doEnd?.invoke(result)
+                doEnd?.invoke(result,view)
             }
         request.into(view).clearOnDetach()
     }

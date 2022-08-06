@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
     <data>
-        <import type="kotlin.jvm.functions.Function1" />
+        <import type="kotlin.jvm.functions.Function2" />
         <import type="android.view.View"/>
         <variable
             name="image_url"
@@ -15,7 +15,7 @@
 
         <variable
             name="do_end"
-            type="Function1&lt;Boolean,kotlin.Unit&gt;" />
+            type="Function2&lt;Boolean,View,kotlin.Unit&gt;" />
         
 
 
