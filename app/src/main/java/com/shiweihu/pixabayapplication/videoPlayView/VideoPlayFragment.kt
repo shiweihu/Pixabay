@@ -18,6 +18,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.activityViewModels
@@ -32,13 +33,16 @@ import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.Player.REPEAT_MODE_ONE
 import com.google.android.exoplayer2.Player.STATE_READY
 import com.google.android.exoplayer2.metadata.Metadata
+import com.google.android.exoplayer2.ui.StyledPlayerView.SHOW_BUFFERING_WHEN_PLAYING
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import com.google.android.material.snackbar.Snackbar
+import com.jeremyliao.liveeventbus.LiveEventBus
 import com.shiweihu.pixabayapplication.BaseFragment
 import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.databinding.ActivityVideoPlayBinding
 import com.shiweihu.pixabayapplication.databinding.LoadingDialogLayoutBinding
+import com.shiweihu.pixabayapplication.event.ExoPlayerEvent
 import com.shiweihu.pixabayapplication.viewArgu.VideoPlayArgu
 import com.shiweihu.pixabayapplication.viewModle.FragmentComunicationViewModel
 import com.shiweihu.pixabayapplication.viewModle.VideoPlayViewModel
@@ -113,19 +117,6 @@ class VideoPlayFragment:BaseFragment(
                 this.findNavController().navigateUp()
             }
 
-            binding.fullScreenBtn.setOnClickListener {
-                player.pause()
-                player.currentMediaItem?.let { mediaItem ->
-                    val uri = mediaItem.localConfiguration?.uri
-                    val position = player.currentPosition
-                    uri?.let {
-                        model.navigateToFullScreen(binding.playerView,it,position)
-                    }
-
-                }
-            }
-
-
 
             binding.shareBtn.setOnClickListener {
                 player.pause()
@@ -135,15 +126,27 @@ class VideoPlayFragment:BaseFragment(
                 }else{
                     requestPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 }
-
-
             }
 
+            binding.fullScreenBtn.setOnClickListener {
+                player.pause()
+//                player.currentMediaItem?.let { mediaItem ->
+//                    val uri = mediaItem.localConfiguration?.uri
+//                    val position = player.currentPosition
+//                    uri?.let {
+//                        model.navigateToFullScreen(binding.playerView,it,position)
+//                    }
+//                }
+                binding?.playerView?.player = null
+                model.navigateToFullScreen(binding.playerView)
+                LiveEventBus.get(ExoPlayerEvent::class.java).post(ExoPlayerEvent(player))
+            }
 
 
 
             binding.playerView.player = player
             binding.playerView.controllerAutoShow = false
+
 
 
             player.repeatMode = REPEAT_MODE_ONE
@@ -205,10 +208,6 @@ class VideoPlayFragment:BaseFragment(
         TransitionInflater.from(this.requireContext()).inflateTransition(R.transition.video_shared_element_transition).also {
             sharedElementReturnTransition = it
         }
-        model.videoPlayerPosition.position.value = 0
-        model.videoPlayerPosition.position.observe(this){
-            player.seekTo(it)
-        }
         sharedModel.videoPlayArguLiveData.observe(this){args ->
             this.data = args
             if(args.from == 1){
@@ -266,8 +265,10 @@ class VideoPlayFragment:BaseFragment(
 
     }
 
+
     override fun onResume() {
         super.onResume()
+        binding?.playerView?.player = player
         player.play()
 
 
@@ -282,23 +283,18 @@ class VideoPlayFragment:BaseFragment(
 
     override fun onStop() {
         super.onStop()
-
-        if(player.isPlaying){
-            player.pause()
-        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         player.stop()
-        player.release()
         binding?.adView?.destroy()
         binding = null
     }
 
     override fun onDestroy() {
         super.onDestroy()
-
+        player.release()
     }
 
     companion object{

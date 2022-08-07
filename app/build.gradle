@@ -17,8 +17,8 @@ android {
         applicationId "com.shiweihu.pixabayapplication"
         minSdk 21
         targetSdk 33
-        versionCode 14
-        versionName "14.0"
+        versionCode 15
+        versionName "15.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -59,6 +59,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
     implementation 'com.google.firebase:firebase-analytics-ktx'
 
+    implementation "io.github.jeremyliao:live-event-bus-x:$live_event_bus"
 
     implementation "androidx.core:core-splashscreen:$splashscreen"
     implementation "com.google.android.gms:play-services-ads:$ads_version"

@@ -8,7 +8,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class VideoPlayActivityViewModle @Inject constructor(
-    val videoPlayerPosition: ApplicationModule.Companion.VideoPlayerPosition
 ) :ViewModel() {
 
 }

@@ -42,15 +42,6 @@
         android:name="com.shiweihu.pixabayapplication.videoPlayView.VideoPlayActivity"
         tools:layout="@layout/video_play_activity_layout"
         >
-        <argument
-            android:name="uri"
-            app:argType = "android.net.Uri"
-            />
-        <argument
-            android:name="position"
-            app:argType = "long"
-            />
-
 
     </activity>
 

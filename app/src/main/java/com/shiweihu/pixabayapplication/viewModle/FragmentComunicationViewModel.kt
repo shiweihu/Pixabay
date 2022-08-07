@@ -2,6 +2,7 @@ package com.shiweihu.pixabayapplication.viewModle
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.android.exoplayer2.ExoPlayer
 import com.shiweihu.pixabayapplication.viewArgu.BigPictureArgu
 import com.shiweihu.pixabayapplication.viewArgu.VideoPlayArgu
 import dagger.hilt.android.lifecycle.HiltViewModel

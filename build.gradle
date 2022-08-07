@@ -44,6 +44,7 @@ buildscript {
         firebase_crashlytics_gradle = "2.9.1"
         google_services = "4.3.13"
         perf_plugin = "1.4.1"
+        live_event_bus = "1.8.0"
     }
 
     repositories {

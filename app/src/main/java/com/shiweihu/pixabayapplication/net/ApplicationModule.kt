@@ -21,17 +21,9 @@ class ApplicationModule {
         return context as MyApplication
     }
 
-    @Singleton
-    @Provides
-    fun provideVideoPlayerProsition(): VideoPlayerPosition{
-        return VideoPlayerPosition(MutableLiveData(0))
-    }
 
     companion object{
 
-         class VideoPlayerPosition(
-            val position:MutableLiveData<Long>
-        )
     }
 
 }

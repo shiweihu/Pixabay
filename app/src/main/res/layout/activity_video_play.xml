@@ -22,6 +22,9 @@
         android:background="@color/black"
         android:id="@+id/background"
         >
+
+
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/container"
             android:layout_width="match_parent"
@@ -36,6 +39,9 @@
                 app:show_buffering="when_playing"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:surface_type="surface_view"
                 />
 
             <com.google.android.gms.ads.AdView
@@ -114,7 +120,6 @@
             </com.google.android.material.appbar.MaterialToolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
-
 
 
 

@@ -22,7 +22,6 @@ import com.shiweihu.pixabayapplication.MyApplication
 import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.net.ApplicationModule
 import com.shiweihu.pixabayapplication.videoPlayView.VideoPlayActivity
-import com.shiweihu.pixabayapplication.videoPlayView.VideoPlayActivityArgs
 
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.io.File
@@ -31,7 +30,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class VideoPlayViewModel @Inject constructor(
-    val videoPlayerPosition: ApplicationModule.Companion.VideoPlayerPosition
 ):ViewModel() {
 
 
@@ -48,8 +46,8 @@ class VideoPlayViewModel @Inject constructor(
         context.startActivity(Intent(Intent.ACTION_VIEW,uri))
     }
 
-    fun navigateToFullScreen(player: View, uri: Uri,position:Long){
-        player.findNavController().navigate(R.id.full_screen,VideoPlayActivityArgs(uri,position).toBundle(),
+    fun navigateToFullScreen(player: View){
+        player.findNavController().navigate(R.id.full_screen,null,
             null,
             FragmentNavigatorExtras(
                 player to VideoPlayActivity.TRANSITION_NAME

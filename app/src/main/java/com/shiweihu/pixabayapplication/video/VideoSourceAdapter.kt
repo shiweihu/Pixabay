@@ -111,17 +111,17 @@ class VideoSourceAdapter(val fragment: Fragment,
 
         recyclerview?.children?.forEachIndexed { index, view ->
             if(view is RecyclerView){
-                val layoutManager = view.layoutManager as GridLayoutManager
-                val firstPosition = layoutManager.findFirstCompletelyVisibleItemPosition()
-                val lastPosition = layoutManager.findLastCompletelyVisibleItemPosition()
+                val layoutManager = view.layoutManager as StaggeredGridLayoutManager
+                val firstPosition = layoutManager.findFirstCompletelyVisibleItemPositions(null)
+                val lastPosition = layoutManager.findLastVisibleItemPositions(null)
                 when(index){
                     0 ->{
-                        pixabayVideoAdapyer.reStoreFirstPosition = firstPosition
-                        pixabayVideoAdapyer.reStoreLastPostion = lastPosition
+                        pixabayVideoAdapyer.reStoreFirstPosition = firstPosition.firstOrNull() ?: firstPosition.last()
+                        pixabayVideoAdapyer.reStoreLastPostion = lastPosition.lastOrNull() ?: lastPosition.first()
                     }
                     1 ->{
-                        pexelsVideoAdapter.reStoreFirstPosition = firstPosition
-                        pexelsVideoAdapter.reStoreLastPostion = lastPosition
+                        pexelsVideoAdapter.reStoreFirstPosition = firstPosition.firstOrNull() ?: firstPosition.last()
+                        pexelsVideoAdapter.reStoreLastPostion = lastPosition.lastOrNull() ?: lastPosition.first()
                     }
                 }
             }
@@ -135,7 +135,7 @@ class VideoSourceAdapter(val fragment: Fragment,
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder {
         val holder = RecyclerViewHolder(RecyclerViewLayoutBinding.inflate(LayoutInflater.from(parent.context),parent,false))
         //for video,the each cover of video is the same size,so change the layout manager
-        holder.binding.recycleView.layoutManager = GridLayoutManager(parent.context,2)
+        //holder.binding.recycleView.layoutManager = GridLayoutManager(parent.context,2)
         return holder
     }
 

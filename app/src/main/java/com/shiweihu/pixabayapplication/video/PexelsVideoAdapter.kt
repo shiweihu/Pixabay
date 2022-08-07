@@ -12,8 +12,10 @@ import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.data.PexelsVideos
 import com.shiweihu.pixabayapplication.data.Video
 import com.shiweihu.pixabayapplication.databinding.CardImageLayoutBinding
+import com.shiweihu.pixabayapplication.utils.DisplayUtils
 import com.shiweihu.pixabayapplication.viewArgu.VideoPlayArgu
 import com.shiweihu.pixabayapplication.viewModle.VideoFragmentMainViewModel
+import kotlin.math.max
 
 class PexelsVideoAdapter(val fragment: Fragment,val clickCallBack:(view:View,args: VideoPlayArgu)->Unit): PagingDataAdapter<PexelsVideos, PexelsVideoAdapter.CoverViewHolder>(
 PexelsVideoAdapter.VideoDiff()
@@ -34,6 +36,9 @@ PexelsVideoAdapter.VideoDiff()
     var pageIdex:Int = 0
     var reStoreFirstPosition = 0
     var reStoreLastPostion = 0
+
+    private val recyclerview_span = fragment.context?.resources?.getInteger(R.integer.photo_recyclerview_span) ?: 1
+    private val photos_item_margin = fragment.context?.resources?.getDimension(R.dimen.photo_recyclerview_margin) ?: 0F
 
     private var recyclerView:RecyclerView? = null
     init {
@@ -71,7 +76,7 @@ PexelsVideoAdapter.VideoDiff()
             holder.binding.imageUrl = it.image
             holder.binding.pxLog.setImageResource(R.drawable.ic_pexels)
             holder.binding.authorName = it.user.name
-            holder.binding.imageView.layoutParams.height = 360
+            //holder.binding.imageView.layoutParams.height = 360
             val priority = pageIdex == 0 && sharedElementIndex == position
             holder.binding.priority = priority
             holder.binding.doEnd = {_,_ ->
@@ -85,6 +90,24 @@ PexelsVideoAdapter.VideoDiff()
             holder.binding.imageView.setOnClickListener {view ->
                 navigateToPlayBack(view,position)
             }
+
+            val item_margin =
+                fragment.context?.let { it1 -> DisplayUtils.dp2px(it1,photos_item_margin)*2 } ?:0
+
+
+
+            val scaleRadio = (DisplayUtils.ScreenWidth.toFloat()-item_margin) / it.width.toFloat()
+            var heightPX = (it.height.toFloat()-item_margin)*(scaleRadio)
+
+            heightPX /= recyclerview_span
+
+
+
+            //val highDP = DisplayUtils.px2dp(holder.binding.imageView.context,heightPX)
+
+            holder.binding.imageView.layoutParams.height = max(heightPX.toInt(),200)
+
+
         }
 
     }
