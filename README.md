@@ -25,6 +25,7 @@ Furthermore,APP integrates firebase tools to help project monitor the performanc
 4. Gson
 5. Glide
 6. leakcanary
+7. LiveEventBus
 
 ### This project has two main functions.the first functions is images search.it load data from Pixabay and Pexels open API.Users easyly change the view between them.
 https://user-images.githubusercontent.com/13948493/179451376-cfb3d42f-374e-4136-ae89-1cf945ba7e51.mp4
