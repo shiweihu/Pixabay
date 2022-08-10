@@ -262,8 +262,10 @@ class VideoPlayFragment:BaseFragment(
 
     override fun onStart() {
         super.onStart()
-
+        model.onBindingCostomTabSever(this.requireActivity())
     }
+
+
 
 
     override fun onResume() {
@@ -283,6 +285,7 @@ class VideoPlayFragment:BaseFragment(
 
     override fun onStop() {
         super.onStop()
+        model.onUnBindingCostomTabSever(this.requireActivity())
     }
 
     override fun onDestroyView() {

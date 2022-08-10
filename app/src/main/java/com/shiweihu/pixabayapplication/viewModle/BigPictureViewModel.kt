@@ -5,9 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.util.Log
-import android.view.View
+import androidx.browser.customtabs.CustomTabColorSchemeParams
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.interstitial.InterstitialAd
@@ -15,10 +15,9 @@ import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.shiweihu.pixabayapplication.MyApplication
 import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.databinding.FragmentBigPictureBinding
+import com.shiweihu.pixabayapplication.util.CustomTabActivityHelper
 import com.shiweihu.pixabayapplication.viewArgu.BigPictureArgu
-import dagger.hilt.android.HiltAndroidApp
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import java.lang.ref.WeakReference
 import javax.inject.Inject
 
@@ -30,6 +29,8 @@ class BigPictureViewModel @Inject constructor(
 
     var bigPictureArgu: BigPictureArgu? = null
 
+    private val customTabActivityHelper = CustomTabActivityHelper()
+
     fun navigateToUserProfilePage(context: Context, username:String, userid:String){
         navigateToWeb(context,"https://pixabay.com/users/${username}-${userid}/")
     }
@@ -39,9 +40,31 @@ class BigPictureViewModel @Inject constructor(
     }
 
     fun navigateToWeb(context:Context,url:String){
-        val uri = Uri.parse(url)
-        context.startActivity(Intent(Intent.ACTION_VIEW,uri))
+//        val uri = Uri.parse(url)
+//        context.startActivity(Intent(Intent.ACTION_VIEW,uri))
+
+        val intentBuilder = CustomTabsIntent.Builder()
+        val defaultColors = CustomTabColorSchemeParams.Builder()
+            .build()
+        intentBuilder.setDefaultColorSchemeParams(defaultColors)
+        intentBuilder.setShareState(CustomTabsIntent.SHARE_STATE_ON)
+        intentBuilder.setShowTitle(true)
+        CustomTabActivityHelper.openCustomTab(
+            context, intentBuilder.build(), Uri.parse(url)){context, uri ->
+            if(Intent(Intent.ACTION_VIEW,uri).resolveActivity(context.packageManager)!=null){
+                context.startActivity(Intent(Intent.ACTION_VIEW,uri))
+            }
+        }
     }
+
+    fun onBindingCostomTabSever(context: Context){
+        customTabActivityHelper.bindCustomTabsService(context)
+    }
+
+    fun onUnBindingCostomTabSever(context: Context){
+        customTabActivityHelper.unbindCustomTabsService(context)
+    }
+
     fun showInterstitialAd(activity: Activity){
         val adRequest = AdRequest.Builder().build()
         val adUnitid =  activity.getString(R.string.Interstitial_ads_big_picture)
@@ -99,6 +122,8 @@ class BigPictureViewModel @Inject constructor(
         } ?: builder
         return builder.build()
     }
+
+
 
 
     companion object{

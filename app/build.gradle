@@ -17,8 +17,8 @@ android {
         applicationId "com.shiweihu.pixabayapplication"
         minSdk 21
         targetSdk 33
-        versionCode 16
-        versionName "16.0"
+        versionCode 18
+        versionName "18.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -53,11 +53,18 @@ dependencies {
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation 'com.google.firebase:firebase-perf-ktx'
 
+    implementation("com.google.android.play:review:2.0.0")
+
+    // For Kotlin users also import the Kotlin extensions library for Play In-App Review:
+    implementation("com.google.android.play:review-ktx:2.0.0")
+
 
     // Declare the dependencies for the Crashlytics and Analytics libraries
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
     implementation 'com.google.firebase:firebase-analytics-ktx'
+
+    implementation "androidx.browser:browser:$browser_verion"
 
     implementation "io.github.jeremyliao:live-event-bus-x:$live_event_bus"
 

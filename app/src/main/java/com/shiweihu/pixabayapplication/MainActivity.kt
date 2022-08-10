@@ -13,11 +13,15 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.addCallback
+import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.google.android.gms.ads.MobileAds
 import com.google.android.material.tabs.TabLayoutMediator
 import com.shiweihu.pixabayapplication.databinding.ActivityMainBinding
+import com.shiweihu.pixabayapplication.room.SysSetting
+import com.shiweihu.pixabayapplication.viewModle.MainActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -29,6 +33,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+
+    val model:MainActivityViewModel by viewModels()
 
     private val icons=  listOf(R.drawable.image_search_selector,R.drawable.vedio_icon_selector)
     private val names by lazy {
@@ -47,6 +53,18 @@ class MainActivity : AppCompatActivity() {
             tab.setIcon(icons[position])
             tab.text = names[position]
         }.attach()
+
+        lifecycleScope.launch {
+            val setting = model.getSyssetting()
+            if(setting == null){
+                model.initSysSetting()
+            }else{
+                model.setTimes(this@MainActivity,setting)
+            }
+
+        }
+
+
 
     }
 

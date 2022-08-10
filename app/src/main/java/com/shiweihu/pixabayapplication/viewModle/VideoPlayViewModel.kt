@@ -11,6 +11,8 @@ import android.os.Environment.DIRECTORY_MOVIES
 import android.provider.MediaStore
 import android.view.View
 import androidx.annotation.RequiresApi
+import androidx.browser.customtabs.CustomTabColorSchemeParams
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -21,6 +23,7 @@ import com.google.android.exoplayer2.transformer.Transformer
 import com.shiweihu.pixabayapplication.MyApplication
 import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.net.ApplicationModule
+import com.shiweihu.pixabayapplication.util.CustomTabActivityHelper
 import com.shiweihu.pixabayapplication.videoPlayView.VideoPlayActivity
 
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -32,6 +35,7 @@ import javax.inject.Inject
 class VideoPlayViewModel @Inject constructor(
 ):ViewModel() {
 
+    private val customTabActivityHelper = CustomTabActivityHelper()
 
 
     fun navigateToUserProfilePage(context: Context, username:String, userid:String){
@@ -42,8 +46,29 @@ class VideoPlayViewModel @Inject constructor(
     }
 
     fun navigateToWeb(context: Context, url:String){
-        val uri = Uri.parse(url)
-        context.startActivity(Intent(Intent.ACTION_VIEW,uri))
+        val intentBuilder = CustomTabsIntent.Builder()
+        val defaultColors = CustomTabColorSchemeParams.Builder()
+            .build()
+        intentBuilder.setDefaultColorSchemeParams(defaultColors)
+        intentBuilder.setShareState(CustomTabsIntent.SHARE_STATE_ON)
+        intentBuilder.setShowTitle(true)
+        intentBuilder.setUrlBarHidingEnabled(true)
+        CustomTabActivityHelper.openCustomTab(
+            context, intentBuilder.build(), Uri.parse(url)){context, uri ->
+            if(Intent(Intent.ACTION_VIEW,uri).resolveActivity(context.packageManager)!=null){
+                context.startActivity(Intent(Intent.ACTION_VIEW,uri))
+            }
+        }
+
+
+    }
+
+    fun onBindingCostomTabSever(context: Context){
+        customTabActivityHelper.bindCustomTabsService(context)
+    }
+
+    fun onUnBindingCostomTabSever(context: Context){
+        customTabActivityHelper.unbindCustomTabsService(context)
     }
 
     fun navigateToFullScreen(player: View){

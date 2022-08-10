@@ -255,6 +255,16 @@ class BigPictureFragment : BaseFragment() {
 
     }
 
+    override fun onStart() {
+        super.onStart()
+        modle.onBindingCostomTabSever(this.requireActivity())
+    }
+
+    override fun onStop() {
+        super.onStop()
+        modle.onUnBindingCostomTabSever(this.requireActivity())
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         binding?.viewPage?.adapter = null
