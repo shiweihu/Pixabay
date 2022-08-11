@@ -105,7 +105,7 @@ class VideoPlayViewModel @Inject constructor(
                     val file = File(filePath)
                     val uri = Uri.fromFile(file)
                     val intent = Intent(Intent.ACTION_SEND).also {
-                        it.type = "video/*"
+                        it.type = "video/mp4"
                         it.putExtra(Intent.EXTRA_STREAM, ClipData.Item(uri).uri)
                     }
 
@@ -143,7 +143,7 @@ class VideoPlayViewModel @Inject constructor(
 //                    val file = File(Environment.getDownloadCacheDirectory().path+"/temp.mp4")
 //                    val uri = Uri.fromFile(file)
                     val intent = Intent(Intent.ACTION_SEND).also {
-                        it.type = "video/*"
+                        it.type = "video/mp4"
                         it.putExtra(Intent.EXTRA_STREAM, outputUri)
                     }
                     val chose_intent = Intent.createChooser(intent,context.resources.getString(R.string.app_choser_title))

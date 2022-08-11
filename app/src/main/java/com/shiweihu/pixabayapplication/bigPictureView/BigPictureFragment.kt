@@ -92,40 +92,17 @@ class BigPictureFragment : BaseFragment() {
 
 
 
-    private val shareToInstagram = registerForActivityResult(object :ActivityResultContract<Bitmap,Unit>(){
-        var temp_input:Uri? = null
-
-        fun getOutPutUri(bitmap:Bitmap):Uri?{
-            val content = ContentValues()
-            content.put(MediaStore.Images.Media.DISPLAY_NAME,UUID.randomUUID().toString())
-            content.put(MediaStore.Images.Media.MIME_TYPE,"image/png")
-            val outputUri = requireContext().contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,content)
-            if (outputUri != null) {
-                requireContext().contentResolver.openOutputStream(outputUri).also { output ->
-                        bitmap.compress(Bitmap.CompressFormat.PNG,100,output)
-                }
-            }
-            return outputUri!!
-        }
-
-
-        override fun createIntent(context: Context, input: Bitmap): Intent {
-            val outputUri = getOutPutUri(input)
+    private val shareToInstagram = registerForActivityResult(object :ActivityResultContract<Uri,Unit>(){
+        override fun createIntent(context: Context, input: Uri): Intent {
             val intent = Intent(Intent.ACTION_SEND).also {
                     it.type = "image/*"
                     // Add the URI to the Intent.
-                    it.putExtra(Intent.EXTRA_STREAM, outputUri)
+                    it.putExtra(Intent.EXTRA_STREAM, input)
             }
-            temp_input = outputUri
             return Intent.createChooser(intent,this@BigPictureFragment.resources.getString(R.string.app_choser_title))
         }
 
         override fun parseResult(resultCode: Int, intent: Intent?) {
-            if(temp_input != null){
-               // this@BigPictureFragment.requireContext().contentResolver.delete(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,temp_input?.query,null)
-                temp_input = null
-            }
-
         }
 
     }) {
@@ -212,21 +189,32 @@ class BigPictureFragment : BaseFragment() {
     }
 
 
+    fun getOutPutUri(bitmap:Bitmap):Uri?{
+        val content = ContentValues()
+        content.put(MediaStore.Images.Media.DISPLAY_NAME,UUID.randomUUID().toString())
+        content.put(MediaStore.Images.Media.MIME_TYPE,"image/png")
+        val outputUri = requireContext().contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,content)
+        if (outputUri != null) {
+            requireContext().contentResolver.openOutputStream(outputUri).also { output ->
+                bitmap.compress(Bitmap.CompressFormat.PNG,100,output)
+            }
+        }
+        return outputUri
+    }
 
     private fun shareImageToInstagram(url:String){
         Uri.parse(url).also {
             Glide.with(this.requireContext()).asBitmap().load(it).into(object:CustomTarget<Bitmap>(){
                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                    shareToInstagram.launch(resource)
+                    getOutPutUri(resource)?.also { uri ->
+                        shareToInstagram.launch(uri)
+                    }
                 }
                 override fun onLoadCleared(placeholder: Drawable?) {
 
                 }
             })
         }
-
-
-
     }
 
 
