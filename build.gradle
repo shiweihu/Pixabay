@@ -5,12 +5,12 @@ buildscript {
 
 
         // App dependencies
-        appCompatVersion = '1.4.2'
+        appCompatVersion = '1.5.0'
         constraintLayoutVersion = '2.1.4'
         coreTestingVersion = '2.0.0'
         coroutinesVersion = '1.6.4'
         espressoVersion = '3.1.1'
-        fragmentVersion = '1.5.1'
+        fragmentVersion = '1.5.2'
         glideVersion = '4.13.2'
         gradleVersion = '7.0.3'
         gsonVersion = '2.9.1'

@@ -18,6 +18,7 @@ import com.shiweihu.pixabayapplication.net.NetworkModule
 import com.shiweihu.pixabayapplication.utils.DisplayUtils
 import dagger.hilt.android.HiltAndroidApp
 import java.util.*
+import kotlin.collections.HashSet
 
 
 @HiltAndroidApp
@@ -92,6 +93,8 @@ class MyApplication: Application() {
 //        for (local in mSystemLanguageList){
 //            lang += local.country
 //        }
+        
+
     }
 
     @RequiresApi(Build.VERSION_CODES.R)

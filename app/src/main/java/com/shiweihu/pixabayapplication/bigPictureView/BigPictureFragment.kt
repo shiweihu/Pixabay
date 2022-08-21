@@ -87,7 +87,12 @@ class BigPictureFragment : BaseFragment() {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         intent.action = android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS
         intent.data = Uri.parse("package:${requireActivity().packageName}")
-        startActivity(intent)
+        intent.resolveActivity(this.requireActivity().packageManager)?.let {
+            startActivity(intent)
+        }
+
+
+
     }
 
 

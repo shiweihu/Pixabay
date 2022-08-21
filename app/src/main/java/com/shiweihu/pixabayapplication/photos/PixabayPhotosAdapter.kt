@@ -3,6 +3,7 @@ package com.shiweihu.pixabayapplication.photos
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
@@ -10,6 +11,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.google.android.material.imageview.ShapeableImageView
 import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.data.ImageInfo
 import com.shiweihu.pixabayapplication.databinding.CardImageLayoutBinding
@@ -85,7 +87,7 @@ class PixabayPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,a
             holder.binding.imageView.transitionName = "PixabayPhotos-${holder.layoutPosition}"
             holder.binding.priority = (holder.layoutPosition == sharedElementIndex && pageIdex == 0)
             holder.binding.doEnd = {_,_ ->
-                if(holder.layoutPosition == sharedElementIndex && pageIdex == 0) {
+                if(position == sharedElementIndex && pageIdex == 0) {
                     fragment.startPostponedEnterTransition()
                 }
             }
@@ -104,7 +106,7 @@ class PixabayPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,a
 
             //val highDP = DisplayUtils.px2dp(holder.binding.imageView.context,heightPX)
 
-            holder.binding.imageView.layoutParams.height = max(heightPX.toInt(),200)
+            holder.binding.root.layoutParams.height = max(heightPX.toInt(),200)
         }
         //holder.binding.executePendingBindings()
     }

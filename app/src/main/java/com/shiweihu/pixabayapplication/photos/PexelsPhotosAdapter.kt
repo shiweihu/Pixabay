@@ -3,11 +3,13 @@ package com.shiweihu.pixabayapplication.photos
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.paging.LoadState
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.imageview.ShapeableImageView
 import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.data.PexelsPhoto
 import com.shiweihu.pixabayapplication.databinding.CardImageLayoutBinding
@@ -93,7 +95,7 @@ class PexelsPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,ar
                 navigateToBigPicture(view,holder.layoutPosition)
             }
             holder.binding.doEnd = {_,_ ->
-                if(holder.layoutPosition == sharedElementIndex && pageIdex == 1){
+                if(position == sharedElementIndex && pageIdex == 1){
                     fragment.startPostponedEnterTransition()
                 }
             }
@@ -111,7 +113,7 @@ class PexelsPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,ar
 
             //val highDP = DisplayUtils.px2dp(holder.binding.imageView.context,heightPX)
 
-            holder.binding.imageView.layoutParams.height = max(heightPX.toInt(),200)
+            holder.binding.root.layoutParams.height = max(heightPX.toInt(),200)
 
 
         }
