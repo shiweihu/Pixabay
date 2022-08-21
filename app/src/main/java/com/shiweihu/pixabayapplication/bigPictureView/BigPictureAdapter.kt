@@ -43,15 +43,14 @@ class BigPictureAdapter(val argu:BigPictureArgu,val fragment: Fragment): Recycle
                 fragment.startPostponedEnterTransition()
             }
             if(state){
-                view.setOnClickListener {
-                    val dialogBuilder = ViewPictureDialog.Companion.Builder()
-                    dialogBuilder.show(holder.binding.root.context,imageUrl)
-                }
+               view.isEnabled = true
             }
         }
-
-
-        holder.binding.executePendingBindings()
+        holder.binding.imageView.setOnClickListener {
+            val dialogBuilder = ViewPictureDialog.Companion.Builder()
+            dialogBuilder.show(it.context,imageUrl)
+        }
+        holder.binding.imageView.isEnabled = false
     }
 
 

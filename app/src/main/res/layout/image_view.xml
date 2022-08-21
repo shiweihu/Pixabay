@@ -29,7 +29,6 @@
             app:priority="@{priority}"
             app:doEnd="@{do_end}"
             android:layout_gravity="center"
-
             />
 
     </FrameLayout>

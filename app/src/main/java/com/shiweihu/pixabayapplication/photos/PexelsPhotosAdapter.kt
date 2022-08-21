@@ -90,7 +90,7 @@ class PexelsPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,ar
             holder.binding.imageView.transitionName = "PexelsPhotos-${position}"
             holder.binding.imageView.tag = "PexelsPhotos-${position}"
             holder.binding.pxLog.setImageResource(R.drawable.ic_pexels)
-            holder.binding.priority = (holder.layoutPosition == sharedElementIndex && pageIdex == 1)
+            holder.binding.priority = (position == sharedElementIndex && pageIdex == 1)
             holder.binding.imageView.setOnClickListener { view ->
                 navigateToBigPicture(view,holder.layoutPosition)
             }

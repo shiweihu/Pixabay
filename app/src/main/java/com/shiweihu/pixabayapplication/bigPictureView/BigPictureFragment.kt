@@ -56,7 +56,6 @@ class BigPictureFragment : BaseFragment() {
 
     private  var binding:FragmentBigPictureBinding? = null
 
-    private var scrollPageCount:Int = 0
 
     private val myTrace = Firebase.performance.newTrace("BigPicture view trace")
 
