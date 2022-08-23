@@ -172,6 +172,7 @@ class VideoFragment : Fragment() {
                         override fun onQueryTextSubmit(query: String): Boolean {
                             sharedModel.videoQueryText.postValue(query)
                             searchView.clearFocus()
+                            binding?.root?.requestFocus()
                             return true
                         }
 

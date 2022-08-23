@@ -17,8 +17,8 @@ android {
         applicationId "com.shiweihu.pixabayapplication"
         minSdk 21
         targetSdk 33
-        versionCode 19
-        versionName "19.0"
+        versionCode 20
+        versionName "20.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -114,7 +114,7 @@ dependencies {
     implementation "com.google.dagger:hilt-android:$rootProject.hiltVersion"
     implementation "com.github.bumptech.glide:okhttp3-integration:$rootProject.glideVersion"
     implementation "com.github.bumptech.glide:annotations:$rootProject.glideVersion"
-    testImplementation 'junit:junit:4.+'
+    testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }

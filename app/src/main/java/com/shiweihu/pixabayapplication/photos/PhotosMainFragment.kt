@@ -159,6 +159,7 @@ class PhotosMainFragment : BaseFragment() {
                         override fun onQueryTextSubmit(query: String): Boolean {
                             activeModel.pictureQueryText.postValue(query)
                             searchView.clearFocus()
+                            binding?.root?.requestFocus()
                             return true
                         }
 
