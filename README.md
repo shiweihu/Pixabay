@@ -17,6 +17,7 @@ Furthermore,APP integrates firebase tools to help project monitor the performanc
 4. Navigation
 5. Paging
 6. ViewModel
+7. Room
 
 ## Other library:
 1. Retrofit+OKHTTP
