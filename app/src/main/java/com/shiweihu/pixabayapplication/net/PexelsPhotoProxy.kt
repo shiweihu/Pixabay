@@ -14,13 +14,14 @@ interface PexelsPhotoProxy {
         @Query("query") query:String = "cat",
         @Query("page") page:Int = 1,
         @Query("per_page") per_page:Int = 80,
+        @Query("locale") lang:String = "en-US"
     ): PexelsPhotosSearchResponse
 
     @Headers("cache-control:max-age=86400")
     @GET("v1/curated")
     suspend fun curatedImages(
         @Query("page") page:Int = 1,
-        @Query("per_page") per_page:Int = 80,
+        @Query("per_page") per_page:Int = 80
     ): PexelsPhotosSearchResponse
 
 //    @Query("orientation") orientation:String = "",

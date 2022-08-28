@@ -22,9 +22,6 @@ import kotlin.math.sqrt
 class BigPictureAdapter(val argu:BigPictureArgu,val fragment: Fragment): RecyclerView.Adapter<BigPictureAdapter.ImageViewHolder>() {
     class ImageViewHolder(val binding:ImageViewBinding):RecyclerView.ViewHolder(binding.root)
 
-    private var origMatrix:Matrix? = null
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
         return ImageViewHolder(
             ImageViewBinding.inflate( LayoutInflater.from(parent.context),parent,false)

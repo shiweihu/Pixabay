@@ -16,12 +16,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.app.SharedElementCallback
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
@@ -164,6 +166,9 @@ class BigPictureFragment : BaseFragment() {
             it.pageProfile.setOnClickListener { view ->
                 modle.pageProfileOnClick(view.context,it.viewPage.currentItem)
             }
+            it.relativeImageBtn.setOnClickListener { view ->
+                findRelativePictures(view,it.viewPage.currentItem)
+            }
 
 
             it.viewPage.offscreenPageLimit = 4
@@ -178,6 +183,16 @@ class BigPictureFragment : BaseFragment() {
         }
         postponeEnterTransition(resources.getInteger(R.integer.post_pone_time).toLong(), TimeUnit.MILLISECONDS)
         return binding?.root
+    }
+
+    private fun findRelativePictures(view: View,index: Int){
+        val keyTerms = modle.relativeBtnClick(view.context,index)
+        if(keyTerms.isNotEmpty()){
+            activeModel.pictureQueryText.postValue(keyTerms)
+            navigateUp()
+        }else{
+            Toast.makeText(this.requireContext(),R.string.empty_key_term_notice,Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun shareOnClick(){

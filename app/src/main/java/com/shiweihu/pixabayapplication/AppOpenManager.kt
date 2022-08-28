@@ -95,7 +95,7 @@ class AppOpenManager(private val myApplication: MyApplication): LifecycleEventOb
 
     /** Creates and returns ad request.  */
     private val adRequest: AdRequest
-        private get() = AdRequest.Builder().build()
+        get() = AdRequest.Builder().build()
 
     /** Utility method that checks if ad exists and can be shown.  */
     val isAdAvailable: Boolean

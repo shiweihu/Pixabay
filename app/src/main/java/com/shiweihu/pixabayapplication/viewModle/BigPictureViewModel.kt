@@ -102,6 +102,23 @@ class BigPictureViewModel @Inject constructor(
 
         }
     }
+
+    fun relativeBtnClick(context: Context,index:Int):String{
+        var keyTerms = ""
+        val tag =  bigPictureArgu?.tags?.get(index)
+        if(tag != null && tag.isNotEmpty()){
+            when(bigPictureArgu?.from){
+                0 ->{
+                    keyTerms = tag
+                }
+                1 ->{
+                    keyTerms = tag
+                }
+            }
+        }
+        return keyTerms
+    }
+
     fun pageProfileOnClick(context: Context,index:Int){
         bigPictureArgu?.pageUrls?.get(index)?.also { pageUrl ->
             navigateToWeb(context,pageUrl)

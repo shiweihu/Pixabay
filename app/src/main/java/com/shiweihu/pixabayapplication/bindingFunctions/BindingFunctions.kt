@@ -1,5 +1,6 @@
 package com.shiweihu.pixabayapplication.bindingFunctions
 
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
@@ -21,7 +22,8 @@ fun bindImageFromUrl(view: ImageView, imageUrl: String?,priority:Boolean = false
     if (imageUrl != null && imageUrl.isNotEmpty()) {
         var request = Glide.with(view.context)
             .load(imageUrl)
-            .placeholder(R.drawable.placeholder).dontTransform()
+            .placeholder(R.drawable.placeholder)
+            .dontTransform()
             .diskCacheStrategy(DiskCacheStrategy.DATA)
         if(priority){
             request = request.priority(Priority.IMMEDIATE)

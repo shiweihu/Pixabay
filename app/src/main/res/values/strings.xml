@@ -43,4 +43,5 @@
     <string name="pexels_title">Pexels</string>
     <string name="go">Go</string>
     <string name="permission_deny_notice">Click Go to change the permissions.</string>
+    <string name="empty_key_term_notice">can not find relative pictures</string>
 </resources>

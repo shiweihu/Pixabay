@@ -75,8 +75,8 @@ class PhotosMainFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
 
         activeModel.pictureQueryText.observe(this){
-            fragmentAdapter.query = it
-            fragmentAdapter.reloadData()
+            fragmentAdapter.startQuery(it)
+            this.startPostponedEnterTransition()
         }
 
         activeModel.pictureItemPosition.observe(this){

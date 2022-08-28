@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.room.Query
 import com.shiweihu.pixabayapplication.databinding.RecyclerViewLayoutBinding
 import com.shiweihu.pixabayapplication.viewModle.FragmentComunicationViewModel
 import com.shiweihu.pixabayapplication.viewModle.PhotosMainFragmentModel
@@ -27,7 +28,7 @@ class SouceAdapter(val fragment:Fragment,
     private val jobs:MutableList<Job> = mutableListOf()
 
     var shareElementIndex = 0
-    var query:String = ""
+    private var query:String = ""
 
 
     private var recyclerview:RecyclerView? = null
@@ -66,6 +67,14 @@ class SouceAdapter(val fragment:Fragment,
             1 ->{
                 initPexelsRecyclerView(holder)
             }
+        }
+
+    }
+
+    fun startQuery(query: String){
+        if(this.query != query){
+            this.query = query
+            reloadData()
         }
 
     }

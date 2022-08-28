@@ -1,5 +1,6 @@
 package com.shiweihu.pixabayapplication.photos
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -85,6 +86,7 @@ class PexelsPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,ar
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         getItem(position)?.also{ it ->
+            Log.println(Log.INFO,"alt",it.alt ?: "")
             holder.binding.imageUrl = it.src?.medium
             holder.binding.authorName = it.photographer
             holder.binding.imageView.transitionName = "PexelsPhotos-${position}"
@@ -143,7 +145,7 @@ class PexelsPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,ar
             imageInfo?.let { info->
                 images.add(info.src!!.large2x!!)
                 profiles.add("")
-                tags.add("")
+                tags.add(info.alt ?: "")
                 usersID.add(info.photographer_url!!)
                 usersName.add(info.photographer!!)
                 pageUrl.add(info.url!!)

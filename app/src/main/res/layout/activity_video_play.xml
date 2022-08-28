@@ -44,6 +44,7 @@
                 app:surface_type="surface_view"
                 />
 
+
             <com.google.android.gms.ads.AdView
                 android:id="@+id/adView"
                 android:layout_width="match_parent"
@@ -72,7 +73,6 @@
                 android:layout_margin="10dp"
                 android:src="@drawable/full_screen_icon"
                 />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

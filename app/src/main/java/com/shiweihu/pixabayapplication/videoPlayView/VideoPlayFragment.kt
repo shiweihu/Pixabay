@@ -60,7 +60,6 @@ class VideoPlayFragment:BaseFragment(
 
     private var binding:ActivityVideoPlayBinding? = null
 
-    private fun mHandler() = binding!!.root.handler
 
     private var data: VideoPlayArgu? = null
 
@@ -117,7 +116,6 @@ class VideoPlayFragment:BaseFragment(
                 this.findNavController().navigateUp()
             }
 
-
             binding.shareBtn.setOnClickListener {
                 player.pause()
                 val permissionState = ActivityCompat.checkSelfPermission(this.requireContext(),Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -129,15 +127,7 @@ class VideoPlayFragment:BaseFragment(
             }
 
             binding.fullScreenBtn.setOnClickListener {
-                player.pause()
-//                player.currentMediaItem?.let { mediaItem ->
-//                    val uri = mediaItem.localConfiguration?.uri
-//                    val position = player.currentPosition
-//                    uri?.let {
-//                        model.navigateToFullScreen(binding.playerView,it,position)
-//                    }
-//                }
-                binding?.playerView?.player = null
+                binding.playerView.player = null
                 model.navigateToFullScreen(binding.playerView)
                 LiveEventBus.get(ExoPlayerEvent::class.java).post(ExoPlayerEvent(player))
             }
@@ -177,7 +167,7 @@ class VideoPlayFragment:BaseFragment(
                     Toast.makeText(this@VideoPlayFragment.requireContext(),error.message,Toast.LENGTH_LONG).show()
                     if(player.hasNextMediaItem()){
                         player.seekToNextMediaItem()
-                        mHandler().postDelayed({
+                        this@VideoPlayFragment.binding?.root?.handler?.postDelayed({
                             player.prepare()
                             player.play()
                         },3000)
@@ -292,6 +282,7 @@ class VideoPlayFragment:BaseFragment(
         super.onDestroyView()
         player.stop()
         binding?.adView?.destroy()
+        binding?.root?.handler?.removeCallbacksAndMessages(null)
         binding = null
     }
 

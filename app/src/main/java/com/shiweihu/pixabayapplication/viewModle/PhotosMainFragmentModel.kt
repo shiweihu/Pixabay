@@ -28,14 +28,16 @@ class PhotosMainFragmentModel @Inject constructor(
     private var currentQueryFlowPexels: Flow<PagingData<PexelsPhoto>>? = null
 
     fun searchPhotosFromPixabay(q:String): Flow<PagingData<ImageInfo>> {
-        if(currentQueryValue != q || currentQueryFlow == null){
-            currentQueryValue = q
-            currentQueryFlow = photoRepository.searchPhotos(q).cachedIn(viewModelScope)
+        var query = q.replace(", ","+").replace(" ","+")
+        if(currentQueryValue != query || currentQueryFlow == null){
+            currentQueryValue = query
+            currentQueryFlow = photoRepository.searchPhotos(query).cachedIn(viewModelScope)
         }
         return currentQueryFlow!!
     }
 
     fun searchPhotosFromPexels(q:String): Flow<PagingData<PexelsPhoto>> {
+        val query = q.replace(", "," ")
         if(currentQueryValuePexels != q || currentQueryFlowPexels == null){
             currentQueryValuePexels = q
             currentQueryFlowPexels = photoRepository.searchPhotosFromPexels(q).cachedIn(viewModelScope)
