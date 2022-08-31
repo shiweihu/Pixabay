@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.paging.LoadState
 import androidx.paging.PagingDataAdapter
@@ -65,6 +66,11 @@ class PixabayVideoAdapter(val fragment: Fragment,val clickCallBack:(view:View,ar
         this.recyclerView = null
     }
 
+    override fun onViewRecycled(holder: CoverViewHolder) {
+        super.onViewRecycled(holder)
+        holder.binding.imageView.scaleType = ImageView.ScaleType.FIT_CENTER
+    }
+
     override fun onBindViewHolder(holder: CoverViewHolder, position: Int) {
         getItem(position)?.let { it ->
             holder.binding.authorName = it.user
@@ -73,9 +79,13 @@ class PixabayVideoAdapter(val fragment: Fragment,val clickCallBack:(view:View,ar
             val priority = pageIdex == 0 && sharedElementIndex == position
             holder.binding.priority = priority
             holder.binding.imageView.layoutParams.height = 360
-            holder.binding.doEnd = {_,_ ->
+            holder.binding.doEnd = {result,view ->
                 if(pageIdex == 0 && sharedElementIndex == position){
                     fragment.startPostponedEnterTransition()
+                }
+                if(result){
+                    (view as ImageView).scaleType =  ImageView.ScaleType.FIT_XY
+                    view.isEnabled = true
                 }
             }
             val transitionName = "PixabayVideo-${position}"
@@ -84,6 +94,7 @@ class PixabayVideoAdapter(val fragment: Fragment,val clickCallBack:(view:View,ar
             holder.binding.imageView.setOnClickListener {view->
                 navigateToPlayBack(view,position)
             }
+            holder.binding.imageView.isEnabled = false
         }
         //holder.binding.executePendingBindings()
 

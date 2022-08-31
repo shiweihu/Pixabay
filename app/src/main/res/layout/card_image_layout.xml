@@ -40,7 +40,7 @@
             app:doEnd="@{do_end}"
             android:minHeight="100dp"
             tools:src="@drawable/ic_launcher_background"
-            android:scaleType="fitXY"
+            android:scaleType="fitCenter"
             android:adjustViewBounds="true"
             android:backgroundTint="?attr/colorAccent"
             app:layout_constraintTop_toTopOf="parent"

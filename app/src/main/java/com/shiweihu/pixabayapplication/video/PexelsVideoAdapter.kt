@@ -3,6 +3,7 @@ package com.shiweihu.pixabayapplication.video
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.paging.LoadState
 import androidx.paging.PagingDataAdapter
@@ -79,9 +80,13 @@ PexelsVideoAdapter.VideoDiff()
             //holder.binding.imageView.layoutParams.height = 360
             val priority = pageIdex == 0 && sharedElementIndex == position
             holder.binding.priority = priority
-            holder.binding.doEnd = {_,_ ->
+            holder.binding.doEnd = {result,view ->
                 if(pageIdex == 1 && sharedElementIndex == position){
                     fragment.startPostponedEnterTransition()
+                }
+                if(result){
+                    (view as ImageView).scaleType =  ImageView.ScaleType.FIT_XY
+                    view.isEnabled = true
                 }
             }
             val transitionName = "PexelsVideo-${position}"
@@ -90,6 +95,7 @@ PexelsVideoAdapter.VideoDiff()
             holder.binding.imageView.setOnClickListener {view ->
                 navigateToPlayBack(view,position)
             }
+            holder.binding.imageView.isEnabled = false
 
             val item_margin =
                 fragment.context?.let { it1 -> DisplayUtils.dp2px(it1,photos_item_margin)*2 } ?:0
@@ -110,6 +116,11 @@ PexelsVideoAdapter.VideoDiff()
 
         }
 
+    }
+
+    override fun onViewRecycled(holder: CoverViewHolder) {
+        super.onViewRecycled(holder)
+        holder.binding.imageView.scaleType = ImageView.ScaleType.FIT_CENTER
     }
 
     fun navigateToPlayBack(view: View, position:Int){

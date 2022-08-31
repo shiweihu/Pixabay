@@ -55,6 +55,11 @@ class PixabayPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,a
         }
     }
 
+    override fun onViewRecycled(holder: ImageViewHolder) {
+        super.onViewRecycled(holder)
+        holder.binding.imageView.scaleType = ImageView.ScaleType.FIT_CENTER
+    }
+
 
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
@@ -81,16 +86,23 @@ class PixabayPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,a
         getItem(position)?.also {
             Log.println(Log.INFO,"tag",it.tags)
             holder.binding.authorName = it.user.trim()
-            holder.binding.imageUrl = it.webformatURL.replace("_640","_340")
+            //holder.binding.imageUrl = it.webformatURL.replace("_640","_340")
+            holder.binding.imageUrl = it.largeImageURL
             holder.binding.imageView.tag = "PixabayPhotos-${position}"
             holder.binding.imageView.setOnClickListener { view ->
                 navigateToBigPicture(view,holder.layoutPosition)
             }
+            holder.binding.imageView.isEnabled = false
+
             holder.binding.imageView.transitionName = "PixabayPhotos-${holder.layoutPosition}"
             holder.binding.priority = (holder.layoutPosition == sharedElementIndex && pageIdex == 0)
-            holder.binding.doEnd = {_,_ ->
+            holder.binding.doEnd = {result,view ->
                 if(position == sharedElementIndex && pageIdex == 0) {
                     fragment.startPostponedEnterTransition()
+                }
+                if(result){
+                    (view as ImageView).scaleType =  ImageView.ScaleType.FIT_XY
+                    view.isEnabled = true
                 }
             }
 
@@ -112,6 +124,8 @@ class PixabayPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,a
         }
         //holder.binding.executePendingBindings()
     }
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
         return ImageViewHolder( CardImageLayoutBinding.inflate(LayoutInflater.from(parent.context),parent,false))

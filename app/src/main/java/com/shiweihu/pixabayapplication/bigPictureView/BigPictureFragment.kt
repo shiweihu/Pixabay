@@ -257,7 +257,9 @@ class BigPictureFragment : BaseFragment() {
 
 
     private fun navigateUp(){
-        activeModel.pictureItemPosition.postValue(binding?.viewPage?.currentItem)
+        binding?.viewPage?.currentItem?.let {
+            activeModel.pictureItemPosition.postValue(it)
+        }
         findNavController().navigateUp()
     }
 

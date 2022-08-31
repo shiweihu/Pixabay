@@ -80,6 +80,11 @@ class PexelsPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,ar
         this.recyclerView = null
     }
 
+    override fun onViewRecycled(holder: ImageViewHolder) {
+        super.onViewRecycled(holder)
+        holder.binding.imageView.scaleType = ImageView.ScaleType.FIT_CENTER
+    }
+
 
 
 
@@ -87,7 +92,7 @@ class PexelsPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,ar
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         getItem(position)?.also{ it ->
             Log.println(Log.INFO,"alt",it.alt ?: "")
-            holder.binding.imageUrl = it.src?.medium
+            holder.binding.imageUrl = it.src?.large2x
             holder.binding.authorName = it.photographer
             holder.binding.imageView.transitionName = "PexelsPhotos-${position}"
             holder.binding.imageView.tag = "PexelsPhotos-${position}"
@@ -96,9 +101,14 @@ class PexelsPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,ar
             holder.binding.imageView.setOnClickListener { view ->
                 navigateToBigPicture(view,holder.layoutPosition)
             }
-            holder.binding.doEnd = {_,_ ->
+            holder.binding.imageView.isEnabled = false
+            holder.binding.doEnd = {result,view ->
                 if(position == sharedElementIndex && pageIdex == 1){
                     fragment.startPostponedEnterTransition()
+                }
+                if(result){
+                    (view as ImageView).scaleType =  ImageView.ScaleType.FIT_XY
+                    view.isEnabled = true
                 }
             }
             val item_margin =
