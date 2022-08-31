@@ -29,10 +29,7 @@ class PexelsSearchPhotoSource(
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PexelsPhoto> {
         val page = params.key ?: 1
-        val myTrace = Firebase.performance.newTrace("Pexels Photo Search Request")
         return try {
-            myTrace.start()
-
             val languageArray = arrayListOf("en-US","pt-BR","es-ES","ca-ES", "de-DE", "it-IT", "fr-FR" ,"sv-SE","id-ID", "pl-PL", "ja-JP","zh-TW","zh-CN","ko-KR","th-TH","nl-NL","hu-HU","vi-VN","cs-CZ","da-DK","fi-FI","uk-UA","el-GR","ro-RO","nb-NO","sk-SK","tr-TR","ru-RU")
             val languages = languageArray.filter {
                 it.indexOf(MyApplication.lang) != -1
@@ -43,14 +40,12 @@ class PexelsSearchPhotoSource(
             }else{
                 photoProxy.queryImages(query = query,page = page, lang = language).photos
             }
-            myTrace.stop()
             LoadResult.Page(
                 data = photos,
                 prevKey = if (page == 1) null else page - 1,
                 nextKey = if(photos.isNotEmpty()) page + 1 else null
             )
         }catch (e:Exception){
-            myTrace.stop()
             Log.println(Log.DEBUG,"PexelsSearchPhotos",e.toString())
             LoadResult.Error(e)
         }

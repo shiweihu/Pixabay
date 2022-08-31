@@ -3,15 +3,24 @@ package com.shiweihu.pixabayapplication.viewModle
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.util.Log
 import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.lifecycle.AndroidViewModel
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.label.ImageLabeling
+import com.google.mlkit.vision.label.defaults.ImageLabelerOptions
 import com.shiweihu.pixabayapplication.MyApplication
 import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.databinding.FragmentBigPictureBinding
@@ -19,7 +28,9 @@ import com.shiweihu.pixabayapplication.util.CustomTabActivityHelper
 import com.shiweihu.pixabayapplication.viewArgu.BigPictureArgu
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.lang.ref.WeakReference
+import java.util.*
 import javax.inject.Inject
+import kotlin.Comparator
 
 @HiltViewModel
 class BigPictureViewModel @Inject constructor(
@@ -38,6 +49,7 @@ class BigPictureViewModel @Inject constructor(
     fun navigateToUserProfilePagePexils(context: Context,userUrl:String){
         navigateToWeb(context,userUrl)
     }
+
 
     fun navigateToWeb(context:Context,url:String){
 //        val uri = Uri.parse(url)
@@ -103,20 +115,72 @@ class BigPictureViewModel @Inject constructor(
         }
     }
 
-    fun relativeBtnClick(context: Context,index:Int):String{
-        var keyTerms = ""
-        val tag =  bigPictureArgu?.tags?.get(index)
-        if(tag != null && tag.isNotEmpty()){
-            when(bigPictureArgu?.from){
-                0 ->{
-                    keyTerms = tag
-                }
-                1 ->{
-                    keyTerms = tag
-                }
+//    fun relativeBtnClick(context: Context,index:Int):String{
+//        var keyTerms = ""
+//        val tag =  bigPictureArgu?.tags?.get(index)
+//        if(tag != null && tag.isNotEmpty()){
+//            when(bigPictureArgu?.from){
+//                0 ->{
+//                    keyTerms = tag
+//                }
+//                1 ->{
+//                    keyTerms = tag
+//                }
+//            }
+//        }
+//        return keyTerms
+//    }
+    fun relativeBtnClick(context: Context,index:Int,callBack:(keyTerm:List<String>)->Unit){
+       val url = bigPictureArgu?.images?.get(index) ?: ""
+        Glide.with(context).asBitmap().load(url).addListener(object : RequestListener<Bitmap> {
+            override fun onLoadFailed(
+                e: GlideException?,
+                model: Any?,
+                target: Target<Bitmap>?,
+                isFirstResource: Boolean
+            ): Boolean {
+                callBack(listOf())
+                return true
             }
-        }
-        return keyTerms
+
+            override fun onResourceReady(
+                resource: Bitmap?,
+                model: Any?,
+                target: Target<Bitmap>?,
+                dataSource: DataSource?,
+                isFirstResource: Boolean
+            ): Boolean {
+                resource?.let {bitmap ->
+                    val image = InputImage.fromBitmap(bitmap, 0)
+                    val labeler = ImageLabeling.getClient(ImageLabelerOptions.DEFAULT_OPTIONS)
+                    labeler.process(image)
+                        .addOnSuccessListener { labels ->
+                            val map = TreeMap<Float,String>(){ fl: Float, fl1: Float ->
+                                fl1.compareTo(fl)
+                            }
+                            val list = mutableListOf<String>()
+                            for (label in labels) {
+                                val text = label.text
+                                val confidence = label.confidence
+                                Log.println(Log.DEBUG,"ML result","text:${text}-confidence:${confidence}-index:${index}")
+                                map[confidence] = text
+                            }
+                            map.forEach{
+                                if(list.size < 1){
+                                    list.add(it.value)
+                                }
+                            }
+                            callBack(list)
+                        }
+                        .addOnFailureListener { e ->
+                            e.printStackTrace()
+                            callBack(listOf())
+                        }
+                }
+                return true
+            }
+
+        }).submit()
     }
 
     fun pageProfileOnClick(context: Context,index:Int){

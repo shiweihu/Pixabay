@@ -30,22 +30,18 @@ class PexelsSearchVideoSource(
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PexelsVideos> {
         val page = params.key ?: 1
-        val myTrace = Firebase.performance.newTrace("Pexels Video Search Request")
         return try {
-            myTrace.start()
             val photos =  if(query.isEmpty()){
                videoProxy.popularVideos(page = page).videos
             }else{
                videoProxy.queryVideos(query = query,page = page).videos
             }
-            myTrace.stop()
             LoadResult.Page(
                 data = photos,
                 prevKey = if (page == 1) null else page - 1,
                 nextKey = if(photos.isNotEmpty()) page + 1 else null
             )
         }catch (e:Exception){
-            myTrace.stop()
             Log.println(Log.DEBUG,"PexelsSearchPhotos",e.toString())
             LoadResult.Error(e)
         }

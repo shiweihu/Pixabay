@@ -12,6 +12,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.transition.TransitionInflater
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,27 +24,29 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.SharedElementCallback
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
-import com.google.android.gms.ads.AdRequest
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.perf.ktx.performance
+import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.label.ImageLabeling
+import com.google.mlkit.vision.label.defaults.ImageLabelerOptions
 import com.shiweihu.pixabayapplication.BaseFragment
 import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.databinding.FragmentBigPictureBinding
 import com.shiweihu.pixabayapplication.viewModle.BigPictureViewModel
 import com.shiweihu.pixabayapplication.viewModle.FragmentComunicationViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.lang.Exception
 import java.util.*
 import java.util.concurrent.TimeUnit
-import kotlin.collections.MutableList
-import kotlin.collections.MutableMap
 import kotlin.collections.set
 
 
@@ -57,10 +60,6 @@ class BigPictureFragment : BaseFragment() {
     //private val args:BigPictureFragmentArgs by navArgs()
 
     private  var binding:FragmentBigPictureBinding? = null
-
-
-    private val myTrace = Firebase.performance.newTrace("BigPicture view trace")
-
 
 
     private val requestPermissionLauncher =registerForActivityResult(
@@ -148,7 +147,6 @@ class BigPictureFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        myTrace.start()
         // Inflate the layout for this fragment
         binding =  FragmentBigPictureBinding.inflate(inflater,container,false).also {
 
@@ -172,11 +170,11 @@ class BigPictureFragment : BaseFragment() {
 
 
             it.viewPage.offscreenPageLimit = 4
-            it.toolBar.setNavigationOnClickListener { _ ->
+            it.toolBar.setNavigationOnClickListener {
                 navigateUp()
             }
 
-            it.shareToInstagramFeed.setOnClickListener {_ ->
+            it.shareToInstagramFeed.setOnClickListener {
                 shareOnClick()
             }
             initTransition()
@@ -186,13 +184,33 @@ class BigPictureFragment : BaseFragment() {
     }
 
     private fun findRelativePictures(view: View,index: Int){
-        val keyTerms = modle.relativeBtnClick(view.context,index)
-        if(keyTerms.isNotEmpty()){
-            activeModel.pictureQueryText.postValue(keyTerms)
-            navigateUp()
-        }else{
-            Toast.makeText(this.requireContext(),R.string.empty_key_term_notice,Toast.LENGTH_SHORT).show()
+//        val keyTerms = modle.relativeBtnClick(view.context,index)
+//        if(keyTerms.isNotEmpty()){
+//            activeModel.pictureQueryText.postValue(keyTerms)
+//            navigateUp()
+//        }else{
+//            Toast.makeText(this.requireContext(),R.string.empty_key_term_notice,Toast.LENGTH_SHORT).show()
+//        }
+        modle.relativeBtnClick(view.context,index){keyTerm ->
+
+            var key = ""
+            keyTerm.forEach {
+                if(key.isEmpty()){
+                    key = it
+                }else{
+                    key+="+${it}"
+                }
+            }
+
+            if(key.isNotEmpty()){
+                activeModel.pictureQueryText.postValue(key)
+                navigateUp()
+            }else{
+                Toast.makeText(this.requireContext(),R.string.empty_key_term_notice,Toast.LENGTH_SHORT).show()
+            }
         }
+
+
     }
 
     private fun shareOnClick(){
@@ -250,7 +268,7 @@ class BigPictureFragment : BaseFragment() {
                 sharedElements: MutableMap<String, View>?
             ) {
                 super.onMapSharedElements(names, sharedElements)
-                val view = binding?.viewPage?.findViewWithTag<ImageView>( "${BigPictureFragment.SHARE_ELEMENT_NAME}-${binding?.viewPage?.currentItem}")
+                val view = binding?.viewPage?.findViewWithTag<ImageView>( "${SHARE_ELEMENT_NAME}-${binding?.viewPage?.currentItem}")
                 if(names != null && sharedElements!=null && view!=null){
                     sharedElements[names[0]] = view
                 }
@@ -281,14 +299,7 @@ class BigPictureFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-        myTrace.stop()
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-
-    }
-
 
 
     companion object {
