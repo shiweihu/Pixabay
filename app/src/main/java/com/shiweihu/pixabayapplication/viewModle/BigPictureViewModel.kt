@@ -25,6 +25,7 @@ import com.shiweihu.pixabayapplication.MyApplication
 import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.databinding.FragmentBigPictureBinding
 import com.shiweihu.pixabayapplication.util.CustomTabActivityHelper
+import com.shiweihu.pixabayapplication.utils.MachineLearningUtils
 import com.shiweihu.pixabayapplication.viewArgu.BigPictureArgu
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.lang.ref.WeakReference
@@ -34,7 +35,8 @@ import kotlin.Comparator
 
 @HiltViewModel
 class BigPictureViewModel @Inject constructor(
-  private val myApplication: MyApplication
+  private val myApplication: MyApplication,
+  private val machineLearningUtils: MachineLearningUtils
 ) :AndroidViewModel(myApplication) {
 
 
@@ -130,8 +132,8 @@ class BigPictureViewModel @Inject constructor(
 //        }
 //        return keyTerms
 //    }
-    fun relativeBtnClick(context: Context,index:Int,callBack:(keyTerm:List<String>)->Unit){
-       val url = bigPictureArgu?.images?.get(index) ?: ""
+    fun relativeBtnClick(context: Context,index:Int,callBack:(keyTerm:String?)->Unit){
+        val url = bigPictureArgu?.images?.get(index) ?: ""
         Glide.with(context).asBitmap().load(url).addListener(object : RequestListener<Bitmap> {
             override fun onLoadFailed(
                 e: GlideException?,
@@ -139,7 +141,7 @@ class BigPictureViewModel @Inject constructor(
                 target: Target<Bitmap>?,
                 isFirstResource: Boolean
             ): Boolean {
-                callBack(listOf())
+                callBack(null)
                 return true
             }
 
@@ -150,36 +152,15 @@ class BigPictureViewModel @Inject constructor(
                 dataSource: DataSource?,
                 isFirstResource: Boolean
             ): Boolean {
-                resource?.let {bitmap ->
-                    val image = InputImage.fromBitmap(bitmap, 0)
-                    val labeler = ImageLabeling.getClient(ImageLabelerOptions.DEFAULT_OPTIONS)
-                    labeler.process(image)
-                        .addOnSuccessListener { labels ->
-                            val map = TreeMap<Float,String>(){ fl: Float, fl1: Float ->
-                                fl1.compareTo(fl)
-                            }
-                            val list = mutableListOf<String>()
-                            for (label in labels) {
-                                val text = label.text
-                                val confidence = label.confidence
-                                Log.println(Log.DEBUG,"ML result","text:${text}-confidence:${confidence}-index:${index}")
-                                map[confidence] = text
-                            }
-                            map.forEach{
-                                if(list.size < 1){
-                                    list.add(it.value)
-                                }
-                            }
-                            callBack(list)
-                        }
-                        .addOnFailureListener { e ->
-                            e.printStackTrace()
-                            callBack(listOf())
-                        }
+                if(resource != null){
+                    machineLearningUtils.getOneLabel(resource){
+                        callBack(it)
+                    }
+                }else{
+                    callBack(null)
                 }
                 return true
             }
-
         }).submit()
     }
 

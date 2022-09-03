@@ -1,6 +1,8 @@
 package com.shiweihu.pixabayapplication.photos
 
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.children
 import androidx.fragment.app.Fragment

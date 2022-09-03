@@ -3,39 +3,8 @@
     <string name="action_settings">Settings</string>
     <string name="action_search">Search</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="images">Images</string>
     <string name="video">Video</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="all">All</string>
-    <string name="category">Category:</string>
-    <string name="backgrounds">Backgrounds</string>
-    <string name="fashion">fashion</string>
-    <string name="nature">nature</string>
-    <string name="science">science</string>
-    <string name="education">education</string>
-    <string name="feelings">feelings</string>
-    <string name="health">health</string>
-    <string name="people">people</string>
-    <string name="religion">religion</string>
-    <string name="places">places</string>
-    <string name="animals">animals</string>
-    <string name="industry">industry</string>
-    <string name="computer">computer</string>
-    <string name="food">food</string>
-    <string name="sports">sports</string>
-    <string name="transportation">transportation</string>
-    <string name="travel">travel</string>
-    <string name="buildings">buildings</string>
-    <string name="business">business</string>
-    <string name="music">music</string>
     <string name="title_activity_video_play">VideoPlayActivity</string>
     <string name="instagram_btn_description">share to instagram feed</string>
     <string name="app_choser_title">chose a application:</string>
@@ -44,4 +13,7 @@
     <string name="go">Go</string>
     <string name="permission_deny_notice">Click Go to change the permissions.</string>
     <string name="empty_key_term_notice">can not find relative pictures</string>
+    <string name="pick_from_photo_album">Pick from photo album</string>
+    <string name="pick_from_camera">Pick from camera</string>
+    <string name="cancel">Cancel</string>
 </resources>

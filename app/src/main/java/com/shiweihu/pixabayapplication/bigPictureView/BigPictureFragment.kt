@@ -33,6 +33,8 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.LoadAdError
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.perf.ktx.performance
@@ -90,9 +92,6 @@ class BigPictureFragment : BaseFragment() {
         intent.resolveActivity(this.requireActivity().packageManager)?.let {
             startActivity(intent)
         }
-
-
-
     }
 
 
@@ -168,7 +167,6 @@ class BigPictureFragment : BaseFragment() {
                 findRelativePictures(view,it.viewPage.currentItem)
             }
 
-
             it.viewPage.offscreenPageLimit = 4
             it.toolBar.setNavigationOnClickListener {
                 navigateUp()
@@ -184,33 +182,14 @@ class BigPictureFragment : BaseFragment() {
     }
 
     private fun findRelativePictures(view: View,index: Int){
-//        val keyTerms = modle.relativeBtnClick(view.context,index)
-//        if(keyTerms.isNotEmpty()){
-//            activeModel.pictureQueryText.postValue(keyTerms)
-//            navigateUp()
-//        }else{
-//            Toast.makeText(this.requireContext(),R.string.empty_key_term_notice,Toast.LENGTH_SHORT).show()
-//        }
-        modle.relativeBtnClick(view.context,index){keyTerm ->
-
-            var key = ""
-            keyTerm.forEach {
-                if(key.isEmpty()){
-                    key = it
-                }else{
-                    key+="+${it}"
-                }
-            }
-
-            if(key.isNotEmpty()){
+        modle.relativeBtnClick(view.context,index){key ->
+            if(key?.isNotEmpty() == true){
                 activeModel.pictureQueryText.postValue(key)
-                navigateUp()
+                findNavController().popBackStack()
             }else{
                 Toast.makeText(this.requireContext(),R.string.empty_key_term_notice,Toast.LENGTH_SHORT).show()
             }
         }
-
-
     }
 
     private fun shareOnClick(){

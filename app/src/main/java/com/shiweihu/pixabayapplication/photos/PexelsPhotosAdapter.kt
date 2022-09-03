@@ -35,6 +35,12 @@ class PexelsPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,ar
             if(it.refresh == LoadState.Loading){
                 //init position
                 recyclerView?.scrollToPosition(0)
+                recyclerView?.visibility = View.INVISIBLE
+            }else if(it.refresh == LoadState.NotLoading(false)){
+                val delayTime = recyclerView?.context?.resources?.getInteger(R.integer.post_pone_time)?.toLong() ?: 0L
+                recyclerView?.handler?.postDelayed({
+                    recyclerView?.visibility = View.VISIBLE
+                },delayTime)
             }
         }
     }
@@ -92,7 +98,7 @@ class PexelsPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,ar
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         getItem(position)?.also{ it ->
             Log.println(Log.INFO,"alt",it.alt ?: "")
-            holder.binding.imageUrl = it.src?.large2x
+            holder.binding.imageUrl = it.src?.large
             holder.binding.authorName = it.photographer
             holder.binding.imageView.transitionName = "PexelsPhotos-${position}"
             holder.binding.imageView.tag = "PexelsPhotos-${position}"
@@ -129,7 +135,7 @@ class PexelsPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,ar
 
 
         }
-        //holder.binding.executePendingBindings()
+        holder.binding.executePendingBindings()
     }
 
 
@@ -153,7 +159,7 @@ class PexelsPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,ar
         val pageUrl = ArrayList<String>()
         this.snapshot().forEach { imageInfo ->
             imageInfo?.let { info->
-                images.add(info.src!!.large2x!!)
+                images.add(info.src!!.large!!)
                 profiles.add("")
                 tags.add(info.alt ?: "")
                 usersID.add(info.photographer_url!!)

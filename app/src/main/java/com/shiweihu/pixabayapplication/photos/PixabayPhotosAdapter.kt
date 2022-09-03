@@ -51,6 +51,12 @@ class PixabayPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,a
             if(it.refresh == LoadState.Loading){
                 //init position
                 recyclerView?.scrollToPosition(0)
+                recyclerView?.visibility = View.INVISIBLE
+            }else if(it.refresh == LoadState.NotLoading(false)){
+               val delayTime = recyclerView?.context?.resources?.getInteger(R.integer.post_pone_time)?.toLong() ?: 0L
+                recyclerView?.handler?.postDelayed({
+                    recyclerView?.visibility = View.VISIBLE
+                },delayTime)
             }
         }
     }
@@ -122,7 +128,7 @@ class PixabayPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,a
 
             holder.binding.root.layoutParams.height = max(heightPX.toInt(),200)
         }
-        //holder.binding.executePendingBindings()
+        holder.binding.executePendingBindings()
     }
 
 
