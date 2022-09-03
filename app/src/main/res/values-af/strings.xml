@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Beeldsoektog</string>
+    <string name="action_settings">Instellings</string>
+    <string name="action_search">Soek</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Beelde</string>
+    <string name="video">Video</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">deel na Instagram-feed</string>
+    <string name="app_choser_title">kies \'n toepassing:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Gaan</string>
+    <string name="permission_deny_notice">Klik Gaan om die toestemmings te verander.</string>
+    <string name="empty_key_term_notice">kan nie relatiewe foto\'s vind nie</string>
+    <string name="pick_from_photo_album">Kies uit foto-album</string>
+    <string name="pick_from_camera">Kies uit kamera</string>
+    <string name="cancel">Kanselleer</string>
+</resources>

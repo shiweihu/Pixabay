@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">ഇമേജ് തെരച്ചിൽ</string>
+    <string name="action_settings">സജ്ജീകരണങ്ങൾ</string>
+    <string name="action_search">തിരയുക</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">ചിത്രങ്ങള്</string>
+    <string name="video">വീഡിയോ</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">Instagram ഫീഡിലേക്ക് പങ്കിടുക</string>
+    <string name="app_choser_title">ഒരു പ്രയോഗം തിരഞ്ഞെടുത്തു:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">പോകുക</string>
+    <string name="permission_deny_notice">അനുമതികൾ മാറ്റാൻ പോകുക ക്ലിക്കുചെയ്യുക.</string>
+    <string name="empty_key_term_notice">ആപേക്ഷിക ചിത്രങ്ങൾ കണ്ടെത്താൻ കഴിഞ്ഞില്ല</string>
+    <string name="pick_from_photo_album">ഫോട്ടോ ആൽബത്തിൽ നിന്ന് തിരഞ്ഞെടുക്കുക</string>
+    <string name="pick_from_camera">ക്യാമറയിൽ നിന്ന് തിരഞ്ഞെടുക്കുക</string>
+    <string name="cancel">ക്യാൻസൽ ചെയ്യ്</string>
+</resources>

@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Huli Kiʻi</string>
+    <string name="action_settings">Nā hoʻonohonoho</string>
+    <string name="action_search">Huli</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Nā kiʻi</string>
+    <string name="video">wikiō</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">kaʻana like i ka hānai instagram</string>
+    <string name="app_choser_title">ua koho i kahi noi:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Hele</string>
+    <string name="permission_deny_notice">Kaomi iā Go e hoʻololi i nā ʻae.</string>
+    <string name="empty_key_term_notice">ʻaʻole hiki ke loaʻa nā kiʻi pili</string>
+    <string name="pick_from_photo_album">E koho mai ka album kiʻi</string>
+    <string name="pick_from_camera">E koho mai ka pahupaʻikiʻi</string>
+    <string name="cancel">Hoʻopau</string>
+</resources>

@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Neman Hoto</string>
+    <string name="action_settings">Saituna</string>
+    <string name="action_search">Bincika</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Hotuna</string>
+    <string name="video">Bidiyo</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">raba zuwa ciyarwar instagram</string>
+    <string name="app_choser_title">ya zabi aikace-aikace:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Tafi</string>
+    <string name="permission_deny_notice">Danna Go don canza izini.</string>
+    <string name="empty_key_term_notice">ba zai iya samun dangi hotuna</string>
+    <string name="pick_from_photo_album">Zaɓi daga kundin hoto</string>
+    <string name="pick_from_camera">Zaɓi daga kamara</string>
+    <string name="cancel">Soke</string>
+</resources>

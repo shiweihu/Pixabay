@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">ಇಮೇಜ್ ಶೋಧ</string>
+    <string name="action_settings">ಸೆಟ್ಟಿಂಗ್ ಗಳು</string>
+    <string name="action_search">ಶೋಧಿಸು</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">ಇಮೇಜ್ ಗಳು</string>
+    <string name="video">ವೀಡಿಯೊ</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">Instagram ಫೀಡ್ ಗೆ ಹಂಚಿಕೊಳ್ಳಿ</string>
+    <string name="app_choser_title">ಅಪ್ಲಿಕೇಶನ್ ಆಯ್ಕೆಮಾಡಿ:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">ಹೋಗು</string>
+    <string name="permission_deny_notice">ಅನುಮತಿಗಳನ್ನು ಬದಲಿಸಲು ಹೋಗು ಕ್ಲಿಕ್ ಮಾಡಿ.</string>
+    <string name="empty_key_term_notice">ಸಂಬಂಧಿತ ಚಿತ್ರಗಳನ್ನು ಹುಡುಕಲು ಸಾಧ್ಯವಾಗುತ್ತಿಲ್ಲ</string>
+    <string name="pick_from_photo_album">ಫೋಟೋ ಆಲ್ಬಂನಿಂದ ಆರಿಸಿ</string>
+    <string name="pick_from_camera">ಕ್ಯಾಮರಾದಿಂದ ಆರಿಸಿ</string>
+    <string name="cancel">ರದ್ದುಮಾಡಿ</string>
+</resources>

@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Imaginum Inquisitionis</string>
+    <string name="action_settings">Occasus</string>
+    <string name="action_search">Quaerere</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Imagines</string>
+    <string name="video">Video</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">participes ad instagram feed</string>
+    <string name="app_choser_title">applicationem elegit:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Go</string>
+    <string name="permission_deny_notice">Click Vade ad mutare permissiones.</string>
+    <string name="empty_key_term_notice">potest invenire aliquid imaginibus</string>
+    <string name="pick_from_photo_album">Colligunt a photo album</string>
+    <string name="pick_from_camera">Colligunt de camera</string>
+    <string name="cancel">Cancel</string>
+</resources>

@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Tìm kiếm hình ảnh</string>
+    <string name="action_settings">Cài đặt</string>
+    <string name="action_search">Tìm kiếm</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Hình ảnh</string>
+    <string name="video">Video</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">chia sẻ lên nguồn cấp dữ liệu instagram</string>
+    <string name="app_choser_title">đã chọn một ứng dụng:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Đi</string>
+    <string name="permission_deny_notice">Nhấp vào Đi để thay đổi các quyền.</string>
+    <string name="empty_key_term_notice">không thể tìm thấy hình ảnh tương đối</string>
+    <string name="pick_from_photo_album">Chọn từ an-bum ảnh</string>
+    <string name="pick_from_camera">Chọn từ máy ảnh</string>
+    <string name="cancel">Hủy</string>
+</resources>

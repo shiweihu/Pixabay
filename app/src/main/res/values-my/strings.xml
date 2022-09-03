@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">ရုပ်ပုံရှာဖွေမှု</string>
+    <string name="action_settings">သတ်မှတ်ချက်များ</string>
+    <string name="action_search">ရှာဖွေခြင်း</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">ရုပ်ပုံများ</string>
+    <string name="video">ဗီဒီယို</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">instagram feed ကို ဝေမျှပါ</string>
+    <string name="app_choser_title">အပ္ပလီကေးရှင်းကို ရွေးချယ်လိုက်ပါတယ်။</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">သွားပါ</string>
+    <string name="permission_deny_notice">ခွင့်ပြုချက်တွေကို ပြောင်းလဲဖို့ Go ကိုနှိပ်ပါ။</string>
+    <string name="empty_key_term_notice">နှိုင်းယှဉ်နိုင်တဲ့ ဓာတ်ပုံတွေကို ရှာမတွေ့နိုင်ဘူး</string>
+    <string name="pick_from_photo_album">ဓာတ်ပုံအယ်လ်ဘမ်မှရွေးချယ်ပါ</string>
+    <string name="pick_from_camera">ကင်မရာမှရွေးချယ်ပါ</string>
+    <string name="cancel">ပယ်ဖျက်ပါ</string>
+</resources>

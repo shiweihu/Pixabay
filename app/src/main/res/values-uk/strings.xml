@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Пошук зображень</string>
+    <string name="action_settings">Параметри</string>
+    <string name="action_search">Шукати</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Зображення</string>
+    <string name="video">Відео</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">поділитися в стрічці Instagram</string>
+    <string name="app_choser_title">обрали заявку:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Іти</string>
+    <string name="permission_deny_notice">Натисніть кнопку Перейти, щоб змінити дозволи.</string>
+    <string name="empty_key_term_notice">не вдається знайти відносні фотографії,</string>
+    <string name="pick_from_photo_album">Вибір із фотоальбому</string>
+    <string name="pick_from_camera">Вибір із камери</string>
+    <string name="cancel">Скасувати</string>
+</resources>

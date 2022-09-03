@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Kusaka Zithunzi</string>
+    <string name="action_settings">Zokonda</string>
+    <string name="action_search">Sakani</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Zithunzi</string>
+    <string name="video">Kanema</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">kugawana ku instagram feed</string>
+    <string name="app_choser_title">anasankha ntchito:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Pitani</string>
+    <string name="permission_deny_notice">Dinani Go kuti musinthe zilolezo.</string>
+    <string name="empty_key_term_notice">sindingapeze zithunzi zachibale</string>
+    <string name="pick_from_photo_album">Sankhani kuchokera pachithunzichi</string>
+    <string name="pick_from_camera">Sankhani kuchokera ku kamera</string>
+    <string name="cancel">Letsani</string>
+</resources>

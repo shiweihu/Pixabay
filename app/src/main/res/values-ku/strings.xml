@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">گەڕانی وێنە</string>
+    <string name="action_settings">ڕێکبەندەکان</string>
+    <string name="action_search">گەڕان</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">وێنەکان</string>
+    <string name="video">ڤیدیۆ</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">هاوبەشکردن بۆ پێدانی ئینستاگرام</string>
+    <string name="app_choser_title">بەرنامەیەک هەڵبژێرە:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">بڕۆ</string>
+    <string name="permission_deny_notice">کرتە بکە لەسەر بڕۆ بۆ گۆڕینی مۆڵەتەکان.</string>
+    <string name="empty_key_term_notice">ناتوانێت وێنەی ڕێژەیی بدۆزێتەوە</string>
+    <string name="pick_from_photo_album">هەڵبژێرە لە ئەلبومی وێنە</string>
+    <string name="pick_from_camera">لە کامێراوە هەڵبژێرە</string>
+    <string name="cancel">هەڵوەشاندنەوه</string>
+</resources>

@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Търсене на изображения</string>
+    <string name="action_settings">Настройки</string>
+    <string name="action_search">Търсене</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Изображения</string>
+    <string name="video">Видео</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">дял към емисията на Instagram</string>
+    <string name="app_choser_title">избра заявление:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Вървя</string>
+    <string name="permission_deny_notice">Щракнете върху Отиди, за да промените разрешенията.</string>
+    <string name="empty_key_term_notice">не може да намери относителни снимки</string>
+    <string name="pick_from_photo_album">Изписване от фотоалбум</string>
+    <string name="pick_from_camera">Изписване от камерата</string>
+    <string name="cancel">Задрасквам</string>
+</resources>

@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">د تصویر پلټنه</string>
+    <string name="action_settings">تنظیمات</string>
+    <string name="action_search">لټون</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">تصویرونه</string>
+    <string name="video">ویډیو</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">د انستاګ د خوراک لپاره شریکول</string>
+    <string name="app_choser_title">یو غوښتنلیک یې غوره کړ:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">ځه</string>
+    <string name="permission_deny_notice">کلیک وکړئ لاړ شئ چې د ترلاسه شوی وو د بدلولو لپاره.</string>
+    <string name="empty_key_term_notice">نسبی انځورونه نه شی موندلای</string>
+    <string name="pick_from_photo_album">د عکس البوم څخه غوره کړئ</string>
+    <string name="pick_from_camera">د کیمرې څخه یې واخله</string>
+    <string name="cancel">لغوه کول</string>
+</resources>

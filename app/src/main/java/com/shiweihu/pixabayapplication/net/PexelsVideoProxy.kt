@@ -14,7 +14,7 @@ interface PexelsVideoProxy {
         @Query("query") query:String,
         @Query("page") page:Int = 1,
         @Query("per_page") per_page:Int = 80,
-        @Query("locale") lang:String = MyApplication.lang
+        @Query("locale") lang:String = "en-US"
     ): PexelsVideoSearchResponse
 
     @Headers("cache-control:max-age=86400")

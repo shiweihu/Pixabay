@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Görsel Arama</string>
+    <string name="action_settings">Ayarlar</string>
+    <string name="action_search">Aramak</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Görüntü</string>
+    <string name="video">Video</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">instagram akışında paylaş</string>
+    <string name="app_choser_title">bir uygulama seçin:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Gitmek</string>
+    <string name="permission_deny_notice">İzinleri değiştirmek için Git\'i tıklatın.</string>
+    <string name="empty_key_term_notice">göreli resimler bulunamıyor</string>
+    <string name="pick_from_photo_album">Fotoğraf albümünden seçim yapma</string>
+    <string name="pick_from_camera">Kameradan seçim yapın</string>
+    <string name="cancel">İptal</string>
+</resources>

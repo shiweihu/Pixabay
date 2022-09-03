@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Búsqueda de imágenes</string>
+    <string name="action_settings">configuración</string>
+    <string name="action_search">buscar</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">imágenes</string>
+    <string name="video">Video</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">Compartir en Instagram feed</string>
+    <string name="app_choser_title">Eligió una aplicación:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">ir</string>
+    <string name="permission_deny_notice">Haga clic en ir para cambiar los permisos.</string>
+    <string name="empty_key_term_notice">No puedo encontrar imágenes relativas</string>
+    <string name="pick_from_photo_album">Selección del álbum de fotos</string>
+    <string name="pick_from_camera">Recoger de la cámara</string>
+    <string name="cancel">cancelar</string>
+</resources>

@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">تصویر تلاش</string>
+    <string name="action_settings">سیٹنگیں</string>
+    <string name="action_search">تلاش</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">تصاویر</string>
+    <string name="video">ویڈیو</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">انسٹاگرام فیڈ میں شیئر کریں</string>
+    <string name="app_choser_title">درخواست کا انتخاب کیا:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">جانا</string>
+    <string name="permission_deny_notice">اجازتیں تبدیل کرنے کے لیے جائیں پر کلک کریں۔</string>
+    <string name="empty_key_term_notice">نسبتی تصاویر نہیں مل پارہا ہے</string>
+    <string name="pick_from_photo_album">فوٹو البم سے چنیں</string>
+    <string name="pick_from_camera">کیمرے سے چنیں</string>
+    <string name="cancel">منسوخ</string>
+</resources>

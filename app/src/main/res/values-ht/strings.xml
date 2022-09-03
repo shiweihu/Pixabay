@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Imaj Rechèch</string>
+    <string name="action_settings">Anviwònman</string>
+    <string name="action_search">Fouye</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Imaj</string>
+    <string name="video">Videyo</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">pataje bay manje Instagram</string>
+    <string name="app_choser_title">chwazi yon aplikasyon:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Ale</string>
+    <string name="permission_deny_notice">Klike sou Ale nan chanje otorizasyon yo.</string>
+    <string name="empty_key_term_notice">pa ka jwenn foto fanmi</string>
+    <string name="pick_from_photo_album">Chwazi soti nan albòm foto</string>
+    <string name="pick_from_camera">Chwazi nan kamera</string>
+    <string name="cancel">Anile</string>
+</resources>

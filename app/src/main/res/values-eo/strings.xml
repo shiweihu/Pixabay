@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Bilda Serĉo</string>
+    <string name="action_settings">Agordoj</string>
+    <string name="action_search">Serĉu</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Bildoj</string>
+    <string name="video">Video</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">konigu al instagram-fluo</string>
+    <string name="app_choser_title">elektis aplikaĵon:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Iru</string>
+    <string name="permission_deny_notice">Alklaku Iru por ŝanĝi la permesojn.</string>
+    <string name="empty_key_term_notice">ne povas trovi relativajn bildojn</string>
+    <string name="pick_from_photo_album">Elektu el fotoalbumo</string>
+    <string name="pick_from_camera">Elektu el fotilo</string>
+    <string name="cancel">Nuligi</string>
+</resources>

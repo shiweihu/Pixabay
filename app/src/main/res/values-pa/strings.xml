@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">ਚਿੱਤਰ ਖੋਜ</string>
+    <string name="action_settings">ਸੈਟਿੰਗ</string>
+    <string name="action_search">ਖੋਜ</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">ਚਿੱਤਰ</string>
+    <string name="video">ਵੀਡਿਓ</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">instagram ਫੀਡ ਨਾਲ ਸਾਂਝਾ ਕਰੋ</string>
+    <string name="app_choser_title">ਇੱਕ ਐਪਲੀਕੇਸ਼ਨ ਚੁਣੀ:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">ਜਾਓ</string>
+    <string name="permission_deny_notice">ਅਧਿਕਾਰ ਬਦਲਣ ਲਈ ਜਾਓ \'ਤੇ ਕਲਿੱਕ ਕਰੋ ।</string>
+    <string name="empty_key_term_notice">ਸਬੰਧਿਤ ਤਸਵੀਰਾਂ ਨੂੰ ਲੱਭਿਆ ਨਹੀਂ ਜਾ ਸਕਦਾ</string>
+    <string name="pick_from_photo_album">ਫੋਟੋ ਐਲਬਮ ਵਿੱਚੋਂ ਚੁਣੋ</string>
+    <string name="pick_from_camera">ਕੈਮਰੇ ਤੋਂ ਚੁਣੋ</string>
+    <string name="cancel">ਰੱਦ ਕਰੋ</string>
+</resources>

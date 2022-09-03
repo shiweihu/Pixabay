@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Utafutaji wa picha</string>
+    <string name="action_settings">Vipimo</string>
+    <string name="action_search">Tafutiza</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Picha</string>
+    <string name="video">Video</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">shiriki kwenye chakula cha instagram</string>
+    <string name="app_choser_title">alichagua maombi:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Kwenda</string>
+    <string name="permission_deny_notice">Bonyeza Nenda ili kubadilisha ruhusa.</string>
+    <string name="empty_key_term_notice">haiwezi kupata picha za jamaa</string>
+    <string name="pick_from_photo_album">Chagua kutoka kwa albamu ya picha</string>
+    <string name="pick_from_camera">Chagua kutoka kwa kamera</string>
+    <string name="cancel">Katisha</string>
+</resources>

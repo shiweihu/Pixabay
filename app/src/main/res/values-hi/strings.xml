@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">छवि खोज</string>
+    <string name="action_settings">सेटिंग्स</string>
+    <string name="action_search">ढूँढ</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">छवियां</string>
+    <string name="video">वीडियो</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">इंस्टाग्राम फीड पर शेयर करें</string>
+    <string name="app_choser_title">एक आवेदन चुना:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">जा</string>
+    <string name="permission_deny_notice">अनुमतियाँ परिवर्तित करने के लिए जाएँ क्लिक करें.</string>
+    <string name="empty_key_term_notice">रिश्तेदार चित्र नहीं ढूँढ सकते</string>
+    <string name="pick_from_photo_album">फोटो एल्बम से चुनें</string>
+    <string name="pick_from_camera">कैमरे से उठाओ</string>
+    <string name="cancel">रद्द करना</string>
+</resources>

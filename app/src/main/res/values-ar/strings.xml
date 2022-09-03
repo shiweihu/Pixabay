@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">بحث في الصور</string>
+    <string name="action_settings">إعدادات</string>
+    <string name="action_search">يبحث</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">الصور</string>
+    <string name="video">فيديو</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">مشاركة في تغذية instagram</string>
+    <string name="app_choser_title">اختر تطبيقًا:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">يذهب</string>
+    <string name="permission_deny_notice">انقر فوق \"انتقال\" لتغيير الأذونات.</string>
+    <string name="empty_key_term_notice">لا يمكن العثور على الصور النسبية</string>
+    <string name="pick_from_photo_album">اختر من ألبوم الصور</string>
+    <string name="pick_from_camera">اختر من الكاميرا</string>
+    <string name="cancel">يلغي</string>
+</resources>

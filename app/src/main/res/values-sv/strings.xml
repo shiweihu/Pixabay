@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Bild sök</string>
+    <string name="action_settings">Inställningar</string>
+    <string name="action_search">Söka</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Bilder</string>
+    <string name="video">Video</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">dela till instagramflöde</string>
+    <string name="app_choser_title">valde en ansökan:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Gå</string>
+    <string name="permission_deny_notice">Klicka på Gå för att ändra behörigheterna.</string>
+    <string name="empty_key_term_notice">kan inte hitta relativa bilder</string>
+    <string name="pick_from_photo_album">Välj från fotoalbum</string>
+    <string name="pick_from_camera">Välj från kameran</string>
+    <string name="cancel">Annullera</string>
+</resources>

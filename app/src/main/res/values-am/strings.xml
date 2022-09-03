@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">ምስል ፍለጋ</string>
+    <string name="action_settings">ቅንብሮች</string>
+    <string name="action_search">ፈልግ</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">ምስሎች</string>
+    <string name="video">ቪዲዮ</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">ለ instagram ምግብ ያጋሩ</string>
+    <string name="app_choser_title">መተግበሪያ መርጠዋል፡-</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">ሂድ</string>
+    <string name="permission_deny_notice">ፈቃዶቹን ለመቀየር Go ን ጠቅ ያድርጉ።</string>
+    <string name="empty_key_term_notice">አንጻራዊ ምስሎችን ማግኘት አልተቻለም</string>
+    <string name="pick_from_photo_album">ከፎቶ አልበም ይምረጡ</string>
+    <string name="pick_from_camera">ከካሜራ ይምረጡ</string>
+    <string name="cancel">ሰርዝ</string>
+</resources>

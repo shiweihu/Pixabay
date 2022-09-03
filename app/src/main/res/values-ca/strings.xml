@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Cerca d\'imatges</string>
+    <string name="action_settings">Configuració</string>
+    <string name="action_search">Buscar</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Imatges</string>
+    <string name="video">Vídeo</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">Comparteix amb el feed d\'Instagram</string>
+    <string name="app_choser_title">va triar una aplicació:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Anar</string>
+    <string name="permission_deny_notice">Feu clic a Vés per canviar els permisos.</string>
+    <string name="empty_key_term_notice">no es poden trobar imatges relatives</string>
+    <string name="pick_from_photo_album">Tria de l\'àlbum de fotos</string>
+    <string name="pick_from_camera">Tria des de la càmera</string>
+    <string name="cancel">Cancel·lar</string>
+</resources>

@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">ស្វែងរករូបភាព</string>
+    <string name="action_settings">ការកំណត់</string>
+    <string name="action_search">ស្វែងរក</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">រូបភាព</string>
+    <string name="video">វីដេអូ</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">ចែករំលែក ទៅ មតិ instagram</string>
+    <string name="app_choser_title">ជ្រើស រើស កម្មវិធី ៖</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">ទៅ</string>
+    <string name="permission_deny_notice">ចុច Go ដើម្បី ផ្លាស់ប្ដូរ ការ អនុញ្ញាត ។</string>
+    <string name="empty_key_term_notice">មិន អាច រក រូបភាព ដែល ទាក់ទង បាន ទេ</string>
+    <string name="pick_from_photo_album">ជ្រើស ពី អាល់ប៊ុម រូបថត</string>
+    <string name="pick_from_camera">រើសពីកាមេរ៉ា</string>
+    <string name="cancel">លប់ចោល</string>
+</resources>

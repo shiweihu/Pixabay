@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Tiftix tal-Immaġni</string>
+    <string name="action_settings">Issettjar</string>
+    <string name="action_search">Tiftix</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Immaġnijiet</string>
+    <string name="video">Vidjo</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">aqsam mal-għalf instagram</string>
+    <string name="app_choser_title">għażel applikazzjoni:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Mur</string>
+    <string name="permission_deny_notice">Ikklikkja Mur biex tibdel il-permessi.</string>
+    <string name="empty_key_term_notice">ma jistgħux isibu ritratti relattivi</string>
+    <string name="pick_from_photo_album">Agħżel mill-album tar-ritratti</string>
+    <string name="pick_from_camera">Agħżel mill-kamera</string>
+    <string name="cancel">Ikkanċella</string>
+</resources>

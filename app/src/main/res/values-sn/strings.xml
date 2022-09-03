@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Image Search</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_search">Search</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Images</string>
+    <string name="video">Vhidhiyo</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">share kune instagram feed</string>
+    <string name="app_choser_title">akasarudza application:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Enda</string>
+    <string name="permission_deny_notice">Dzvanya Enda kuti uchinje mvumo.</string>
+    <string name="empty_key_term_notice">haigone kuwana mapikicha ehukama</string>
+    <string name="pick_from_photo_album">Sarudza kubva pamafoto album</string>
+    <string name="pick_from_camera">Sarudza kubva kamera</string>
+    <string name="cancel">Kanzura</string>
+</resources>

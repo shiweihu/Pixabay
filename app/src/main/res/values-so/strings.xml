@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Raadinta Sawirka</string>
+    <string name="action_settings">Dejinta</string>
+    <string name="action_search">Raadi</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Sawirada</string>
+    <string name="video">Video</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">la wadaag instagram feed</string>
+    <string name="app_choser_title">doortay codsi:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Tag</string>
+    <string name="permission_deny_notice">Guji Go si aad u bedesho oggolaanshaha</string>
+    <string name="empty_key_term_notice">ma heli karo sawiro qaraabo ah</string>
+    <string name="pick_from_photo_album">Ka soo qaado albamka sawirka</string>
+    <string name="pick_from_camera">Ka soo qaado kamarada</string>
+    <string name="cancel">Jooji</string>
+</resources>

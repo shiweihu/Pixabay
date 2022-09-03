@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Kép keresése</string>
+    <string name="action_settings">Beállítások</string>
+    <string name="action_search">Keresés</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Képek</string>
+    <string name="video">Video</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">megosztás az instagram feedben</string>
+    <string name="app_choser_title">kiválasztott egy alkalmazást:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Megy</string>
+    <string name="permission_deny_notice">Kattintson az Ugrás gombra az engedélyek módosításához.</string>
+    <string name="empty_key_term_notice">nem talál relatív képeket</string>
+    <string name="pick_from_photo_album">Válasszon a fotóalbumból</string>
+    <string name="pick_from_camera">Válasszon a kamerából</string>
+    <string name="cancel">Érvénytelenít</string>
+</resources>

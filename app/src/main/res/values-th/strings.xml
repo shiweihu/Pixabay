@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">ค้นหารูปภาพ</string>
+    <string name="action_settings">ตั้งค่า</string>
+    <string name="action_search">ค้นหา</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">ภาพต่าง ๆ</string>
+    <string name="video">วิดีโอ</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">ใช้ร่วมกับแหล่งป้อน instagram</string>
+    <string name="app_choser_title">เลือกโปรแกรม:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">ไปได้แล้ว</string>
+    <string name="permission_deny_notice">คลิกเพื่อเปลี่ยนสิทธิ์ ที่อนุญาต</string>
+    <string name="empty_key_term_notice">ไม่พบรูปภาพ ที่สัมพันธ์กัน</string>
+    <string name="pick_from_photo_album">เลือกจากอัลบั้มภาพ</string>
+    <string name="pick_from_camera">เลือกจากกล้อง</string>
+    <string name="cancel">ยกเลิก</string>
+</resources>

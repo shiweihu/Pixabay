@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Поиск по изображениям</string>
+    <string name="action_settings">Настройка по умолчанию</string>
+    <string name="action_search">Поиск по сайту</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Фотографии с сайта</string>
+    <string name="video">Видео о нас</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">Поделиться в instagram feed</string>
+    <string name="app_choser_title">Выберите приложение:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">- нет, нет.</string>
+    <string name="permission_deny_notice">Нажмите кнопку Go, чтобы изменить разрешения.</string>
+    <string name="empty_key_term_notice">Не можете найти относительные фотографии</string>
+    <string name="pick_from_photo_album">Выбрать из фотоальбома</string>
+    <string name="pick_from_camera">Выберите из камеры</string>
+    <string name="cancel">Все в силе</string>
+</resources>

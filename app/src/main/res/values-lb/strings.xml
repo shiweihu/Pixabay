@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Bild Sich</string>
+    <string name="action_settings">Astellungen</string>
+    <string name="action_search">Sichen</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Biller</string>
+    <string name="video">Video</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">deelen op Instagram Feed</string>
+    <string name="app_choser_title">wielt eng Applikatioun:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Gitt</string>
+    <string name="permission_deny_notice">Klickt Go fir d\'Permissiounen z\'änneren.</string>
+    <string name="empty_key_term_notice">kann net relativ Biller fannen</string>
+    <string name="pick_from_photo_album">Wielt aus Fotoalbum</string>
+    <string name="pick_from_camera">Wielt aus der Kamera</string>
+    <string name="cancel">Ofbriechen</string>
+</resources>

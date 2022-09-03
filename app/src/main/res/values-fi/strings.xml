@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Kuvien haku</string>
+    <string name="action_settings">Asetukset</string>
+    <string name="action_search">Etsiä</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Kuvia</string>
+    <string name="video">Video</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">jaa instagram-syötteeseen</string>
+    <string name="app_choser_title">valitsi sovelluksen:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Mennä</string>
+    <string name="permission_deny_notice">Klikkaa Siirry, jos haluat muuttaa käyttöoikeuksia.</string>
+    <string name="empty_key_term_notice">ei löydy suhteellisia kuvia</string>
+    <string name="pick_from_photo_album">Valitse valokuva-albumista</string>
+    <string name="pick_from_camera">Valitse kamerasta</string>
+    <string name="cancel">Perua</string>
+</resources>

@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Fikarohana sary</string>
+    <string name="action_settings">Fandrindran\'ny</string>
+    <string name="action_search">Hikaroka</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Sary</string>
+    <string name="video">Horonan-tsary</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">Mizara amin\'ny fahana instagram</string>
+    <string name="app_choser_title">nisafidy rindran\'asa iray:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Mandehana</string>
+    <string name="permission_deny_notice">Tsindrio hoe Go raha hanova ny fahazoan-dalana.</string>
+    <string name="empty_key_term_notice">Tsy mahita sary azo raisina</string>
+    <string name="pick_from_photo_album">Misafidiana tahirin-tsary</string>
+    <string name="pick_from_camera">Misafidiana fakantsary</string>
+    <string name="cancel">Foano</string>
+</resources>

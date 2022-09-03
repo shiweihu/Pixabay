@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Кескінді іздеу</string>
+    <string name="action_settings">Параметрлер</string>
+    <string name="action_search">Іздеу</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Суреттер</string>
+    <string name="video">Бейне</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">Instagram арнасына ортақ пайдалану</string>
+    <string name="app_choser_title">қолданба таңдады:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Go</string>
+    <string name="permission_deny_notice">Рұқсаттарды өзгерту үшін Өту түймешігін басыңыз.</string>
+    <string name="empty_key_term_notice">салыстырмалы суреттерді таба алмайды</string>
+    <string name="pick_from_photo_album">Фотоальбомнан таңдау</string>
+    <string name="pick_from_camera">Камерадан таңдау</string>
+    <string name="cancel">Болдырмау</string>
+</resources>

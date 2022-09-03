@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">이미지 검색</string>
+    <string name="action_settings">설정</string>
+    <string name="action_search">검색</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">이미지</string>
+    <string name="video">비디오</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">instagram 피드에 공유</string>
+    <string name="app_choser_title">응용 프로그램 선택:choose a application:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">가</string>
+    <string name="permission_deny_notice">권한을 변경하려면 [이동]을 클릭합니다.</string>
+    <string name="empty_key_term_notice">상대 사진을 찾을 수 없습니까</string>
+    <string name="pick_from_photo_album">사진 앨범에서 선택 choose from photo album</string>
+    <string name="pick_from_camera">카메라에서 골라내다</string>
+    <string name="cancel">취소</string>
+</resources>

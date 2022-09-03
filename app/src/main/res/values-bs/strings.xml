@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Pretraga slike</string>
+    <string name="action_settings">Postavke</string>
+    <string name="action_search">Tražiti</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Slike</string>
+    <string name="video">Video</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">share to instagram feed</string>
+    <string name="app_choser_title">odabrao aplikaciju :</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Kreni.</string>
+    <string name="permission_deny_notice">Kliknite Idi da biste promijenili dozvole.</string>
+    <string name="empty_key_term_notice">ne mogu pronaći relativne slike</string>
+    <string name="pick_from_photo_album">Izaberi iz foto albuma</string>
+    <string name="pick_from_camera">Izaberi sa kamere</string>
+    <string name="cancel">Otkazati</string>
+</resources>

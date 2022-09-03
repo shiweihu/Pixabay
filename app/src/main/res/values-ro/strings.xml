@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Căutare de imagini</string>
+    <string name="action_settings">Setări</string>
+    <string name="action_search">Căutare</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Imagini</string>
+    <string name="video">Video</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">partajați în fluxul Instagram</string>
+    <string name="app_choser_title">a ales o cerere:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Merge</string>
+    <string name="permission_deny_notice">Faceți clic pe Salt pentru a modifica permisiunile.</string>
+    <string name="empty_key_term_notice">nu pot găsi imagini relative</string>
+    <string name="pick_from_photo_album">Alegeți din albumul foto</string>
+    <string name="pick_from_camera">Alegeți din cameră</string>
+    <string name="cancel">Anula</string>
+</resources>

@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Sailiga o Ata</string>
+    <string name="action_settings">Faatulagaga</string>
+    <string name="action_search">Saili</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Ata</string>
+    <string name="video">Vitio</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">faasoa atu i meaai o le instagram</string>
+    <string name="app_choser_title">filifilia se talosaga:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Alu</string>
+    <string name="permission_deny_notice">Kiliki le Alu e sui ai le faatagaga.</string>
+    <string name="empty_key_term_notice">e le mafai ona maua ni ata e faatatau i ai</string>
+    <string name="pick_from_photo_album">Filifili mai le lipine o le ata</string>
+    <string name="pick_from_camera">Filifili mai le mea pueata</string>
+    <string name="cancel">Faaleaogaina</string>
+</resources>

@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Vaizdų paieška</string>
+    <string name="action_settings">Parametrai</string>
+    <string name="action_search">Ieškoti</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Vaizdus</string>
+    <string name="video">Video</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">dalintis instagram sklaidos kanale</string>
+    <string name="app_choser_title">pasirinko paraišką:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Eiti</string>
+    <string name="permission_deny_notice">Spustelėkite Eiti, kad pakeistumėte leidimus.</string>
+    <string name="empty_key_term_notice">negali rasti santykinių nuotraukų</string>
+    <string name="pick_from_photo_album">Pasirinkite iš nuotraukų albumo</string>
+    <string name="pick_from_camera">Pasirinkite iš fotoaparato</string>
+    <string name="cancel">Atšaukti</string>
+</resources>

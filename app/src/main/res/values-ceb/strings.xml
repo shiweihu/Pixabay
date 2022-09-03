@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Pangitag Hulagway</string>
+    <string name="action_settings">Mga setting</string>
+    <string name="action_search">Pangitaa</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Mga larawan</string>
+    <string name="video">Video</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">share sa instagram feed</string>
+    <string name="app_choser_title">nagpili usa ka aplikasyon:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Lakaw</string>
+    <string name="permission_deny_notice">I-klik ang Lakaw aron usbon ang mga permiso.</string>
+    <string name="empty_key_term_notice">dili makit-an ang mga relatibong litrato</string>
+    <string name="pick_from_photo_album">Pagpili gikan sa photo album</string>
+    <string name="pick_from_camera">Pagpili gikan sa camera</string>
+    <string name="cancel">Pagkanselar</string>
+</resources>

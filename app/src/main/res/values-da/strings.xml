@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Billedsøgning</string>
+    <string name="action_settings">Indstillinger</string>
+    <string name="action_search">Søge</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Billeder</string>
+    <string name="video">Video</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">del til instagram feed</string>
+    <string name="app_choser_title">valgte en ansøgning:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Gå</string>
+    <string name="permission_deny_notice">Klik på Gå for at ændre tilladelserne.</string>
+    <string name="empty_key_term_notice">kan ikke finde relative billeder</string>
+    <string name="pick_from_photo_album">Vælg fra fotoalbum</string>
+    <string name="pick_from_camera">Vælg fra kamera</string>
+    <string name="cancel">Aflyse</string>
+</resources>

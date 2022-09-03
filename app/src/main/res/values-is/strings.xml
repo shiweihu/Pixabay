@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Myndaleit</string>
+    <string name="action_settings">Stillingar</string>
+    <string name="action_search">Leita</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Myndir</string>
+    <string name="video">Myndband</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">deila í instagram straum</string>
+    <string name="app_choser_title">valdi umsókn:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Fara</string>
+    <string name="permission_deny_notice">Smelltu á Fara til að breyta heimildum.</string>
+    <string name="empty_key_term_notice">get ekki fundið ættingja myndir</string>
+    <string name="pick_from_photo_album">Veldu úr myndaalbúmi</string>
+    <string name="pick_from_camera">Veldu úr myndavélinni</string>
+    <string name="cancel">Afturkalla</string>
+</resources>

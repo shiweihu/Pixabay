@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">ຄົ້ນຫາຮູບພາບ</string>
+    <string name="action_settings">ການຕັ້ງຄ່າ</string>
+    <string name="action_search">ຄົ້ນຫາ</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">ຮູບພາບ</string>
+    <string name="video">ວີດີໂອ</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">ແບ່ງປັນໃຫ້ instagram feed</string>
+    <string name="app_choser_title">ເລືອກເອົາຄໍາຮ້ອງສະຫມັກ:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">ໄປ</string>
+    <string name="permission_deny_notice">ຄລິກໄປເພື່ອປ່ຽນການອະນຸຍາດ.</string>
+    <string name="empty_key_term_notice">ບໍ່ສາມາດຊອກຫາຮູບພາບຍາດພີ່ນ້ອງ</string>
+    <string name="pick_from_photo_album">ເລືອກຈາກ album ຮູບພາບ</string>
+    <string name="pick_from_camera">ເລືອກຈາກກ້ອງ</string>
+    <string name="cancel">ຍົກເລີກ</string>
+</resources>

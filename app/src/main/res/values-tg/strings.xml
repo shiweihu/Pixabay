@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Ҷустуҷӯи тасвир</string>
+    <string name="action_settings">Танзимотҳо</string>
+    <string name="action_search">Ҷустуҷӯ</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Тасвирҳо</string>
+    <string name="video">Видео</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">дар канали инстаграм мубодила кунед</string>
+    <string name="app_choser_title">ариза интихоб кунед:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Бирав</string>
+    <string name="permission_deny_notice">Барои тағир додани иҷозатҳо Гузариш -ро клик кунед.</string>
+    <string name="empty_key_term_notice">тасвирҳои нисбӣ пайдо карда наметавонанд</string>
+    <string name="pick_from_photo_album">Аз албоми аксҳо интихоб кунед</string>
+    <string name="pick_from_camera">Аз камера интихоб кунед</string>
+    <string name="cancel">Бекор кардан</string>
+</resources>

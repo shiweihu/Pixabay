@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">图片搜索</string>
+    <string name="action_settings">设置</string>
+    <string name="action_search">搜索</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">图片</string>
+    <string name="video">视频</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">分享到instagram</string>
+    <string name="app_choser_title">选择一个应用程序:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">去</string>
+    <string name="permission_deny_notice">单击Go以更改权限。</string>
+    <string name="empty_key_term_notice">找不到相关图片</string>
+    <string name="pick_from_photo_album">从相册中挑选</string>
+    <string name="pick_from_camera">挑选相机</string>
+    <string name="cancel">取消</string>
+</resources>

@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Irudien bilaketa</string>
+    <string name="action_settings">Ezarpenak</string>
+    <string name="action_search">Bilatu</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Irudiak</string>
+    <string name="video">Bideoa</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">partekatu instagram jarioan</string>
+    <string name="app_choser_title">aplikazio bat aukeratu:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Zoaz</string>
+    <string name="permission_deny_notice">Sakatu Joan baimenak aldatzeko.</string>
+    <string name="empty_key_term_notice">ezin dira irudi erlatiboak aurkitu</string>
+    <string name="pick_from_photo_album">Aukeratu argazki albumetik</string>
+    <string name="pick_from_camera">Aukeratu kameratik</string>
+    <string name="cancel">Utzi</string>
+</resources>

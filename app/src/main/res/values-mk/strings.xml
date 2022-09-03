@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Пребарување на слики</string>
+    <string name="action_settings">Подесувања</string>
+    <string name="action_search">Пребарајте</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Слики</string>
+    <string name="video">Видео</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">делење на инстаграм преносот</string>
+    <string name="app_choser_title">избра апликација:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Оди.</string>
+    <string name="permission_deny_notice">Кликнете одете за да ги промените дозволите.</string>
+    <string name="empty_key_term_notice">Не можам да најдам релативни слики</string>
+    <string name="pick_from_photo_album">Избери од фото албумот</string>
+    <string name="pick_from_camera">Бегај од камерата.</string>
+    <string name="cancel">Откажи</string>
+</resources>

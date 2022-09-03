@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Carian Imej</string>
+    <string name="action_settings">Seting</string>
+    <string name="action_search">Carian</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Imej</string>
+    <string name="video">Video</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">kongsi ke suapan instagram</string>
+    <string name="app_choser_title">memilih permohonan:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Pergi</string>
+    <string name="permission_deny_notice">Klik Pergi untuk mengubah keizinan.</string>
+    <string name="empty_key_term_notice">tidak dapat mencari gambar relatif</string>
+    <string name="pick_from_photo_album">Pilih daripada album foto</string>
+    <string name="pick_from_camera">Pilih daripada kamera</string>
+    <string name="cancel">Membatalkan</string>
+</resources>

@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">ఇమేజ్ శోధన</string>
+    <string name="action_settings">అమర్పులు</string>
+    <string name="action_search">వెతుకు</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">[మార్చు] చిత్రాలు</string>
+    <string name="video">వీడియో</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">Instagram ఫీడ్ కు భాగస్వామ్యం చేయండి</string>
+    <string name="app_choser_title">ఒక అప్లికేషన్ ను ఎంచుకుంది:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">వెళ్ళు</string>
+    <string name="permission_deny_notice">అనుమతులను మార్చడానికి గో క్లిక్ చేయండి.</string>
+    <string name="empty_key_term_notice">సాపేక్ష చిత్రాలను కనుగొనలేరు</string>
+    <string name="pick_from_photo_album">ఫోటో ఆల్బమ్ నుండి ఎంచుకోండి</string>
+    <string name="pick_from_camera">కెమెరా నుండి ఎంచుకోండి</string>
+    <string name="cancel">రద్దు</string>
+</resources>

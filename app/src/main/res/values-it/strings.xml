@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Ricerca immagini</string>
+    <string name="action_settings">impostazioni</string>
+    <string name="action_search">cerca</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">immagini</string>
+    <string name="video">Video</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">Condividi la fonte di instagram</string>
+    <string name="app_choser_title">Scegli un’ applicazione:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">vai</string>
+    <string name="permission_deny_notice">Fai clic su vai per cambiare i permessi.</string>
+    <string name="empty_key_term_notice">Impossibile trovare immagini relative</string>
+    <string name="pick_from_photo_album">Preleva dall’ album fotografico</string>
+    <string name="pick_from_camera">Preleva dalla fotocamera</string>
+    <string name="cancel">annulla</string>
+</resources>

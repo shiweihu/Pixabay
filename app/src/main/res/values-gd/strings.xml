@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Rannsachadh Dhealbhan</string>
+    <string name="action_settings">Suidhichidhean</string>
+    <string name="action_search">Rannsaich</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Dealbhan</string>
+    <string name="video">Bhideo</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">roinn gu instagram feed</string>
+    <string name="app_choser_title">tagh iarrtas:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Rachaibh</string>
+    <string name="permission_deny_notice">Cliog Rach gus na ceadan atharrachadh.</string>
+    <string name="empty_key_term_notice">chan urrainn dha dealbhan càirdeach a lorg</string>
+    <string name="pick_from_photo_album">Tagh bho photo album</string>
+    <string name="pick_from_camera">Tagh bhon chamara</string>
+    <string name="cancel">Sguir dheth</string>
+</resources>

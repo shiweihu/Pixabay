@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Ukusesha Isithombe</string>
+    <string name="action_settings">Izilungiselelo</string>
+    <string name="action_search">Sesha</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Izithombe</string>
+    <string name="video">Ividiyo</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">yabelana kokuphakelayo kwe-instagram</string>
+    <string name="app_choser_title">ukhethe isicelo:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Hamba</string>
+    <string name="permission_deny_notice">Chofoza okuthi Hamba ukuze ushintshe izimvume.</string>
+    <string name="empty_key_term_notice">angikwazi ukuthola izithombe ezihlobene</string>
+    <string name="pick_from_photo_album">Khetha ku-albhamu yezithombe</string>
+    <string name="pick_from_camera">Khetha kukhamera</string>
+    <string name="cancel">Khansela</string>
+</resources>

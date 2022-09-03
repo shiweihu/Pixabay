@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Image Search</string>
+    <string name="action_settings">Ynstellings</string>
+    <string name="action_search">Sykje</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Ofbyldings</string>
+    <string name="video">Video</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">diel oan instagram feed</string>
+    <string name="app_choser_title">kies in applikaasje:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Gean</string>
+    <string name="permission_deny_notice">Klik op Gean om de tagongsrjochten te feroarjen.</string>
+    <string name="empty_key_term_notice">kin gjin relative foto\'s fine</string>
+    <string name="pick_from_photo_album">Kies út fotoalbum</string>
+    <string name="pick_from_camera">Kies út kamera</string>
+    <string name="cancel">Ofbrekke</string>
+</resources>

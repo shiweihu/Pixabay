@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Iwadi Aworan</string>
+    <string name="action_settings">Ètò</string>
+    <string name="action_search">Wa</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Awọn aworan</string>
+    <string name="video">Fidio</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">pin si kikọ sii instagram</string>
+    <string name="app_choser_title">yan ohun elo kan:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Lọ</string>
+    <string name="permission_deny_notice">Tẹ Lọ lati yi awọn igbanilaaye pada.</string>
+    <string name="empty_key_term_notice">ko le ri ojulumo awọn aworan</string>
+    <string name="pick_from_photo_album">Yan lati inu awo-orin fọto</string>
+    <string name="pick_from_camera">Yan lati kamẹra</string>
+    <string name="cancel">Fagilee</string>
+</resources>

@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">ચિત્ર શોધ</string>
+    <string name="action_settings">સુયોજનો</string>
+    <string name="action_search">શોધવું</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">ઇમેજો</string>
+    <string name="video">દૂરદર્શન</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">ઇન્સ્ટાગ્રામ ફીડમાં વહેંચો</string>
+    <string name="app_choser_title">કાર્યક્રમ પસંદ કરો:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">જવું</string>
+    <string name="permission_deny_notice">પરવાનગીઓ બદલવા માટે જાઓ પર ક્લિક કરો.</string>
+    <string name="empty_key_term_notice">સંબંધિત ચિત્રો શોધી શકતા નથી</string>
+    <string name="pick_from_photo_album">ફોટો આલ્બમ માંથી પસંદ કરો</string>
+    <string name="pick_from_camera">કૅમેરામાંથી પસંદ કરો</string>
+    <string name="cancel">રદ્દ</string>
+</resources>

@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Pildiotsing</string>
+    <string name="action_settings">Seaded</string>
+    <string name="action_search">Otsing</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Pilte</string>
+    <string name="video">Video</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">jaga instagrami vooga</string>
+    <string name="app_choser_title">valis rakenduse:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Minema</string>
+    <string name="permission_deny_notice">Klõpsake õiguste muutmiseks nuppu Mine.</string>
+    <string name="empty_key_term_notice">ei leia suhtelisi pilte</string>
+    <string name="pick_from_photo_album">Vali fotoalbumist</string>
+    <string name="pick_from_camera">Valige kaamerast</string>
+    <string name="cancel">Tühistama</string>
+</resources>

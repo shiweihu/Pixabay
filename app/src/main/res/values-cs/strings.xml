@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Vyhledávání obrázků</string>
+    <string name="action_settings">Nastavení</string>
+    <string name="action_search">Hledání</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Obrazy</string>
+    <string name="video">Video</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">sdílet na instagram feed</string>
+    <string name="app_choser_title">vyberte aplikaci:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Jít</string>
+    <string name="permission_deny_notice">Kliknutím na tlačítko Přejít změňte oprávnění.</string>
+    <string name="empty_key_term_notice">nelze najít relativní obrázky</string>
+    <string name="pick_from_photo_album">Výběr z fotoalba</string>
+    <string name="pick_from_camera">Výběr z fotoaparátu</string>
+    <string name="cancel">Zrušit</string>
+</resources>

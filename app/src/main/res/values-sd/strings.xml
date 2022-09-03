@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name"></string>
+    <string name="action_settings">سيٽنگون</string>
+    <string name="action_search">ڳولا</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">تصويرون</string>
+    <string name="video">وڊيو</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">Instagram فيڊ تي حصيداري ڪريو</string>
+    <string name="app_choser_title">ايپليڪيشن چونڊيو:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">وڃ</string>
+    <string name="permission_deny_notice">ڪلڪ ڪريو وڃو اجازتون تبديل ڪرڻ لاء.</string>
+    <string name="empty_key_term_notice">لاڳاپو تصويرون نه ملي سگهي</string>
+    <string name="pick_from_photo_album">فوٽو البم مان چونڊيو</string>
+    <string name="pick_from_camera">ڪئميرا مان چونڊيو</string>
+    <string name="cancel">منسوخ ڪريو</string>
+</resources>

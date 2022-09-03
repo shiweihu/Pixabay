@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Rasm qidirishQuery</string>
+    <string name="action_settings">Moslamalar</string>
+    <string name="action_search">Qidirish</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Rasmlar</string>
+    <string name="video">Video</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">Instagram tasmasiga ulashing</string>
+    <string name="app_choser_title">dastur tanladi:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Oʻtish</string>
+    <string name="permission_deny_notice">Huquqlarni oʻzgartirish uchun \"Go\" tugmasini bosing.</string>
+    <string name="empty_key_term_notice">nisbiy rasmlarni topa olmadi</string>
+    <string name="pick_from_photo_album">Fotoalbomdan tanlang</string>
+    <string name="pick_from_camera">Kameradan terish</string>
+    <string name="cancel">Bekor qilish</string>
+</resources>

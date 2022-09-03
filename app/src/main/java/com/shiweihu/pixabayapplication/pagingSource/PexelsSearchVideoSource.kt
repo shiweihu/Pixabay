@@ -5,6 +5,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.perf.ktx.performance
+import com.shiweihu.pixabayapplication.MyApplication
 import com.shiweihu.pixabayapplication.data.ImageInfo
 import com.shiweihu.pixabayapplication.data.PexelsPhoto
 import com.shiweihu.pixabayapplication.data.PexelsVideos
@@ -31,10 +32,15 @@ class PexelsSearchVideoSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PexelsVideos> {
         val page = params.key ?: 1
         return try {
+            val languageArray = arrayListOf("en-US","pt-BR","es-ES","ca-ES", "de-DE", "it-IT", "fr-FR" ,"sv-SE","id-ID", "pl-PL", "ja-JP","zh-TW","zh-CN","ko-KR","th-TH","nl-NL","hu-HU","vi-VN","cs-CZ","da-DK","fi-FI","uk-UA","el-GR","ro-RO","nb-NO","sk-SK","tr-TR","ru-RU")
+            val languages = languageArray.filter {
+                it.indexOf(MyApplication.lang) != -1
+            }
+            var language = if(languages.isNotEmpty()) languages[0] else languageArray[0]
             val photos =  if(query.isEmpty()){
                videoProxy.popularVideos(page = page).videos
             }else{
-               videoProxy.queryVideos(query = query,page = page).videos
+               videoProxy.queryVideos(query = query,page = page, lang = language).videos
             }
             LoadResult.Page(
                 data = photos,

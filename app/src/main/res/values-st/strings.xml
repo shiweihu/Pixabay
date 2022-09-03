@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Patlisiso ea Litšoantšo</string>
+    <string name="action_settings">Litlhophiso</string>
+    <string name="action_search">Batla</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Litšoantšo</string>
+    <string name="video">Video</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">arolelana ho fepa ea instagram</string>
+    <string name="app_choser_title">khetha kopo:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Eya</string>
+    <string name="permission_deny_notice">Tobetsa Eya ho fetola ditumello.</string>
+    <string name="empty_key_term_notice">ha e khone ho fumana litšoantšo tse amanang</string>
+    <string name="pick_from_photo_album">Khetha ho tsoa ho albamo ea lifoto</string>
+    <string name="pick_from_camera">Khetha ho khamera</string>
+    <string name="cancel">Hlakola</string>
+</resources>

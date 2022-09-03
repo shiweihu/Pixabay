@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Uphendlo loMfanekiso</string>
+    <string name="action_settings">Iisetingi</string>
+    <string name="action_search">Khangela</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="images">Imifanekiso</string>
+    <string name="video">Ividiyo</string>
+    <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
+    <string name="instagram_btn_description">ukwabelana kwi-instagram feed</string>
+    <string name="app_choser_title">ukhethe isicelo:</string>
+    <string name="pixabay_title" translatable="false">Pixabay</string>
+    <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="go">Hamba</string>
+    <string name="permission_deny_notice">Cofa ku-Go ukutshintsha iimvume.</string>
+    <string name="empty_key_term_notice">awukwazi ukufumana imifanekiso ehambelanayo</string>
+    <string name="pick_from_photo_album">Khetha kwialbham yeefoto</string>
+    <string name="pick_from_camera">Khetha kwikhamera</string>
+    <string name="cancel">Rhoxisa</string>
+</resources>
