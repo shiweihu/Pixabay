@@ -33,10 +33,15 @@ class PexelsSearchVideoSource(
         val page = params.key ?: 1
         return try {
             val languageArray = arrayListOf("en-US","pt-BR","es-ES","ca-ES", "de-DE", "it-IT", "fr-FR" ,"sv-SE","id-ID", "pl-PL", "ja-JP","zh-TW","zh-CN","ko-KR","th-TH","nl-NL","hu-HU","vi-VN","cs-CZ","da-DK","fi-FI","uk-UA","el-GR","ro-RO","nb-NO","sk-SK","tr-TR","ru-RU")
-            val languages = languageArray.filter {
-                it.indexOf(MyApplication.lang) != -1
+            val language = languageArray.filter {
+                it == "${MyApplication.lang}-${MyApplication.country}"
+            }.run {
+                if(this.isEmpty()){
+                    return@run "en-US"
+                }else{
+                    return@run this[0]
+                }
             }
-            var language = if(languages.isNotEmpty()) languages[0] else languageArray[0]
             val photos =  if(query.isEmpty()){
                videoProxy.popularVideos(page = page).videos
             }else{

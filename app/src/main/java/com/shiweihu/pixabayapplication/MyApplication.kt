@@ -29,7 +29,12 @@ class MyApplication: Application() {
         const val API_KEY = "25109780-7bd3253b1b879d034650fb7f1"
         const val PEXELS_API_KEY = "563492ad6f917000010000014f8e0e71323c406392738971f27849a7"
         val mHandler = Handler(Looper.getMainLooper())
-        var lang = "en"
+        val lang by lazy {
+            Locale.getDefault().language
+        }
+        val country by lazy {
+            Locale.getDefault().getCountry()
+        }
         var APP_DEBUG = false
 
     }
@@ -54,7 +59,7 @@ class MyApplication: Application() {
 
 
 
-        lang = Locale.getDefault().language
+
         //Glide.get(this@MyApplication).clearMemory()
 //        CoroutineScope(Dispatchers.IO).launch {
 //            Glide.get(this@MyApplication).clearDiskCache()
