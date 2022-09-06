@@ -131,9 +131,6 @@ class PhotosMainFragment : BaseFragment() {
                 }
             }
         }
-        else{
-            Toast.makeText(this.requireContext(),R.string.empty_key_term_notice, Toast.LENGTH_SHORT).show()
-        }
     }
 
     private val picturePickerLaunch = registerForActivityResult(object :
