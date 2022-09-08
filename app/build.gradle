@@ -43,6 +43,7 @@ android {
         dataBinding true
     }
     namespace 'com.shiweihu.pixabayapplication'
+    buildToolsVersion '33.0.0'
 }
 
 dependencies {

@@ -13,6 +13,7 @@ import android.provider.MediaStore
 import android.provider.MediaStore.ACTION_IMAGE_CAPTURE
 import android.transition.TransitionInflater
 import android.view.*
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
@@ -231,9 +232,6 @@ class PhotosMainFragment : BaseFragment() {
                 }
 
             })
-            it.cameraBtn.setOnClickListener {
-                showPicturePickerDialog()
-            }
 
             initMenu(it.toolBar.menu)
             initShareElement()
@@ -303,6 +301,13 @@ class PhotosMainFragment : BaseFragment() {
                             return true
                         }
                     })
+                }
+                R.id.action_picture_select ->{
+                    val camera_btn = (it.actionView as ImageView)
+                    camera_btn.setImageResource(R.drawable.camera_icon)
+                    camera_btn.setOnClickListener {
+                        showPicturePickerDialog()
+                    }
                 }
             }
         }
