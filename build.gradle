@@ -5,7 +5,7 @@ buildscript {
 
 
         // App dependencies
-        appCompatVersion = '1.5.0'
+        appCompatVersion = '1.5.1'
         constraintLayoutVersion = '2.1.4'
         coreTestingVersion = '2.0.0'
         coroutinesVersion = '1.6.4'
@@ -18,11 +18,11 @@ buildscript {
         junitVersion = '4.12'
         kotlinVersion = '1.5.31'
         ktlintVersion = '0.38.1'
-        ktxVersion = '1.8.0'
+        ktxVersion = '1.9.0'
         lifecycleVersion = '2.4.1'
         lifecycle_extensions = '2.2.0'
         materialVersion = '1.6.1'
-        navigationVersion = '2.5.1'
+        navigationVersion = '2.5.2'
         okhttpLoggingVersion = '5.0.0-alpha.10'
         pagingVersion = '3.1.1'
         retrofitVersion = '2.9.0'
@@ -38,7 +38,7 @@ buildscript {
         lifecycle_version = "2.5.1"
         kotlin_plugin = "1.7.10"
         gradle_version = '7.2.2'
-        ads_version = "21.1.0"
+        ads_version = "21.2.0"
         splashscreen = "1.0.0"
         firebase_bom = '30.4.0'
         firebase_crashlytics_gradle = "2.9.1"
