@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Pilih saka album foto</string>
     <string name="pick_from_camera">Pilih saka kamera</string>
     <string name="cancel">Batal</string>
+    <string name="view_pictures_in_web">Deleng ing kaca web</string>
+    <string name="view_photographer_in_web">Pindhah menyang kaca fotografer</string>
+    <string name="find_the_similar_pictures">Nemokake Gambar sing padha</string>
+    <string name="download_image">Ngundhuh</string>
+    <string name="share_image_to">Nuduhake Gambar menyang liyane</string>
+    <string name="download_successfully">Download kasil</string>
+    <string name="download_failed">Ngundhuh gagal</string>
+    <string name="view_it">Deleng</string>
 </resources>

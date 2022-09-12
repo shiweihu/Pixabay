@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">ഫോട്ടോ ആൽബത്തിൽ നിന്ന് തിരഞ്ഞെടുക്കുക</string>
     <string name="pick_from_camera">ക്യാമറയിൽ നിന്ന് തിരഞ്ഞെടുക്കുക</string>
     <string name="cancel">ക്യാൻസൽ ചെയ്യ്</string>
+    <string name="view_pictures_in_web">വെബ് പേജിൽ കാണുക</string>
+    <string name="view_photographer_in_web">ഫോട്ടോഗ്രാഫർ പേജിലേക്ക് പോകുക</string>
+    <string name="find_the_similar_pictures">സമാനമായ ചിത്രങ്ങൾ കണ്ടെത്തൽ</string>
+    <string name="download_image">ഡൌൺലോഡ്</string>
+    <string name="share_image_to">ചിത്രങ്ങൾ മറ്റുള്ളവയിലേക്ക് പങ്കിടുക</string>
+    <string name="download_successfully">വിജയകരമായി ഡൌണ് ലോഡ് ചെയ്യുക</string>
+    <string name="download_failed">ഡൗൺലോഡ് പരാജയപ്പെട്ടു</string>
+    <string name="view_it">അത് കാണുക</string>
 </resources>

@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">ဓာတ်ပုံအယ်လ်ဘမ်မှရွေးချယ်ပါ</string>
     <string name="pick_from_camera">ကင်မရာမှရွေးချယ်ပါ</string>
     <string name="cancel">ပယ်ဖျက်ပါ</string>
+    <string name="view_pictures_in_web">ဝက်ဘ်စာမျက်နှာမှာကြည့်ပါ</string>
+    <string name="view_photographer_in_web">ဓာတ်ပုံဆရာ စာမျက်နှာကို သွားပါ</string>
+    <string name="find_the_similar_pictures">အလားတူပုံရိပ်များကို ရှာဖွေခြင်း</string>
+    <string name="download_image">ဒေါင်းလုတ်ဆွဲပါ</string>
+    <string name="share_image_to">ရုပ်ပုံတွေကို တခြားပုံရိပ်တွေ ဝေမျှပါ</string>
+    <string name="download_successfully">အောင်မြင်စွာ ဒေါင်းလုတ်ဆွဲပါ</string>
+    <string name="download_failed">ဒေါင်းလုတ် မအောင်မြင်ခဲ့</string>
+    <string name="view_it">အဲဒါကို ရှုမြင်ပါ</string>
 </resources>

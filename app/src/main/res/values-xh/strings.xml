@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Khetha kwialbham yeefoto</string>
     <string name="pick_from_camera">Khetha kwikhamera</string>
     <string name="cancel">Rhoxisa</string>
+    <string name="view_pictures_in_web">Yijonge kwiphepha lewebhu</string>
+    <string name="view_photographer_in_web">Yiya kwiphepha lokufota</string>
+    <string name="find_the_similar_pictures">Ukufumana Imifanekiso Efanayo</string>
+    <string name="download_image">Khuphela</string>
+    <string name="share_image_to">Yabelana ngeMifanekiso kwabanye</string>
+    <string name="download_successfully">Khuphela ngempumelelo</string>
+    <string name="download_failed">Ukukhuphela akuphumelelanga</string>
+    <string name="view_it">Yijonge</string>
 </resources>

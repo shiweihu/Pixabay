@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Выбрать из фотоальбома</string>
     <string name="pick_from_camera">Выберите из камеры</string>
     <string name="cancel">Все в силе</string>
+    <string name="view_pictures_in_web">Посмотреть его на веб-странице</string>
+    <string name="view_photographer_in_web">Перейти на страницу фотографа</string>
+    <string name="find_the_similar_pictures">Поиск похожих изображений</string>
+    <string name="download_image">скачать</string>
+    <string name="share_image_to">Поделиться фотографиями с другими</string>
+    <string name="download_successfully">Скачать успешно</string>
+    <string name="download_failed">Загрузка не удалась</string>
+    <string name="view_it">Посмотрите на него</string>
 </resources>

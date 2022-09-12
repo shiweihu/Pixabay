@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Fotoğraf albümünden seçim yapma</string>
     <string name="pick_from_camera">Kameradan seçim yapın</string>
     <string name="cancel">İptal</string>
+    <string name="view_pictures_in_web">Web sayfasında görüntüleyin</string>
+    <string name="view_photographer_in_web">Fotoğrafçı sayfasına git</string>
+    <string name="find_the_similar_pictures">Benzer Görüntüleri Bulma</string>
+    <string name="download_image">İndirmek</string>
+    <string name="share_image_to">Görüntüleri başkalarıyla paylaşma</string>
+    <string name="download_successfully">Başarıyla indirin</string>
+    <string name="download_failed">İndirme başarısız oldu</string>
+    <string name="view_it">Görüntüleyin</string>
 </resources>

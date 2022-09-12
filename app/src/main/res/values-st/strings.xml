@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Khetha ho tsoa ho albamo ea lifoto</string>
     <string name="pick_from_camera">Khetha ho khamera</string>
     <string name="cancel">Hlakola</string>
+    <string name="view_pictures_in_web">E shebe leqepheng la tepo</string>
+    <string name="view_photographer_in_web">Eya leqepheng la lifoto</string>
+    <string name="find_the_similar_pictures">Ho Fumana Litšoantšo tse Tšoanang</string>
+    <string name="download_image">Khoasolla</string>
+    <string name="share_image_to">Arolelana Litšoantšo ho ba bang</string>
+    <string name="download_successfully">Khoasolla ka katleho</string>
+    <string name="download_failed">Ho khoasolla ho hlolehile</string>
+    <string name="view_it">E shebelle</string>
 </resources>

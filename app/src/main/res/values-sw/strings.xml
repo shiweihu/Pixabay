@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Chagua kutoka kwa albamu ya picha</string>
     <string name="pick_from_camera">Chagua kutoka kwa kamera</string>
     <string name="cancel">Katisha</string>
+    <string name="view_pictures_in_web">Tazama kwenye ukurasa wa wavuti</string>
+    <string name="view_photographer_in_web">Nenda kwenye ukurasa wa mpiga picha</string>
+    <string name="find_the_similar_pictures">Kupata Picha zinazofanana</string>
+    <string name="download_image">Kupakua</string>
+    <string name="share_image_to">Shiriki Picha kwa nyingine</string>
+    <string name="download_successfully">Pakua kwa mafanikio</string>
+    <string name="download_failed">Upakuaji umeshindikana</string>
+    <string name="view_it">Tazama</string>
 </resources>

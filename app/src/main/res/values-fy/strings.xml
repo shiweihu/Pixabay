@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Kies út fotoalbum</string>
     <string name="pick_from_camera">Kies út kamera</string>
     <string name="cancel">Ofbrekke</string>
+    <string name="view_pictures_in_web">Besjoch it op webside</string>
+    <string name="view_photographer_in_web">Gean nei fotograaf side</string>
+    <string name="find_the_similar_pictures">Finding Similar Images</string>
+    <string name="download_image">Download</string>
+    <string name="share_image_to">Diel ôfbyldings mei oare</string>
+    <string name="download_successfully">Download mei súkses</string>
+    <string name="download_failed">Download mislearre</string>
+    <string name="view_it">Besjoch it</string>
 </resources>

@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Colligunt a photo album</string>
     <string name="pick_from_camera">Colligunt de camera</string>
     <string name="cancel">Cancel</string>
+    <string name="view_pictures_in_web">Vide in pagina interretialem</string>
+    <string name="view_photographer_in_web">Adi paginam photographicam</string>
+    <string name="find_the_similar_pictures">Similes imagines inveniens</string>
+    <string name="download_image">Download</string>
+    <string name="share_image_to">Share Imagines aliis</string>
+    <string name="download_successfully">Download feliciter</string>
+    <string name="download_failed">Download defecit</string>
+    <string name="view_it">View it</string>
 </resources>

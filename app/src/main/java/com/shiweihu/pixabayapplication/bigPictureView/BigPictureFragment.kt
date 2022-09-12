@@ -13,15 +13,14 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.transition.TransitionInflater
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.app.SharedElementCallback
+import androidx.core.view.forEachIndexed
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -63,19 +62,24 @@ class BigPictureFragment : BaseFragment() {
 
     private  var binding:FragmentBigPictureBinding? = null
 
+    private val viewBinding:FragmentBigPictureBinding
+    get() {
+        return binding!!
+    }
+
 
     private val requestPermissionLauncher =registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted: Boolean ->
         if (isGranted) {
-            shareOnClick()
+            onShareImageAction()
         } else {
             // Explain to the user that the feature is unavailable because the
             // features requires a permission that the user has denied. At the
             // same time, respect the user's decision. Don't link to system
             // settings in an effort to convince the user to change their
             // decision.
-            Snackbar.make(binding!!.root,R.string.permission_deny_notice, Snackbar.LENGTH_LONG).setAction(R.string.go){
+            Snackbar.make(viewBinding.root,R.string.permission_deny_notice, Snackbar.LENGTH_LONG).setAction(R.string.go){
                 getAppDetailSettingIntent()
             }.show()
         }
@@ -126,17 +130,23 @@ class BigPictureFragment : BaseFragment() {
 
         activeModel.bigPictureArguLiveData.observe(this){
             modle.bigPictureArgu = it
-            binding?.from = it.from
+            viewBinding.from = it.from
             val pageAdapter = BigPictureAdapter(it,this)
-            binding?.viewPage?.adapter = pageAdapter
-            binding?.viewPage?.setCurrentItem(it.currentIndex,false)
+            viewBinding.viewPage.adapter = pageAdapter
+            viewBinding.viewPage.setCurrentItem(it.currentIndex,false)
         }
 
     }
 
-    private fun loadBanerAd(index:Int){
-        modle.getAdRequest(index).also { adRequest ->
-            binding?.adView?.loadAd(adRequest)
+    private fun loadBanerAd(){
+        modle.getAdRequest().also { adRequest ->
+            viewBinding.adView.loadAd(adRequest)
+            viewBinding.adView.adListener = object : AdListener(){
+                override fun onAdClosed() {
+                    super.onAdClosed()
+                    viewBinding.adView.visibility = View.GONE
+                }
+            }
         }
     }
 
@@ -145,7 +155,7 @@ class BigPictureFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding =  FragmentBigPictureBinding.inflate(inflater,container,false).also {
 
@@ -154,40 +164,68 @@ class BigPictureFragment : BaseFragment() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
                     modle.onPageChange(it,position,this@BigPictureFragment.requireActivity())
-                    loadBanerAd(position)
                 }
             })
-            it.userProfile.setOnClickListener { view ->
-                modle.userProfileOnClick(view.context,it.viewPage.currentItem)
-            }
-            it.pageProfile.setOnClickListener { view ->
-                modle.pageProfileOnClick(view.context,it.viewPage.currentItem)
-            }
-            it.relativeImageBtn.setOnClickListener { view ->
-                findRelativePictures(view,it.viewPage.currentItem)
-            }
+
 
             it.viewPage.offscreenPageLimit = 4
             it.toolBar.setNavigationOnClickListener {
                 navigateUp()
             }
-
-            it.shareToInstagramFeed.setOnClickListener {
-                shareOnClick()
-            }
             initTransition()
+            initMenu(it.toolBar.menu)
         }
+        loadBanerAd()
         postponeEnterTransition(resources.getInteger(R.integer.post_pone_time).toLong(), TimeUnit.MILLISECONDS)
-        return binding?.root
+        return viewBinding.root
     }
 
-    private fun findRelativePictures(view: View,index: Int){
-        modle.relativeBtnClick(view.context,index){key ->
+    private fun initMenu(menu: Menu){
+        menu.forEachIndexed{index,item ->
+            when(item.itemId){
+                R.id.action_view_image_page ->{
+                    item.setOnMenuItemClickListener {
+                        modle.pageProfileOnClick(this.requireContext(),viewBinding.viewPage.currentItem)
+                        true
+                    }
+                }
+                R.id.action_view_photographer_page ->{
+                    item.setOnMenuItemClickListener {
+                        modle.userProfileOnClick(this.requireContext(),viewBinding.viewPage.currentItem)
+                        true
+                    }
+                }
+                R.id.action_find_similar_images ->{
+                    item.setOnMenuItemClickListener {
+                        findRelativePictures(this.requireContext(),viewBinding.viewPage.currentItem)
+                        true
+                    }
+                }
+                R.id.action_download ->{
+                    item.setOnMenuItemClickListener {
+                        onClickDownloadAction()
+                        true
+                    }
+                }
+                R.id.action_share_image ->{
+                    item.setOnMenuItemClickListener {
+                        shareOnClick()
+                        true
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    private fun findRelativePictures(context: Context,index: Int){
+        modle.relativeBtnClick(context,index){key ->
             if(key?.isNotEmpty() == true){
                 activeModel.pictureQueryText.postValue(key)
                 findNavController().popBackStack()
             }else{
-                Toast.makeText(this.requireContext(),R.string.empty_key_term_notice,Toast.LENGTH_SHORT).show()
+                Toast.makeText(context,R.string.empty_key_term_notice,Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -196,9 +234,7 @@ class BigPictureFragment : BaseFragment() {
         val permissionState = ActivityCompat.checkSelfPermission(this.requireContext(),
             Manifest.permission.WRITE_EXTERNAL_STORAGE)
         if(permissionState == PackageManager.PERMISSION_GRANTED || Build.VERSION.SDK_INT > Build.VERSION_CODES.P){
-            modle.getShareUrl(binding!!.viewPage.currentItem)?.also { url ->
-                shareImageToInstagram(url)
-            }
+            onShareImageAction()
         }else{
             requestPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
         }
@@ -218,25 +254,60 @@ class BigPictureFragment : BaseFragment() {
         return outputUri
     }
 
-    private fun shareImageToInstagram(url:String){
+    private fun viewImagesInSystem(uri:Uri){
+        val intent = Intent(Intent.ACTION_VIEW).also {
+            it.setDataAndType(uri,"image/*")
+
+        }
+        startActivity(intent)
+    }
+
+    private fun onClickDownloadAction(){
+        modle.getShareUrl(viewBinding.viewPage.currentItem)?.also { url ->
+            downloadImage(url){ uri ->
+                if(uri != null){
+                    Snackbar.make(viewBinding.root,R.string.download_successfully, Snackbar.LENGTH_LONG).setAction(R.string.view_it){
+                        viewImagesInSystem(uri)
+                    }.show()
+                }else{
+                    Toast.makeText(this@BigPictureFragment.requireContext(),R.string.download_failed,Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+    }
+
+    private fun downloadImage(url:String,callBack:(uri:Uri?)->Unit){
         Uri.parse(url).also {
             Glide.with(this.requireContext()).asBitmap().load(it).into(object:CustomTarget<Bitmap>(){
                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                    getOutPutUri(resource)?.also { uri ->
-                        shareToInstagram.launch(uri)
-                    }
+                    callBack(getOutPutUri(resource))
                 }
                 override fun onLoadCleared(placeholder: Drawable?) {
-
+                    callBack(null)
                 }
             })
+        }
+    }
+
+    private fun onShareImageAction(){
+        modle.getShareUrl(viewBinding.viewPage.currentItem)?.also{
+            shareImageToInstagram(it)
+        }
+    }
+
+    private fun shareImageToInstagram(url:String){
+        downloadImage(url){
+            it?.let { uri ->
+                shareToInstagram.launch(uri)
+            }
         }
     }
 
 
 
     private fun navigateUp(){
-        binding?.viewPage?.currentItem?.let {
+        viewBinding.viewPage.currentItem.let {
             activeModel.pictureItemPosition.postValue(it)
         }
         findNavController().navigateUp()
@@ -249,7 +320,7 @@ class BigPictureFragment : BaseFragment() {
                 sharedElements: MutableMap<String, View>?
             ) {
                 super.onMapSharedElements(names, sharedElements)
-                val view = binding?.viewPage?.findViewWithTag<ImageView>( "${SHARE_ELEMENT_NAME}-${binding?.viewPage?.currentItem}")
+                val view = viewBinding.viewPage?.findViewWithTag<ImageView>( "${SHARE_ELEMENT_NAME}-${viewBinding.viewPage?.currentItem}")
                 if(names != null && sharedElements!=null && view!=null){
                     sharedElements[names[0]] = view
                 }
@@ -273,8 +344,8 @@ class BigPictureFragment : BaseFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding?.viewPage?.adapter = null
-        binding?.adView?.destroy()
+        viewBinding.viewPage.adapter = null
+        viewBinding.adView.destroy()
         binding = null
     }
 

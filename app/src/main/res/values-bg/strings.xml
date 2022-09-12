@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Изписване от фотоалбум</string>
     <string name="pick_from_camera">Изписване от камерата</string>
     <string name="cancel">Задрасквам</string>
+    <string name="view_pictures_in_web">Преглед на него на уеб страница</string>
+    <string name="view_photographer_in_web">Към страницата на фотографа</string>
+    <string name="find_the_similar_pictures">Намиране на подобни изображения</string>
+    <string name="download_image">Свалям</string>
+    <string name="share_image_to">Споделяне на изображения към други</string>
+    <string name="download_successfully">Изтегляне успешно</string>
+    <string name="download_failed">Изтеглянето е неуспешно</string>
+    <string name="view_it">Преглед на него</string>
 </resources>

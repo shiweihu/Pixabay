@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name"></string>
+    <string name="app_name">تصوير جي ڳولا</string>
     <string name="action_settings">سيٽنگون</string>
     <string name="action_search">ڳولا</string>
     <!-- Strings used for fragments for navigation -->
@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">فوٽو البم مان چونڊيو</string>
     <string name="pick_from_camera">ڪئميرا مان چونڊيو</string>
     <string name="cancel">منسوخ ڪريو</string>
+    <string name="view_pictures_in_web">ان کي ڏسو ويب پيج تي</string>
+    <string name="view_photographer_in_web">فوٽوگرافر صفحي ڏانھن وڃو</string>
+    <string name="find_the_similar_pictures">ملندڙ تصويرون ڳولڻ</string>
+    <string name="download_image">ڊائون لوڊ ڪريو</string>
+    <string name="share_image_to">ٻين سان تصويرون شيئر ڪريو</string>
+    <string name="download_successfully">ڊائون لوڊ ڪاميابي سان</string>
+    <string name="download_failed">ڊائون لوڊ ناڪام ٿيو</string>
+    <string name="view_it">ان کي ڏسو</string>
 </resources>

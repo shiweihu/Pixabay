@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Вибір із фотоальбому</string>
     <string name="pick_from_camera">Вибір із камери</string>
     <string name="cancel">Скасувати</string>
+    <string name="view_pictures_in_web">Переглянути його на веб-сторінці</string>
+    <string name="view_photographer_in_web">Перейти на сторінку фотографа</string>
+    <string name="find_the_similar_pictures">Пошук схожих зображень</string>
+    <string name="download_image">Завантажити</string>
+    <string name="share_image_to">Діліться зображеннями з іншими</string>
+    <string name="download_successfully">Успішно завантажити</string>
+    <string name="download_failed">Не вдалося завантажити</string>
+    <string name="view_it">Переглянути</string>
 </resources>

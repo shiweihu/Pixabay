@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Wielt aus Fotoalbum</string>
     <string name="pick_from_camera">Wielt aus der Kamera</string>
     <string name="cancel">Ofbriechen</string>
+    <string name="view_pictures_in_web">Kuckt et op der Websäit</string>
+    <string name="view_photographer_in_web">Gitt op d\'Fotograf Säit</string>
+    <string name="find_the_similar_pictures">Fannen Ähnlech Biller</string>
+    <string name="download_image">Download</string>
+    <string name="share_image_to">Deelt Biller mat aneren</string>
+    <string name="download_successfully">Eroflueden erfollegräich</string>
+    <string name="download_failed">Download gescheitert</string>
+    <string name="view_it">Kuckt et</string>
 </resources>

@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Elektu el fotoalbumo</string>
     <string name="pick_from_camera">Elektu el fotilo</string>
     <string name="cancel">Nuligi</string>
+    <string name="view_pictures_in_web">Vidu ĝin sur retpaĝo</string>
+    <string name="view_photographer_in_web">Iru al paĝo de fotisto</string>
+    <string name="find_the_similar_pictures">Trovi Similajn Bildojn</string>
+    <string name="download_image">Elŝutu</string>
+    <string name="share_image_to">Kunhavigi Bildojn al aliaj</string>
+    <string name="download_successfully">Elŝutu sukcese</string>
+    <string name="download_failed">Elŝuto malsukcesis</string>
+    <string name="view_it">Rigardu ĝin</string>
 </resources>

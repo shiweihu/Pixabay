@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Фотоальбомнан таңдау</string>
     <string name="pick_from_camera">Камерадан таңдау</string>
     <string name="cancel">Болдырмау</string>
+    <string name="view_pictures_in_web">Веб-бетте көру</string>
+    <string name="view_photographer_in_web">Фотограф бетіне өту</string>
+    <string name="find_the_similar_pictures">Ұқсас суреттерді табу</string>
+    <string name="download_image">Жүктеу</string>
+    <string name="share_image_to">Суреттерді басқасына ортақ пайдалану</string>
+    <string name="download_successfully">Жүктеу сәтті орындалсын</string>
+    <string name="download_failed">Жүктеу жаңылысы</string>
+    <string name="view_it">Қарап шығу</string>
 </resources>

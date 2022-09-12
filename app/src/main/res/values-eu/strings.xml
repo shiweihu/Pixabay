@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Aukeratu argazki albumetik</string>
     <string name="pick_from_camera">Aukeratu kameratik</string>
     <string name="cancel">Utzi</string>
+    <string name="view_pictures_in_web">Ikus ezazu web orrian</string>
+    <string name="view_photographer_in_web">Joan argazkilariaren orrialdera</string>
+    <string name="find_the_similar_pictures">Antzeko Irudiak Bilatzea</string>
+    <string name="download_image">Deskargatu</string>
+    <string name="share_image_to">Partekatu irudiak beste batzuekin</string>
+    <string name="download_successfully">Deskargatu behar bezala</string>
+    <string name="download_failed">Ezin izan da deskargatu</string>
+    <string name="view_it">Ikus ezazu</string>
 </resources>

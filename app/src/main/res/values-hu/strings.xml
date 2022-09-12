@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Válasszon a fotóalbumból</string>
     <string name="pick_from_camera">Válasszon a kamerából</string>
     <string name="cancel">Érvénytelenít</string>
+    <string name="view_pictures_in_web">Tekintse meg a weboldalon</string>
+    <string name="view_photographer_in_web">Ugrás a fotós oldalra</string>
+    <string name="find_the_similar_pictures">Hasonló képek keresése</string>
+    <string name="download_image">Letöltés</string>
+    <string name="share_image_to">Képek megosztása másokkal</string>
+    <string name="download_successfully">Letöltés sikeresen</string>
+    <string name="download_failed">A letöltés sikertelen</string>
+    <string name="view_it">Tekintse meg</string>
 </resources>

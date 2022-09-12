@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Valitse valokuva-albumista</string>
     <string name="pick_from_camera">Valitse kamerasta</string>
     <string name="cancel">Perua</string>
+    <string name="view_pictures_in_web">Katso se verkkosivulla</string>
+    <string name="view_photographer_in_web">Siirry valokuvaajasivulle</string>
+    <string name="find_the_similar_pictures">Samanlaisten kuvien löytäminen</string>
+    <string name="download_image">Ladata</string>
+    <string name="share_image_to">Jaa kuvia muille</string>
+    <string name="download_successfully">Lataa onnistuneesti</string>
+    <string name="download_failed">Lataus epäonnistui</string>
+    <string name="view_it">Katso se</string>
 </resources>

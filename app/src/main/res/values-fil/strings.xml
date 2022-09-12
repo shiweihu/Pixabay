@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Pumili mula sa larawan album</string>
     <string name="pick_from_camera">Pumili mula sa camera</string>
     <string name="cancel">Kanselahin ang</string>
+    <string name="view_pictures_in_web">Tingnan ito sa pahina ng web</string>
+    <string name="view_photographer_in_web">Pumunta sa pahina ng photographer</string>
+    <string name="find_the_similar_pictures">Paghahanap ng katulad na mga Imahe</string>
+    <string name="download_image">I-download</string>
+    <string name="share_image_to">Magbahagi ng mga Larawan sa iba pang mga imahe</string>
+    <string name="download_successfully">Matagumpay na mai-download</string>
+    <string name="download_failed">Nabigo ang Pag-download</string>
+    <string name="view_it">Tumanaw nito</string>
 </resources>

@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Veldu úr myndaalbúmi</string>
     <string name="pick_from_camera">Veldu úr myndavélinni</string>
     <string name="cancel">Afturkalla</string>
+    <string name="view_pictures_in_web">Skoða það á vefsíðu</string>
+    <string name="view_photographer_in_web">Farðu á síðu ljósmyndara</string>
+    <string name="find_the_similar_pictures">Að finna svipaðar myndir</string>
+    <string name="download_image">Hlaða niður</string>
+    <string name="share_image_to">Deila myndum til annarra</string>
+    <string name="download_successfully">Hlaða niður með góðum árangri</string>
+    <string name="download_failed">Niðurhal mistókst</string>
+    <string name="view_it">Skoða það</string>
 </resources>

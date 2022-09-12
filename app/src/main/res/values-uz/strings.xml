@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Fotoalbomdan tanlang</string>
     <string name="pick_from_camera">Kameradan terish</string>
     <string name="cancel">Bekor qilish</string>
+    <string name="view_pictures_in_web">Veb sahifada ko\'rish</string>
+    <string name="view_photographer_in_web">Fotograf sahifasiga o\'ting</string>
+    <string name="find_the_similar_pictures">Shunga o\'xshash rasmlarni topish</string>
+    <string name="download_image">Yuklab olish</string>
+    <string name="share_image_to">Rasmlarni boshqasiga ulashing</string>
+    <string name="download_successfully">Muvaffaqiyatli yozib olish</string>
+    <string name="download_failed">Yozib olib boʻlmadi</string>
+    <string name="view_it">Uni ko\'rish</string>
 </resources>

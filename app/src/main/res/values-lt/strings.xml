@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Pasirinkite iš nuotraukų albumo</string>
     <string name="pick_from_camera">Pasirinkite iš fotoaparato</string>
     <string name="cancel">Atšaukti</string>
+    <string name="view_pictures_in_web">Peržiūrėkite jį tinklalapyje</string>
+    <string name="view_photographer_in_web">Eiti į fotografo puslapį</string>
+    <string name="find_the_similar_pictures">Panašių vaizdų radimas</string>
+    <string name="download_image">Atsisiųsti</string>
+    <string name="share_image_to">Vaizdų bendrinimas su kitais</string>
+    <string name="download_successfully">Atsisiųskite sėkmingai</string>
+    <string name="download_failed">Atsisiųsti nepavyko</string>
+    <string name="view_it">Peržiūrėti</string>
 </resources>

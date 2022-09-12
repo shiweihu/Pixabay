@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Vælg fra fotoalbum</string>
     <string name="pick_from_camera">Vælg fra kamera</string>
     <string name="cancel">Aflyse</string>
+    <string name="view_pictures_in_web">Se det på websiden</string>
+    <string name="view_photographer_in_web">Gå til fotograf side</string>
+    <string name="find_the_similar_pictures">Find lignende billeder</string>
+    <string name="download_image">Downloade</string>
+    <string name="share_image_to">Del billeder til andre</string>
+    <string name="download_successfully">Download med succes</string>
+    <string name="download_failed">Download mislykkedes</string>
+    <string name="view_it">Se det</string>
 </resources>

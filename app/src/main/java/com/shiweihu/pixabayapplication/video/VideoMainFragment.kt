@@ -17,6 +17,8 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
 import com.google.android.material.tabs.TabLayoutMediator
 import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.databinding.FragmentMainVideoBinding
@@ -130,6 +132,17 @@ class VideoFragment : Fragment() {
             }.also {
                 it.attach()
             }
+
+            AdRequest.Builder().build().also {
+                binding.adView.loadAd(it)
+                binding.adView.adListener = object : AdListener(){
+                    override fun onAdClosed() {
+                        super.onAdClosed()
+                        binding.adView.visibility = View.GONE
+                    }
+                }
+            }
+
         }
         postponeEnterTransition(resources.getInteger(R.integer.post_pone_time).toLong(), TimeUnit.MILLISECONDS)
         return binding?.root

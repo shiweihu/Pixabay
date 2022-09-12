@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Ka soo qaado albamka sawirka</string>
     <string name="pick_from_camera">Ka soo qaado kamarada</string>
     <string name="cancel">Jooji</string>
+    <string name="view_pictures_in_web">Ka eeg bogga shabakadda</string>
+    <string name="view_photographer_in_web">Tag bogga sawir qaade</string>
+    <string name="find_the_similar_pictures">Helitaanka Sawirro La Mid ah</string>
+    <string name="download_image">Download</string>
+    <string name="share_image_to">La wadaag Sawirada kuwa kale</string>
+    <string name="download_successfully">Download si guul leh</string>
+    <string name="download_failed">Soo dejintu way fashilantay</string>
+    <string name="view_it">Daawo</string>
 </resources>

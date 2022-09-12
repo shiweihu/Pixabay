@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Misafidiana tahirin-tsary</string>
     <string name="pick_from_camera">Misafidiana fakantsary</string>
     <string name="cancel">Foano</string>
+    <string name="view_pictures_in_web">Hijery izany ao amin\'ny pejin-tranonkala</string>
+    <string name="view_photographer_in_web">Mankanesa ao amin\'ny pejin\'ny mpaka sary</string>
+    <string name="find_the_similar_pictures">Mahita sary mitovy amin\'izany</string>
+    <string name="download_image">Hisintona</string>
+    <string name="share_image_to">Mizara sary amin\'ny hafa</string>
+    <string name="download_successfully">Hisintona amim-pahombiazana</string>
+    <string name="download_failed">Tsy nahomby ny fisintonana</string>
+    <string name="view_it">Hijery izany</string>
 </resources>

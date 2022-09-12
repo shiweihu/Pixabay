@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Alegeți din albumul foto</string>
     <string name="pick_from_camera">Alegeți din cameră</string>
     <string name="cancel">Anula</string>
+    <string name="view_pictures_in_web">Vizualizați-l pe pagina web</string>
+    <string name="view_photographer_in_web">Du-te la pagina fotograf</string>
+    <string name="find_the_similar_pictures">Găsirea imaginilor similare</string>
+    <string name="download_image">Descărca</string>
+    <string name="share_image_to">Partajarea imaginilor către alte persoane</string>
+    <string name="download_successfully">Descărcați cu succes</string>
+    <string name="download_failed">Descărcarea nu a reușit</string>
+    <string name="view_it">Vizualizați-l</string>
 </resources>

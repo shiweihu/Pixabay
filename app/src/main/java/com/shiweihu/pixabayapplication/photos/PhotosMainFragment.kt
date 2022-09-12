@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.MediaStore.ACTION_IMAGE_CAPTURE
 import android.transition.TransitionInflater
+import android.util.Log
 import android.view.*
 import android.widget.ImageView
 import android.widget.Toast
@@ -28,6 +29,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
@@ -235,7 +238,15 @@ class PhotosMainFragment : BaseFragment() {
 
             initMenu(it.toolBar.menu)
             initShareElement()
-
+            AdRequest.Builder().build().also { request ->
+                it.adView.loadAd(request)
+                it.adView.adListener = object :AdListener(){
+                    override fun onAdClosed() {
+                        super.onAdClosed()
+                        it.adView.visibility = View.GONE
+                    }
+                }
+            }
         }
         postponeEnterTransition(resources.getInteger(R.integer.post_pone_time).toLong(), TimeUnit.MILLISECONDS)
         return binding?.root

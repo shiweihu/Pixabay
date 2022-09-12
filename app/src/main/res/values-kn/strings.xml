@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">ಫೋಟೋ ಆಲ್ಬಂನಿಂದ ಆರಿಸಿ</string>
     <string name="pick_from_camera">ಕ್ಯಾಮರಾದಿಂದ ಆರಿಸಿ</string>
     <string name="cancel">ರದ್ದುಮಾಡಿ</string>
+    <string name="view_pictures_in_web">ವೆಬ್ ಪುಟದಲ್ಲಿ ಇದನ್ನು ವೀಕ್ಷಿಸಿ</string>
+    <string name="view_photographer_in_web">ಫೋಟೋಗ್ರಾಫರ್ ಪುಟಕ್ಕೆ ಹೋಗಿ</string>
+    <string name="find_the_similar_pictures">ಒಂದೇ ರೀತಿಯ ಇಮೇಜ್ ಗಳನ್ನು ಹುಡುಕಲಾಗುತ್ತಿದೆ</string>
+    <string name="download_image">ಡೌನ್ ಲೋಡ್ ಮಾಡು</string>
+    <string name="share_image_to">ಇತರರಿಗೆ ಇಮೇಜ್ ಗಳನ್ನು ಹಂಚಿ</string>
+    <string name="download_successfully">ಯಶಸ್ವಿಯಾಗಿ ಡೌನ್ ಲೋಡ್ ಮಾಡು</string>
+    <string name="download_failed">ಡೌನ್ ಲೋಡ್ ವಿಫಲವಾಗಿದೆ</string>
+    <string name="view_it">ಅದನ್ನು ವೀಕ್ಷಿಸಿ</string>
 </resources>

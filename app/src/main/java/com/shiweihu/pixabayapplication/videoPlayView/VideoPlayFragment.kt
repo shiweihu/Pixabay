@@ -1,31 +1,25 @@
 package com.shiweihu.pixabayapplication.videoPlayView
 
 import android.Manifest
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.res.Configuration
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.transition.TransitionInflater
-import android.util.Log
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.view.ViewCompat
+import androidx.core.view.forEachIndexed
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.PlaybackException
@@ -33,9 +27,8 @@ import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.Player.REPEAT_MODE_ONE
 import com.google.android.exoplayer2.Player.STATE_READY
 import com.google.android.exoplayer2.metadata.Metadata
-import com.google.android.exoplayer2.ui.StyledPlayerView.SHOW_BUFFERING_WHEN_PLAYING
+import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.MobileAds
 import com.google.android.material.snackbar.Snackbar
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.shiweihu.pixabayapplication.BaseFragment
@@ -43,7 +36,7 @@ import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.databinding.ActivityVideoPlayBinding
 import com.shiweihu.pixabayapplication.databinding.LoadingDialogLayoutBinding
 import com.shiweihu.pixabayapplication.event.ExoPlayerEvent
-import com.shiweihu.pixabayapplication.viewArgu.VideoPlayArgu
+import com.shiweihu.pixabayapplication.video.VideoFragmentDirections
 import com.shiweihu.pixabayapplication.viewModle.FragmentComunicationViewModel
 import com.shiweihu.pixabayapplication.viewModle.VideoPlayViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -60,8 +53,12 @@ class VideoPlayFragment:BaseFragment(
 
     private var binding:ActivityVideoPlayBinding? = null
 
+    private val viewBinding:ActivityVideoPlayBinding
+    get() {
+        return binding!!
+    }
 
-    private var data: VideoPlayArgu? = null
+
 
 
     private val player by lazy {
@@ -97,10 +94,6 @@ class VideoPlayFragment:BaseFragment(
     }
 
 
-
-
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -115,16 +108,8 @@ class VideoPlayFragment:BaseFragment(
                 sharedModel.videoItemPosition.postValue(player.currentMediaItemIndex)
                 this.findNavController().navigateUp()
             }
+            initMenu(binding.toolBar.menu)
 
-            binding.shareBtn.setOnClickListener {
-                player.pause()
-                val permissionState = ActivityCompat.checkSelfPermission(this.requireContext(),Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                if(permissionState == PackageManager.PERMISSION_GRANTED || Build.VERSION.SDK_INT > Build.VERSION_CODES.P){
-                    showLoadingDialog()
-                }else{
-                    requestPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                }
-            }
 
             binding.fullScreenBtn.setOnClickListener {
                 binding.playerView.player = null
@@ -132,21 +117,12 @@ class VideoPlayFragment:BaseFragment(
                 LiveEventBus.get(ExoPlayerEvent::class.java).post(ExoPlayerEvent(player))
             }
 
-
-
             binding.playerView.player = player
             binding.playerView.controllerAutoShow = false
-
-
-
             player.repeatMode = REPEAT_MODE_ONE
             player.addListener(object: Player.Listener {
                 override fun onMediaItemTransition(mediaItem: MediaItem?, reason: Int) {
                     super.onMediaItemTransition(mediaItem, reason)
-                    initMenuAction(player.currentMediaItemIndex)
-                    getAdRequest(player.currentMediaItemIndex).also {
-                        binding.adView.loadAd(it)
-                    }
                 }
 
                 override fun onMetadata(metadata: Metadata) {
@@ -167,7 +143,7 @@ class VideoPlayFragment:BaseFragment(
                     Toast.makeText(this@VideoPlayFragment.requireContext(),error.message,Toast.LENGTH_LONG).show()
                     if(player.hasNextMediaItem()){
                         player.seekToNextMediaItem()
-                        this@VideoPlayFragment.binding?.root?.handler?.postDelayed({
+                        this@VideoPlayFragment.viewBinding.root.handler?.postDelayed({
                             player.prepare()
                             player.play()
                         },3000)
@@ -176,18 +152,105 @@ class VideoPlayFragment:BaseFragment(
                 }
 
             })
+            getAdRequest().also {
+                binding.adView.loadAd(it)
+                binding.adView.adListener = object : AdListener(){
+                    override fun onAdClosed() {
+                        super.onAdClosed()
+                        binding.adView.visibility = View.GONE
+                    }
+                }
+            }
         }
-        return binding?.root
+        return viewBinding.root
     }
 
-    private fun showLoadingDialog(){
+    private fun onShareAction(){
+        player.pause()
+        val permissionState = ActivityCompat.checkSelfPermission(this.requireContext(),Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        if(permissionState == PackageManager.PERMISSION_GRANTED || Build.VERSION.SDK_INT > Build.VERSION_CODES.P){
+            showLoadingDialog()
+        }else{
+            requestPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        }
+    }
+
+    private fun onViewWebPage(){
+        model.goToPage(this.requireContext(),player.currentMediaItemIndex)
+    }
+    private fun onUserWebPage(){
+        model.goToUserPage(this.requireContext(),player.currentMediaItemIndex)
+    }
+
+    private fun viewVideoInSystem(uri:Uri){
+        val intent = Intent(Intent.ACTION_VIEW).also {
+            it.setDataAndType(uri,"video/mp4")
+        }
+        startActivity(intent)
+    }
+    private fun afterDownLoad(uri: Uri?){
+        if(uri != null){
+            Snackbar.make(viewBinding.root,R.string.download_successfully, Snackbar.LENGTH_LONG).setAction(R.string.view_it){
+                viewVideoInSystem(uri)
+            }.show()
+        }else{
+            Toast.makeText(this.requireContext(),R.string.download_failed,Toast.LENGTH_SHORT).show()
+        }
+    }
+    private fun onDownloadAction(){
+        val dialog = createLoadingDialog()
+        dialog.show()
+        player.currentMediaItem?.let {
+            model.downloadVideo(this.requireContext(), it){ uri ->
+                dialog.dismiss()
+                afterDownLoad(uri)
+            }
+        }
+    }
+
+    private fun initMenu(menu: Menu){
+        menu.forEachIndexed{_,item ->
+            when(item.itemId){
+                R.id.action_view_image_page ->{
+                    item.setOnMenuItemClickListener {
+                        onViewWebPage()
+                        true
+                    }
+                }
+                R.id.action_view_photographer_page ->{
+                    item.setOnMenuItemClickListener {
+                        onUserWebPage()
+                        true
+                    }
+                }
+                R.id.action_download ->{
+                    item.setOnMenuItemClickListener {
+                        onDownloadAction()
+                        true
+                    }
+                }
+                R.id.action_share_image ->{
+                    item.setOnMenuItemClickListener {
+                        onShareAction()
+                        true
+                    }
+                }
+            }
+        }
+    }
+
+    private fun createLoadingDialog():AlertDialog{
         val builder = AlertDialog.Builder(this.requireContext(),R.style.Theme_PixabayApplication_LoadDialog)
         val loadingBinding = LoadingDialogLayoutBinding.inflate(LayoutInflater.from(this.requireContext()))
         builder.setView(loadingBinding.root)
         builder.setCancelable(false)
-        val dialog =builder.create()
+        return builder.create()
+    }
+
+    private fun showLoadingDialog(){
+        val dialog = createLoadingDialog()
         dialog.show()
-        model.downloadVideo(this.requireContext(),player.currentMediaItem!!){
+        model.shareVideo(this.requireContext(),player.currentMediaItem!!){
             dialog.dismiss()
         }
     }
@@ -199,56 +262,25 @@ class VideoPlayFragment:BaseFragment(
             sharedElementReturnTransition = it
         }
         sharedModel.videoPlayArguLiveData.observe(this){args ->
-            this.data = args
-            if(args.from == 1){
-                binding?.pageProfile?.setImageResource(R.drawable.ic_pexels)
-            }
-            args.videos?.forEach {
-                val item = MediaItem.fromUri(it)
-                player.addMediaItem(item)
-            }
-            player.seekTo(args.currentIndex,0L)
-            initMenuAction(args.currentIndex)
-            player.prepare()
+            model.videoData = args
+            initPlayer()
         }
     }
+    private fun initPlayer(){
+        model.videoData?.videos?.forEach {
+            val item = MediaItem.fromUri(it)
+            player.addMediaItem(item)
+        }
+        player.seekTo(model.videoData?.currentIndex!!,0L)
+        player.prepare()
+    }
 
-    fun getAdRequest(index:Int):AdRequest{
-        var builder =  AdRequest.Builder()
-        builder = data?.tags?.get(index)?.let {
-            it.split(",").forEach { keyWord ->
-                builder = if(keyWord.isEmpty()) builder else builder.addKeyword(keyWord)
-            }
-            builder
-        } ?: builder
-        return builder.build()
+    fun getAdRequest():AdRequest{
+        return AdRequest.Builder().build()
     }
 
 
-    private fun initMenuAction(position:Int){
-        binding?.userProfileUrl = data?.profiles?.get(position)
-        binding?.pageProfile?.setOnClickListener {
-            model.navigateToWeb(this@VideoPlayFragment.requireContext(),data?.pageUrls!![position])
-        }
-        binding?.userProfile?.setOnClickListener {
-            when(data?.from){
-                0 ->{
-                    val username = data?.userNameArray?.get(position)
-                    val userid = data?.useridArray?.get(position)
-                    if(username != null && userid!=null){
-                        model.navigateToUserProfilePage(this@VideoPlayFragment.requireContext(),username,userid)
-                    }
-                }
-                1 ->{
-                    val url = data?.useridArray?.get(position)
-                    if(url != null){
-                        model.navigateToUserProfilePageOnPexels(this.requireContext(),url)
-                    }
-                }
-            }
 
-        }
-    }
 
     override fun onStart() {
         super.onStart()
@@ -260,7 +292,7 @@ class VideoPlayFragment:BaseFragment(
 
     override fun onResume() {
         super.onResume()
-        binding?.playerView?.player = player
+        viewBinding.playerView.player = player
         player.play()
 
 
@@ -281,8 +313,8 @@ class VideoPlayFragment:BaseFragment(
     override fun onDestroyView() {
         super.onDestroyView()
         player.stop()
-        binding?.adView?.destroy()
-        binding?.root?.handler?.removeCallbacksAndMessages(null)
+        viewBinding.adView.destroy()
+        viewBinding.root.handler?.removeCallbacksAndMessages(null)
         binding = null
     }
 

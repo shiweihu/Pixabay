@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Výber z fotoalbumu</string>
     <string name="pick_from_camera">Výber z kamery</string>
     <string name="cancel">Zrušiť</string>
+    <string name="view_pictures_in_web">Zobraziť na webovej stránke</string>
+    <string name="view_photographer_in_web">Prejsť na stránku fotografa</string>
+    <string name="find_the_similar_pictures">Nájdenie podobných obrázkov</string>
+    <string name="download_image">Stiahnuť</string>
+    <string name="share_image_to">Zdieľanie obrázkov s ostatnými</string>
+    <string name="download_successfully">Úspešné stiahnutie</string>
+    <string name="download_failed">Sťahovanie zlyhalo</string>
+    <string name="view_it">Zobraziť</string>
 </resources>

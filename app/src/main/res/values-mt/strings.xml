@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Agħżel mill-album tar-ritratti</string>
     <string name="pick_from_camera">Agħżel mill-kamera</string>
     <string name="cancel">Ikkanċella</string>
+    <string name="view_pictures_in_web">Araha fuq il-paġna tal-web</string>
+    <string name="view_photographer_in_web">Mur fil-paġna tal-fotografu</string>
+    <string name="find_the_similar_pictures">Sib Immaġini Simili</string>
+    <string name="download_image">Tniżżel</string>
+    <string name="share_image_to">Aqsam Immaġini ma \'oħrajn</string>
+    <string name="download_successfully">Niżżel b\'suċċess</string>
+    <string name="download_failed">It-tniżżil ma rnexxiex</string>
+    <string name="view_it">Araha</string>
 </resources>

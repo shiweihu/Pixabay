@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Chọn từ an-bum ảnh</string>
     <string name="pick_from_camera">Chọn từ máy ảnh</string>
     <string name="cancel">Hủy</string>
+    <string name="view_pictures_in_web">Xem nó trên trang web</string>
+    <string name="view_photographer_in_web">Truy cập trang nhiếp ảnh gia</string>
+    <string name="find_the_similar_pictures">Tìm hình ảnh tương tự</string>
+    <string name="download_image">Tải xuống</string>
+    <string name="share_image_to">Chia sẻ hình ảnh cho người khác</string>
+    <string name="download_successfully">Tải xuống thành công</string>
+    <string name="download_failed">Tải xuống không thành công</string>
+    <string name="view_it">Xem nó</string>
 </resources>

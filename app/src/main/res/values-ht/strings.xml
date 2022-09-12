@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Chwazi soti nan albòm foto</string>
     <string name="pick_from_camera">Chwazi nan kamera</string>
     <string name="cancel">Anile</string>
+    <string name="view_pictures_in_web">Gade li sou paj wèb</string>
+    <string name="view_photographer_in_web">Ale nan fotograf paj</string>
+    <string name="find_the_similar_pictures">Jwenn Imaj ki sanble</string>
+    <string name="download_image">Rale li</string>
+    <string name="share_image_to">Pataje Imaj nan lòt</string>
+    <string name="download_successfully">Download avèk siksè</string>
+    <string name="download_failed">Telechaje telechaje</string>
+    <string name="view_it">Gade li</string>
 </resources>

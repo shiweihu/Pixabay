@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">เลือกจากอัลบั้มภาพ</string>
     <string name="pick_from_camera">เลือกจากกล้อง</string>
     <string name="cancel">ยกเลิก</string>
+    <string name="view_pictures_in_web">ดูบนหน้าเว็บ</string>
+    <string name="view_photographer_in_web">ไปยังหน้าช่างภาพ</string>
+    <string name="find_the_similar_pictures">ค้นหาภาพ ที่คล้ายกัน</string>
+    <string name="download_image">ดาวน์โหลด</string>
+    <string name="share_image_to">แบ่งปันภาพไปยังส่วนอื่น ๆ</string>
+    <string name="download_successfully">ดาวน์โหลดเรียบร้อยแล้ว</string>
+    <string name="download_failed">การดาวน์โหลดล้มเหลว</string>
+    <string name="view_it">ดูมันสิ</string>
 </resources>

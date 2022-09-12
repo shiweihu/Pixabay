@@ -6,14 +6,22 @@
     <string name="images">Beelde</string>
     <string name="video">Video</string>
     <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
-    <string name="instagram_btn_description">deel na Instagram-feed</string>
-    <string name="app_choser_title">kies \'n toepassing:</string>
+    <string name="instagram_btn_description">deel na Instagram feed</string>
+    <string name="app_choser_title">het \'n aansoek gekies:</string>
     <string name="pixabay_title" translatable="false">Pixabay</string>
     <string name="pexels_title" translatable="false">Pexels</string>
     <string name="go">Gaan</string>
     <string name="permission_deny_notice">Klik Gaan om die toestemmings te verander.</string>
-    <string name="empty_key_term_notice">kan nie relatiewe foto\'s vind nie</string>
+    <string name="empty_key_term_notice">Kan nie relatiewe foto\'s vind nie</string>
     <string name="pick_from_photo_album">Kies uit foto-album</string>
     <string name="pick_from_camera">Kies uit kamera</string>
     <string name="cancel">Kanselleer</string>
+    <string name="view_pictures_in_web">Bekyk dit op webblad</string>
+    <string name="view_photographer_in_web">Gaan na fotograaf bladsy</string>
+    <string name="find_the_similar_pictures">Vind soortgelyke beelde</string>
+    <string name="download_image">Aflaai</string>
+    <string name="share_image_to">Deel foto\'s aan ander</string>
+    <string name="download_successfully">Laai suksesvol af</string>
+    <string name="download_failed">Aflaai het misluk</string>
+    <string name="view_it">Bekyk dit</string>
 </resources>

@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Vali fotoalbumist</string>
     <string name="pick_from_camera">Valige kaamerast</string>
     <string name="cancel">Tühistama</string>
+    <string name="view_pictures_in_web">Vaadake seda veebilehel</string>
+    <string name="view_photographer_in_web">Mine fotograafi lehele</string>
+    <string name="find_the_similar_pictures">Sarnaste piltide leidmine</string>
+    <string name="download_image">Alla laadima</string>
+    <string name="share_image_to">Piltide jagamine teistega</string>
+    <string name="download_successfully">Laadige edukalt alla</string>
+    <string name="download_failed">Allalaadimine ebaõnnestus</string>
+    <string name="view_it">Vaata seda</string>
 </resources>

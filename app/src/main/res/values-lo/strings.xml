@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">ເລືອກຈາກ album ຮູບພາບ</string>
     <string name="pick_from_camera">ເລືອກຈາກກ້ອງ</string>
     <string name="cancel">ຍົກເລີກ</string>
+    <string name="view_pictures_in_web">ເບິ່ງໃນຫນ້າເວັບ</string>
+    <string name="view_photographer_in_web">ໄປທີ່ຫນ້ານັກຖ່າຍຮູບ</string>
+    <string name="find_the_similar_pictures">ການຊອກຫາຮູບພາບທີ່ຄ້າຍຄືກັນ</string>
+    <string name="download_image">ດາວໂຫລດ</string>
+    <string name="share_image_to">ແບ່ງປັນຮູບພາບໃຫ້ກັບຄົນອື່ນ</string>
+    <string name="download_successfully">ດາວໂຫລດສໍາເລັດຜົນ</string>
+    <string name="download_failed">ດາວໂຫລດຫຼົ້ມ</string>
+    <string name="view_it">ເບິ່ງມັນ</string>
 </resources>

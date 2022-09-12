@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Yan lati inu awo-orin fọto</string>
     <string name="pick_from_camera">Yan lati kamẹra</string>
     <string name="cancel">Fagilee</string>
+    <string name="view_pictures_in_web">Wo o lori oju-iwe ayelujara</string>
+    <string name="view_photographer_in_web">Lọ si oju-iwe oluyaworan</string>
+    <string name="find_the_similar_pictures">Wiwa Awọn aworan ti o jọra</string>
+    <string name="download_image">Gba lati ayelujara</string>
+    <string name="share_image_to">Pin Awọn aworan si miiran</string>
+    <string name="download_successfully">Ṣe igbasilẹ ni aṣeyọri</string>
+    <string name="download_failed">Gbigba lati ayelujara kuna</string>
+    <string name="view_it">Wo o</string>
 </resources>

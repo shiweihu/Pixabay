@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Pangitag Hulagway</string>
+    <string name="app_name">Pagpangita sa Hulagway</string>
     <string name="action_settings">Mga setting</string>
     <string name="action_search">Pangitaa</string>
     <!-- Strings used for fragments for navigation -->
@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Pagpili gikan sa photo album</string>
     <string name="pick_from_camera">Pagpili gikan sa camera</string>
     <string name="cancel">Pagkanselar</string>
+    <string name="view_pictures_in_web">Tan-awa kini sa web page</string>
+    <string name="view_photographer_in_web">Adto sa pahina sa photographer</string>
+    <string name="find_the_similar_pictures">Pangitag Kaparehas nga mga Imahen</string>
+    <string name="download_image">Pag-download</string>
+    <string name="share_image_to">Ipakigbahin ang mga Imahe sa uban</string>
+    <string name="download_successfully">Malampuson ang pag-download</string>
+    <string name="download_failed">Napakyas ang pag-download</string>
+    <string name="view_it">Tan-awa kini</string>
 </resources>

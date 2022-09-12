@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Aus Fotoalbum auswählen</string>
     <string name="pick_from_camera">Aus der Kamera auswählen</string>
     <string name="cancel">Abbrechen</string>
+    <string name="view_pictures_in_web">Auf der Webseite anzeigen</string>
+    <string name="view_photographer_in_web">Zur Fotografenseite</string>
+    <string name="find_the_similar_pictures">Ähnliche Bilder finden</string>
+    <string name="download_image">Herunterladen</string>
+    <string name="share_image_to">Freigeben von Bildern für andere</string>
+    <string name="download_successfully">Erfolgreich herunterladen</string>
+    <string name="download_failed">Download fehlgeschlagen</string>
+    <string name="view_it">Sehen Sie es sich an</string>
 </resources>

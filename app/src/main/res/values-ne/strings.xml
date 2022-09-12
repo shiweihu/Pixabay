@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">फोटो एल्बमबाट चयन गर्नुहोस्</string>
     <string name="pick_from_camera">क्यामेराबाट छान्नुहोस्</string>
     <string name="cancel">रद्द गर्नुहोस्</string>
+    <string name="view_pictures_in_web">यसलाई वेब पृष्ठमा हेर्नुहोस्</string>
+    <string name="view_photographer_in_web">फोटोग्राफर पृष्ठमा जानुहोस्</string>
+    <string name="find_the_similar_pictures">समान छविहरू फेला पार्नुहोस्</string>
+    <string name="download_image">डाउनलोड गर्नुहोस्</string>
+    <string name="share_image_to">अन्यमा छविहरू साझेदारी गर्नुहोस्</string>
+    <string name="download_successfully">सफलतापूर्वक डाउनलोड गर्नुहोस्</string>
+    <string name="download_failed">डाउनलोड असफल भयो</string>
+    <string name="view_it">यो हेर्नुहोस्</string>
 </resources>

@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">사진 앨범에서 선택 choose from photo album</string>
     <string name="pick_from_camera">카메라에서 골라내다</string>
     <string name="cancel">취소</string>
+    <string name="view_pictures_in_web">웹 페이지에서 확인합니다</string>
+    <string name="view_photographer_in_web">사진 작가 페이지로 이동</string>
+    <string name="find_the_similar_pictures">비슷한 이미지 찾기 (find Similar image)</string>
+    <string name="download_image">다운로드</string>
+    <string name="share_image_to">다른 사람에게 이미지 공유</string>
+    <string name="download_successfully">성공적으로 다운로드</string>
+    <string name="download_failed">다운로드 하지 못 했습니다</string>
+    <string name="view_it">그것을 보기</string>
 </resources>

@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Khetha ku-albhamu yezithombe</string>
     <string name="pick_from_camera">Khetha kukhamera</string>
     <string name="cancel">Khansela</string>
+    <string name="view_pictures_in_web">Ibuke ekhasini lewebhu</string>
+    <string name="view_photographer_in_web">Iya ekhasini lomthwebuli zithombe</string>
+    <string name="find_the_similar_pictures">Ukuthola Izithombe Ezifanayo</string>
+    <string name="download_image">Landa</string>
+    <string name="share_image_to">Yabelana ngezithombe kwabanye</string>
+    <string name="download_successfully">Landa ngempumelelo</string>
+    <string name="download_failed">Ukulanda kuhlulekile</string>
+    <string name="view_it">Ibuke</string>
 </resources>

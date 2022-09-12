@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Sarudza kubva pamafoto album</string>
     <string name="pick_from_camera">Sarudza kubva kamera</string>
     <string name="cancel">Kanzura</string>
+    <string name="view_pictures_in_web">Zvione pawebhu peji</string>
+    <string name="view_photographer_in_web">Enda kune peji yemifananidzo</string>
+    <string name="find_the_similar_pictures">Kutsvaga Mifananidzo Yakafanana</string>
+    <string name="download_image">Download</string>
+    <string name="share_image_to">Share Images kune vamwe</string>
+    <string name="download_successfully">Dhaunirodha zvakabudirira</string>
+    <string name="download_failed">Kudhaunirodha zvaramba</string>
+    <string name="view_it">Zvione</string>
 </resources>

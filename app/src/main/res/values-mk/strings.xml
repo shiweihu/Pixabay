@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Избери од фото албумот</string>
     <string name="pick_from_camera">Бегај од камерата.</string>
     <string name="cancel">Откажи</string>
+    <string name="view_pictures_in_web">Види го на веб страница</string>
+    <string name="view_photographer_in_web">Оди на фотографска страница.</string>
+    <string name="find_the_similar_pictures">Пронаоѓање слични слики</string>
+    <string name="download_image">Симни го.</string>
+    <string name="share_image_to">Сподели слики на други</string>
+    <string name="download_successfully">Преземете го успешно.</string>
+    <string name="download_failed">Превземи неуспешна.</string>
+    <string name="view_it">Види го.</string>
 </resources>

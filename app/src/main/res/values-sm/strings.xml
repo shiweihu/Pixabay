@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Filifili mai le lipine o le ata</string>
     <string name="pick_from_camera">Filifili mai le mea pueata</string>
     <string name="cancel">Faaleaogaina</string>
+    <string name="view_pictures_in_web">Maimoa i ai i le itulau uepi</string>
+    <string name="view_photographer_in_web">Alu i le itulau o le tagata pu\'eata</string>
+    <string name="find_the_similar_pictures">Mauaina o Ata Faapena</string>
+    <string name="download_image">Sii mai</string>
+    <string name="share_image_to">Faasoa atu Ata i isi</string>
+    <string name="download_successfully">Manuia le siiina mai</string>
+    <string name="download_failed">E lei manuia le siiina mai</string>
+    <string name="view_it">Maimoa i ai</string>
 </resources>

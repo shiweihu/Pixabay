@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">ជ្រើស ពី អាល់ប៊ុម រូបថត</string>
     <string name="pick_from_camera">រើសពីកាមេរ៉ា</string>
     <string name="cancel">លប់ចោល</string>
+    <string name="view_pictures_in_web">មើល វា នៅ លើ ទំព័រ បណ្ដាញ</string>
+    <string name="view_photographer_in_web">ទៅ កាន់ ទំព័រ អ្នក ថត រូប</string>
+    <string name="find_the_similar_pictures">ការស្វែងរករូបភាពស្រដៀងគ្នា</string>
+    <string name="download_image">ទាញយក</string>
+    <string name="share_image_to">ចែករំលែករូបភាពទៅផ្សេងទៀត</string>
+    <string name="download_successfully">ទាញយកដោយជោគជ័យ</string>
+    <string name="download_failed">ទាញយកបានបរាជ័យ</string>
+    <string name="view_it">មើល វា</string>
 </resources>

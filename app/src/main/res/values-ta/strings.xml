@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">புகைப்பட ஆல்பத்திலிருந்து தேர்ந்தெடு</string>
     <string name="pick_from_camera">கேமராவிலிருந்து தேர்ந்தெடு</string>
     <string name="cancel">ரத்து</string>
+    <string name="view_pictures_in_web">வலைப்பக்கத்தில் அதைக் காணவும்</string>
+    <string name="view_photographer_in_web">புகைப்படக் கலைஞர் பக்கத்திற்குச் செல்லவும்</string>
+    <string name="find_the_similar_pictures">ஒத்த படங்களைக் கண்டறிதல்</string>
+    <string name="download_image">பதிவிறக்க</string>
+    <string name="share_image_to">படிமங்களை மற்றவற்றுக்கு பகிர்</string>
+    <string name="download_successfully">வெற்றிகரமாக பதிவிறக்கு</string>
+    <string name="download_failed">பதிவிறக்கம் தோல்வியுற்றது</string>
+    <string name="view_it">அதைப் பார்க்கவும்</string>
 </resources>

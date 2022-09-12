@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Sceglite da l\'album di foto</string>
     <string name="pick_from_camera">Sceglite da a camera</string>
     <string name="cancel">Cancella</string>
+    <string name="view_pictures_in_web">Vede nantu à a pagina web</string>
+    <string name="view_photographer_in_web">Vai à a pagina di u fotografu</string>
+    <string name="find_the_similar_pictures">Truvà Images Simili</string>
+    <string name="download_image">Scaricate</string>
+    <string name="share_image_to">Condividi l\'Image à l\'altri</string>
+    <string name="download_successfully">Scaricate cun successu</string>
+    <string name="download_failed">Scaricamentu fallutu</string>
+    <string name="view_it">Vede lu</string>
 </resources>

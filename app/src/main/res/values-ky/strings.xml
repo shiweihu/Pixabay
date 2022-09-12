@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Сүрөт альбомунан тандоо</string>
     <string name="pick_from_camera">Камерадан тандоо</string>
     <string name="cancel">Жокко чыгаруу</string>
+    <string name="view_pictures_in_web">Аны веб-беттеги көрүү</string>
+    <string name="view_photographer_in_web">Фотограф баракчасына өтүү</string>
+    <string name="find_the_similar_pictures">Ушуга окшогон сүрөттөрдү табуу</string>
+    <string name="download_image">Жүктөө</string>
+    <string name="share_image_to">Сүрөттөрдү башкаларга бөлүшкүлө</string>
+    <string name="download_successfully">Жүктөп алуу ийгиликтүү</string>
+    <string name="download_failed">Жүктөө ишке ашпады</string>
+    <string name="view_it">Аны көрүү</string>
 </resources>

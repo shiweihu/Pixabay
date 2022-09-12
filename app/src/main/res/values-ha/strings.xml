@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Zaɓi daga kundin hoto</string>
     <string name="pick_from_camera">Zaɓi daga kamara</string>
     <string name="cancel">Soke</string>
+    <string name="view_pictures_in_web">Duba shi a shafin yanar gizon</string>
+    <string name="view_photographer_in_web">Jeka shafin mai daukar hoto</string>
+    <string name="find_the_similar_pictures">Nemo Makamantan Hotuna</string>
+    <string name="download_image">Zazzagewa</string>
+    <string name="share_image_to">Raba Hotuna ga sauran</string>
+    <string name="download_successfully">Sauke cikin nasara</string>
+    <string name="download_failed">An kasa saukewa</string>
+    <string name="view_it">Duba shi</string>
 </resources>

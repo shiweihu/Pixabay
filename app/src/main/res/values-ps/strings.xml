@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">د عکس البوم څخه غوره کړئ</string>
     <string name="pick_from_camera">د کیمرې څخه یې واخله</string>
     <string name="cancel">لغوه کول</string>
+    <string name="view_pictures_in_web">په وېب پاڼه کې یې وګورئ</string>
+    <string name="view_photographer_in_web">د عکاس پاڼې ته لاړ شئ</string>
+    <string name="find_the_similar_pictures">د ورته تصویرونو موندل</string>
+    <string name="download_image">ډاونلوډ</string>
+    <string name="share_image_to">نورو ته تصویرونه شریک کړه</string>
+    <string name="download_successfully">په بریالیتوب سره ډاونلوډ</string>
+    <string name="download_failed">ډاونلوډ ناکام شو</string>
+    <string name="view_it">ویې لید</string>
 </resources>

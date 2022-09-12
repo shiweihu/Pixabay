@@ -1,19 +1,27 @@
 <resources>
-    <string name="app_name">ምስል ፍለጋ</string>
-    <string name="action_settings">ቅንብሮች</string>
-    <string name="action_search">ፈልግ</string>
+    <string name="app_name">የምስል ፍለጋ</string>
+    <string name="action_settings">ምርጫዎች</string>
+    <string name="action_search">ፍለጋ</string>
     <!-- Strings used for fragments for navigation -->
     <string name="images">ምስሎች</string>
     <string name="video">ቪዲዮ</string>
     <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
-    <string name="instagram_btn_description">ለ instagram ምግብ ያጋሩ</string>
-    <string name="app_choser_title">መተግበሪያ መርጠዋል፡-</string>
+    <string name="instagram_btn_description">ለinstagram መተግበብ ያጋሩ</string>
+    <string name="app_choser_title">መተግበሪያ መረጠ</string>
     <string name="pixabay_title" translatable="false">Pixabay</string>
     <string name="pexels_title" translatable="false">Pexels</string>
     <string name="go">ሂድ</string>
-    <string name="permission_deny_notice">ፈቃዶቹን ለመቀየር Go ን ጠቅ ያድርጉ።</string>
-    <string name="empty_key_term_notice">አንጻራዊ ምስሎችን ማግኘት አልተቻለም</string>
+    <string name="permission_deny_notice">ፍቃደኞችን ለመቀየር ይሂዱ።</string>
+    <string name="empty_key_term_notice">አንጻራዊ ስዕሎችን ማግኘት አልተቻለም</string>
     <string name="pick_from_photo_album">ከፎቶ አልበም ይምረጡ</string>
     <string name="pick_from_camera">ከካሜራ ይምረጡ</string>
-    <string name="cancel">ሰርዝ</string>
+    <string name="cancel">ተወው</string>
+    <string name="view_pictures_in_web">በድረ ገጽ ይመልከቱ</string>
+    <string name="view_photographer_in_web">ወደ ፎቶ አንሺ ገጽ ይሂዱ</string>
+    <string name="find_the_similar_pictures">ተመሳሳይ ምስሎችን ማግኘት</string>
+    <string name="download_image">አውርድ</string>
+    <string name="share_image_to">ምስሎችን ለሌሎች አካፍሉ</string>
+    <string name="download_successfully">በተሳካ ሁኔታ አውርድ</string>
+    <string name="download_failed">አውርድ አልተሳካም</string>
+    <string name="view_it">ይመልከቱ</string>
 </resources>

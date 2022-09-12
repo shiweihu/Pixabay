@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Sankhani kuchokera pachithunzichi</string>
     <string name="pick_from_camera">Sankhani kuchokera ku kamera</string>
     <string name="cancel">Letsani</string>
+    <string name="view_pictures_in_web">Onani patsamba lawebusayiti</string>
+    <string name="view_photographer_in_web">Pitani patsamba la wojambula</string>
+    <string name="find_the_similar_pictures">Kupeza Zithunzi Zofanana</string>
+    <string name="download_image">Tsitsani</string>
+    <string name="share_image_to">Gawani Zithunzi kwa ena</string>
+    <string name="download_successfully">Tsitsani bwino</string>
+    <string name="download_failed">Kutsitsa kwalephera</string>
+    <string name="view_it">Onani</string>
 </resources>

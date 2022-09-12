@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <item
+        android:id="@+id/action_view_image_page"
+        android:orderInCategory="70"
+        android:title="@string/view_pictures_in_web"
+        app:actionViewClass="com.google.android.material.textview.MaterialTextView"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/action_view_photographer_page"
+        android:orderInCategory="70"
+        android:title="@string/view_photographer_in_web"
+        app:actionViewClass="com.google.android.material.textview.MaterialTextView"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/action_download"
+        android:orderInCategory="70"
+        android:title="@string/download_image"
+        app:actionViewClass="com.google.android.material.textview.MaterialTextView"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/action_share_image"
+        android:orderInCategory="70"
+        android:title="@string/share_image_to"
+        app:actionViewClass="com.google.android.material.textview.MaterialTextView"
+        app:showAsAction="never"
+        />
+</menu>

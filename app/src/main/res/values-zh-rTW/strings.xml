@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">從相冊中挑選</string>
     <string name="pick_from_camera">相機拍攝</string>
     <string name="cancel">取消</string>
+    <string name="view_pictures_in_web">在網頁上查看</string>
+    <string name="view_photographer_in_web">進入拍照者頁面</string>
+    <string name="find_the_similar_pictures">尋找相似的圖片</string>
+    <string name="download_image">下載</string>
+    <string name="share_image_to">分享圖片給其他</string>
+    <string name="download_successfully">下載成功</string>
+    <string name="download_failed">下載失敗了</string>
+    <string name="view_it">查看</string>
 </resources>

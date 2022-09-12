@@ -1,19 +1,27 @@
 <resources>
-    <string name="app_name">بحث في الصور</string>
-    <string name="action_settings">إعدادات</string>
-    <string name="action_search">يبحث</string>
+    <string name="app_name">البحث عن الصور</string>
+    <string name="action_settings">اعدادات</string>
+    <string name="action_search">بحث</string>
     <!-- Strings used for fragments for navigation -->
     <string name="images">الصور</string>
     <string name="video">فيديو</string>
     <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
-    <string name="instagram_btn_description">مشاركة في تغذية instagram</string>
-    <string name="app_choser_title">اختر تطبيقًا:</string>
+    <string name="instagram_btn_description">شارك في خلاصة Instagram</string>
+    <string name="app_choser_title">اختار تطبيقا:</string>
     <string name="pixabay_title" translatable="false">Pixabay</string>
     <string name="pexels_title" translatable="false">Pexels</string>
-    <string name="go">يذهب</string>
-    <string name="permission_deny_notice">انقر فوق \"انتقال\" لتغيير الأذونات.</string>
+    <string name="go">ذهب</string>
+    <string name="permission_deny_notice">انقر على انتقال لتغيير الأذونات.</string>
     <string name="empty_key_term_notice">لا يمكن العثور على الصور النسبية</string>
     <string name="pick_from_photo_album">اختر من ألبوم الصور</string>
-    <string name="pick_from_camera">اختر من الكاميرا</string>
-    <string name="cancel">يلغي</string>
+    <string name="pick_from_camera">اختر من بين الكاميرا</string>
+    <string name="cancel">إلغاء الأمر</string>
+    <string name="view_pictures_in_web">عرضه على صفحة الويب</string>
+    <string name="view_photographer_in_web">انتقل إلى صفحة المصور</string>
+    <string name="find_the_similar_pictures">العثور على صور مشابهة</string>
+    <string name="download_image">تحميل</string>
+    <string name="share_image_to">مشاركة الصور مع الآخرين</string>
+    <string name="download_successfully">تحميل بنجاح</string>
+    <string name="download_failed">فشل التنزيل</string>
+    <string name="view_it">شاهده</string>
 </resources>

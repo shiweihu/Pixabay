@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Аз албоми аксҳо интихоб кунед</string>
     <string name="pick_from_camera">Аз камера интихоб кунед</string>
     <string name="cancel">Бекор кардан</string>
+    <string name="view_pictures_in_web">Онро дар саҳифаи интернетӣ бубинед</string>
+    <string name="view_photographer_in_web">Ба саҳифаи суратгир равед</string>
+    <string name="find_the_similar_pictures">Ҷустуҷӯи тасвирҳои шабеҳ</string>
+    <string name="download_image">Зеркашӣ кунед</string>
+    <string name="share_image_to">Тасвирҳоро ба дигарон мубодила кунед</string>
+    <string name="download_successfully">Бомуваффақият зеркашӣ кунед</string>
+    <string name="download_failed">Зеркашӣ карда нашуд</string>
+    <string name="view_it">Онро тамошо кунед</string>
 </resources>

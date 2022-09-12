@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Izbiranje iz fotoalbuma</string>
     <string name="pick_from_camera">Izbiranje iz fotoaparata</string>
     <string name="cancel">Odpovedati</string>
+    <string name="view_pictures_in_web">Oglejte si ga na spletni strani</string>
+    <string name="view_photographer_in_web">Pojdi na stran fotografa</string>
+    <string name="find_the_similar_pictures">Iskanje podobnih slik</string>
+    <string name="download_image">Prenesti</string>
+    <string name="share_image_to">Skupna raba slik z drugimi</string>
+    <string name="download_successfully">Uspešno prenos</string>
+    <string name="download_failed">Prenos ni uspel</string>
+    <string name="view_it">Oglejte si ga</string>
 </resources>

@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Pick from photo album</string>
     <string name="pick_from_camera">Pick from camera</string>
     <string name="cancel">Cancel</string>
+    <string name="view_pictures_in_web">View it on web page</string>
+    <string name="view_photographer_in_web">Go to photographer page</string>
+    <string name="find_the_similar_pictures">Finding Similar Images</string>
+    <string name="download_image">Download</string>
+    <string name="share_image_to">Share Images to other</string>
+    <string name="download_successfully">Download successfully</string>
+    <string name="download_failed">Download failed</string>
+    <string name="view_it">View it</string>
 </resources>

@@ -16,6 +16,7 @@ import androidx.browser.customtabs.CustomTabsIntent
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
+import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.transformer.TransformationException
 import com.google.android.exoplayer2.transformer.TransformationResult
@@ -25,6 +26,7 @@ import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.net.ApplicationModule
 import com.shiweihu.pixabayapplication.util.CustomTabActivityHelper
 import com.shiweihu.pixabayapplication.videoPlayView.VideoPlayActivity
+import com.shiweihu.pixabayapplication.viewArgu.VideoPlayArgu
 
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.io.File
@@ -81,16 +83,46 @@ class VideoPlayViewModel @Inject constructor(
 
     }
 
-
-    fun downloadVideo(context:Context,mediaItem:MediaItem,callBack:()->Unit){
-       if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-           downloadV26(context,mediaItem,callBack)
-       }else{
-           download(context,mediaItem,callBack)
-       }
-
+    private fun shareToOtherAPP(context: Context,uri: Uri){
+        val intent = Intent(Intent.ACTION_SEND).also {
+            it.type = "video/mp4"
+            it.putExtra(Intent.EXTRA_STREAM, uri)
+        }
+        val chose_intent = Intent.createChooser(intent,context.resources.getString(R.string.app_choser_title))
+        context.startActivity(chose_intent)
     }
-    private fun download(context: Context,mediaItem:MediaItem,callBack:()->Unit){
+
+    fun shareVideo(context:Context, mediaItem:MediaItem, callBack:()->Unit){
+       if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+           downloadV26(context,mediaItem){ uri ->
+               if(uri != null){
+                   shareToOtherAPP(context,uri)
+               }
+               callBack()
+           }
+       }else{
+           download(context,mediaItem){ uri ->
+               if(uri != null){
+                   shareToOtherAPP(context,uri)
+               }
+               callBack()
+           }
+       }
+    }
+
+    fun downloadVideo(context:Context, mediaItem:MediaItem, callBack:(Uri?)->Unit){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            downloadV26(context,mediaItem){ uri ->
+                callBack(uri)
+            }
+        }else{
+            download(context,mediaItem){ uri ->
+                callBack(uri)
+            }
+        }
+    }
+
+    private fun download(context: Context,mediaItem:MediaItem,callBack:(Uri?)->Unit){
 
         val path = Environment.getExternalStoragePublicDirectory(DIRECTORY_MOVIES).absolutePath
         val filePath = path +"/${UUID.randomUUID()}.mp4"
@@ -104,14 +136,7 @@ class VideoPlayViewModel @Inject constructor(
 //                    val uri = Uri.fromFile(file)
                     val file = File(filePath)
                     val uri = Uri.fromFile(file)
-                    val intent = Intent(Intent.ACTION_SEND).also {
-                        it.type = "video/mp4"
-                        it.putExtra(Intent.EXTRA_STREAM, ClipData.Item(uri).uri)
-                    }
-
-                    val chose_intent = Intent.createChooser(intent,context.resources.getString(R.string.app_choser_title))
-                    context.startActivity(chose_intent)
-                    callBack()
+                    callBack(uri)
                 }
 
                 override fun onTransformationError(
@@ -119,16 +144,15 @@ class VideoPlayViewModel @Inject constructor(
                     exception: TransformationException
                 ) {
                     super.onTransformationError(inputMediaItem, exception)
-
                     exception.printStackTrace()
-                    callBack()
+                    callBack(null)
                 }
             }).build()
         transformer.startTransformation(mediaItem,filePath)
     }
 
     @RequiresApi(26)
-    private fun downloadV26(context: Context,mediaItem:MediaItem,callBack:()->Unit){
+    private fun downloadV26(context: Context,mediaItem:MediaItem,callBack:(Uri?)->Unit){
         val content = ContentValues()
         content.put(MediaStore.Video.Media.DISPLAY_NAME,UUID.randomUUID().toString())
         content.put(MediaStore.Video.Media.MIME_TYPE,"video/mp4")
@@ -142,13 +166,7 @@ class VideoPlayViewModel @Inject constructor(
 //                    val fileDescriptor = context.contentResolver.openFileDescriptor(outputUri!!,"w")
 //                    val file = File(Environment.getDownloadCacheDirectory().path+"/temp.mp4")
 //                    val uri = Uri.fromFile(file)
-                    val intent = Intent(Intent.ACTION_SEND).also {
-                        it.type = "video/mp4"
-                        it.putExtra(Intent.EXTRA_STREAM, outputUri)
-                    }
-                    val chose_intent = Intent.createChooser(intent,context.resources.getString(R.string.app_choser_title))
-                    context.startActivity(chose_intent)
-                    callBack()
+                    callBack(outputUri)
                 }
 
                 override fun onTransformationError(
@@ -158,7 +176,7 @@ class VideoPlayViewModel @Inject constructor(
                     super.onTransformationError(inputMediaItem, exception)
 
                     exception.printStackTrace()
-                    callBack()
+                    callBack(null)
                 }
             })
             .build()
@@ -168,6 +186,37 @@ class VideoPlayViewModel @Inject constructor(
         val fileDescriptor = context.contentResolver.openFileDescriptor(outputUri!!,"w")
         transformer.startTransformation(mediaItem, fileDescriptor!! )
     }
+
+
+    var videoData: VideoPlayArgu? = null
+    private val data:VideoPlayArgu
+    get() {
+        return videoData!!
+    }
+
+    fun goToPage(context: Context,position:Int){
+        data.pageUrls?.get(position)?.let {
+            navigateToWeb(context,it)
+        }
+    }
+    fun goToUserPage(context: Context,position:Int){
+        when(data.from){
+            0 ->{
+                val username = data.userNameArray?.get(position)
+                val userid = data.useridArray?.get(position)
+                if(username != null && userid!=null){
+                    navigateToUserProfilePage(context,username,userid)
+                }
+            }
+            1 ->{
+                val url = data.useridArray?.get(position)
+                if(url != null){
+                    navigateToUserProfilePageOnPexels(context,url)
+                }
+            }
+        }
+    }
+
 
 
     override fun onCleared() {

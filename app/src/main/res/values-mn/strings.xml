@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Зургийн цомгоос сонго</string>
     <string name="pick_from_camera">Камераас сонгоно уу</string>
     <string name="cancel">Цуцлах</string>
+    <string name="view_pictures_in_web">Вэб хуудаснаас үзнэ үү</string>
+    <string name="view_photographer_in_web">Гэрэл зурагчны хуудас руу очно уу</string>
+    <string name="find_the_similar_pictures">Ижил төстэй зургуудыг хайж олох</string>
+    <string name="download_image">Татаж авах</string>
+    <string name="share_image_to">Зургийг бусадтай хуваалцах</string>
+    <string name="download_successfully">Амжилттай татаж авлаа</string>
+    <string name="download_failed">Татаж чадсангүй</string>
+    <string name="view_it">Үзээрэй</string>
 </resources>

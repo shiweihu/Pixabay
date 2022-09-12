@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Pilih daripada album foto</string>
     <string name="pick_from_camera">Pilih daripada kamera</string>
     <string name="cancel">Membatalkan</string>
+    <string name="view_pictures_in_web">Lihat di laman web</string>
+    <string name="view_photographer_in_web">Pergi ke halaman jurugambar</string>
+    <string name="find_the_similar_pictures">Mencari Imej Yang Serupa</string>
+    <string name="download_image">Muat turun</string>
+    <string name="share_image_to">Kongsi Imej kepada yang lain</string>
+    <string name="download_successfully">Muat turun berjaya</string>
+    <string name="download_failed">Muat turun gagal</string>
+    <string name="view_it">Lihatlah</string>
 </resources>

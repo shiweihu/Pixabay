@@ -16,4 +16,12 @@
     <string name="pick_from_photo_album">Tagh bho photo album</string>
     <string name="pick_from_camera">Tagh bhon chamara</string>
     <string name="cancel">Sguir dheth</string>
+    <string name="view_pictures_in_web">Seall e air duilleag-lìn</string>
+    <string name="view_photographer_in_web">Rach gu duilleag neach-togail dhealbhan</string>
+    <string name="find_the_similar_pictures">Lorg ìomhaighean coltach</string>
+    <string name="download_image">Luchdaich sìos</string>
+    <string name="share_image_to">Roinn dealbhan gu feadhainn eile</string>
+    <string name="download_successfully">Luchdaich sìos gu soirbheachail</string>
+    <string name="download_failed">Dh\'fhàillig an luchdachadh sìos</string>
+    <string name="view_it">Seall air</string>
 </resources>

@@ -14,6 +14,14 @@
     <string name="permission_deny_notice">单击Go以更改权限。</string>
     <string name="empty_key_term_notice">找不到相关图片</string>
     <string name="pick_from_photo_album">从相册中挑选</string>
-    <string name="pick_from_camera">相机拍摄</string>
+    <string name="pick_from_camera">挑选相机</string>
     <string name="cancel">取消</string>
+    <string name="view_pictures_in_web">在网页上查看</string>
+    <string name="view_photographer_in_web">进入拍照者页面</string>
+    <string name="find_the_similar_pictures">寻找相似的图片</string>
+    <string name="download_image">下载</string>
+    <string name="share_image_to">分享图片给其他</string>
+    <string name="download_successfully">下载成功</string>
+    <string name="download_failed">下载失败了</string>
+    <string name="view_it">查看</string>
 </resources>

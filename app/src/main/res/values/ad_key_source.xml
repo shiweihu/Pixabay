@@ -4,4 +4,6 @@
     <string name="banner_id_for_video_play" translatable="false">ca-app-pub-8265796598311311/7199889435</string>
     <string name="Interstitial_ads_big_picture" translatable="false">ca-app-pub-8265796598311311/8256437343</string>
     <string name="app_open_ad" translatable="false">ca-app-pub-8265796598311311/9052027150</string>
+    <string name="photo_main_banner" translatable="false">ca-app-pub-8265796598311311/7602480933</string>
+    <string name="video_main_banner" translatable="false">ca-app-pub-8265796598311311/5331540817</string>
 </resources>
