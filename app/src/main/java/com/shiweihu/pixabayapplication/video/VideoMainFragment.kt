@@ -19,10 +19,13 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdView
 import com.google.android.material.tabs.TabLayoutMediator
 import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.databinding.FragmentMainVideoBinding
 import com.shiweihu.pixabayapplication.photos.PhotosMainFragment
+import com.shiweihu.pixabayapplication.utils.DisplayUtils
 import com.shiweihu.pixabayapplication.viewModle.FragmentComunicationViewModel
 import com.shiweihu.pixabayapplication.viewModle.VideoFragmentMainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -49,6 +52,11 @@ class VideoFragment : Fragment() {
 
     private var binding:FragmentMainVideoBinding? = null
 
+    private val viewBinding:FragmentMainVideoBinding
+    get() {
+        return binding!!
+    }
+
     private val model:VideoFragmentMainViewModel by viewModels()
     private val sharedModel: FragmentComunicationViewModel by activityViewModels()
 
@@ -58,6 +66,18 @@ class VideoFragment : Fragment() {
 
     private val adapter:VideoSourceAdapter by lazy {
         VideoSourceAdapter(this,model,sharedModel)
+    }
+
+    private val adSize: AdSize by lazy {
+        val density =  this.requireContext().resources.displayMetrics.density
+
+        var adWidthPixels = viewBinding.adViewLayout.width.toFloat()
+        if (adWidthPixels == 0f) {
+            adWidthPixels = DisplayUtils.ScreenWidth.toFloat()
+        }
+
+        val adWidth = (adWidthPixels / density).toInt()
+        AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this.requireContext(), adWidth)
     }
 
 
@@ -82,7 +102,7 @@ class VideoFragment : Fragment() {
             ) {
                 super.onMapSharedElements(names, sharedElements)
 
-                val recyclerView =  binding?.viewPager?.findViewWithTag<RecyclerView>(sourceIndex)
+                val recyclerView =  viewBinding.viewPager.findViewWithTag<RecyclerView>(sourceIndex)
                 var tag = ""
                 when(sourceIndex){
                     0 ->{
@@ -132,26 +152,30 @@ class VideoFragment : Fragment() {
             }.also {
                 it.attach()
             }
-
-            AdRequest.Builder().build().also {
-                binding.adView.loadAd(it)
-                binding.adView.adListener = object : AdListener(){
-                    override fun onAdClosed() {
-                        super.onAdClosed()
-                        binding.adView.visibility = View.GONE
-                    }
-                }
-            }
-
         }
         postponeEnterTransition(resources.getInteger(R.integer.post_pone_time).toLong(), TimeUnit.MILLISECONDS)
-        return binding?.root
+        return viewBinding.root
+    }
+
+    private fun initAdMob(){
+        AdRequest.Builder().build().also { request ->
+            val adView = AdView(this.requireContext())
+            adView.setAdSize(adSize)
+            adView.adUnitId = this.requireContext().resources.getString(R.string.video_main_banner)
+            adView.adListener = object :AdListener(){
+                override fun onAdClosed() {
+                    super.onAdClosed()
+                    viewBinding.adViewLayout.visibility = View.GONE
+                }
+            }
+            viewBinding.adViewLayout.addView(adView)
+            adView.loadAd(request)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
+        initAdMob()
     }
 
     override fun onStop() {
@@ -165,7 +189,7 @@ class VideoFragment : Fragment() {
         super.onDestroyView()
         tabLayoutMediator?.detach()
         tabLayoutMediator = null
-        binding?.viewPager?.adapter = null
+        viewBinding.viewPager?.adapter = null
         binding = null
     }
 
@@ -185,7 +209,7 @@ class VideoFragment : Fragment() {
                         override fun onQueryTextSubmit(query: String): Boolean {
                             sharedModel.videoQueryText.postValue(query)
                             searchView.clearFocus()
-                            binding?.root?.requestFocus()
+                            viewBinding.root.requestFocus()
                             return true
                         }
 

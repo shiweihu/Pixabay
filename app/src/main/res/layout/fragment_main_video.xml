@@ -12,7 +12,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             tools:context="com.shiweihu.pixabayapplication.video.VideoMainFragment"
-            app:layout_constraintBottom_toTopOf="@id/adView"
+            app:layout_constraintBottom_toTopOf="@id/adView_layout"
             app:layout_constraintTop_toTopOf="parent"
             >
 
@@ -64,12 +64,10 @@
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/adView"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/adView_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:adSize="BANNER"
-            app:adUnitId="@string/video_main_banner"
             android:layout_gravity="bottom"
             app:layout_constraintBottom_toBottomOf="parent"
             />

@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.MediaStore.ACTION_IMAGE_CAPTURE
 import android.transition.TransitionInflater
+import android.util.DisplayMetrics
 import android.util.Log
 import android.view.*
 import android.widget.ImageView
@@ -29,8 +30,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.*
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
@@ -42,6 +42,7 @@ import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.databinding.BottomSheetPicturePickerLayoutBinding
 
 import com.shiweihu.pixabayapplication.databinding.FragmentMainPhotosBinding
+import com.shiweihu.pixabayapplication.utils.DisplayUtils
 import com.shiweihu.pixabayapplication.viewModle.FragmentComunicationViewModel
 import com.shiweihu.pixabayapplication.viewModle.PhotosMainFragmentModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -58,11 +59,28 @@ class PhotosMainFragment : BaseFragment() {
 
     private var binding:FragmentMainPhotosBinding? = null
 
+    private val viewBinding:FragmentMainPhotosBinding
+    get() {
+        return binding!!
+    }
     private var sourceIndex = 0
 
     private val fragmentAdapter:SouceAdapter by lazy {
         SouceAdapter(this,model,activeModel)
     }
+
+    private val adSize: AdSize by lazy {
+        val density =  this.requireContext().resources.displayMetrics.density
+
+        var adWidthPixels = viewBinding.adViewLayout.width.toFloat()
+        if (adWidthPixels == 0f) {
+            adWidthPixels = DisplayUtils.ScreenWidth.toFloat()
+        }
+
+        val adWidth = (adWidthPixels / density).toInt()
+        AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this.requireContext(), adWidth)
+    }
+
 
     private var tabLayoutMediator:TabLayoutMediator? = null
 
@@ -77,7 +95,7 @@ class PhotosMainFragment : BaseFragment() {
             // same time, respect the user's decision. Don't link to system
             // settings in an effort to convince the user to change their
             // decision.
-            Snackbar.make(binding!!.root,R.string.permission_deny_notice, Snackbar.LENGTH_LONG).setAction(R.string.go){
+            Snackbar.make(viewBinding.root,R.string.permission_deny_notice, Snackbar.LENGTH_LONG).setAction(R.string.go){
                 getAppDetailSettingIntent()
             }.show()
         }
@@ -112,13 +130,13 @@ class PhotosMainFragment : BaseFragment() {
         }
 
         override fun parseResult(resultCode: Int, intent: Intent?): Bitmap? {
-            if(resultCode == Activity.RESULT_OK){
+            return if(resultCode == Activity.RESULT_OK){
                 val inputStream = this@PhotosMainFragment.requireContext().contentResolver.openInputStream(
-                        outputUri!!
-                    )
-                return BitmapFactory.decodeStream(inputStream)
+                    outputUri!!
+                )
+                BitmapFactory.decodeStream(inputStream)
             }else{
-                return null
+                null
             }
         }
 
@@ -167,7 +185,7 @@ class PhotosMainFragment : BaseFragment() {
             ) {
                 super.onMapSharedElements(names, sharedElements)
 
-                val recyclerView =  binding?.viewPager?.findViewWithTag<RecyclerView>(sourceIndex)
+                val recyclerView =  viewBinding.viewPager.findViewWithTag<RecyclerView>(sourceIndex)
                 var tag = ""
                 when(sourceIndex){
                     0 ->{
@@ -203,7 +221,7 @@ class PhotosMainFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentMainPhotosBinding.inflate(inflater,container,false).also { it ->
 //            it.recycleView.adapter = photoAdapter
 //            it.recycleView.setItemViewCacheSize(30)
@@ -238,19 +256,28 @@ class PhotosMainFragment : BaseFragment() {
 
             initMenu(it.toolBar.menu)
             initShareElement()
-            AdRequest.Builder().build().also { request ->
-                it.adView.loadAd(request)
-                it.adView.adListener = object :AdListener(){
-                    override fun onAdClosed() {
-                        super.onAdClosed()
-                        it.adView.visibility = View.GONE
-                    }
-                }
-            }
         }
         postponeEnterTransition(resources.getInteger(R.integer.post_pone_time).toLong(), TimeUnit.MILLISECONDS)
-        return binding?.root
+        return viewBinding.root
     }
+
+    private fun initAdMob(){
+        AdRequest.Builder().build().also { request ->
+            val adView = AdView(this.requireContext())
+            adView.setAdSize(adSize)
+            adView.adUnitId = this.requireContext().resources.getString(R.string.photo_main_banner)
+            adView.adListener = object :AdListener(){
+                override fun onAdClosed() {
+                    super.onAdClosed()
+                    viewBinding.adViewLayout.visibility = View.GONE
+                }
+            }
+            viewBinding.adViewLayout.addView(adView)
+            adView.loadAd(request)
+        }
+    }
+
+
 
     private fun showPicturePickerDialog(){
         val bottomSheetDialog =  BottomSheetDialog(this.requireContext())
@@ -304,7 +331,7 @@ class PhotosMainFragment : BaseFragment() {
                         override fun onQueryTextSubmit(query: String): Boolean {
                             activeModel.pictureQueryText.postValue(query)
                             searchView.clearFocus()
-                            binding?.root?.requestFocus()
+                            viewBinding.root.requestFocus()
                             return true
                         }
 
@@ -328,7 +355,7 @@ class PhotosMainFragment : BaseFragment() {
 
     override fun onStop() {
         super.onStop()
-//        val recyclerView =  binding?.viewPager?.findViewWithTag<RecyclerView>(sourceIndex)
+//        val recyclerView =  viewBinding.viewPager?.findViewWithTag<RecyclerView>(sourceIndex)
 //        val firstPositions = (recyclerView?.layoutManager as StaggeredGridLayoutManager).findFirstCompletelyVisibleItemPositions(null)
 //        val lastPositions = (recyclerView?.layoutManager as StaggeredGridLayoutManager).findLastCompletelyVisibleItemPositions(null)
 //        firstPosition = firstPositions.minOrNull() ?: 0
@@ -345,7 +372,7 @@ class PhotosMainFragment : BaseFragment() {
         super.onDestroyView()
         tabLayoutMediator?.detach()
         tabLayoutMediator = null
-        binding?.viewPager?.adapter = null
+        viewBinding.viewPager.adapter = null
         binding = null
 
 
@@ -366,7 +393,7 @@ class PhotosMainFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //query(queryStr,category)
+        initAdMob()
 
         exitTransition = TransitionInflater.from(context)
             .inflateTransition(R.transition.grid_exit_transition)

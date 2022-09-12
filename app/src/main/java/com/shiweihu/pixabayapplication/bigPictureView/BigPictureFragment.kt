@@ -33,6 +33,8 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
 import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.ktx.Firebase
@@ -43,6 +45,7 @@ import com.google.mlkit.vision.label.defaults.ImageLabelerOptions
 import com.shiweihu.pixabayapplication.BaseFragment
 import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.databinding.FragmentBigPictureBinding
+import com.shiweihu.pixabayapplication.utils.DisplayUtils
 import com.shiweihu.pixabayapplication.viewModle.BigPictureViewModel
 import com.shiweihu.pixabayapplication.viewModle.FragmentComunicationViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -61,10 +64,24 @@ class BigPictureFragment : BaseFragment() {
     //private val args:BigPictureFragmentArgs by navArgs()
 
     private  var binding:FragmentBigPictureBinding? = null
+    private var adView:AdView? = null
+
 
     private val viewBinding:FragmentBigPictureBinding
     get() {
         return binding!!
+    }
+
+    private val adSize: AdSize by lazy {
+        val density =  this.requireContext().resources.displayMetrics.density
+
+        var adWidthPixels = viewBinding.adViewLayout.width.toFloat()
+        if (adWidthPixels == 0f) {
+            adWidthPixels = DisplayUtils.ScreenWidth.toFloat()
+        }
+
+        val adWidth = (adWidthPixels / density).toInt()
+        AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this.requireContext(), adWidth)
     }
 
 
@@ -140,13 +157,21 @@ class BigPictureFragment : BaseFragment() {
 
     private fun loadBanerAd(){
         modle.getAdRequest().also { adRequest ->
-            viewBinding.adView.loadAd(adRequest)
-            viewBinding.adView.adListener = object : AdListener(){
+            adView = AdView(this.requireContext())
+            adView?.setAdSize(adSize)
+            adView?.adUnitId = this.requireContext().getString(R.string.banner_id_for_big_picture)
+            adView?.loadAd(adRequest)
+            adView?.adListener = object : AdListener(){
                 override fun onAdClosed() {
                     super.onAdClosed()
-                    viewBinding.adView.visibility = View.GONE
+                    viewBinding.adViewLayout.visibility = View.GONE
+                }
+
+                override fun onAdFailedToLoad(p0: LoadAdError) {
+                    super.onAdFailedToLoad(p0)
                 }
             }
+            viewBinding.adViewLayout.addView(adView)
         }
     }
 
@@ -345,7 +370,8 @@ class BigPictureFragment : BaseFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         viewBinding.viewPage.adapter = null
-        viewBinding.adView.destroy()
+        adView?.destroy()
+        adView = null
         binding = null
     }
 

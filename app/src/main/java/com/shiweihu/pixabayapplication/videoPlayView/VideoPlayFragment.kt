@@ -29,6 +29,8 @@ import com.google.android.exoplayer2.Player.STATE_READY
 import com.google.android.exoplayer2.metadata.Metadata
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdView
 import com.google.android.material.snackbar.Snackbar
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.shiweihu.pixabayapplication.BaseFragment
@@ -36,6 +38,7 @@ import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.databinding.ActivityVideoPlayBinding
 import com.shiweihu.pixabayapplication.databinding.LoadingDialogLayoutBinding
 import com.shiweihu.pixabayapplication.event.ExoPlayerEvent
+import com.shiweihu.pixabayapplication.utils.DisplayUtils
 import com.shiweihu.pixabayapplication.video.VideoFragmentDirections
 import com.shiweihu.pixabayapplication.viewModle.FragmentComunicationViewModel
 import com.shiweihu.pixabayapplication.viewModle.VideoPlayViewModel
@@ -57,7 +60,19 @@ class VideoPlayFragment:BaseFragment(
     get() {
         return binding!!
     }
+    private var adView:AdView? = null
 
+    private val adSize: AdSize by lazy {
+        val density =  this.requireContext().resources.displayMetrics.density
+
+        var adWidthPixels = viewBinding.adViewLayout.width.toFloat()
+        if (adWidthPixels == 0f) {
+            adWidthPixels = DisplayUtils.ScreenWidth.toFloat()
+        }
+
+        val adWidth = (adWidthPixels / density).toInt()
+        AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this.requireContext(), adWidth)
+    }
 
 
 
@@ -98,7 +113,7 @@ class VideoPlayFragment:BaseFragment(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = ActivityVideoPlayBinding.inflate(inflater,container,false).also{ binding ->
 
 
@@ -152,17 +167,30 @@ class VideoPlayFragment:BaseFragment(
                 }
 
             })
-            getAdRequest().also {
-                binding.adView.loadAd(it)
-                binding.adView.adListener = object : AdListener(){
-                    override fun onAdClosed() {
-                        super.onAdClosed()
-                        binding.adView.visibility = View.GONE
-                    }
-                }
-            }
         }
         return viewBinding.root
+    }
+
+    private fun initAdMob(){
+        getAdRequest().also {
+            adView = AdView(this.requireContext())
+            adView?.setAdSize(adSize)
+            adView?.adUnitId = this.requireContext().getString(R.string.banner_id_for_video_play)
+            adView?.loadAd(it)
+            adView?.adListener = object : AdListener(){
+                override fun onAdClosed() {
+                    super.onAdClosed()
+                    viewBinding.adViewLayout.visibility = View.GONE
+                }
+            }
+            viewBinding.adViewLayout.addView(adView)
+        }
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initAdMob()
     }
 
     private fun onShareAction(){
@@ -313,8 +341,9 @@ class VideoPlayFragment:BaseFragment(
     override fun onDestroyView() {
         super.onDestroyView()
         player.stop()
-        viewBinding.adView.destroy()
         viewBinding.root.handler?.removeCallbacksAndMessages(null)
+        adView?.destroy()
+        adView = null
         binding = null
     }
 

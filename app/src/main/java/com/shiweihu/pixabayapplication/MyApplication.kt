@@ -13,6 +13,7 @@ import android.view.WindowManager
 import android.view.WindowMetrics
 import androidx.annotation.RequiresApi
 import com.bumptech.glide.Glide
+import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.MobileAds
 import com.shiweihu.pixabayapplication.net.NetworkModule
 import com.shiweihu.pixabayapplication.utils.DisplayUtils
@@ -36,6 +37,7 @@ class MyApplication: Application() {
             Locale.getDefault().getCountry()
         }
         var APP_DEBUG = false
+
 
     }
 

@@ -42,15 +42,13 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/app_bar"
             />
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/adView"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/adView_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            app:adSize="SMART_BANNER"
-            app:adUnitId="@string/banner_id_for_big_picture"
             app:layout_constraintTop_toBottomOf="@+id/app_bar"
             />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
