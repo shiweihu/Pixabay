@@ -65,6 +65,9 @@ class PhotosMainFragment : BaseFragment() {
     }
     private var sourceIndex = 0
 
+    private var adView:AdView? = null
+
+
     private val fragmentAdapter:SouceAdapter by lazy {
         SouceAdapter(this,model,activeModel)
     }
@@ -263,17 +266,17 @@ class PhotosMainFragment : BaseFragment() {
 
     private fun initAdMob(){
         AdRequest.Builder().build().also { request ->
-            val adView = AdView(this.requireContext())
-            adView.setAdSize(adSize)
-            adView.adUnitId = this.requireContext().resources.getString(R.string.photo_main_banner)
-            adView.adListener = object :AdListener(){
+            adView = AdView(this.requireContext())
+            adView?.setAdSize(adSize)
+            adView?.adUnitId = this.requireContext().resources.getString(R.string.photo_main_banner)
+            adView?.adListener = object :AdListener(){
                 override fun onAdClosed() {
                     super.onAdClosed()
                     viewBinding.adViewLayout.visibility = View.GONE
                 }
             }
             viewBinding.adViewLayout.addView(adView)
-            adView.loadAd(request)
+            adView?.loadAd(request)
         }
     }
 
@@ -373,6 +376,8 @@ class PhotosMainFragment : BaseFragment() {
         tabLayoutMediator?.detach()
         tabLayoutMediator = null
         viewBinding.viewPager.adapter = null
+        adView?.destroy()
+        adView = null
         binding = null
 
 
