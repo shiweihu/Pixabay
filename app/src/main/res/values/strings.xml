@@ -24,4 +24,5 @@
     <string name="download_successfully">Download successfully</string>
     <string name="download_failed">Download failed</string>
     <string name="view_it">View it</string>
+    <string name="google_search_text">Google search</string>
 </resources>

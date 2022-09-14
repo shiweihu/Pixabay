@@ -208,6 +208,12 @@ class BigPictureFragment : BaseFragment() {
     private fun initMenu(menu: Menu){
         menu.forEachIndexed{index,item ->
             when(item.itemId){
+                R.id.action_google_search ->{
+                    item.setOnMenuItemClickListener{
+                        modle.googleSearch(this.requireContext(),viewBinding.viewPage.currentItem)
+                        true
+                    }
+                }
                 R.id.action_view_image_page ->{
                     item.setOnMenuItemClickListener {
                         modle.pageProfileOnClick(this.requireContext(),viewBinding.viewPage.currentItem)

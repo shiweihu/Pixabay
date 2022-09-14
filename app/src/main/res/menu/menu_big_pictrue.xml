@@ -4,6 +4,14 @@
     >
 
     <item
+        android:id="@+id/action_google_search"
+        android:orderInCategory="70"
+        android:title="@string/google_search_text"
+        app:actionViewClass="com.google.android.material.textview.MaterialTextView"
+        app:showAsAction="never"
+        />
+
+    <item
         android:id="@+id/action_view_image_page"
         android:orderInCategory="70"
         android:title="@string/view_pictures_in_web"

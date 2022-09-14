@@ -164,6 +164,11 @@ class BigPictureViewModel @Inject constructor(
         }).submit()
     }
 
+    fun googleSearch(context: Context,index: Int){
+        val imageUrl = bigPictureArgu?.images?.get(index)
+        val url ="https://www.google.com/searchbyimage?site=search&sa=X&image_url=${imageUrl}"
+        navigateToWeb(context,url)
+    }
     fun pageProfileOnClick(context: Context,index:Int){
         bigPictureArgu?.pageUrls?.get(index)?.also { pageUrl ->
             navigateToWeb(context,pageUrl)
