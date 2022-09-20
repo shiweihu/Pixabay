@@ -90,7 +90,6 @@ class PixabayPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,a
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         getItem(position)?.also {
-            Log.println(Log.INFO,"tag",it.tags)
             holder.binding.authorName = it.user.trim()
             //holder.binding.imageUrl = it.webformatURL.replace("_640","_340")
             holder.binding.imageUrl = it.largeImageURL

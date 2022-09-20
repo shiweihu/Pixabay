@@ -18,11 +18,13 @@
 <transitionSet
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:duration="@integer/transition"
-    android:interpolator="@android:interpolator/fast_out_slow_in"
+    android:interpolator="@android:interpolator/fast_out_linear_in"
     android:transitionOrdering="together">
 <!-- <changeClipBounds/>-->
   <changeTransform/>
+<!--  <changeScroll/>-->
+<!--  <changeScroll/>-->
   <changeBounds/>
-<!--  <changeImageTransform/>-->
+  <changeImageTransform/>
 
 </transitionSet>

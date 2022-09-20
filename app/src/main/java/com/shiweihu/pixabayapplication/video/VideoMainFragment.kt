@@ -189,7 +189,7 @@ class VideoFragment : Fragment() {
         super.onDestroyView()
         tabLayoutMediator?.detach()
         tabLayoutMediator = null
-        viewBinding.viewPager?.adapter = null
+        viewBinding.viewPager.adapter = null
         binding = null
     }
 

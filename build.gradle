@@ -37,7 +37,7 @@ buildscript {
         anko_version = "0.10.4"
         lifecycle_version = "2.5.1"
         kotlin_plugin = "1.7.10"
-        gradle_version = '7.2.2'
+        gradle_version = '7.3.0'
         ads_version = "21.2.0"
         splashscreen = "1.0.0"
         firebase_bom = '30.4.0'

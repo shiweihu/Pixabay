@@ -27,7 +27,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:cardElevation="0dp"
+    app:cardElevation="3dp"
     android:layout_margin="@dimen/photo_recyclerview_margin"
     app:cardCornerRadius="0dp"
     >

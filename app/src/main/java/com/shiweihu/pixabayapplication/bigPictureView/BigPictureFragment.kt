@@ -351,7 +351,7 @@ class BigPictureFragment : BaseFragment() {
                 sharedElements: MutableMap<String, View>?
             ) {
                 super.onMapSharedElements(names, sharedElements)
-                val view = viewBinding.viewPage?.findViewWithTag<ImageView>( "${SHARE_ELEMENT_NAME}-${viewBinding.viewPage?.currentItem}")
+                val view = viewBinding.viewPage.findViewWithTag<ImageView>( "${SHARE_ELEMENT_NAME}-${viewBinding.viewPage.currentItem}")
                 if(names != null && sharedElements!=null && view!=null){
                     sharedElements[names[0]] = view
                 }
