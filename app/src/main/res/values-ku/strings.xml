@@ -13,8 +13,8 @@
     <string name="go">بڕۆ</string>
     <string name="permission_deny_notice">کرتە بکە لەسەر بڕۆ بۆ گۆڕینی مۆڵەتەکان.</string>
     <string name="empty_key_term_notice">ناتوانێت وێنەی ڕێژەیی بدۆزێتەوە</string>
-    <string name="pick_from_photo_album">هەڵبژێرە لە ئەلبومی وێنە</string>
-    <string name="pick_from_camera">لە کامێراوە هەڵبژێرە</string>
+    <string name="pick_from_photo_album">لە ئەلبومی وێنە هەڵبژێردراوە</string>
+    <string name="pick_from_camera">وێنە لە کامێراوە بگرە</string>
     <string name="cancel">هەڵوەشاندنەوه</string>
     <string name="view_pictures_in_web">سەیری بکە لەسەر لاپەڕەی وێب</string>
     <string name="view_photographer_in_web">بڕۆ بۆ پەڕەی وێنەگر</string>
@@ -24,4 +24,5 @@
     <string name="download_successfully">داگرتن بەسەرکەوتوویی</string>
     <string name="download_failed">داگرتن سەرکەوتوو نەبوو</string>
     <string name="view_it">سەیری بکە</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

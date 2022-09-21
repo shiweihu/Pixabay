@@ -14,7 +14,7 @@
     <string name="permission_deny_notice">Барои тағир додани иҷозатҳо Гузариш -ро клик кунед.</string>
     <string name="empty_key_term_notice">тасвирҳои нисбӣ пайдо карда наметавонанд</string>
     <string name="pick_from_photo_album">Аз албоми аксҳо интихоб кунед</string>
-    <string name="pick_from_camera">Аз камера интихоб кунед</string>
+    <string name="pick_from_camera">Аз камера акс гиред</string>
     <string name="cancel">Бекор кардан</string>
     <string name="view_pictures_in_web">Онро дар саҳифаи интернетӣ бубинед</string>
     <string name="view_photographer_in_web">Ба саҳифаи суратгир равед</string>
@@ -24,4 +24,5 @@
     <string name="download_successfully">Бомуваффақият зеркашӣ кунед</string>
     <string name="download_failed">Зеркашӣ карда нашуд</string>
     <string name="view_it">Онро тамошо кунед</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

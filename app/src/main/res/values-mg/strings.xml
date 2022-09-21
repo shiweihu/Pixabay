@@ -13,8 +13,8 @@
     <string name="go">Mandehana</string>
     <string name="permission_deny_notice">Tsindrio hoe Go raha hanova ny fahazoan-dalana.</string>
     <string name="empty_key_term_notice">Tsy mahita sary azo raisina</string>
-    <string name="pick_from_photo_album">Misafidiana tahirin-tsary</string>
-    <string name="pick_from_camera">Misafidiana fakantsary</string>
+    <string name="pick_from_photo_album">Voafidy avy amin\'ny raki-tsary</string>
+    <string name="pick_from_camera">Maka sary avy amin\'ny fakantsary</string>
     <string name="cancel">Foano</string>
     <string name="view_pictures_in_web">Hijery izany ao amin\'ny pejin-tranonkala</string>
     <string name="view_photographer_in_web">Mankanesa ao amin\'ny pejin\'ny mpaka sary</string>
@@ -24,4 +24,5 @@
     <string name="download_successfully">Hisintona amim-pahombiazana</string>
     <string name="download_failed">Tsy nahomby ny fisintonana</string>
     <string name="view_it">Hijery izany</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

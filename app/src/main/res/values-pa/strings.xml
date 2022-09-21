@@ -13,8 +13,8 @@
     <string name="go">ਜਾਓ</string>
     <string name="permission_deny_notice">ਅਧਿਕਾਰ ਬਦਲਣ ਲਈ ਜਾਓ \'ਤੇ ਕਲਿੱਕ ਕਰੋ ।</string>
     <string name="empty_key_term_notice">ਸਬੰਧਿਤ ਤਸਵੀਰਾਂ ਨੂੰ ਲੱਭਿਆ ਨਹੀਂ ਜਾ ਸਕਦਾ</string>
-    <string name="pick_from_photo_album">ਫੋਟੋ ਐਲਬਮ ਵਿੱਚੋਂ ਚੁਣੋ</string>
-    <string name="pick_from_camera">ਕੈਮਰੇ ਤੋਂ ਚੁਣੋ</string>
+    <string name="pick_from_photo_album">ਫੋਟੋ ਐਲਬਮ ਤੋਂ ਚੁਣੋ</string>
+    <string name="pick_from_camera">ਕੈਮਰੇ ਤੋਂ ਤਸਵੀਰ ਲਓ</string>
     <string name="cancel">ਰੱਦ ਕਰੋ</string>
     <string name="view_pictures_in_web">ਇਸ ਨੂੰ ਵੈੱਬ ਪੰਨੇ \'ਤੇ ਦੇਖੋ</string>
     <string name="view_photographer_in_web">ਫੋਟੋਗ੍ਰਾਫਰ ਪੰਨੇ \'ਤੇ ਜਾਓ</string>
@@ -24,4 +24,5 @@
     <string name="download_successfully">ਠੀਕ ਤਰ੍ਹਾਂ ਡਾਊਨਲੋਡ ਕਰੋ</string>
     <string name="download_failed">ਡਾਊਨਲੋਡ ਫੇਲ੍ਹ ਹੋਇਆ</string>
     <string name="view_it">ਇਸ ਨੂੰ ਵੇਖੋ</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

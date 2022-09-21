@@ -7,21 +7,22 @@
     <string name="video">Видео</string>
     <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
     <string name="instagram_btn_description">дял към емисията на Instagram</string>
-    <string name="app_choser_title">избра заявление:</string>
+    <string name="app_choser_title">Изберете приложение:</string>
     <string name="pixabay_title" translatable="false">Pixabay</string>
     <string name="pexels_title" translatable="false">Pexels</string>
     <string name="go">Вървя</string>
-    <string name="permission_deny_notice">Щракнете върху Отиди, за да промените разрешенията.</string>
-    <string name="empty_key_term_notice">не може да намери относителни снимки</string>
-    <string name="pick_from_photo_album">Изписване от фотоалбум</string>
-    <string name="pick_from_camera">Изписване от камерата</string>
+    <string name="permission_deny_notice">Щракнете върху Отиди за промяна на разрешенията.</string>
+    <string name="empty_key_term_notice">Не можете да намерите относителни снимки</string>
+    <string name="pick_from_photo_album">Избрано от фотоалбума</string>
+    <string name="pick_from_camera">Снимайте се от камерата</string>
     <string name="cancel">Задрасквам</string>
-    <string name="view_pictures_in_web">Преглед на него на уеб страница</string>
+    <string name="view_pictures_in_web">Вижте го на уеб страницата</string>
     <string name="view_photographer_in_web">Към страницата на фотографа</string>
     <string name="find_the_similar_pictures">Намиране на подобни изображения</string>
     <string name="download_image">Свалям</string>
-    <string name="share_image_to">Споделяне на изображения към други</string>
+    <string name="share_image_to">Споделяне на изображения с други</string>
     <string name="download_successfully">Изтегляне успешно</string>
-    <string name="download_failed">Изтеглянето е неуспешно</string>
-    <string name="view_it">Преглед на него</string>
+    <string name="download_failed">Изтегляне неуспешно</string>
+    <string name="view_it">Виж го</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

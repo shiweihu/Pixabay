@@ -60,21 +60,6 @@ class VideoPlayFragment:BaseFragment(
     get() {
         return binding!!
     }
-    private var adView:AdView? = null
-
-    private val adSize: AdSize by lazy {
-        val density =  this.requireContext().resources.displayMetrics.density
-
-        var adWidthPixels = viewBinding.adViewLayout.width.toFloat()
-        if (adWidthPixels == 0f) {
-            adWidthPixels = DisplayUtils.ScreenWidth.toFloat()
-        }
-
-        val adWidth = (adWidthPixels / density).toInt()
-        AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this.requireContext(), adWidth)
-    }
-
-
 
     private val player by lazy {
          ExoPlayer.Builder(this.requireContext()).build()
@@ -127,7 +112,7 @@ class VideoPlayFragment:BaseFragment(
 
 
             binding.fullScreenBtn.setOnClickListener {
-                binding.playerView.player = null
+                player.pause()
                 model.navigateToFullScreen(binding.playerView)
                 LiveEventBus.get(ExoPlayerEvent::class.java).post(ExoPlayerEvent(player))
             }
@@ -171,26 +156,9 @@ class VideoPlayFragment:BaseFragment(
         return viewBinding.root
     }
 
-    private fun initAdMob(){
-        getAdRequest().also {
-            adView = AdView(this.requireContext())
-            adView?.setAdSize(adSize)
-            adView?.adUnitId = this.requireContext().getString(R.string.banner_id_for_video_play)
-            adView?.loadAd(it)
-            adView?.adListener = object : AdListener(){
-                override fun onAdClosed() {
-                    super.onAdClosed()
-                    viewBinding.adViewLayout.visibility = View.GONE
-                }
-            }
-            viewBinding.adViewLayout.addView(adView)
-        }
-
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initAdMob()
     }
 
     private fun onShareAction(){
@@ -303,13 +271,6 @@ class VideoPlayFragment:BaseFragment(
         player.prepare()
     }
 
-    fun getAdRequest():AdRequest{
-        return AdRequest.Builder().build()
-    }
-
-
-
-
     override fun onStart() {
         super.onStart()
         model.onBindingCostomTabSever(this.requireActivity())
@@ -335,6 +296,7 @@ class VideoPlayFragment:BaseFragment(
 
     override fun onStop() {
         super.onStop()
+        viewBinding.playerView.player = null
         model.onUnBindingCostomTabSever(this.requireActivity())
     }
 
@@ -342,8 +304,6 @@ class VideoPlayFragment:BaseFragment(
         super.onDestroyView()
         player.stop()
         viewBinding.root.handler?.removeCallbacksAndMessages(null)
-        adView?.destroy()
-        adView = null
         binding = null
     }
 

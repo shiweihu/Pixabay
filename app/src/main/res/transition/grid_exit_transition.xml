@@ -32,10 +32,10 @@
 <!--    </targets>-->
 <!--  </explode>-->
 
-    <!--  <changeClipBounds/>-->
+<!--      <changeClipBounds/>-->
 <!--      <changeTransform/>-->
 <!--      <changeBounds/>-->
-<!--       <changeImageTransform/> -->
+<!--       <changeImageTransform/>-->
 
 
 

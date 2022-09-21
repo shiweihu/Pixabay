@@ -14,7 +14,7 @@
     <string name="permission_deny_notice">ڪلڪ ڪريو وڃو اجازتون تبديل ڪرڻ لاء.</string>
     <string name="empty_key_term_notice">لاڳاپو تصويرون نه ملي سگهي</string>
     <string name="pick_from_photo_album">فوٽو البم مان چونڊيو</string>
-    <string name="pick_from_camera">ڪئميرا مان چونڊيو</string>
+    <string name="pick_from_camera">ڪئميرا مان تصوير ڪڍو</string>
     <string name="cancel">منسوخ ڪريو</string>
     <string name="view_pictures_in_web">ان کي ڏسو ويب پيج تي</string>
     <string name="view_photographer_in_web">فوٽوگرافر صفحي ڏانھن وڃو</string>
@@ -24,4 +24,5 @@
     <string name="download_successfully">ڊائون لوڊ ڪاميابي سان</string>
     <string name="download_failed">ڊائون لوڊ ناڪام ٿيو</string>
     <string name="view_it">ان کي ڏسو</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

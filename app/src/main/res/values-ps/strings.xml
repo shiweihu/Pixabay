@@ -13,8 +13,8 @@
     <string name="go">ځه</string>
     <string name="permission_deny_notice">کلیک وکړئ لاړ شئ چې د ترلاسه شوی وو د بدلولو لپاره.</string>
     <string name="empty_key_term_notice">نسبی انځورونه نه شی موندلای</string>
-    <string name="pick_from_photo_album">د عکس البوم څخه غوره کړئ</string>
-    <string name="pick_from_camera">د کیمرې څخه یې واخله</string>
+    <string name="pick_from_photo_album">د عکس البوم څخه غوره شوی</string>
+    <string name="pick_from_camera">د کیمرې نه عکس واخله</string>
     <string name="cancel">لغوه کول</string>
     <string name="view_pictures_in_web">په وېب پاڼه کې یې وګورئ</string>
     <string name="view_photographer_in_web">د عکاس پاڼې ته لاړ شئ</string>
@@ -24,4 +24,5 @@
     <string name="download_successfully">په بریالیتوب سره ډاونلوډ</string>
     <string name="download_failed">ډاونلوډ ناکام شو</string>
     <string name="view_it">ویې لید</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

@@ -13,8 +13,8 @@
     <string name="go">- нет, нет.</string>
     <string name="permission_deny_notice">Нажмите кнопку Go, чтобы изменить разрешения.</string>
     <string name="empty_key_term_notice">Не можете найти относительные фотографии</string>
-    <string name="pick_from_photo_album">Выбрать из фотоальбома</string>
-    <string name="pick_from_camera">Выберите из камеры</string>
+    <string name="pick_from_photo_album">Выбран из фотоальбома</string>
+    <string name="pick_from_camera">Фото с камеры</string>
     <string name="cancel">Все в силе</string>
     <string name="view_pictures_in_web">Посмотреть его на веб-странице</string>
     <string name="view_photographer_in_web">Перейти на страницу фотографа</string>
@@ -24,4 +24,5 @@
     <string name="download_successfully">Скачать успешно</string>
     <string name="download_failed">Загрузка не удалась</string>
     <string name="view_it">Посмотрите на него</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

@@ -13,8 +13,8 @@
     <string name="go">Іти</string>
     <string name="permission_deny_notice">Натисніть кнопку Перейти, щоб змінити дозволи.</string>
     <string name="empty_key_term_notice">не вдається знайти відносні фотографії,</string>
-    <string name="pick_from_photo_album">Вибір із фотоальбому</string>
-    <string name="pick_from_camera">Вибір із камери</string>
+    <string name="pick_from_photo_album">Вибране з фотоальбому</string>
+    <string name="pick_from_camera">Зйомка з камери</string>
     <string name="cancel">Скасувати</string>
     <string name="view_pictures_in_web">Переглянути його на веб-сторінці</string>
     <string name="view_photographer_in_web">Перейти на сторінку фотографа</string>
@@ -24,4 +24,5 @@
     <string name="download_successfully">Успішно завантажити</string>
     <string name="download_failed">Не вдалося завантажити</string>
     <string name="view_it">Переглянути</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

@@ -14,7 +14,7 @@
     <string name="permission_deny_notice">ចុច Go ដើម្បី ផ្លាស់ប្ដូរ ការ អនុញ្ញាត ។</string>
     <string name="empty_key_term_notice">មិន អាច រក រូបភាព ដែល ទាក់ទង បាន ទេ</string>
     <string name="pick_from_photo_album">ជ្រើស ពី អាល់ប៊ុម រូបថត</string>
-    <string name="pick_from_camera">រើសពីកាមេរ៉ា</string>
+    <string name="pick_from_camera">ថតរូបភាពពីកាមេរ៉ា</string>
     <string name="cancel">លប់ចោល</string>
     <string name="view_pictures_in_web">មើល វា នៅ លើ ទំព័រ បណ្ដាញ</string>
     <string name="view_photographer_in_web">ទៅ កាន់ ទំព័រ អ្នក ថត រូប</string>
@@ -24,4 +24,5 @@
     <string name="download_successfully">ទាញយកដោយជោគជ័យ</string>
     <string name="download_failed">ទាញយកបានបរាជ័យ</string>
     <string name="view_it">មើល វា</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

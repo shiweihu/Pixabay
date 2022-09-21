@@ -13,8 +13,8 @@
     <string name="go">Anar</string>
     <string name="permission_deny_notice">Feu clic a Vés per canviar els permisos.</string>
     <string name="empty_key_term_notice">no es poden trobar imatges relatives</string>
-    <string name="pick_from_photo_album">Tria de l\'àlbum de fotos</string>
-    <string name="pick_from_camera">Tria des de la càmera</string>
+    <string name="pick_from_photo_album">Escollit entre l\'àlbum de fotos</string>
+    <string name="pick_from_camera">Feu fotos des de la càmera</string>
     <string name="cancel">Cancel·lar</string>
     <string name="view_pictures_in_web">Veure-ho a la pàgina web</string>
     <string name="view_photographer_in_web">Anar a la pàgina del fotògraf</string>
@@ -24,4 +24,5 @@
     <string name="download_successfully">Descarregar amb èxit</string>
     <string name="download_failed">Baixada fallida</string>
     <string name="view_it">Veure-ho</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

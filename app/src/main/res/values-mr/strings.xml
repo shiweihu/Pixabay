@@ -13,8 +13,8 @@
     <string name="go">जाणे</string>
     <string name="permission_deny_notice">परवानग्या बदलण्यासाठी गोवर क्लिक करा.</string>
     <string name="empty_key_term_notice">सापेक्ष चित्रे सापडत नाहीत</string>
-    <string name="pick_from_photo_album">फोटो अल्बममधून निवडा</string>
-    <string name="pick_from_camera">कॅमेर् यातून निवडा</string>
+    <string name="pick_from_photo_album">फोटो अल्बममधून निवड</string>
+    <string name="pick_from_camera">कॅमेर् यावरुन फोटो काढा</string>
     <string name="cancel">रद्द करा</string>
     <string name="view_pictures_in_web">वेब पृष्ठावर पहा</string>
     <string name="view_photographer_in_web">फोटोग्राफर पेजवर जा</string>
@@ -24,4 +24,5 @@
     <string name="download_successfully">यशस्वीरित्या डाउनलोड करा</string>
     <string name="download_failed">डाउनलोड अयशस्वी</string>
     <string name="view_it">ते पहा</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

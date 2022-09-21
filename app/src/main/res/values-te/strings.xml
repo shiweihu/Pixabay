@@ -13,8 +13,8 @@
     <string name="go">వెళ్ళు</string>
     <string name="permission_deny_notice">అనుమతులను మార్చడానికి గో క్లిక్ చేయండి.</string>
     <string name="empty_key_term_notice">సాపేక్ష చిత్రాలను కనుగొనలేరు</string>
-    <string name="pick_from_photo_album">ఫోటో ఆల్బమ్ నుండి ఎంచుకోండి</string>
-    <string name="pick_from_camera">కెమెరా నుండి ఎంచుకోండి</string>
+    <string name="pick_from_photo_album">ఫోటో ఆల్బమ్ నుండి ఎంచుకోబడింది</string>
+    <string name="pick_from_camera">కెమెరా నుండి చిత్రాన్ని తీయండి</string>
     <string name="cancel">రద్దు</string>
     <string name="view_pictures_in_web">దీనిని వెబ్ పేజీలో వీక్షించండి</string>
     <string name="view_photographer_in_web">ఫోటోగ్రాఫర్ పేజీకి వెళ్లండి</string>
@@ -24,4 +24,5 @@
     <string name="download_successfully">డౌన్ లోడ్ విజయవంతంగా</string>
     <string name="download_failed">డౌన్ లోడ్ విఫలమైంది</string>
     <string name="view_it">దీనిని వీక్షించండి</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

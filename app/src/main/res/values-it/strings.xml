@@ -13,8 +13,8 @@
     <string name="go">vai</string>
     <string name="permission_deny_notice">Fai clic su vai per cambiare i permessi.</string>
     <string name="empty_key_term_notice">Impossibile trovare immagini relative</string>
-    <string name="pick_from_photo_album">Preleva dall’ album fotografico</string>
-    <string name="pick_from_camera">Preleva dalla fotocamera</string>
+    <string name="pick_from_photo_album">Scegli dall’ album fotografico</string>
+    <string name="pick_from_camera">Scatta foto dalla macchina fotografica</string>
     <string name="cancel">annulla</string>
     <string name="view_pictures_in_web">Visualizza sulla pagina web</string>
     <string name="view_photographer_in_web">Vai alla pagina del fotografo</string>
@@ -24,4 +24,5 @@
     <string name="download_successfully">Scarica correttamente</string>
     <string name="download_failed">Scaricamento non riuscito</string>
     <string name="view_it">Visualizza it</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

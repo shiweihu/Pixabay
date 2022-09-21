@@ -13,8 +13,8 @@
     <string name="go">ذهب</string>
     <string name="permission_deny_notice">انقر على انتقال لتغيير الأذونات.</string>
     <string name="empty_key_term_notice">لا يمكن العثور على الصور النسبية</string>
-    <string name="pick_from_photo_album">اختر من ألبوم الصور</string>
-    <string name="pick_from_camera">اختر من بين الكاميرا</string>
+    <string name="pick_from_photo_album">تم الاختيار من بين ألبوم الصور</string>
+    <string name="pick_from_camera">التقاط صورة من الكاميرا</string>
     <string name="cancel">إلغاء الأمر</string>
     <string name="view_pictures_in_web">عرضه على صفحة الويب</string>
     <string name="view_photographer_in_web">انتقل إلى صفحة المصور</string>
@@ -24,4 +24,5 @@
     <string name="download_successfully">تحميل بنجاح</string>
     <string name="download_failed">فشل التنزيل</string>
     <string name="view_it">شاهده</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

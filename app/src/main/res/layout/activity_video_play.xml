@@ -35,15 +35,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:surface_type="surface_view"
                 />
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/adView_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                app:layout_constraintTop_toTopOf="parent"
-                />
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/full_screen_btn"
                 android:layout_width="wrap_content"

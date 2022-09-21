@@ -12,7 +12,6 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.transition.TransitionInflater
-import android.util.Log
 import android.view.*
 import android.widget.ImageView
 import android.widget.Toast
@@ -26,26 +25,12 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdSize
-import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.LoadAdError
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.perf.ktx.performance
-import com.google.mlkit.vision.common.InputImage
-import com.google.mlkit.vision.label.ImageLabeling
-import com.google.mlkit.vision.label.defaults.ImageLabelerOptions
 import com.shiweihu.pixabayapplication.BaseFragment
 import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.databinding.FragmentBigPictureBinding
-import com.shiweihu.pixabayapplication.utils.DisplayUtils
 import com.shiweihu.pixabayapplication.viewModle.BigPictureViewModel
 import com.shiweihu.pixabayapplication.viewModle.FragmentComunicationViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -64,7 +49,7 @@ class BigPictureFragment : BaseFragment() {
     //private val args:BigPictureFragmentArgs by navArgs()
 
     private  var binding:FragmentBigPictureBinding? = null
-    private var adView:AdView? = null
+
 
 
     private val viewBinding:FragmentBigPictureBinding
@@ -72,17 +57,6 @@ class BigPictureFragment : BaseFragment() {
         return binding!!
     }
 
-    private val adSize: AdSize by lazy {
-        val density =  this.requireContext().resources.displayMetrics.density
-
-        var adWidthPixels = viewBinding.adViewLayout.width.toFloat()
-        if (adWidthPixels == 0f) {
-            adWidthPixels = DisplayUtils.ScreenWidth.toFloat()
-        }
-
-        val adWidth = (adWidthPixels / density).toInt()
-        AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this.requireContext(), adWidth)
-    }
 
 
     private val requestPermissionLauncher =registerForActivityResult(
@@ -155,25 +129,6 @@ class BigPictureFragment : BaseFragment() {
 
     }
 
-    private fun loadBanerAd(){
-        modle.getAdRequest().also { adRequest ->
-            adView = AdView(this.requireContext())
-            adView?.setAdSize(adSize)
-            adView?.adUnitId = this.requireContext().getString(R.string.banner_id_for_big_picture)
-            adView?.loadAd(adRequest)
-            adView?.adListener = object : AdListener(){
-                override fun onAdClosed() {
-                    super.onAdClosed()
-                    viewBinding.adViewLayout.visibility = View.GONE
-                }
-
-                override fun onAdFailedToLoad(p0: LoadAdError) {
-                    super.onAdFailedToLoad(p0)
-                }
-            }
-            viewBinding.adViewLayout.addView(adView)
-        }
-    }
 
 
 
@@ -200,7 +155,6 @@ class BigPictureFragment : BaseFragment() {
             initTransition()
             initMenu(it.toolBar.menu)
         }
-        loadBanerAd()
         postponeEnterTransition(resources.getInteger(R.integer.post_pone_time).toLong(), TimeUnit.MILLISECONDS)
         return viewBinding.root
     }
@@ -376,8 +330,6 @@ class BigPictureFragment : BaseFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         viewBinding.viewPage.adapter = null
-        adView?.destroy()
-        adView = null
         binding = null
     }
 

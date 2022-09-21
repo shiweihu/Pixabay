@@ -14,7 +14,7 @@
     <string name="permission_deny_notice">Націсніце Go, каб змяніць дазволы.</string>
     <string name="empty_key_term_notice">не магу знайсці адносныя фатаграфіі</string>
     <string name="pick_from_photo_album">Выбраць з фотаальбома</string>
-    <string name="pick_from_camera">Выбраць з камеры</string>
+    <string name="pick_from_camera">Зрабіць фота з камеры</string>
     <string name="cancel">Адмяніць</string>
     <string name="view_pictures_in_web">Глядзець на вэб-старонцы</string>
     <string name="view_photographer_in_web">Перайсці на старонку фатографа</string>
@@ -24,4 +24,5 @@
     <string name="download_successfully">Спампоўка паспяхова</string>
     <string name="download_failed">Памылка спампоўкі</string>
     <string name="view_it">Праглядзіце яго</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

@@ -13,8 +13,8 @@
     <string name="go">Go</string>
     <string name="permission_deny_notice">Рұқсаттарды өзгерту үшін Өту түймешігін басыңыз.</string>
     <string name="empty_key_term_notice">салыстырмалы суреттерді таба алмайды</string>
-    <string name="pick_from_photo_album">Фотоальбомнан таңдау</string>
-    <string name="pick_from_camera">Камерадан таңдау</string>
+    <string name="pick_from_photo_album">Фотоальбомнан таңдады</string>
+    <string name="pick_from_camera">Фотоаппараттан суретке түсу</string>
     <string name="cancel">Болдырмау</string>
     <string name="view_pictures_in_web">Веб-бетте көру</string>
     <string name="view_photographer_in_web">Фотограф бетіне өту</string>
@@ -24,4 +24,5 @@
     <string name="download_successfully">Жүктеу сәтті орындалсын</string>
     <string name="download_failed">Жүктеу жаңылысы</string>
     <string name="view_it">Қарап шығу</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

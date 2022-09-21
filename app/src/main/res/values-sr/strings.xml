@@ -13,8 +13,8 @@
     <string name="go">Ићи</string>
     <string name="permission_deny_notice">Кликните на дугме \"Иди\" да бисте променили дозволе.</string>
     <string name="empty_key_term_notice">није могуће пронаћи релативне слике</string>
-    <string name="pick_from_photo_album">Избор са фото-албума</string>
-    <string name="pick_from_camera">Избор са фотоапарата</string>
+    <string name="pick_from_photo_album">Одабрао из фото-албума</string>
+    <string name="pick_from_camera">Сликај са фотоапарата</string>
     <string name="cancel">Откажи</string>
     <string name="view_pictures_in_web">Прикажи на Wеб страници</string>
     <string name="view_photographer_in_web">Иди на страницу фотографа</string>
@@ -24,4 +24,5 @@
     <string name="download_successfully">Успешно преузимање</string>
     <string name="download_failed">Преузимање није успело</string>
     <string name="view_it">Погледај</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

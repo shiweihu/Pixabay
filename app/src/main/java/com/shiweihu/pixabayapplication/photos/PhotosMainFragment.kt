@@ -72,17 +72,7 @@ class PhotosMainFragment : BaseFragment() {
         SouceAdapter(this,model,activeModel)
     }
 
-    private val adSize: AdSize by lazy {
-        val density =  this.requireContext().resources.displayMetrics.density
 
-        var adWidthPixels = viewBinding.adViewLayout.width.toFloat()
-        if (adWidthPixels == 0f) {
-            adWidthPixels = DisplayUtils.ScreenWidth.toFloat()
-        }
-
-        val adWidth = (adWidthPixels / density).toInt()
-        AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this.requireContext(), adWidth)
-    }
 
 
     private var tabLayoutMediator:TabLayoutMediator? = null
@@ -264,21 +254,6 @@ class PhotosMainFragment : BaseFragment() {
         return viewBinding.root
     }
 
-    private fun initAdMob(){
-        AdRequest.Builder().build().also { request ->
-            adView = AdView(this.requireContext())
-            adView?.setAdSize(adSize)
-            adView?.adUnitId = this.requireContext().resources.getString(R.string.photo_main_banner)
-            adView?.adListener = object :AdListener(){
-                override fun onAdClosed() {
-                    super.onAdClosed()
-                    viewBinding.adViewLayout.visibility = View.GONE
-                }
-            }
-            viewBinding.adViewLayout.addView(adView)
-            adView?.loadAd(request)
-        }
-    }
 
 
 
@@ -398,7 +373,6 @@ class PhotosMainFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initAdMob()
 
         exitTransition = TransitionInflater.from(context)
             .inflateTransition(R.transition.grid_exit_transition)

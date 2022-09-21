@@ -13,8 +13,8 @@
     <string name="go">Jít</string>
     <string name="permission_deny_notice">Kliknutím na tlačítko Přejít změňte oprávnění.</string>
     <string name="empty_key_term_notice">nelze najít relativní obrázky</string>
-    <string name="pick_from_photo_album">Výběr z fotoalba</string>
-    <string name="pick_from_camera">Výběr z fotoaparátu</string>
+    <string name="pick_from_photo_album">Vyberte si z fotoalba</string>
+    <string name="pick_from_camera">Pořizování snímků z fotoaparátu</string>
     <string name="cancel">Zrušit</string>
     <string name="view_pictures_in_web">Zobrazit na webové stránce</string>
     <string name="view_photographer_in_web">Přejít na stránku fotografa</string>
@@ -24,4 +24,5 @@
     <string name="download_successfully">Stáhnout úspěšně</string>
     <string name="download_failed">Stažení se nezdařilo</string>
     <string name="view_it">Zobrazit</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

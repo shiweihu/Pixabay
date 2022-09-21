@@ -13,15 +13,16 @@
     <string name="go">Tag</string>
     <string name="permission_deny_notice">Guji Go si aad u bedesho oggolaanshaha</string>
     <string name="empty_key_term_notice">ma heli karo sawiro qaraabo ah</string>
-    <string name="pick_from_photo_album">Ka soo qaado albamka sawirka</string>
-    <string name="pick_from_camera">Ka soo qaado kamarada</string>
+    <string name="pick_from_photo_album">Ka dooro albam sawir</string>
+    <string name="pick_from_camera">Sawir ka qaad kamarada</string>
     <string name="cancel">Jooji</string>
     <string name="view_pictures_in_web">Ka eeg bogga shabakadda</string>
     <string name="view_photographer_in_web">Tag bogga sawir qaade</string>
-    <string name="find_the_similar_pictures">Helitaanka Sawirro La Mid ah</string>
+    <string name="find_the_similar_pictures">Helitaanka Sawirro La Mid Ah</string>
     <string name="download_image">Download</string>
     <string name="share_image_to">La wadaag Sawirada kuwa kale</string>
     <string name="download_successfully">Download si guul leh</string>
     <string name="download_failed">Soo dejintu way fashilantay</string>
     <string name="view_it">Daawo</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

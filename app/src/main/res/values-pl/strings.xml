@@ -14,7 +14,7 @@
     <string name="permission_deny_notice">Kliknij przycisk Przejdź, aby zmienić uprawnienia.</string>
     <string name="empty_key_term_notice">nie można znaleźć względnych zdjęć</string>
     <string name="pick_from_photo_album">Wybierz z albumu fotograficznego</string>
-    <string name="pick_from_camera">Wybierz z aparatu</string>
+    <string name="pick_from_camera">Zrób zdjęcie z aparatu</string>
     <string name="cancel">Anuluj</string>
     <string name="view_pictures_in_web">Zobacz go na stronie internetowej</string>
     <string name="view_photographer_in_web">Przejdź do strony fotografa</string>
@@ -24,4 +24,5 @@
     <string name="download_successfully">Pobieranie powiodło się</string>
     <string name="download_failed">Pobieranie nie powiodło się</string>
     <string name="view_it">Zobacz</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

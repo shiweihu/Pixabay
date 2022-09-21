@@ -14,7 +14,7 @@
     <string name="permission_deny_notice">Chofoza okuthi Hamba ukuze ushintshe izimvume.</string>
     <string name="empty_key_term_notice">angikwazi ukuthola izithombe ezihlobene</string>
     <string name="pick_from_photo_album">Khetha ku-albhamu yezithombe</string>
-    <string name="pick_from_camera">Khetha kukhamera</string>
+    <string name="pick_from_camera">Thatha isithombe kwikhamera</string>
     <string name="cancel">Khansela</string>
     <string name="view_pictures_in_web">Ibuke ekhasini lewebhu</string>
     <string name="view_photographer_in_web">Iya ekhasini lomthwebuli zithombe</string>
@@ -24,4 +24,5 @@
     <string name="download_successfully">Landa ngempumelelo</string>
     <string name="download_failed">Ukulanda kuhlulekile</string>
     <string name="view_it">Ibuke</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

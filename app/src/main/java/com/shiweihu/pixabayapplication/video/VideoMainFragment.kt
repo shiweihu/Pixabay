@@ -68,18 +68,6 @@ class VideoFragment : Fragment() {
         VideoSourceAdapter(this,model,sharedModel)
     }
 
-    private val adSize: AdSize by lazy {
-        val density =  this.requireContext().resources.displayMetrics.density
-
-        var adWidthPixels = viewBinding.adViewLayout.width.toFloat()
-        if (adWidthPixels == 0f) {
-            adWidthPixels = DisplayUtils.ScreenWidth.toFloat()
-        }
-
-        val adWidth = (adWidthPixels / density).toInt()
-        AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this.requireContext(), adWidth)
-    }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -157,25 +145,10 @@ class VideoFragment : Fragment() {
         return viewBinding.root
     }
 
-    private fun initAdMob(){
-        AdRequest.Builder().build().also { request ->
-            val adView = AdView(this.requireContext())
-            adView.setAdSize(adSize)
-            adView.adUnitId = this.requireContext().resources.getString(R.string.video_main_banner)
-            adView.adListener = object :AdListener(){
-                override fun onAdClosed() {
-                    super.onAdClosed()
-                    viewBinding.adViewLayout.visibility = View.GONE
-                }
-            }
-            viewBinding.adViewLayout.addView(adView)
-            adView.loadAd(request)
-        }
-    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initAdMob()
     }
 
     override fun onStop() {

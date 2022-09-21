@@ -6,22 +6,23 @@
     <string name="images">Immaġnijiet</string>
     <string name="video">Vidjo</string>
     <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
-    <string name="instagram_btn_description">aqsam mal-għalf instagram</string>
+    <string name="instagram_btn_description">sehem mal-għalf instagram</string>
     <string name="app_choser_title">għażel applikazzjoni:</string>
     <string name="pixabay_title" translatable="false">Pixabay</string>
     <string name="pexels_title" translatable="false">Pexels</string>
     <string name="go">Mur</string>
     <string name="permission_deny_notice">Ikklikkja Mur biex tibdel il-permessi.</string>
-    <string name="empty_key_term_notice">ma jistgħux isibu ritratti relattivi</string>
-    <string name="pick_from_photo_album">Agħżel mill-album tar-ritratti</string>
-    <string name="pick_from_camera">Agħżel mill-kamera</string>
+    <string name="empty_key_term_notice">ma jistax isib stampi relattivi</string>
+    <string name="pick_from_photo_album">Magħżul mill-album tar-ritratti</string>
+    <string name="pick_from_camera">Ħu ritratt mill-kamera</string>
     <string name="cancel">Ikkanċella</string>
     <string name="view_pictures_in_web">Araha fuq il-paġna tal-web</string>
     <string name="view_photographer_in_web">Mur fil-paġna tal-fotografu</string>
-    <string name="find_the_similar_pictures">Sib Immaġini Simili</string>
+    <string name="find_the_similar_pictures">Biex issib Stampi Simili</string>
     <string name="download_image">Tniżżel</string>
-    <string name="share_image_to">Aqsam Immaġini ma \'oħrajn</string>
+    <string name="share_image_to">Ixxerja l-Immaġnijiet ma\' oħrajn</string>
     <string name="download_successfully">Niżżel b\'suċċess</string>
     <string name="download_failed">It-tniżżil ma rnexxiex</string>
     <string name="view_it">Araha</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

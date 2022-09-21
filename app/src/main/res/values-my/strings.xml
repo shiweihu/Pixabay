@@ -13,8 +13,8 @@
     <string name="go">သွားပါ</string>
     <string name="permission_deny_notice">ခွင့်ပြုချက်တွေကို ပြောင်းလဲဖို့ Go ကိုနှိပ်ပါ။</string>
     <string name="empty_key_term_notice">နှိုင်းယှဉ်နိုင်တဲ့ ဓာတ်ပုံတွေကို ရှာမတွေ့နိုင်ဘူး</string>
-    <string name="pick_from_photo_album">ဓာတ်ပုံအယ်လ်ဘမ်မှရွေးချယ်ပါ</string>
-    <string name="pick_from_camera">ကင်မရာမှရွေးချယ်ပါ</string>
+    <string name="pick_from_photo_album">ဓာတ်ပုံအယ်လ်ဘမ်ကနေ ရွေးချယ်ပါ</string>
+    <string name="pick_from_camera">ကင်မရာကနေ ဓာတ်ပုံရိုက်ပါ</string>
     <string name="cancel">ပယ်ဖျက်ပါ</string>
     <string name="view_pictures_in_web">ဝက်ဘ်စာမျက်နှာမှာကြည့်ပါ</string>
     <string name="view_photographer_in_web">ဓာတ်ပုံဆရာ စာမျက်နှာကို သွားပါ</string>
@@ -24,4 +24,5 @@
     <string name="download_successfully">အောင်မြင်စွာ ဒေါင်းလုတ်ဆွဲပါ</string>
     <string name="download_failed">ဒေါင်းလုတ် မအောင်မြင်ခဲ့</string>
     <string name="view_it">အဲဒါကို ရှုမြင်ပါ</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

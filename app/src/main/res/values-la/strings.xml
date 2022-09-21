@@ -13,10 +13,10 @@
     <string name="go">Go</string>
     <string name="permission_deny_notice">Click Vade ad mutare permissiones.</string>
     <string name="empty_key_term_notice">potest invenire aliquid imaginibus</string>
-    <string name="pick_from_photo_album">Colligunt a photo album</string>
-    <string name="pick_from_camera">Colligunt de camera</string>
+    <string name="pick_from_photo_album">Elegit ex photo album</string>
+    <string name="pick_from_camera">Ut picturam ex camera</string>
     <string name="cancel">Cancel</string>
-    <string name="view_pictures_in_web">Vide in pagina interretialem</string>
+    <string name="view_pictures_in_web">Vide eam in pagina</string>
     <string name="view_photographer_in_web">Adi paginam photographicam</string>
     <string name="find_the_similar_pictures">Similes imagines inveniens</string>
     <string name="download_image">Download</string>
@@ -24,4 +24,5 @@
     <string name="download_successfully">Download feliciter</string>
     <string name="download_failed">Download defecit</string>
     <string name="view_it">View it</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

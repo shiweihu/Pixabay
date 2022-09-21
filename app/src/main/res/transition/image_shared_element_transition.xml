@@ -21,10 +21,11 @@
     android:interpolator="@android:interpolator/fast_out_linear_in"
     android:transitionOrdering="together">
 <!-- <changeClipBounds/>-->
-  <changeTransform/>
-<!--  <changeScroll/>-->
-<!--  <changeScroll/>-->
   <changeBounds/>
-  <changeImageTransform/>
+  <changeTransform/>
+<!--  <changeBounds/>-->
+<!--  <changeTransform/>-->
+<!--  <changeScroll/>-->
+<!--  <changeScroll/>-->
 
 </transitionSet>

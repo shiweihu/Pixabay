@@ -14,7 +14,7 @@
     <string name="permission_deny_notice">[移動]をクリックしてアクセス権を変更します。</string>
     <string name="empty_key_term_notice">相対的な写真を見つけることができませんか</string>
     <string name="pick_from_photo_album">写真集から選ぶ</string>
-    <string name="pick_from_camera">カメラなあ</string>
+    <string name="pick_from_camera">カメラで写真を撮る</string>
     <string name="cancel">キャンセル</string>
     <string name="view_pictures_in_web">webページでご覧ください</string>
     <string name="view_photographer_in_web">写真家ページへ</string>
@@ -24,4 +24,5 @@
     <string name="download_successfully">ダウンロード成功</string>
     <string name="download_failed">ダウンロード失敗した</string>
     <string name="view_it">見て</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

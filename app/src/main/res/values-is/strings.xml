@@ -13,8 +13,8 @@
     <string name="go">Fara</string>
     <string name="permission_deny_notice">Smelltu á Fara til að breyta heimildum.</string>
     <string name="empty_key_term_notice">get ekki fundið ættingja myndir</string>
-    <string name="pick_from_photo_album">Veldu úr myndaalbúmi</string>
-    <string name="pick_from_camera">Veldu úr myndavélinni</string>
+    <string name="pick_from_photo_album">Valið úr myndaalbúmi</string>
+    <string name="pick_from_camera">Taktu mynd úr myndavélinni</string>
     <string name="cancel">Afturkalla</string>
     <string name="view_pictures_in_web">Skoða það á vefsíðu</string>
     <string name="view_photographer_in_web">Farðu á síðu ljósmyndara</string>
@@ -24,4 +24,5 @@
     <string name="download_successfully">Hlaða niður með góðum árangri</string>
     <string name="download_failed">Niðurhal mistókst</string>
     <string name="view_it">Skoða það</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

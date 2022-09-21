@@ -14,7 +14,7 @@
     <string name="permission_deny_notice">Зөвшөөрлийг өөрчлөхийн тулд Go дээр дарна уу.</string>
     <string name="empty_key_term_notice">харьцангуй зураг олж чадахгүй байна</string>
     <string name="pick_from_photo_album">Зургийн цомгоос сонго</string>
-    <string name="pick_from_camera">Камераас сонгоно уу</string>
+    <string name="pick_from_camera">Камераас зураг авах</string>
     <string name="cancel">Цуцлах</string>
     <string name="view_pictures_in_web">Вэб хуудаснаас үзнэ үү</string>
     <string name="view_photographer_in_web">Гэрэл зурагчны хуудас руу очно уу</string>
@@ -24,4 +24,5 @@
     <string name="download_successfully">Амжилттай татаж авлаа</string>
     <string name="download_failed">Татаж чадсангүй</string>
     <string name="view_it">Үзээрэй</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

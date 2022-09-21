@@ -13,8 +13,8 @@
     <string name="go">போ</string>
     <string name="permission_deny_notice">அனுமதிகளை மாற்ற செல் என்பதைக் கிளிக் செய்யவும்.</string>
     <string name="empty_key_term_notice">உறவினர் படங்களை கண்டுபிடிக்க முடியவில்லை</string>
-    <string name="pick_from_photo_album">புகைப்பட ஆல்பத்திலிருந்து தேர்ந்தெடு</string>
-    <string name="pick_from_camera">கேமராவிலிருந்து தேர்ந்தெடு</string>
+    <string name="pick_from_photo_album">புகைப்பட ஆல்பத்திலிருந்து தேர்ந்தெடுக்கப்பட்டது</string>
+    <string name="pick_from_camera">கேமராவிலிருந்து படம் எடு</string>
     <string name="cancel">ரத்து</string>
     <string name="view_pictures_in_web">வலைப்பக்கத்தில் அதைக் காணவும்</string>
     <string name="view_photographer_in_web">புகைப்படக் கலைஞர் பக்கத்திற்குச் செல்லவும்</string>
@@ -24,4 +24,5 @@
     <string name="download_successfully">வெற்றிகரமாக பதிவிறக்கு</string>
     <string name="download_failed">பதிவிறக்கம் தோல்வியுற்றது</string>
     <string name="view_it">அதைப் பார்க்கவும்</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

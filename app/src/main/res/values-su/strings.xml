@@ -13,8 +13,8 @@
     <string name="go">indit</string>
     <string name="permission_deny_notice">Klik Go pikeun ngarobah idin.</string>
     <string name="empty_key_term_notice">teu bisa manggihan gambar relatif</string>
-    <string name="pick_from_photo_album">Pilih tina albeum poto</string>
-    <string name="pick_from_camera">Pilih tina kaméra</string>
+    <string name="pick_from_photo_album">Milih tina albeum poto</string>
+    <string name="pick_from_camera">Candak gambar tina kaméra</string>
     <string name="cancel">Ngabolaykeun</string>
     <string name="view_pictures_in_web">Tingali dina halaman wéb</string>
     <string name="view_photographer_in_web">Pindah ka halaman fotografer</string>
@@ -24,4 +24,5 @@
     <string name="download_successfully">Unduh suksés</string>
     <string name="download_failed">Ngundeur gagal</string>
     <string name="view_it">Tingali</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

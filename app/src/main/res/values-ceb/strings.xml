@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Pagpangita sa Hulagway</string>
+    <string name="app_name">Pangitag Hulagway</string>
     <string name="action_settings">Mga setting</string>
     <string name="action_search">Pangitaa</string>
     <!-- Strings used for fragments for navigation -->
@@ -13,8 +13,8 @@
     <string name="go">Lakaw</string>
     <string name="permission_deny_notice">I-klik ang Lakaw aron usbon ang mga permiso.</string>
     <string name="empty_key_term_notice">dili makit-an ang mga relatibong litrato</string>
-    <string name="pick_from_photo_album">Pagpili gikan sa photo album</string>
-    <string name="pick_from_camera">Pagpili gikan sa camera</string>
+    <string name="pick_from_photo_album">Gipili gikan sa photo album</string>
+    <string name="pick_from_camera">Kuhaa ang litrato gikan sa camera</string>
     <string name="cancel">Pagkanselar</string>
     <string name="view_pictures_in_web">Tan-awa kini sa web page</string>
     <string name="view_photographer_in_web">Adto sa pahina sa photographer</string>
@@ -24,4 +24,5 @@
     <string name="download_successfully">Malampuson ang pag-download</string>
     <string name="download_failed">Napakyas ang pag-download</string>
     <string name="view_it">Tan-awa kini</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

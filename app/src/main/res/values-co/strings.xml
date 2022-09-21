@@ -14,7 +14,7 @@
     <string name="permission_deny_notice">Cliccate Vai per cambià i permessi.</string>
     <string name="empty_key_term_notice">ùn pò truvà ritratti parenti</string>
     <string name="pick_from_photo_album">Sceglite da l\'album di foto</string>
-    <string name="pick_from_camera">Sceglite da a camera</string>
+    <string name="pick_from_camera">Pigliate una foto da a camera</string>
     <string name="cancel">Cancella</string>
     <string name="view_pictures_in_web">Vede nantu à a pagina web</string>
     <string name="view_photographer_in_web">Vai à a pagina di u fotografu</string>
@@ -24,4 +24,5 @@
     <string name="download_successfully">Scaricate cun successu</string>
     <string name="download_failed">Scaricamentu fallutu</string>
     <string name="view_it">Vede lu</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

@@ -13,8 +13,8 @@
     <string name="go">Đi</string>
     <string name="permission_deny_notice">Nhấp vào Đi để thay đổi các quyền.</string>
     <string name="empty_key_term_notice">không thể tìm thấy hình ảnh tương đối</string>
-    <string name="pick_from_photo_album">Chọn từ an-bum ảnh</string>
-    <string name="pick_from_camera">Chọn từ máy ảnh</string>
+    <string name="pick_from_photo_album">Chọn từ album ảnh</string>
+    <string name="pick_from_camera">Chụp ảnh từ máy ảnh</string>
     <string name="cancel">Hủy</string>
     <string name="view_pictures_in_web">Xem nó trên trang web</string>
     <string name="view_photographer_in_web">Truy cập trang nhiếp ảnh gia</string>
@@ -24,4 +24,5 @@
     <string name="download_successfully">Tải xuống thành công</string>
     <string name="download_failed">Tải xuống không thành công</string>
     <string name="view_it">Xem nó</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

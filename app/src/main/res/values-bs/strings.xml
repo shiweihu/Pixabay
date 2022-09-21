@@ -13,8 +13,8 @@
     <string name="go">Kreni.</string>
     <string name="permission_deny_notice">Kliknite Idi da biste promijenili dozvole.</string>
     <string name="empty_key_term_notice">ne mogu pronaći relativne slike</string>
-    <string name="pick_from_photo_album">Izaberi iz foto albuma</string>
-    <string name="pick_from_camera">Izaberi sa kamere</string>
+    <string name="pick_from_photo_album">Odabrao iz foto albuma</string>
+    <string name="pick_from_camera">Slikaj sa kamere</string>
     <string name="cancel">Otkazati</string>
     <string name="view_pictures_in_web">Pregledaj ga na web stranici</string>
     <string name="view_photographer_in_web">Idi na stranicu fotografa</string>
@@ -24,4 +24,5 @@
     <string name="download_successfully">Uspješno preuzmi</string>
     <string name="download_failed">Preuzimanje nije uspjelo</string>
     <string name="view_it">Pogledaj ga</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

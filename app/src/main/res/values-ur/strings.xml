@@ -1,27 +1,28 @@
 <resources>
-    <string name="app_name">تصویر تلاش</string>
+    <string name="app_name">تصویری تلاش</string>
     <string name="action_settings">سیٹنگیں</string>
     <string name="action_search">تلاش</string>
     <!-- Strings used for fragments for navigation -->
     <string name="images">تصاویر</string>
     <string name="video">ویڈیو</string>
     <string name="title_activity_video_play" translatable="false">VideoPlayActivity</string>
-    <string name="instagram_btn_description">انسٹاگرام فیڈ میں شیئر کریں</string>
+    <string name="instagram_btn_description">انسٹاگرام فیڈ پر اشتراک کریں</string>
     <string name="app_choser_title">درخواست کا انتخاب کیا:</string>
     <string name="pixabay_title" translatable="false">Pixabay</string>
     <string name="pexels_title" translatable="false">Pexels</string>
     <string name="go">جانا</string>
-    <string name="permission_deny_notice">اجازتیں تبدیل کرنے کے لیے جائیں پر کلک کریں۔</string>
+    <string name="permission_deny_notice">اجازتیں تبدیل کرنے کے لیے گو پر کلک کریں۔</string>
     <string name="empty_key_term_notice">نسبتی تصاویر نہیں مل پارہا ہے</string>
-    <string name="pick_from_photo_album">فوٹو البم سے چنیں</string>
-    <string name="pick_from_camera">کیمرے سے چنیں</string>
+    <string name="pick_from_photo_album">فوٹو البم سے منتخب کیا گیا</string>
+    <string name="pick_from_camera">کیمرے سے تصویر لیں</string>
     <string name="cancel">منسوخ</string>
     <string name="view_pictures_in_web">اسے ویب صفحہ پر دیکھیں</string>
-    <string name="view_photographer_in_web">فوٹوگرافر صفحہ پر جائیں</string>
+    <string name="view_photographer_in_web">فوٹوگرافر کے صفحے پر جائیں</string>
     <string name="find_the_similar_pictures">اسی طرح کی تصاویر تلاش کرنا</string>
     <string name="download_image">ڈاؤن لوڈ</string>
-    <string name="share_image_to">تصاویر دوسرے پر شیئر کریں</string>
-    <string name="download_successfully">کامیابی سے ڈاؤن لوڈ کریں</string>
+    <string name="share_image_to">تصاویر کو دوسرے کے ساتھ اشتراک کریں</string>
+    <string name="download_successfully">کامیابی کے ساتھ ڈاؤن لوڈ کریں</string>
     <string name="download_failed">ڈاؤن لوڈ ناکام</string>
     <string name="view_it">اسے دیکھیں</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

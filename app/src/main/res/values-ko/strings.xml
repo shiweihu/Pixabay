@@ -13,8 +13,8 @@
     <string name="go">가</string>
     <string name="permission_deny_notice">권한을 변경하려면 [이동]을 클릭합니다.</string>
     <string name="empty_key_term_notice">상대 사진을 찾을 수 없습니까</string>
-    <string name="pick_from_photo_album">사진 앨범에서 선택 choose from photo album</string>
-    <string name="pick_from_camera">카메라에서 골라내다</string>
+    <string name="pick_from_photo_album">사진 앨범에서 선택 selected from photo album</string>
+    <string name="pick_from_camera">카메라로 사진을 찍다</string>
     <string name="cancel">취소</string>
     <string name="view_pictures_in_web">웹 페이지에서 확인합니다</string>
     <string name="view_photographer_in_web">사진 작가 페이지로 이동</string>
@@ -24,4 +24,5 @@
     <string name="download_successfully">성공적으로 다운로드</string>
     <string name="download_failed">다운로드 하지 못 했습니다</string>
     <string name="view_it">그것을 보기</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

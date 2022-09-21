@@ -13,8 +13,8 @@
     <string name="go">जाओ</string>
     <string name="permission_deny_notice">अनुमतिहरू परिवर्तन गर्न जानुहोस् क्लिक गर्नुहोस् ।</string>
     <string name="empty_key_term_notice">सम्बन्धित चित्रहरू फेला पार्न सकिँदैन</string>
-    <string name="pick_from_photo_album">फोटो एल्बमबाट चयन गर्नुहोस्</string>
-    <string name="pick_from_camera">क्यामेराबाट छान्नुहोस्</string>
+    <string name="pick_from_photo_album">फोटो एल्बमबाट चयन गरियो</string>
+    <string name="pick_from_camera">क्यामेराबाट फोटो खिच्नुहोस्</string>
     <string name="cancel">रद्द गर्नुहोस्</string>
     <string name="view_pictures_in_web">यसलाई वेब पृष्ठमा हेर्नुहोस्</string>
     <string name="view_photographer_in_web">फोटोग्राफर पृष्ठमा जानुहोस्</string>
@@ -24,4 +24,5 @@
     <string name="download_successfully">सफलतापूर्वक डाउनलोड गर्नुहोस्</string>
     <string name="download_failed">डाउनलोड असफल भयो</string>
     <string name="view_it">यो हेर्नुहोस्</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

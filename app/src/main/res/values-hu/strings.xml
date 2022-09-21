@@ -14,7 +14,7 @@
     <string name="permission_deny_notice">Kattintson az Ugrás gombra az engedélyek módosításához.</string>
     <string name="empty_key_term_notice">nem talál relatív képeket</string>
     <string name="pick_from_photo_album">Válasszon a fotóalbumból</string>
-    <string name="pick_from_camera">Válasszon a kamerából</string>
+    <string name="pick_from_camera">Fénykép készítése a kameráról</string>
     <string name="cancel">Érvénytelenít</string>
     <string name="view_pictures_in_web">Tekintse meg a weboldalon</string>
     <string name="view_photographer_in_web">Ugrás a fotós oldalra</string>
@@ -24,4 +24,5 @@
     <string name="download_successfully">Letöltés sikeresen</string>
     <string name="download_failed">A letöltés sikertelen</string>
     <string name="view_it">Tekintse meg</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

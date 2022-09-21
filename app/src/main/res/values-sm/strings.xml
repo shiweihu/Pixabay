@@ -14,7 +14,7 @@
     <string name="permission_deny_notice">Kiliki le Alu e sui ai le faatagaga.</string>
     <string name="empty_key_term_notice">e le mafai ona maua ni ata e faatatau i ai</string>
     <string name="pick_from_photo_album">Filifili mai le lipine o le ata</string>
-    <string name="pick_from_camera">Filifili mai le mea pueata</string>
+    <string name="pick_from_camera">Pue se ata mai le mea pueata</string>
     <string name="cancel">Faaleaogaina</string>
     <string name="view_pictures_in_web">Maimoa i ai i le itulau uepi</string>
     <string name="view_photographer_in_web">Alu i le itulau o le tagata pu\'eata</string>
@@ -24,4 +24,5 @@
     <string name="download_successfully">Manuia le siiina mai</string>
     <string name="download_failed">E lei manuia le siiina mai</string>
     <string name="view_it">Maimoa i ai</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>

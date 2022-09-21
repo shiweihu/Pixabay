@@ -13,15 +13,16 @@
     <string name="go">Hele</string>
     <string name="permission_deny_notice">Kaomi iā Go e hoʻololi i nā ʻae.</string>
     <string name="empty_key_term_notice">ʻaʻole hiki ke loaʻa nā kiʻi pili</string>
-    <string name="pick_from_photo_album">E koho mai ka album kiʻi</string>
-    <string name="pick_from_camera">E koho mai ka pahupaʻikiʻi</string>
+    <string name="pick_from_photo_album">Koho mai ka album kiʻi</string>
+    <string name="pick_from_camera">Lawe kiʻi mai ka pahupaʻikiʻi</string>
     <string name="cancel">Hoʻopau</string>
     <string name="view_pictures_in_web">E nānā iā ia ma ka ʻaoʻao pūnaewele</string>
     <string name="view_photographer_in_web">E hele i ka ʻaoʻao paʻi kiʻi</string>
-    <string name="find_the_similar_pictures">Loaʻa i nā kiʻi like</string>
+    <string name="find_the_similar_pictures">Ke ʻimi nei i nā kiʻi like</string>
     <string name="download_image">Hoʻoiho</string>
     <string name="share_image_to">Kaʻana like i nā kiʻi i kekahi</string>
     <string name="download_successfully">Loaʻa ka hoʻoiho ʻana</string>
     <string name="download_failed">ʻAʻole i hoʻoiho ʻia</string>
     <string name="view_it">Nānā</string>
+    <string name="google_search_text" translatable="false">Google Search</string>
 </resources>
