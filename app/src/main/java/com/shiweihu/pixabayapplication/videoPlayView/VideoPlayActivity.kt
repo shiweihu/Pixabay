@@ -55,8 +55,7 @@ class VideoPlayActivity :AppCompatActivity(){
         }
 
         binding.playerView.transitionName = TRANSITION_NAME
-
-
+        binding.playerView.controllerAutoShow = false
 
 
 //        TransitionInflater.from(this).inflateTransition(R.transition.video_shared_element_activity_transition).also {

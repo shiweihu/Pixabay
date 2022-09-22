@@ -18,6 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/bottom_navigate"
+        android:background="@drawable/admob_background_drawable"
+        tools:layout_height="100dp"
         >
 
 
