@@ -15,7 +15,6 @@
         android:roundIcon="@mipmap/app_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PixabayApplication"
-        android:hardwareAccelerated="true"
         android:largeHeap="true"
         >
         <meta-data
