@@ -25,4 +25,5 @@
     <string name="download_failed">ഡൗൺലോഡ് പരാജയപ്പെട്ടു</string>
     <string name="view_it">അത് കാണുക</string>
     <string name="google_search_text" translatable="false">Google Search</string>
+    <string name="share_video_to">വീഡിയോ മറ്റുള്ളവരുമായി പങ്കിടുക</string>
 </resources>

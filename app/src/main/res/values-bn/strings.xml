@@ -25,4 +25,5 @@
     <string name="download_failed">ডাউনলোড ব্যর্থ হয়েছে</string>
     <string name="view_it">এটি দেখুন</string>
     <string name="google_search_text" translatable="false">Google Search</string>
+    <string name="share_video_to">অন্যের সাথে ভিডিও শেয়ার করুন</string>
 </resources>

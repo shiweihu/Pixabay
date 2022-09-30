@@ -24,7 +24,7 @@ fun bindImageFromUrl(view: ImageView, imageUrl: String?,priority:Boolean = false
             .load(imageUrl)
             .placeholder(R.drawable.placeholder)
             .dontTransform()
-            .diskCacheStrategy(DiskCacheStrategy.DATA)
+            .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
         if(priority){
             request = request.priority(Priority.IMMEDIATE)
         }

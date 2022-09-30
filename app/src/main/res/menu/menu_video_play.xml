@@ -24,9 +24,9 @@
         app:showAsAction="never"
         />
     <item
-        android:id="@+id/action_share_image"
+        android:id="@+id/action_share_video"
         android:orderInCategory="70"
-        android:title="@string/share_image_to"
+        android:title="@string/share_video_to"
         app:actionViewClass="com.google.android.material.textview.MaterialTextView"
         app:showAsAction="never"
         />

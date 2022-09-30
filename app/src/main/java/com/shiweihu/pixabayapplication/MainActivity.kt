@@ -43,6 +43,11 @@ class MainActivity : AppCompatActivity() {
         this.resources.getStringArray(R.array.bottom_text)
     }
 
+    private val adView:AdView
+        get() {
+            return binding.root.findViewWithTag("adView")
+        }
+
     private val adSize: AdSize by lazy {
         val density =  this.resources.displayMetrics.density
 
@@ -92,18 +97,25 @@ class MainActivity : AppCompatActivity() {
             }
             binding.adViewLayout.addView(adView)
             adView.loadAd(request)
+            adView.tag = "adView"
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        adView.pause()
     }
 
     override fun onResume() {
         super.onResume()
+        adView.resume()
     }
+
+
 
     override fun onDestroy() {
         super.onDestroy()
-        CoroutineScope(Dispatchers.IO).launch {
-            Glide.get(this@MainActivity).clearDiskCache()
-        }
+        adView.destroy()
     }
 
 

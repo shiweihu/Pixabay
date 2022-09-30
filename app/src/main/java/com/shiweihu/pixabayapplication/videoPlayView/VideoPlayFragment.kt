@@ -225,7 +225,7 @@ class VideoPlayFragment:BaseFragment(
                         true
                     }
                 }
-                R.id.action_share_image ->{
+                R.id.action_share_video ->{
                     item.setOnMenuItemClickListener {
                         onShareAction()
                         true

@@ -25,4 +25,5 @@
     <string name="download_failed">Dh\'fhàillig an luchdachadh sìos</string>
     <string name="view_it">Seall air</string>
     <string name="google_search_text" translatable="false">Google Search</string>
+    <string name="share_video_to">Roinn bhidio ri daoine eile</string>
 </resources>

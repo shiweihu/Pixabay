@@ -25,4 +25,5 @@
     <string name="download_failed">Ngundeur gagal</string>
     <string name="view_it">Tingali</string>
     <string name="google_search_text" translatable="false">Google Search</string>
+    <string name="share_video_to">Bagikeun pidéo ka anu sanés</string>
 </resources>

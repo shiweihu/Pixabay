@@ -25,4 +25,5 @@
     <string name="download_failed">Prenos ni uspel</string>
     <string name="view_it">Oglejte si ga</string>
     <string name="google_search_text" translatable="false">Google Search</string>
+    <string name="share_video_to">Skupna raba videoposnetka z drugimi</string>
 </resources>

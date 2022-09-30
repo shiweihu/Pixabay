@@ -65,8 +65,6 @@ class PhotosMainFragment : BaseFragment() {
     }
     private var sourceIndex = 0
 
-    private var adView:AdView? = null
-
 
     private val fragmentAdapter:SouceAdapter by lazy {
         SouceAdapter(this,model,activeModel)
@@ -351,8 +349,6 @@ class PhotosMainFragment : BaseFragment() {
         tabLayoutMediator?.detach()
         tabLayoutMediator = null
         viewBinding.viewPager.adapter = null
-        adView?.destroy()
-        adView = null
         binding = null
 
 

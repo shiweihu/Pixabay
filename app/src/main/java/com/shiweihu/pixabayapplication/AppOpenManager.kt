@@ -9,12 +9,17 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
+import com.bumptech.glide.Glide
 import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.appopen.AppOpenAd
 import com.google.android.gms.ads.appopen.AppOpenAd.AppOpenAdLoadCallback
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import kotlin.system.exitProcess
 
 
@@ -154,16 +159,25 @@ class AppOpenManager(private val myApplication: MyApplication): LifecycleEventOb
         val timeDiff = System.currentTimeMillis() - lastCreateTime
         //If the startup time is 20 hours longer than the last startup time，
         //it should restart the MainActivity,because the pixabay reset image url after 24 hours.
-        if( timeDiff/1000/60/60 >= 20){
+        //timeDiff/1000/60/60 >= 20
+        if(timeDiff/1000/60/60 >= 20){
            lastCreateTime = System.currentTimeMillis()
-           Intent(myApplication.applicationContext,MainActivity::class.java).also{
-               it.flags = FLAG_ACTIVITY_NEW_TASK
-               myApplication.applicationContext.startActivity(it)
-           }
-           for(activity in activityList){
-                activity.finish()
-           }
-           activityList.clear()
+            CoroutineScope(Dispatchers.Main).launch {
+                val job = CoroutineScope(Dispatchers.IO).async {
+                    currentActivity?.let {
+                        Glide.get(it).clearDiskCache()
+                    }
+                }
+                job.await()
+                Intent(myApplication.applicationContext,MainActivity::class.java).also{
+                    it.flags = FLAG_ACTIVITY_NEW_TASK
+                    myApplication.applicationContext.startActivity(it)
+                }
+                for(activity in activityList){
+                    activity.finish()
+                }
+                activityList.clear()
+            }
         }
     }
 

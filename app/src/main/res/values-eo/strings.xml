@@ -25,4 +25,5 @@
     <string name="download_failed">Elŝuto malsukcesis</string>
     <string name="view_it">Rigardu ĝin</string>
     <string name="google_search_text" translatable="false">Google Search</string>
+    <string name="share_video_to">Kunhavigu filmeton al aliaj</string>
 </resources>
