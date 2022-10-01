@@ -7,13 +7,11 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.google.android.gms.ads.AdRequest
 import com.shiweihu.pixabayapplication.R
-import com.shiweihu.pixabayapplication.data.PexelsVideos
-import com.shiweihu.pixabayapplication.data.Video
+import com.shiweihu.pixabayapplication.data.PexelsData.PexelsVideos
+import com.shiweihu.pixabayapplication.data.PixabayData.Video
 import com.shiweihu.pixabayapplication.repository.VideoRepository
 import com.shiweihu.pixabayapplication.videoPlayView.VideoPlayFragment
-import com.shiweihu.pixabayapplication.videoPlayView.VideoPlayFragmentArgs
 import com.shiweihu.pixabayapplication.viewArgu.VideoPlayArgu
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow

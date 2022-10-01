@@ -1,6 +1,5 @@
 package com.shiweihu.pixabayapplication.video
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,11 +9,9 @@ import androidx.paging.LoadState
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.shiweihu.pixabayapplication.data.Video
+import com.shiweihu.pixabayapplication.data.PixabayData.Video
 import com.shiweihu.pixabayapplication.databinding.CardImageLayoutBinding
-import com.shiweihu.pixabayapplication.viewArgu.BigPictureArgu
 import com.shiweihu.pixabayapplication.viewArgu.VideoPlayArgu
-import com.shiweihu.pixabayapplication.viewModle.VideoFragmentMainViewModel
 
 class PixabayVideoAdapter(val fragment: Fragment,val clickCallBack:(view:View,args: VideoPlayArgu)->Unit): PagingDataAdapter<Video, PixabayVideoAdapter.CoverViewHolder>(
     VideoDiff()

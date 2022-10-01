@@ -10,13 +10,11 @@ import androidx.paging.LoadState
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.imageview.ShapeableImageView
 import com.shiweihu.pixabayapplication.R
-import com.shiweihu.pixabayapplication.data.PexelsPhoto
+import com.shiweihu.pixabayapplication.data.PexelsData.PexelsPhoto
 import com.shiweihu.pixabayapplication.databinding.CardImageLayoutBinding
 import com.shiweihu.pixabayapplication.utils.DisplayUtils
 import com.shiweihu.pixabayapplication.viewArgu.BigPictureArgu
-import java.lang.RuntimeException
 import kotlin.math.max
 
 class PexelsPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,args:BigPictureArgu)->Unit):
@@ -74,7 +72,7 @@ class PexelsPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,ar
         }else{
             if(sharedElementIndex < reStoreFirstPosition || sharedElementIndex>reStoreLastPostion){
                 recyclerView.scrollToPosition(sharedElementIndex)
-            }else if( sharedElementIndex >= reStoreFirstPosition && sharedElementIndex<= reStoreLastPostion){
+            }else{
                 recyclerView.scrollToPosition(reStoreFirstPosition)
             }
         }

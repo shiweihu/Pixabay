@@ -1,7 +1,6 @@
 package com.shiweihu.pixabayapplication.net
 
-import com.shiweihu.pixabayapplication.MyApplication
-import com.shiweihu.pixabayapplication.data.PexelsVideoSearchResponse
+import com.shiweihu.pixabayapplication.data.PexelsData.PexelsVideoSearchResponse
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query

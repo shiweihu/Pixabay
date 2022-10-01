@@ -1,4 +1,4 @@
-package com.shiweihu.pixabayapplication.data
+package com.shiweihu.pixabayapplication.data.PexelsData
 
 data class PexelsPhotosSearchResponse(
     val next_page: String?,

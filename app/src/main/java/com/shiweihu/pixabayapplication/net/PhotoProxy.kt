@@ -3,7 +3,7 @@ package com.shiweihu.pixabayapplication.net
 
 import com.shiweihu.pixabayapplication.MyApplication
 
-import com.shiweihu.pixabayapplication.data.Photos
+import com.shiweihu.pixabayapplication.data.PixabayData.Photos
 import retrofit2.http.*
 
 interface PhotoProxy {

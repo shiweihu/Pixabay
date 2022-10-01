@@ -1,25 +1,28 @@
 package com.shiweihu.pixabayapplication.repository
 
-import android.graphics.ImageDecoder
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.asLiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.shiweihu.pixabayapplication.data.ImageInfo
-import com.shiweihu.pixabayapplication.data.PexelsPhoto
+import com.shiweihu.pixabayapplication.data.PixabayData.ImageInfo
+import com.shiweihu.pixabayapplication.data.PexelsData.PexelsPhoto
+import com.shiweihu.pixabayapplication.data.UnSplashData.ListPhotos
+import com.shiweihu.pixabayapplication.data.UnSplashData.UnSplashItem
 import com.shiweihu.pixabayapplication.net.PexelsPhotoProxy
 import com.shiweihu.pixabayapplication.net.PhotoProxy
+import com.shiweihu.pixabayapplication.net.UnsplashPhotoProxy
 import com.shiweihu.pixabayapplication.pagingSource.PexelsSearchPhotoSource
 import com.shiweihu.pixabayapplication.pagingSource.SearchPhotoSource
-import dagger.hilt.android.lifecycle.HiltViewModel
+import com.shiweihu.pixabayapplication.pagingSource.UnsplashSearchPhotoSource
 import kotlinx.coroutines.flow.Flow
+import okhttp3.ResponseBody
+import retrofit2.Call
 import javax.inject.Inject
 
 
 class PhotoRepository @Inject constructor(
     private val photoProxy: PhotoProxy,
-    private val PexelsPhotoProxy:PexelsPhotoProxy
+    private val PexelsPhotoProxy:PexelsPhotoProxy,
+    private val unsplashPhotoProxy: UnsplashPhotoProxy
 ) {
     fun searchPhotos(q:String): Flow<PagingData<ImageInfo>> {
         return Pager(
@@ -32,5 +35,15 @@ class PhotoRepository @Inject constructor(
             config = PagingConfig(enablePlaceholders = false, pageSize = 3, initialLoadSize = 20),
             pagingSourceFactory = { PexelsSearchPhotoSource(PexelsPhotoProxy,q) }
         ).flow
+    }
+    fun searchPhotosFromUnsplash(q:String):Flow<PagingData<UnSplashItem>>{
+        return Pager(
+            config = PagingConfig(enablePlaceholders = false, pageSize = 3, initialLoadSize = 20),
+            pagingSourceFactory = { UnsplashSearchPhotoSource(unsplashPhotoProxy,q) }
+        ).flow
+    }
+
+    fun downloadEndUnsplash(url:String): Call<ResponseBody> {
+        return unsplashPhotoProxy.downloadEnd(url)
     }
 }

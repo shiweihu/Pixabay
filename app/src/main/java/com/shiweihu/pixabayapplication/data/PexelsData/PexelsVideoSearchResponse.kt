@@ -1,4 +1,4 @@
-package com.shiweihu.pixabayapplication.data
+package com.shiweihu.pixabayapplication.data.PexelsData
 
 
 import com.google.gson.annotations.SerializedName

@@ -10,6 +10,7 @@
     <string name="app_choser_title">chose a application:</string>
     <string name="pixabay_title" translatable="false">Pixabay</string>
     <string name="pexels_title" translatable="false">Pexels</string>
+    <string name="Unsplash_title" translatable="false">Unsplash</string>
     <string name="go">Go</string>
     <string name="permission_deny_notice">Click Go to change the permissions.</string>
     <string name="empty_key_term_notice">can not find relative pictures</string>

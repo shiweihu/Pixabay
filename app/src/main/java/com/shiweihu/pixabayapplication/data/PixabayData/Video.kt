@@ -1,6 +1,5 @@
-package com.shiweihu.pixabayapplication.data
+package com.shiweihu.pixabayapplication.data.PixabayData
 
-import VideosX
 import com.google.gson.annotations.SerializedName
 
 data class Video(

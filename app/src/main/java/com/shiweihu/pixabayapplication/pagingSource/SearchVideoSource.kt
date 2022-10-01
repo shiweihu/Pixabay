@@ -1,15 +1,10 @@
 package com.shiweihu.pixabayapplication.pagingSource
 
 
-import Videos
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.perf.ktx.performance
-import com.shiweihu.pixabayapplication.data.ImageInfo
-import com.shiweihu.pixabayapplication.data.Video
-import com.shiweihu.pixabayapplication.net.PhotoProxy
+import com.shiweihu.pixabayapplication.data.PixabayData.Video
 import com.shiweihu.pixabayapplication.net.VideoProxy
 import java.lang.Exception
 

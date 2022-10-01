@@ -14,6 +14,16 @@
             type="String" />
 
         <variable
+            name="BlurHash"
+            type="String" />
+        <variable
+            name="width"
+            type="Integer" />
+        <variable
+            name="height"
+            type="Integer" />
+
+        <variable
             name="do_end"
             type="Function2&lt;Boolean,View,kotlin.Unit&gt;" />
         
@@ -38,8 +48,10 @@
             app:imageUrl="@{image_url}"
             app:priority="@{priority}"
             app:doEnd="@{do_end}"
+            app:BlurHash="@{BlurHash}"
+            app:width="@{width}"
+            app:height="@{height}"
             android:minHeight="100dp"
-            tools:src="@drawable/ic_launcher_background"
             android:scaleType="fitCenter"
             android:adjustViewBounds="true"
             android:backgroundTint="?attr/colorAccent"

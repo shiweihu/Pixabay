@@ -9,6 +9,7 @@ import android.util.Log
 import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -24,10 +25,14 @@ import com.google.mlkit.vision.label.defaults.ImageLabelerOptions
 import com.shiweihu.pixabayapplication.MyApplication
 import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.databinding.FragmentBigPictureBinding
+import com.shiweihu.pixabayapplication.repository.PhotoRepository
 import com.shiweihu.pixabayapplication.util.CustomTabActivityHelper
 import com.shiweihu.pixabayapplication.utils.MachineLearningUtils
 import com.shiweihu.pixabayapplication.viewArgu.BigPictureArgu
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import retrofit2.await
+import retrofit2.awaitResponse
 import java.lang.ref.WeakReference
 import java.util.*
 import javax.inject.Inject
@@ -36,7 +41,8 @@ import kotlin.Comparator
 @HiltViewModel
 class BigPictureViewModel @Inject constructor(
   private val myApplication: MyApplication,
-  private val machineLearningUtils: MachineLearningUtils
+  private val machineLearningUtils: MachineLearningUtils,
+  private val photoRepository: PhotoRepository
 ) :AndroidViewModel(myApplication) {
 
 
@@ -50,6 +56,9 @@ class BigPictureViewModel @Inject constructor(
 
     fun navigateToUserProfilePagePexils(context: Context,userUrl:String){
         navigateToWeb(context,userUrl)
+    }
+    fun navigateToUserProfilePageUnsplash(context: Context,userUrl:String){
+        navigateToWeb(context,"${userUrl}?utm_source=Image Search&utm_medium=referral")
     }
 
 
@@ -86,8 +95,6 @@ class BigPictureViewModel @Inject constructor(
     }
 
     fun onPageChange(binding:FragmentBigPictureBinding,position:Int,activity: Activity){
-        binding.userProfileUrl = bigPictureArgu?.profiles?.get(position) ?: ""
-        binding.priority = true
         checkIfShowAd(activity)
     }
     private var scrollPageCount = 0
@@ -112,6 +119,9 @@ class BigPictureViewModel @Inject constructor(
             }
             1 ->{
                 navigateToUserProfilePagePexils(context,userid!!)
+            }
+            2 ->{
+                navigateToUserProfilePageUnsplash(context,userid!!)
             }
 
         }
@@ -171,7 +181,11 @@ class BigPictureViewModel @Inject constructor(
     }
     fun pageProfileOnClick(context: Context,index:Int){
         bigPictureArgu?.pageUrls?.get(index)?.also { pageUrl ->
-            navigateToWeb(context,pageUrl)
+            if(bigPictureArgu!!.from == 2){
+                navigateToWeb(context,"${pageUrl}?utm_source=Image Search&utm_medium=referral")
+            }else{
+                navigateToWeb(context,pageUrl)
+            }
         }
     }
 
@@ -181,6 +195,21 @@ class BigPictureViewModel @Inject constructor(
 
     fun getAdRequest():AdRequest{
         return AdRequest.Builder().build()
+    }
+
+    fun sendDownLoadEndRequest(position:Int){
+        when(bigPictureArgu?.from){
+            2 ->{
+                val url = bigPictureArgu?.tags?.get(position)
+                if(!url.isNullOrEmpty()){
+                    viewModelScope.launch {
+                        val call = photoRepository.downloadEndUnsplash(url!!)
+                        val response=  call.awaitResponse()
+                        Log.println(Log.DEBUG,"download end", response.isSuccessful.toString())
+                    }
+                }
+            }
+        }
     }
 
 

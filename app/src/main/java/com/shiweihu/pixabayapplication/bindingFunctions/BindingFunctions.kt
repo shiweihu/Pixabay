@@ -1,6 +1,6 @@
 package com.shiweihu.pixabayapplication.bindingFunctions
 
-import android.graphics.drawable.Drawable
+import android.graphics.drawable.BitmapDrawable
 import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
@@ -10,28 +10,46 @@ import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
 import com.shiweihu.pixabayapplication.R
+import com.shiweihu.pixabayapplication.util.BlurHashDecoder
+import kotlinx.coroutines.*
 
 
-@BindingAdapter(value = ["imageUrl","priority","doEnd"],requireAll = false)
-fun bindImageFromUrl(view: ImageView, imageUrl: String?,priority:Boolean = false,doEnd:((result:Boolean,view: View)->Unit)?) {
+@BindingAdapter(value = ["imageUrl","priority","BlurHash","width","height","doEnd"],requireAll = false)
+fun bindImageFromUrl(view: ImageView, imageUrl: String?,priority:Boolean = false,BlurHash:String?,width:Int?,height:Int?,doEnd:((result:Boolean,view: View)->Unit)?) {
     if (imageUrl != null && imageUrl.isNotEmpty()) {
         var request = Glide.with(view.context)
             .load(imageUrl)
-            .placeholder(R.drawable.placeholder)
             .dontTransform()
             .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
         if(priority){
             request = request.priority(Priority.IMMEDIATE)
         }
         request.doOnEnd {result ->
-                doEnd?.invoke(result,view)
+            doEnd?.invoke(result,view)
+        }
+        if(BlurHash.isNullOrEmpty()){
+            request = request.placeholder(R.drawable.placeholder)
+            request.into(view).clearOnDetach()
+        }else{
+            if(!BlurHash.isEmpty() && width!=null && height != null){
+                CoroutineScope(Dispatchers.Main).launch {
+                    val placeholder = withContext(Dispatchers.IO){
+                        BitmapDrawable(view.context.resources,BlurHashDecoder.decode(BlurHash,
+                            (width / 100).coerceAtLeast(20), (height / 100).coerceAtLeast(20)
+                        ))
+                    }
+
+                    request  = request.placeholder(placeholder)
+                    request.into(view).clearOnDetach()
+                }
             }
-        request.into(view).clearOnDetach()
+        }
+
+
+
     }
 }
 

@@ -1,6 +1,5 @@
-
+package com.shiweihu.pixabayapplication.data.PixabayData
 import com.google.gson.annotations.SerializedName
-import com.shiweihu.pixabayapplication.data.Video
 
 data class Videos(
     @SerializedName("hits")

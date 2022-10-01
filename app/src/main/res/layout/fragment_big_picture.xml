@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
-        <variable
-            name="user_profile_url"
-            type="String" />
-        <variable
-            name="priority"
-            type="Boolean" />
-        <variable
-            name="from"
-            type="Integer" />
+
 
 
     </data>

@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -24,6 +25,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.launch
 import androidx.appcompat.widget.SearchView
 import androidx.core.app.SharedElementCallback
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.forEach
 
 import androidx.fragment.app.activityViewModels
@@ -185,6 +187,9 @@ class PhotosMainFragment : BaseFragment() {
                     1 ->{
                         tag = "PexelsPhotos-${fragmentAdapter.shareElementIndex}"
                     }
+                    2 ->{
+                        tag = "UnsplashPhotos-${fragmentAdapter.shareElementIndex}"
+                    }
                 }
                 val view = recyclerView?.findViewWithTag<View>(tag)
                 if(names != null && sharedElements != null && view != null){
@@ -220,12 +225,13 @@ class PhotosMainFragment : BaseFragment() {
            // it.appBar.setExpanded(false)
             it.viewPager.adapter = fragmentAdapter
             it.viewPager.offscreenPageLimit = 1
-            it.viewPager.isSaveEnabled = false
+            //it.viewPager.isSaveEnabled = true
             it.viewPager.isUserInputEnabled = false
             it.viewPager.setCurrentItem(sourceIndex,false)
             fragmentAdapter.setPageIndex(sourceIndex)
             tabLayoutMediator = TabLayoutMediator(it.tabs, it.viewPager) { tab, position ->
                 tab.text = getTabTitle(position)
+                //tab.icon = getTabIcon(position)
             }.also {
                 it.attach()
             }
@@ -251,6 +257,17 @@ class PhotosMainFragment : BaseFragment() {
         postponeEnterTransition(resources.getInteger(R.integer.post_pone_time).toLong(), TimeUnit.MILLISECONDS)
         return viewBinding.root
     }
+
+//    private fun getTabIcon(position:Int):Drawable?{
+//        val context = this.requireContext()
+//        return when (position) {
+//            PIXABAY_INDEX -> ResourcesCompat.getDrawable(context.resources,R.drawable.pixabay_logo,null)
+//            PEXELS_INDEX -> ResourcesCompat.getDrawable(context.resources,R.drawable.ic_pexels,null)
+//            UNSPLASH_INDEX -> ResourcesCompat.getDrawable(context.resources,R.drawable.unsplash_icon,null)
+//            else -> null
+//        }
+//    }
+
 
 
 
@@ -283,6 +300,7 @@ class PhotosMainFragment : BaseFragment() {
         return when (position) {
             PIXABAY_INDEX -> getString(R.string.pixabay_title)
             PEXELS_INDEX -> getString(R.string.pexels_title)
+            UNSPLASH_INDEX -> getString(R.string.Unsplash_title)
             else -> null
         }
     }
@@ -381,5 +399,6 @@ class PhotosMainFragment : BaseFragment() {
     companion object {
         const val PIXABAY_INDEX = 0
         const val PEXELS_INDEX = 1
+        const val UNSPLASH_INDEX = 2
     }
 }

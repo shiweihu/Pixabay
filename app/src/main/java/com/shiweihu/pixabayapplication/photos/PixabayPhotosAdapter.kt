@@ -1,20 +1,16 @@
 package com.shiweihu.pixabayapplication.photos
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.google.android.material.imageview.ShapeableImageView
 import com.shiweihu.pixabayapplication.R
-import com.shiweihu.pixabayapplication.data.ImageInfo
+import com.shiweihu.pixabayapplication.data.PixabayData.ImageInfo
 import com.shiweihu.pixabayapplication.databinding.CardImageLayoutBinding
 import com.shiweihu.pixabayapplication.utils.DisplayUtils
 import com.shiweihu.pixabayapplication.viewArgu.BigPictureArgu
@@ -76,7 +72,7 @@ class PixabayPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,a
         }else{
             if(sharedElementIndex < reStoreFirstPosition || sharedElementIndex>reStoreLastPostion){
                 recyclerView.scrollToPosition(sharedElementIndex)
-            }else if( sharedElementIndex >= reStoreFirstPosition && sharedElementIndex<= reStoreLastPostion){
+            }else{
                 recyclerView.scrollToPosition(reStoreFirstPosition)
             }
         }

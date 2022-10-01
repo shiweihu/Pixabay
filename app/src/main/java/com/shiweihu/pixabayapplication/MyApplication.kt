@@ -29,6 +29,7 @@ class MyApplication: Application() {
         //pixabay request key
         const val API_KEY = "25109780-7bd3253b1b879d034650fb7f1"
         const val PEXELS_API_KEY = "563492ad6f917000010000014f8e0e71323c406392738971f27849a7"
+        const val UNSPLASH_API_KEY = "uszTNarYxX6BMVLSRFuJ8WWVV1oYyPtTgoiMEz1vM1k"
         val mHandler = Handler(Looper.getMainLooper())
         val lang by lazy {
             Locale.getDefault().language

@@ -121,7 +121,6 @@ class BigPictureFragment : BaseFragment() {
 
         activeModel.bigPictureArguLiveData.observe(this){
             modle.bigPictureArgu = it
-            viewBinding.from = it.from
             val pageAdapter = BigPictureAdapter(it,this)
             viewBinding.viewPage.adapter = pageAdapter
             viewBinding.viewPage.setCurrentItem(it.currentIndex,false)
@@ -248,8 +247,10 @@ class BigPictureFragment : BaseFragment() {
     }
 
     private fun onClickDownloadAction(){
-        modle.getShareUrl(viewBinding.viewPage.currentItem)?.also { url ->
+        val position = viewBinding.viewPage.currentItem
+        modle.getShareUrl(position)?.also { url ->
             downloadImage(url){ uri ->
+                modle.sendDownLoadEndRequest(position)
                 if(uri != null){
                     Snackbar.make(viewBinding.root,R.string.download_successfully, Snackbar.LENGTH_LONG).setAction(R.string.view_it){
                         viewImagesInSystem(uri)
@@ -276,14 +277,16 @@ class BigPictureFragment : BaseFragment() {
     }
 
     private fun onShareImageAction(){
-        modle.getShareUrl(viewBinding.viewPage.currentItem)?.also{
-            shareImageToInstagram(it)
+        val position = viewBinding.viewPage.currentItem
+        modle.getShareUrl(position)?.also{
+            shareImageToInstagram(it,position)
         }
     }
 
-    private fun shareImageToInstagram(url:String){
+    private fun shareImageToInstagram(url:String,position:Int){
         downloadImage(url){
             it?.let { uri ->
+                modle.sendDownLoadEndRequest(position)
                 shareToInstagram.launch(uri)
             }
         }

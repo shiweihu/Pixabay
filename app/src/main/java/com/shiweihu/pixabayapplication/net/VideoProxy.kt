@@ -1,6 +1,6 @@
 package com.shiweihu.pixabayapplication.net
 
-import Videos
+import com.shiweihu.pixabayapplication.data.PixabayData.Videos
 import com.shiweihu.pixabayapplication.MyApplication
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -20,5 +20,5 @@ interface VideoProxy {
        @Query("safesearch") safesearch:Boolean = true,
        @Query("editors_choice")editors_choice:Boolean = false,
        @Query("order") order:String = "popular"
-   ):Videos
+   ): Videos
 }

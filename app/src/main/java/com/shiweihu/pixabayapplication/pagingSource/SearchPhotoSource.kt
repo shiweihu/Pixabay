@@ -3,9 +3,7 @@ package com.shiweihu.pixabayapplication.pagingSource
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.perf.ktx.performance
-import com.shiweihu.pixabayapplication.data.ImageInfo
+import com.shiweihu.pixabayapplication.data.PixabayData.ImageInfo
 import com.shiweihu.pixabayapplication.net.PhotoProxy
 import java.lang.Exception
 
