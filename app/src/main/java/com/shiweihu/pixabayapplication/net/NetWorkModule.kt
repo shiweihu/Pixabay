@@ -31,14 +31,11 @@ class NetworkModule {
             })
             it.addInterceptor { chain ->
                 val origin  = chain.request()
-//                    val newRequest = origin.newBuilder()
-//                        .method(origin.method,origin.body)
-//                        .build()
                 val response = chain.proceed(origin)
                 if(MyApplication.APP_DEBUG){
                     for(header in response.headers){
                         MyApplication.mHandler.post {
-                            Log.println(Log.DEBUG,"response header","${header.first}:${header.second}")
+                            Log.println(Log.DEBUG,"pixabay response header","${header.first}:${header.second}")
                         }
                     }
                 }
@@ -73,7 +70,7 @@ class NetworkModule {
                 if(MyApplication.APP_DEBUG){
                     for(header in response.headers){
                         MyApplication.mHandler.post {
-                            Log.println(Log.DEBUG,"response header","${header.first}:${header.second}")
+                            Log.println(Log.DEBUG,"pexels response header","${header.first}:${header.second}")
                         }
                     }
                 }
@@ -108,7 +105,7 @@ class NetworkModule {
                 if(MyApplication.APP_DEBUG){
                     for(header in response.headers){
                         MyApplication.mHandler.post {
-                            Log.println(Log.DEBUG,"Unsplash_responseHeader","${header.first}:${header.second}")
+                            Log.println(Log.DEBUG,"UnsplashResponseHeader","${header.first}:${header.second}")
                         }
                     }
                 }

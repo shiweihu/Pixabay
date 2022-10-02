@@ -132,7 +132,7 @@ PexelsVideoAdapter.VideoDiff()
 
         this.snapshot().forEach { items ->
             items?.let {video ->
-                videos.add(video.videoFiles[0].link)
+                videos.add(video.videoFiles[1].link)
                 profiles.add("")
                 tags.add("")
                 userid.add(video.user.url)

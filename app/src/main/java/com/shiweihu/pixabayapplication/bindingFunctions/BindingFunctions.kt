@@ -1,6 +1,8 @@
 package com.shiweihu.pixabayapplication.bindingFunctions
 
+import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
@@ -14,7 +16,10 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.util.BlurHashDecoder
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 @BindingAdapter(value = ["imageUrl","priority","BlurHash","width","height","doEnd"],requireAll = false)
@@ -37,11 +42,15 @@ fun bindImageFromUrl(view: ImageView, imageUrl: String?,priority:Boolean = false
             if(!BlurHash.isEmpty() && width!=null && height != null){
                 CoroutineScope(Dispatchers.Main).launch {
                     val placeholder = withContext(Dispatchers.IO){
-                        BitmapDrawable(view.context.resources,BlurHashDecoder.decode(BlurHash,
-                            (width / 100).coerceAtLeast(20), (height / 100).coerceAtLeast(20)
-                        ))
+                        if(BlurHash.length <= 9){
+                            val color = Color.parseColor(BlurHash)
+                            ColorDrawable(color)
+                        }else{
+                            BitmapDrawable(view.context.resources,BlurHashDecoder.decode(BlurHash,
+                                (width / 100).coerceAtLeast(20), (height / 100).coerceAtLeast(20)
+                            ))
+                        }
                     }
-
                     request  = request.placeholder(placeholder)
                     request.into(view).clearOnDetach()
                 }

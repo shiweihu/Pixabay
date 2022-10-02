@@ -131,6 +131,10 @@ class PexelsPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,ar
 
             holder.binding.root.layoutParams.height = max(heightPX.toInt(),200)
 
+            holder.binding.blurHash = it.avg_color
+            holder.binding.width = 0
+            holder.binding.height= 0
+
 
         }
         holder.binding.executePendingBindings()

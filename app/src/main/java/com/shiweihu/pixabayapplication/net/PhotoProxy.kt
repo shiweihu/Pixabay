@@ -19,6 +19,7 @@ interface PhotoProxy {
         @Query("lang") lang:String = MyApplication.lang,
         @Query("safesearch") safesearch:Boolean = true,
         @Query("editors_choice")editors_choice:Boolean = false,
-        @Query("order") order:String = "latest"
+        @Query("order") order:String = "latest",
+        @Query("image_type") type:String = "photo"
     ): Photos
 }
