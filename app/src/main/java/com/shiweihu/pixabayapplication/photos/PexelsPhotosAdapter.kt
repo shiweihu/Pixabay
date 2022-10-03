@@ -86,7 +86,6 @@ class PexelsPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,ar
 
     override fun onViewRecycled(holder: ImageViewHolder) {
         super.onViewRecycled(holder)
-        holder.binding.imageView.scaleType = ImageView.ScaleType.FIT_CENTER
     }
 
 
@@ -111,7 +110,6 @@ class PexelsPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,ar
                     fragment.startPostponedEnterTransition()
                 }
                 if(result){
-                    (view as ImageView).scaleType =  ImageView.ScaleType.FIT_XY
                     view.isEnabled = true
                 }
             }
@@ -137,7 +135,7 @@ class PexelsPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,ar
 
 
         }
-        holder.binding.executePendingBindings()
+       // holder.binding.executePendingBindings()
     }
 
 

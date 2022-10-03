@@ -22,8 +22,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-@BindingAdapter(value = ["imageUrl","priority","BlurHash","width","height","doEnd"],requireAll = false)
-fun bindImageFromUrl(view: ImageView, imageUrl: String?,priority:Boolean = false,BlurHash:String?,width:Int?,height:Int?,doEnd:((result:Boolean,view: View)->Unit)?) {
+@BindingAdapter(value = ["imageUrl","priority","BlurHash","width","height","preview","doEnd"],requireAll = false)
+fun bindImageFromUrl(view: ImageView, imageUrl: String?,priority:Boolean = false,BlurHash:String?,width:Int?,height:Int?,preview:String? = null,doEnd:((result:Boolean,view: View)->Unit)?) {
     if (imageUrl != null && imageUrl.isNotEmpty()) {
         var request = Glide.with(view.context)
             .load(imageUrl)
@@ -35,6 +35,10 @@ fun bindImageFromUrl(view: ImageView, imageUrl: String?,priority:Boolean = false
         request.doOnEnd {result ->
             doEnd?.invoke(result,view)
         }
+        if(!preview.isNullOrEmpty()){
+            request = request.thumbnail(Glide.with(view).load(preview).priority(Priority.HIGH).override(5))
+            request.into(view).clearOnDetach()
+        }else
         if(BlurHash.isNullOrEmpty()){
             request = request.placeholder(R.drawable.placeholder)
             request.into(view).clearOnDetach()

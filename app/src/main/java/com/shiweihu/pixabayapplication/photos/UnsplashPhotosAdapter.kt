@@ -77,7 +77,6 @@ class UnsplashPhotosAdapter(val fragment: Fragment, val clickCallBack:(view: Vie
                 navigateToBigPicture(view,position)
             }
             holder.binding.imageView.isEnabled = false
-            holder.binding.imageView.scaleType = ImageView.ScaleType.FIT_XY
 
             holder.binding.imageView.transitionName = "UnsplashPhotos-${holder.layoutPosition}"
             holder.binding.priority = (holder.layoutPosition == sharedElementIndex && pageIdex == 0)
@@ -110,7 +109,7 @@ class UnsplashPhotosAdapter(val fragment: Fragment, val clickCallBack:(view: Vie
             var widthPX = (it.width.toFloat()-item_margin)*(scaleRadio) / recyclerview_span
             holder.binding.width = widthPX.toInt()
         }
-        holder.binding.executePendingBindings()
+        //holder.binding.executePendingBindings()
 
     }
 

@@ -59,7 +59,6 @@ class PixabayPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,a
 
     override fun onViewRecycled(holder: ImageViewHolder) {
         super.onViewRecycled(holder)
-        holder.binding.imageView.scaleType = ImageView.ScaleType.FIT_CENTER
     }
 
 
@@ -89,6 +88,7 @@ class PixabayPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,a
             holder.binding.authorName = it.user.trim()
             //holder.binding.imageUrl = it.webformatURL.replace("_640","_340")
             holder.binding.imageUrl = it.largeImageURL
+            holder.binding.preview = it.previewURL
             holder.binding.imageView.tag = "PixabayPhotos-${position}"
             holder.binding.imageView.setOnClickListener { view ->
                 navigateToBigPicture(view,holder.layoutPosition)
@@ -102,7 +102,6 @@ class PixabayPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,a
                     fragment.startPostponedEnterTransition()
                 }
                 if(result){
-                    (view as ImageView).scaleType =  ImageView.ScaleType.FIT_XY
                     view.isEnabled = true
                 }
             }
@@ -123,7 +122,7 @@ class PixabayPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,a
 
             holder.binding.root.layoutParams.height = max(heightPX.toInt(),200)
         }
-        holder.binding.executePendingBindings()
+       // holder.binding.executePendingBindings()
     }
 
 
