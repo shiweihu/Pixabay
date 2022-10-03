@@ -12,16 +12,6 @@
         <variable
             name="author_name"
             type="String" />
-
-        <variable
-            name="BlurHash"
-            type="String" />
-        <variable
-            name="width"
-            type="Integer" />
-        <variable
-            name="height"
-            type="Integer" />
         <variable
             name="preview"
             type="String" />
@@ -51,9 +41,6 @@
             app:imageUrl="@{image_url}"
             app:priority="@{priority}"
             app:doEnd="@{do_end}"
-            app:BlurHash="@{BlurHash}"
-            app:width="@{width}"
-            app:height="@{height}"
             app:preview="@{preview}"
             android:minHeight="100dp"
             android:scaleType="fitXY"

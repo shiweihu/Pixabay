@@ -22,8 +22,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-@BindingAdapter(value = ["imageUrl","priority","BlurHash","width","height","preview","doEnd"],requireAll = false)
-fun bindImageFromUrl(view: ImageView, imageUrl: String?,priority:Boolean = false,BlurHash:String?,width:Int?,height:Int?,preview:String? = null,doEnd:((result:Boolean,view: View)->Unit)?) {
+@BindingAdapter(value = ["imageUrl","priority","preview","doEnd"],requireAll = false)
+fun bindImageFromUrl(view: ImageView, imageUrl: String?,priority:Boolean = false,preview:String? = null,doEnd:((result:Boolean,view: View)->Unit)?) {
     if (imageUrl != null && imageUrl.isNotEmpty()) {
         var request = Glide.with(view.context)
             .load(imageUrl)
@@ -36,29 +36,26 @@ fun bindImageFromUrl(view: ImageView, imageUrl: String?,priority:Boolean = false
             doEnd?.invoke(result,view)
         }
         if(!preview.isNullOrEmpty()){
-            request = request.thumbnail(Glide.with(view).load(preview).priority(Priority.HIGH).override(5))
-            request.into(view).clearOnDetach()
-        }else
-        if(BlurHash.isNullOrEmpty()){
-            request = request.placeholder(R.drawable.placeholder)
-            request.into(view).clearOnDetach()
-        }else{
-            if(!BlurHash.isEmpty() && width!=null && height != null){
+            if(preview.length <= 8){
+                val color = Color.parseColor(preview)
+                val drawable = ColorDrawable(color)
+                request = request.placeholder(drawable)
+                request.into(view).clearOnDetach()
+            }else if(preview.length == 28 && !preview.contains("http")){
                 CoroutineScope(Dispatchers.Main).launch {
-                    val placeholder = withContext(Dispatchers.IO){
-                        if(BlurHash.length <= 9){
-                            val color = Color.parseColor(BlurHash)
-                            ColorDrawable(color)
-                        }else{
-                            BitmapDrawable(view.context.resources,BlurHashDecoder.decode(BlurHash,
-                                (width / 100).coerceAtLeast(20), (height / 100).coerceAtLeast(20)
-                            ))
-                        }
+                    val drawable = withContext(Dispatchers.IO){
+                        BitmapDrawable(view.context.resources,BlurHashDecoder.decode(preview,10,10))
                     }
-                    request  = request.placeholder(placeholder)
+                    request = request.placeholder(drawable)
                     request.into(view).clearOnDetach()
                 }
+            }else{
+                request = request.thumbnail(Glide.with(view).load(preview).priority(Priority.HIGH).override(20))
+                request.into(view).clearOnDetach()
             }
+        }else{
+            request = request.placeholder(R.drawable.placeholder)
+            request.into(view).clearOnDetach()
         }
 
 

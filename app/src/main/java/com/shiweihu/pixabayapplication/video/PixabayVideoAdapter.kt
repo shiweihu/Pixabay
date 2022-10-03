@@ -51,7 +51,7 @@ class PixabayVideoAdapter(val fragment: Fragment,val clickCallBack:(view:View,ar
         }else{
             if(sharedElementIndex < reStoreFirstPosition || sharedElementIndex>reStoreLastPostion){
                 recyclerView.scrollToPosition(sharedElementIndex)
-            }else if( sharedElementIndex >= reStoreFirstPosition && sharedElementIndex<= reStoreLastPostion){
+            }else {
                 recyclerView.scrollToPosition(reStoreFirstPosition)
             }
         }

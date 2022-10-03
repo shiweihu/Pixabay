@@ -70,7 +70,7 @@ class UnsplashPhotosAdapter(val fragment: Fragment, val clickCallBack:(view: Vie
             holder.binding.authorName = it.userName.trim()
             //holder.binding.imageUrl = it.webformatURL.replace("_640","_340")
             holder.binding.imageUrl = it.urls.regular
-            holder.binding.blurHash = it.blurHash
+            holder.binding.preview = it.blurHash
             holder.binding.pxLog.setImageResource(R.drawable.unsplash_icon)
             holder.binding.imageView.tag = "UnsplashPhotos-${position}"
             holder.binding.imageView.setOnClickListener { view ->
@@ -104,10 +104,6 @@ class UnsplashPhotosAdapter(val fragment: Fragment, val clickCallBack:(view: Vie
             //val highDP = DisplayUtils.px2dp(holder.binding.imageView.context,heightPX)
             val height = max(heightPX.toInt(),200)
             holder.binding.root.layoutParams.height = height
-            holder.binding.height = height
-
-            var widthPX = (it.width.toFloat()-item_margin)*(scaleRadio) / recyclerview_span
-            holder.binding.width = widthPX.toInt()
         }
         //holder.binding.executePendingBindings()
 

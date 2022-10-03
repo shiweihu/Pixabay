@@ -58,7 +58,7 @@ PexelsVideoAdapter.VideoDiff()
         }else{
             if(sharedElementIndex < reStoreFirstPosition || sharedElementIndex>reStoreLastPostion){
                 recyclerView.scrollToPosition(sharedElementIndex)
-            }else if( sharedElementIndex >= reStoreFirstPosition && sharedElementIndex<= reStoreLastPostion){
+            }else {
                 recyclerView.scrollToPosition(reStoreFirstPosition)
             }
         }
@@ -94,24 +94,13 @@ PexelsVideoAdapter.VideoDiff()
                 navigateToPlayBack(view,position)
             }
             holder.binding.imageView.isEnabled = false
-
             val item_margin =
                 fragment.context?.let { it1 -> DisplayUtils.dp2px(it1,photos_item_margin)*2 } ?:0
-
-
-
             val scaleRadio = (DisplayUtils.ScreenWidth.toFloat()-item_margin) / it.width.toFloat()
             var heightPX = (it.height.toFloat()-item_margin)*(scaleRadio)
-
             heightPX /= recyclerview_span
-
-
-
             //val highDP = DisplayUtils.px2dp(holder.binding.imageView.context,heightPX)
-
             holder.binding.imageView.layoutParams.height = max(heightPX.toInt(),200)
-
-
         }
 
     }

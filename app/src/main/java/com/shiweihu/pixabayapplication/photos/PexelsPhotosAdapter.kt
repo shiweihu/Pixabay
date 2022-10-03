@@ -95,8 +95,9 @@ class PexelsPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,ar
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         getItem(position)?.also{ it ->
             Log.println(Log.INFO,"alt",it.alt ?: "")
-            holder.binding.imageUrl = it.src?.large
+            holder.binding.imageUrl = it.src?.large2x
             holder.binding.authorName = it.photographer
+            holder.binding.preview = it.avg_color
             holder.binding.imageView.transitionName = "PexelsPhotos-${position}"
             holder.binding.imageView.tag = "PexelsPhotos-${position}"
             holder.binding.pxLog.setImageResource(R.drawable.ic_pexels)
@@ -115,25 +116,10 @@ class PexelsPhotosAdapter(val fragment: Fragment,val clickCallBack:(view:View,ar
             }
             val item_margin =
                 fragment.context?.let { it1 -> DisplayUtils.dp2px(it1,photos_item_margin)*2 } ?:0
-
-
-
             val scaleRadio = (DisplayUtils.ScreenWidth.toFloat()-item_margin) / it.width.toFloat()
             var heightPX = (it.height.toFloat()-item_margin)*(scaleRadio)
-
             heightPX /= recyclerview_span
-
-
-
-            //val highDP = DisplayUtils.px2dp(holder.binding.imageView.context,heightPX)
-
             holder.binding.root.layoutParams.height = max(heightPX.toInt(),200)
-
-            holder.binding.blurHash = it.avg_color
-            holder.binding.width = 0
-            holder.binding.height= 0
-
-
         }
        // holder.binding.executePendingBindings()
     }
