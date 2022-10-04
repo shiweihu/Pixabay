@@ -187,9 +187,6 @@ class PhotosMainFragment : BaseFragment() {
                     1 ->{
                         tag = "PexelsPhotos-${fragmentAdapter.shareElementIndex}"
                     }
-                    2 ->{
-                        tag = "UnsplashPhotos-${fragmentAdapter.shareElementIndex}"
-                    }
                 }
                 val view = recyclerView?.findViewWithTag<View>(tag)
                 if(names != null && sharedElements != null && view != null){
@@ -224,7 +221,7 @@ class PhotosMainFragment : BaseFragment() {
            // initShareElement()
            // it.appBar.setExpanded(false)
             it.viewPager.adapter = fragmentAdapter
-            it.viewPager.offscreenPageLimit = 1
+            it.viewPager.offscreenPageLimit = 2
             //it.viewPager.isSaveEnabled = true
             it.viewPager.isUserInputEnabled = false
             it.viewPager.setCurrentItem(sourceIndex,false)

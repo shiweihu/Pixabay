@@ -1,5 +1,6 @@
 package com.shiweihu.pixabayapplication.photos
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -49,17 +50,10 @@ class SouceAdapter(val fragment:Fragment,
         }
     }
 
-    private val unsplashPhotosAdapter by lazy {
-        UnsplashPhotosAdapter(fragment){view,args->
-            activityModel.bigPictureArguLiveData.value = args
-            model.navigateToBigPicture(view,args.currentIndex)
-        }
-    }
 
     fun setPageIndex(pageIndex:Int){
         pixabayPhotosAdapter.pageIdex = pageIndex
         pexelsPhotosAdapter.pageIdex = pageIndex
-        unsplashPhotosAdapter.pageIdex = pageIndex
     }
 
 
@@ -77,13 +71,11 @@ class SouceAdapter(val fragment:Fragment,
             1 ->{
                 initPexelsRecyclerView(holder)
             }
-            2 ->{
-                initUnSplashRecyclerView(holder)
-            }
         }
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun startQuery(query: String){
         if(this.query != query){
             this.query = query
@@ -96,7 +88,6 @@ class SouceAdapter(val fragment:Fragment,
         shareElementIndex = 0
         pixabayPhotosAdapter.sharedElementIndex = 0
         pexelsPhotosAdapter.sharedElementIndex=0
-        unsplashPhotosAdapter.sharedElementIndex = 0
         bindingData()
     }
     private fun bindingData(){
@@ -114,14 +105,6 @@ class SouceAdapter(val fragment:Fragment,
         }
         jobs.add(job2)
 
-        val job3 = fragment.lifecycleScope.launch {
-            model.searchPhotosFromUnsplash(query).collectLatest {
-                unsplashPhotosAdapter.submitData(it)
-            }
-        }
-        jobs.add(job3)
-
-
     }
 
 
@@ -137,12 +120,6 @@ class SouceAdapter(val fragment:Fragment,
         pexelsPhotosAdapter.sharedElementIndex = shareElementIndex
         holder.binding.recycleView.adapter = pexelsPhotosAdapter
         holder.binding.recycleView.tag = 1
-    }
-
-    private fun initUnSplashRecyclerView(holder: RecyclerViewHolder){
-        unsplashPhotosAdapter.sharedElementIndex = shareElementIndex
-        holder.binding.recycleView.adapter = unsplashPhotosAdapter
-        holder.binding.recycleView.tag = 2
     }
 
     override fun onViewAttachedToWindow(holder: RecyclerViewHolder) {
@@ -165,10 +142,6 @@ class SouceAdapter(val fragment:Fragment,
                     1 ->{
                         pexelsPhotosAdapter.reStoreFirstPosition = firstPosition.firstOrNull() ?: firstPosition.last()
                         pexelsPhotosAdapter.reStoreLastPostion = lastPosition.lastOrNull() ?: lastPosition.first()
-                    }
-                    2 ->{
-                        unsplashPhotosAdapter.reStoreFirstPosition = firstPosition.firstOrNull() ?: firstPosition.last()
-                        unsplashPhotosAdapter.reStoreLastPostion = lastPosition.lastOrNull() ?: lastPosition.first()
                     }
                 }
             }
@@ -213,7 +186,7 @@ class SouceAdapter(val fragment:Fragment,
     }
 
     override fun getItemCount(): Int {
-        return 3
+        return 2
     }
 
 

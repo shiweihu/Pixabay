@@ -197,24 +197,6 @@ class BigPictureViewModel @Inject constructor(
         return AdRequest.Builder().build()
     }
 
-    fun sendDownLoadEndRequest(position:Int){
-        when(bigPictureArgu?.from){
-            2 ->{
-                val url = bigPictureArgu?.tags?.get(position)
-                if(!url.isNullOrEmpty()){
-                    viewModelScope.launch {
-                        val call = photoRepository.downloadEndUnsplash(url!!)
-                        val response=  call.awaitResponse()
-                        Log.println(Log.DEBUG,"download end", response.isSuccessful.toString())
-                    }
-                }
-            }
-        }
-    }
-
-
-
-
     companion object{
 
         private class AdCallBack(activity: Activity):InterstitialAdLoadCallback(){

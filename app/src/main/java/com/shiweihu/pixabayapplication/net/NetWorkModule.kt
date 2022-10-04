@@ -81,43 +81,6 @@ class NetworkModule {
         }.build())
         .addConverterFactory(GsonConverterFactory.create())
         .build()
-
-    private val myUnsplashHttpProxy: Retrofit = Retrofit.Builder()
-        .baseUrl(UNSPLASH_BASE_URL)
-        .client(OkHttpClient.Builder().also {
-
-            it.cache(file_cache?.let { it1 -> Cache(it1, 86400L) })
-
-
-            it.addInterceptor(HttpLoggingInterceptor().apply {
-                level = HttpLoggingInterceptor.Level.BASIC
-            })
-            it.addInterceptor { chain ->
-                val origin  = chain.request()
-//                    val newRequest = origin.newBuilder()
-//                        .method(origin.method,origin.body)
-//                        .build()
-
-                val newRequest = origin.newBuilder()
-                    .header("Authorization","Client-ID ${MyApplication.UNSPLASH_API_KEY}")
-                    .build()
-                val response = chain.proceed(newRequest)
-                if(MyApplication.APP_DEBUG){
-                    for(header in response.headers){
-                        MyApplication.mHandler.post {
-                            Log.println(Log.DEBUG,"UnsplashResponseHeader","${header.first}:${header.second}")
-                        }
-                    }
-                }
-                return@addInterceptor response
-            }
-            it.connectTimeout(30L, TimeUnit.SECONDS)
-            it.readTimeout(20L,TimeUnit.SECONDS)
-        }.build())
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-
-
     @Singleton
     @Provides
     fun providePhotoProxy(): PhotoProxy {
@@ -141,18 +104,13 @@ class NetworkModule {
         return myPexelsHttpProxy.create(PexelsVideoProxy::class.java)
     }
 
-    @Singleton
-    @Provides
-    fun provideUnsplashPhotoProxy():UnsplashPhotoProxy{
-        return myUnsplashHttpProxy.create(UnsplashPhotoProxy::class.java)
-    }
+
 
 
 
     companion object{
         private const val BASE_URL = "https://pixabay.com/"
         private const val PEXELS_BASE_URL = "https://api.pexels.com/"
-        private const val UNSPLASH_BASE_URL = "https://api.unsplash.com/"
         var file_cache: File? = null
     }
 

@@ -250,7 +250,6 @@ class BigPictureFragment : BaseFragment() {
         val position = viewBinding.viewPage.currentItem
         modle.getShareUrl(position)?.also { url ->
             downloadImage(url){ uri ->
-                modle.sendDownLoadEndRequest(position)
                 if(uri != null){
                     Snackbar.make(viewBinding.root,R.string.download_successfully, Snackbar.LENGTH_LONG).setAction(R.string.view_it){
                         viewImagesInSystem(uri)
@@ -286,7 +285,6 @@ class BigPictureFragment : BaseFragment() {
     private fun shareImageToInstagram(url:String,position:Int){
         downloadImage(url){
             it?.let { uri ->
-                modle.sendDownLoadEndRequest(position)
                 shareToInstagram.launch(uri)
             }
         }

@@ -12,8 +12,6 @@ import com.shiweihu.pixabayapplication.R
 import com.shiweihu.pixabayapplication.bigPictureView.BigPictureFragment
 import com.shiweihu.pixabayapplication.data.PixabayData.ImageInfo
 import com.shiweihu.pixabayapplication.data.PexelsData.PexelsPhoto
-import com.shiweihu.pixabayapplication.data.UnSplashData.ListPhotos
-import com.shiweihu.pixabayapplication.data.UnSplashData.UnSplashItem
 import com.shiweihu.pixabayapplication.repository.PhotoRepository
 import com.shiweihu.pixabayapplication.utils.MachineLearningUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -30,8 +28,6 @@ class PhotosMainFragmentModel @Inject constructor(
     private var currentQueryFlow: Flow<PagingData<ImageInfo>>? = null
     private var currentQueryValuePexels:String? = null
     private var currentQueryFlowPexels: Flow<PagingData<PexelsPhoto>>? = null
-    private var currentQueryValueUnSplash:String? = null
-    private var currentQueryFlowUnSplash: Flow<PagingData<UnSplashItem>>? = null
 
 
 
@@ -57,14 +53,6 @@ class PhotosMainFragmentModel @Inject constructor(
         return currentQueryFlowPexels!!
     }
 
-    fun searchPhotosFromUnsplash(q:String): Flow<PagingData<UnSplashItem>> {
-        val query = q.replace(", "," ")
-        if(currentQueryValueUnSplash != q || currentQueryFlowUnSplash == null){
-            currentQueryValueUnSplash = q
-            currentQueryFlowUnSplash = photoRepository.searchPhotosFromUnsplash(q).cachedIn(viewModelScope)
-        }
-        return currentQueryFlowUnSplash!!
-    }
 
 
     fun navigateToBigPicture(view: View,
